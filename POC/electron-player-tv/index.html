@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Karaokê TV Player</title>
+    <!-- Bibliotecas WebSocket -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100vh; background-color: black; overflow: hidden; font-family: sans-serif;}
+        #status { color: white; text-align: center; margin-top: 20%; font-size: 2rem; }
+        webview { width: 100vw; height: 100vh; display: none; border: none; }
+    </style>
+</head>
+<body>
+    <h1 id="status">Iniciando a TV...</h1>
+    
+    <!-- O componente que carregará o YouTube -->
+    <webview id="youtube-player" src="about:blank"></webview>
+    
+    <script src="./renderer.js"></script>
+</body>
+</html>
