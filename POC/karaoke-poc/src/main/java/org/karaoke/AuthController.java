@@ -24,7 +24,7 @@ public class AuthController {
         String senha = credenciais.get("senha");
 
         try {
-            String sql = "SELECT COUNT(*) FROM usuarios WHERE usuario = ? AND senha = ?";
+            String sql = "SELECT COUNT(*) FROM usuario WHERE user = ? AND senha = ?";
             // Consulta direta no banco SQL Server
             Integer count = jdbcTemplate.queryForObject(sql, Integer.class, usuario, senha);
 
