@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 function App() {
   // Estados de Autenticação
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
   
