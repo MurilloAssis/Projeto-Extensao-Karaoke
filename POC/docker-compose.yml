@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Banco de Dados MySQL Oficial
+  mysql-db:
+    image: mysql:8.0
+    container_name: karaoke-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: poc_karaoke # O Docker já cria esse banco automaticamente
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  # Backend Spring Boot
+  karaoke-api:
+    build: ./karaoke-poc
+    container_name: karaoke-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-db
+    environment:
+      # Força o perfil mysql e altera a URL para apontar para o nome do contêiner do banco
+      SPRING_PROFILES_ACTIVE: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/poc_karaoke
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+  # Frontend Painel React (assumindo Vite)
+  karaoke-admin:
+    build: ./karaoke-envio-player 
+    container_name: karaoke-admin
+    ports:
+      - "5173:5173"
+    depends_on:
+      - karaoke-api
+volumes:
+    mysql_data:
