@@ -1,0 +1,76 @@
+% !TEX root = ../documento.tex
+%% Preâmbulo LaTeX: Define classes e características do documento
+%% A classe do documento (\documentclass) fica em documento.tex
+
+%% Tipografia (Arial / Helvetica por padrão)
+\input{configuracoes/tipografia}
+
+%% Pacotes usados pelo documento
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{nomencl}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage{lastpage}
+\usepackage{booktabs}
+\usepackage{multirow, array, tabularx}
+\usepackage{titlesec}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage{simplecd}
+\usepackage[final]{pdfpages}
+\usepackage{listings}
+\usepackage{amsmath, amssymb}
+
+%% Adiciona as alterações do ABNTeX-IFPI
+\usepackage{abntex-ifpi/abntex-ifpi}
+\usepackage{abntex-ifpi/tikz-uml}
+
+%% Configuração de listagens de código-fonte com suporte a UTF-8
+\definecolor{codebg}{RGB}{246,248,250}
+\definecolor{codeframe}{RGB}{208,215,222}
+\definecolor{codecomment}{RGB}{87,96,106}
+\definecolor{codekeyword}{RGB}{5,80,174}
+\definecolor{codestring}{RGB}{10,48,105}
+
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=t,
+  commentstyle=\color{codecomment}\itshape,
+  frame=single,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{codekeyword}\bfseries,
+  numbers=left,
+  numbersep=8pt,
+  numberstyle=\tiny\color{codecomment},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestring},
+  tabsize=2,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+           {à}{{\`a}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1
+           {ê}{{\^e}}1 {ô}{{\^o}}1 {â}{{\^a}}1
+}
+
+%% Comandos auxiliares para Apêndices e Anexos
+\newcommand{\apendiceitem}[2]{\chapter{#1}\label{#2}}
+\newcommand{\anexoitem}[2]{\chapter{#1}\label{#2}}
+
+%% Metadados, citações, cores e espaçamentos
+\input{configuracoes/pdf}
+\input{configuracoes/metadados}
+\input{configuracoes/citacoes}
+\input{configuracoes/cores}
+\input{configuracoes/espacamentos}

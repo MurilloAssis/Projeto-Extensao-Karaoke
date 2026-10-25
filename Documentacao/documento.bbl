@@ -1,0 +1,66 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[BRASIL 2018]{brasil2018lgpd}
+\abntrefinfo{BRASIL}{BRASIL}{2018}
+{BRASIL. \textbf{Lei n{\textordmasculine} 13.709, de 14 de agosto de 2018. Lei
+  Geral de Proteção de Dados Pessoais (LGPD)}. Brasília, DF: Presidência da
+  República, 2018.
+Dispon{\'\i}vel em:
+  \url{https://www.planalto.gov.br/ccivil\_03/\_ato2015-2018/2018/lei/l13709.htm}.
+  Acesso em: 12 out. 2026.}
+
+\bibitem[{CONTA SIMPLES} \& {VISA} 2025]{contasimples2025}
+\abntrefinfo{{CONTA SIMPLES} \& {VISA}}{{CONTA SIMPLES}; {VISA}}{2025}
+{{CONTA SIMPLES}; {VISA}. \textbf{1{\textordmasculine} Panorama da Gestão de
+  Despesas Corporativas no Brasil}. São Paulo: [s.n.], 2025.
+Dispon{\'\i}vel em:
+  \url{https://lp.contasimples.com/panorama-da-gestao-de-despesas-corporativas-no-brasil}.
+  Acesso em: 12 out. 2026.}
+
+\bibitem[{ELECTRON} 2025]{electron2025}
+\abntrefinfo{{ELECTRON}}{{ELECTRON}}{2025}
+{{ELECTRON}. \textbf{Electron Documentation: Process Model and Context
+  Isolation}. 2025.
+Dispon{\'\i}vel em: \url{https://www.electronjs.org/docs}. Acesso em: 15 out.
+  2026.}
+
+\bibitem[{JUKS} 2026]{juks2026}
+\abntrefinfo{{JUKS}}{{JUKS}}{2026}
+{{JUKS}. \textbf{Juks -- O Jukebox Digital do Seu Bar}. São Paulo: [s.n.],
+  2026.
+Dispon{\'\i}vel em: \url{https://juks.com.br/}. Acesso em: 14 out. 2026.}
+
+\bibitem[{KARAFUN BUSINESS} 2026]{karafun2026}
+\abntrefinfo{{KARAFUN BUSINESS}}{{KARAFUN BUSINESS}}{2026}
+{{KARAFUN BUSINESS}. \textbf{KaraFun Business \& KaraFun Pro: Professional
+  Karaoke Solutions for Venues}. Lille: [s.n.], 2026.
+Dispon{\'\i}vel em: \url{https://business.karafun.com/}. Acesso em: 14 out.
+  2026.}
+
+\bibitem[{REACT} 2025]{react2025}
+\abntrefinfo{{REACT}}{{REACT}}{2025}
+{{REACT}. \textbf{React Documentation: Describing the UI and Managing State}.
+  2025.
+Dispon{\'\i}vel em: \url{https://react.dev/}. Acesso em: 15 out. 2026.}
+
+\bibitem[{SERASA EXPERIAN} 2026]{serasa2026}
+\abntrefinfo{{SERASA EXPERIAN}}{{SERASA EXPERIAN}}{2026}
+{{SERASA EXPERIAN}. \textbf{Consulta Cadastral de Pessoa Jurídica: APACHE GRU
+  ROCK BAR LTDA - ME (CNPJ 64.687.141/0001-07)}. São Paulo: [s.n.], 2026.
+Dispon{\'\i}vel em:
+  \url{https://empresas.serasaexperian.com.br/consulta-gratis/APACHE-GRU-ROCK-BAR-LTDA-ME-64687141000107}.
+  Acesso em: 10 out. 2026.}
+
+\bibitem[{SINGA BUSINESS} 2026]{singa2026}
+\abntrefinfo{{SINGA BUSINESS}}{{SINGA BUSINESS}}{2026}
+{{SINGA BUSINESS}. \textbf{Professional Karaoke Software for Bars, Venues and
+  KTV Rooms}. Helsinki: [s.n.], 2026.
+Dispon{\'\i}vel em: \url{https://singa.com/business/}. Acesso em: 14 out.
+  2026.}
+
+\end{thebibliography}

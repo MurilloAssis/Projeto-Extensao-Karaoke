@@ -1,0 +1,10 @@
+%% Abstract (configurado para língua inglesa)
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+This technical report documents the requirements engineering, architectural modeling, and Proof of Concept (PoC) implementation of the \textbf{Karaokê Apache} system, an integrated platform for queue management, song requests, and audiovisual playback tailored for the commercial establishment \textbf{Apache Gru Rock Bar} (\texttt{APACHE GRU ROCK BAR LTDA - ME}, CNPJ 64.687.141/0001-07), located in Guarulhos -- SP, Brazil. The venue hosts a weekly \textit{Karaoke Night} where song requests and singer queues were previously managed manually, leading to lost requests, duplicate songs within short intervals, operational overload for the host when manually switching video windows on the main screen, and lack of queue transparency for patrons. To address these bottlenecks, a decoupled distributed architecture was designed comprising four subsystems: (1) a responsive mobile web interface (\textit{Client Web}) accessed via a QR Code displayed on the main screen for catalog browsing and song submission; (2) an administrative dashboard (\textit{Admin Web}) for queue moderation and stage control; (3) a centralized Orchestrator API enforcing business rules (RN00 to RN04), authentication, and relational database persistence; and (4) the native desktop application \textbf{Karaokê TV Player}, built with Electron and React/Vite, dedicated to uninterrupted full-screen playback on the bar's display. Project management combined agile practices (Scrum and Kanban via Trello and GitHub) with Feature-Driven Development (FDD), organizing the software around four core UML components: \textit{Users}, \textit{Queue}, \textit{Song Request}, and \textit{Player}. Experimental validation of the PoC confirmed real-time synchronization between the web controller and the Electron TV Player, demonstrating both technical reliability and low-cost financial viability for small hospitality venues.
+
+\vspace{\onelineskip}
+\noindent
+\textbf{Keywords}: Web system; Karaoke; Queue management; Electron; React; University extension.
+\end{otherlanguage*}
+\end{resumo}

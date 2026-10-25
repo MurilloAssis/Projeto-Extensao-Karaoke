@@ -1,0 +1,42 @@
+% !TEX root = documento.tex
+%% ========================================================================== %%
+%% Projeto Integrado de Extensão - Karaokê Apache (Apache Gru Rock Bar)       %%
+%% Estruturado no Template ABNTeX2 / ABNTEX-IFPI (Pronto para Overleaf)       %%
+%% ========================================================================== %%
+
+%% Classe do documento (definida aqui para que este seja o único arquivo raiz do projeto)
+\documentclass[
+	12pt,				% Fonte: 12pt
+	oneside,			% Impressão: oneside = 1 face, twoside = 2 faces (frente-e-verso)
+	a4paper,			% Tamanho do Papel: A4
+	chapter=TITLE,		% Todos os capítulos devem ficar em caixa alta
+	section=TITLE,		% Todas as seções devem ficar em caixa alta
+	english,			% Adiciona Idioma para Hifenização: Inglês
+	brazil				% Adiciona Idioma para Hifenização: Português do Brasil (principal)
+]{abntex2}				% Utilizar ABNTeX2
+
+%% Preâmbulo (configurações, pacotes e tudo mais)
+\input{estrutura/preambulo}
+
+%% Início do Documento
+\begin{document}
+
+%% Documento será escrito em Português do Brasil
+\selectlanguage{brazil}
+
+%% Elementos pré-textuais: capa, folha de rosto, dedicatória, listas, sumário, etc.
+\input{estrutura/pre-textual.tex}
+
+%% Indica que a partir daqui ficarão os elementos textuais (TCC em si)
+\textual
+
+%% Inclui os capítulos do TCC (parte textual)
+\input{estrutura/textual}
+
+%% Finalizações para o PDF
+\bookmarksetup{startatroot}
+
+%% Elementos pós-textuais: Referências, Apêndices, Anexos, etc.
+\include{estrutura/pos-textual}
+
+\end{document}

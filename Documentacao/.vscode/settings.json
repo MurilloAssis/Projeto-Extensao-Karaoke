@@ -1,0 +1,17 @@
+{
+  "latex-workshop.latex.rootFile.doNotPrompt": true,
+  "latex-workshop.latex.rootFile.useMagicComment": true,
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.recipes": [
+    { "name": "latexmk (documento.tex)", "tools": ["latexmk-documento"] }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk-documento",
+      "command": "latexmk",
+      "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "-pdf", "documento.tex"],
+      "env": {}
+    }
+  ]
+}

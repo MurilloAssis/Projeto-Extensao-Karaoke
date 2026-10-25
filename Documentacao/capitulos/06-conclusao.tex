@@ -1,0 +1,30 @@
+\chapter{Conclusão} \label{cap:conclusao}
+
+Este capítulo encerra o documento sintetizando as considerações finais sobre o desenvolvimento do projeto \textbf{Karaokê Apache} até a sua fase atual de MVP, relatando as principais dificuldades superadas pela equipe e apresentando as possibilidades de evolução futura do sistema.
+
+\section{Considerações Finais}
+
+O desenvolvimento do projeto \textbf{Karaokê Apache} demonstrou como a aplicação estruturada de conceitos de Engenharia de Software, Análise de Sistemas e Arquitetura de Aplicações Distribuídas permite construir uma solução tecnológica diretamente alinhada à realidade de um pequeno negócio local. Ao investigar a rotina da \textit{Noite de Karaokê} no estabelecimento parceiro \textbf{Apache Gru Rock Bar}, em Guarulhos -- SP, foi possível traduzir gargalos operacionais concretos -- antes resolvidos no improviso com anotações em papel e janelas manuais de navegador -- em requisitos objetivos, regras de negócio bem definidas (RN00 a RN04) e uma arquitetura modular clara.
+
+Mesmo encontrando-se em fase de Produto Mínimo Viável (MVP), os resultados obtidos na implementação da Prova de Conceito (\texttt{Poc.mp4}) cumpriram o objetivo de validar o núcleo mais sensível da solução: a sincronização em tempo real entre a fila web em React/Vite e o reprodutor desktop dedicado \textbf{Karaokê TV Player} em Electron. Dessa forma, o projeto entrega ao estabelecimento parceiro uma base funcional sólida, gratuita e adaptada à sua infraestrutura física, ao mesmo tempo em que consolida a formação prática dos estudantes do IFSP.
+
+\section{Dificuldades Encontradas}
+
+Ao longo do ciclo de levantamento, modelagem e implementação do MVP, a equipe enfrentou e solucionou três dificuldades principais:
+
+\begin{enumerate}
+  \item \textbf{Sincronização em tempo real entre a fila web e o reprodutor desktop:} garantir que as ações de controle da fila refletissem imediatamente na janela dedicada do \textit{Karaokê TV Player} em Electron sem necessidade de recarregar a página exigiu o desacoplamento claro entre o estado da fila e o componente de exibição;
+  \item \textbf{Políticas de incorporação (\textit{embed}) e \textit{autoplay} de vídeos:} navegadores modernos e o próprio YouTube impõem restrições a vídeos embarcados e ao início automático de áudio, o que exigiu testes específicos dentro do container Chromium do Electron e a inclusão de controles diretos (\textit{Play} e \textit{Próxima música}) para o operador do palco;
+  \item \textbf{Calibragem do escopo para o calendário semestral:} foi necessário delimitar criteriosamente o escopo do MVP, descartando ideias iniciais que criariam barreiras de uso para os clientes do bar (como obrigar o download de um aplicativo nativo nas lojas móveis) em favor de uma interface web acessível instantaneamente via QR Code no telão.
+\end{enumerate}
+
+\section{Trabalhos Futuros}
+
+Como continuidade natural após a conclusão e implantação definitiva do MVP no Apache Gru Rock Bar, destacam-se os seguintes trabalhos futuros:
+
+\begin{itemize}
+  \item \textbf{Implementação do módulo de letras no celular e painel de estatísticas musicais:} ativar na próxima etapa do projeto o preenchimento e exibição da tabela \texttt{letra} (já estruturada na modelagem de dados) para acompanhamento no celular, bem como relatórios das músicas mais cantadas no Apache Gru Rock Bar;
+  \item \textbf{Notificação automática de proximidade na fila:} emitir um alerta visual no celular do cliente quando faltar apenas uma música para sua chamada ao palco;
+  \item \textbf{Detecção automática de bloqueio de \textit{embed} via YouTube IFrame API:} validar preventivamente no momento do pedido se o vídeo do YouTube permite reprodução embarcada, sugerindo automaticamente versões alternativas de karaokê;
+  \item \textbf{Interação da plateia e integração com o cardápio digital da casa:} permitir que as mesas enviem reações visuais para o telão durante as apresentações e disponibilizar um atalho rápido na tela da fila para o cardápio de bebidas e porções do bar.
+\end{itemize}

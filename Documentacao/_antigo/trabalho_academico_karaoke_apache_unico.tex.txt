@@ -1,0 +1,2355 @@
+%% Pre-seeded AUX, TOC, LOT, LOF, and embedded PNGs for single-pass compilation
+\begin{filecontents*}{\jobname.aux}
+\relax 
+\providecommand\babel@aux[2]{}
+\@nameuse{bbl@beforestart}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\babel@aux{portuguese}{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introdução}{17}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{cap:introducao}{{1}{17}{Introdução}{chapter.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Caracterização do Projeto}{17}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Objetivos}{17}{section.1.2}\protected@file@percent }
+\citation{contasimples2025}
+\citation{sebrae2024}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Objetivo Geral}{18}{subsection.1.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Objetivos Específicos}{18}{subsection.1.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Justificativa}{18}{section.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Escopo do Projeto}{19}{section.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Estrutura do Documento}{19}{section.1.5}\protected@file@percent }
+\citation{laudon2022}
+\citation{obrien2013}
+\citation{sebrae2024}
+\citation{contasimples2025}
+\citation{singa2026}
+\citation{karafun2026}
+\citation{juks2026}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Contexto do Projeto}{21}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{cap:contexto}{{2}{21}{Contexto do Projeto}{chapter.2}{}}
+\citation{serasa2026}
+\citation{apacheinsta2026}
+\citation{zinesick2026}
+\citation{apachekaraoke2026}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Estudo comparativo entre soluções existentes no mercado e o sistema proposto.\relax }}{22}{table.caption.4}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:concorrencia}{{2.1}{22}{Estudo comparativo entre soluções existentes no mercado e o sistema proposto.\relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Cenário}{22}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Público-Alvo}{23}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Necessidades Identificadas}{23}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Regras de Negócio}{24}{section.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Regras de negócio do domínio do sistema Karaokê Apache.\relax }}{25}{table.caption.5}\protected@file@percent }
+\newlabel{tab:regras_negocio}{{2.2}{25}{Regras de negócio do domínio do sistema Karaokê Apache.\relax }{table.caption.5}{}}
+\newlabel{quad:atividades}{{1}{25}{Regras de Negócio}{quadrocounter.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Análise do Sistema}{27}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{cap:analise}{{3}{27}{Análise do Sistema}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Visão Geral do Sistema}{27}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Atores Envolvidos}{27}{section.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Identificação e caracterização dos atores do sistema Karaokê Apache.\relax }}{28}{table.caption.6}\protected@file@percent }
+\newlabel{tab:atores}{{3.1}{28}{Identificação e caracterização dos atores do sistema Karaokê Apache.\relax }{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Casos de Uso}{28}{section.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Casos de Uso UML -- Sistema Karaokê Apache.\relax }}{29}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:casos_uso}{{3.1}{29}{Diagrama de Casos de Uso UML -- Sistema Karaokê Apache.\relax }{figure.caption.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Especificação dos casos de uso (UC) do sistema Karaokê Apache.\relax }}{30}{table.caption.8}\protected@file@percent }
+\newlabel{tab:casos_uso}{{3.2}{30}{Especificação dos casos de uso (UC) do sistema Karaokê Apache.\relax }{table.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Modelo Conceitual}{31}{section.3.4}\protected@file@percent }
+\newlabel{quad:classes_conceitual}{{2}{31}{Modelo Conceitual}{quadrocounter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Requisitos Funcionais}{32}{section.3.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Requisitos funcionais (RF) do sistema Karaokê Apache.\relax }}{33}{table.caption.9}\protected@file@percent }
+\newlabel{tab:requisitos_funcionais}{{3.3}{33}{Requisitos funcionais (RF) do sistema Karaokê Apache.\relax }{table.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}Requisitos Não Funcionais}{34}{section.3.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Requisitos não funcionais (RNF) do sistema Karaokê Apache.\relax }}{34}{table.caption.10}\protected@file@percent }
+\newlabel{tab:requisitos_nao_funcionais}{{3.4}{34}{Requisitos não funcionais (RNF) do sistema Karaokê Apache.\relax }{table.caption.10}{}}
+\citation{brasil2018lgpd}
+\@writefile{toc}{\contentsline {section}{\numberline {3.7}Restrições do Sistema}{35}{section.3.7}\protected@file@percent }
+\citation{sommerville2019}
+\citation{fowler2006}
+\citation{pressman2016}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Projeto do Sistema}{36}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{cap:projeto}{{4}{36}{Projeto do Sistema}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Arquitetura do Sistema}{36}{section.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Componentes UML (\texttt  {diagrama\_de\_componentes.png}).\relax }}{37}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:uml_componentes}{{4.1}{37}{Diagrama de Componentes UML (\texttt {diagrama\_de\_componentes.png}).\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Projeto dos Componentes}{37}{section.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Detalhamento técnico dos componentes arquiteturais e suas interfaces.\relax }}{38}{table.caption.12}\protected@file@percent }
+\newlabel{tab:componentes_uml}{{4.1}{38}{Detalhamento técnico dos componentes arquiteturais e suas interfaces.\relax }{table.caption.12}{}}
+\newlabel{eq:tempo_espera}{{4.1}{38}{Projeto dos Componentes}{equation.4.2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Modelo de Dados}{38}{section.4.3}\protected@file@percent }
+\newlabel{quad:classes_projeto}{{3}{38}{Modelo de Dados}{quadrocounter.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Dicionário de dados do modelo relacional do sistema Karaokê Apache.\relax }}{41}{table.caption.13}\protected@file@percent }
+\newlabel{tab:dicionario_dados}{{4.2}{41}{Dicionário de dados do modelo relacional do sistema Karaokê Apache.\relax }{table.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Projeto da Interface do Usuário}{42}{section.4.4}\protected@file@percent }
+\newlabel{quad:interfaces_mvp}{{4}{42}{Projeto da Interface do Usuário}{quadrocounter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Diagramas de Interação}{43}{section.4.5}\protected@file@percent }
+\newlabel{quad:sequencia}{{5}{43}{Diagramas de Interação}{quadrocounter.5}{}}
+\citation{react2025}
+\citation{electron2025}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Tecnologias Utilizadas}{44}{section.4.6}\protected@file@percent }
+\citation{brasil2018lgpd}
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Tecnologias, frameworks e ferramentas utilizadas no projeto.\relax }}{45}{table.caption.14}\protected@file@percent }
+\newlabel{tab:tecnologias}{{4.3}{45}{Tecnologias, frameworks e ferramentas utilizadas no projeto.\relax }{table.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Segurança e Controle de Acesso}{45}{section.4.7}\protected@file@percent }
+\newlabel{quad:estados}{{6}{46}{Segurança e Controle de Acesso}{quadrocounter.6}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Implementação}{47}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{cap:implementacao}{{5}{47}{Implementação}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Ambiente de Desenvolvimento}{47}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Estrutura da Aplicação}{47}{section.5.2}\protected@file@percent }
+\newlabel{quad:pacotes}{{7}{47}{Estrutura da Aplicação}{quadrocounter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Implementação dos Componentes}{48}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Integração dos Módulos}{49}{section.5.4}\protected@file@percent }
+\newlabel{quad:implantacao}{{8}{49}{Integração dos Módulos}{quadrocounter.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Testes Realizados}{50}{section.5.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Testes preliminares realizados sobre a Prova de Conceito e o MVP.\relax }}{51}{table.caption.15}\protected@file@percent }
+\newlabel{tab:testes_mvp}{{5.1}{51}{Testes preliminares realizados sobre a Prova de Conceito e o MVP.\relax }{table.caption.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Resultados Obtidos}{51}{section.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Limitações da Implementação}{52}{section.5.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusão}{53}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{cap:conclusao}{{6}{53}{Conclusão}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Considerações Finais}{53}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Dificuldades Encontradas}{53}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Trabalhos Futuros}{54}{section.6.3}\protected@file@percent }
+\bibcite{apacheinsta2026}{1}
+\bibcite{apachekaraoke2026}{2}
+\bibcite{armbrust2009}{3}
+\bibcite{brasil2018lgpd}{4}
+\bibcite{contasimples2025}{5}
+\bibcite{electron2025}{6}
+\bibcite{fowler2006}{7}
+\bibcite{juks2026}{8}
+\bibcite{karafun2026}{9}
+\bibcite{laudon2022}{10}
+\bibcite{mell2011}{11}
+\@writefile{toc}{\contentsline {chapter}{REFERÊNCIAS}{55}{section.6.3}\protected@file@percent }
+\bibcite{obrien2013}{12}
+\bibcite{pressman2016}{13}
+\bibcite{react2025}{14}
+\bibcite{sebrae2024}{15}
+\bibcite{serasa2026}{16}
+\bibcite{singa2026}{17}
+\bibcite{sommerville2019}{18}
+\bibcite{weber2014}{19}
+\bibcite{zinesick2026}{20}
+\@writefile{toc}{\contentsline {chapter}{APÊNDICE A\ -- \MakeUppercase    []{Especificação XML do Diagrama de Componentes no UMLet}}{57}{chapter*.17}\protected@file@percent }
+\newlabel{apendice:uml}{{A}{57}{APÊNDICE \thechapter \ -- \MakeUppercase {Especificação XML do Diagrama de Componentes no UMLet}}{chapter*.17}{}}
+\newlabel{lst:umlet}{{A.1}{57}{Estrutura do arquivo diagrama\_de\_componentes.uxf (UMLet)}{lstlisting.1.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.1}{\ignorespaces Estrutura do arquivo diagrama\_de\_componentes.uxf (UMLet).}}{57}{lstlisting.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{APÊNDICE B\ -- \MakeUppercase    []{Trechos de Código-Fonte do MVP (Electron e Validação da Fila)}}{58}{chapter*.18}\protected@file@percent }
+\newlabel{apendice:codigo}{{B}{58}{APÊNDICE \thechapter \ -- \MakeUppercase {Trechos de Código-Fonte do MVP (Electron e Validação da Fila)}}{chapter*.18}{}}
+\newlabel{lst:electron_main}{{B.1}{58}{Inicialização do reprodutor desktop Karaokê TV Player em Electron (main.js)}{lstlisting.2.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {B.1}{\ignorespaces Inicialização do reprodutor desktop Karaokê TV Player em Electron (main.js).}}{58}{lstlisting.2.1}\protected@file@percent }
+\newlabel{lst:youtube_parser}{{B.2}{58}{Extração de ID do YouTube e validação anti-duplicidade na fila (RN00 e RN01)}{lstlisting.2.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {B.2}{\ignorespaces Extração de ID do YouTube e validação anti-duplicidade na fila (RN00 e RN01).}}{58}{lstlisting.2.2}\protected@file@percent }
+\citation{brasil2018lgpd}
+\@writefile{toc}{\contentsline {chapter}{ANEXO A\ -- \MakeUppercase    []{Referência Normativa -- Art. 6{\textordmasculine } da Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine } 13.709/2018)}}{60}{chapter*.19}\protected@file@percent }
+\newlabel{anexo:lgpd}{{A}{60}{ANEXO \thechapter \ -- \MakeUppercase {Referência Normativa -- Art. 6{\textordmasculine } da Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine } 13.709/2018)}}{chapter*.19}{}}
+\newlabel{LastPage}{{6.3}{60}{Trabalhos Futuros}{chapter*.19}{}}
+\gdef \@abspage@last{61}
+\end{filecontents*}
+\begin{filecontents*}{\jobname.toc}
+\babel@toc {portuguese}{}\relax 
+\contentsline {chapter}{\numberline {1}Introdução}{17}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Caracterização do Projeto}{17}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Objetivos}{17}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Objetivo Geral}{18}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Objetivos Específicos}{18}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Justificativa}{18}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Escopo do Projeto}{19}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Estrutura do Documento}{19}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Contexto do Projeto}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Cenário}{22}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Público-Alvo}{23}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Necessidades Identificadas}{23}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Regras de Negócio}{24}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Análise do Sistema}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Visão Geral do Sistema}{27}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Atores Envolvidos}{27}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Casos de Uso}{28}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Modelo Conceitual}{31}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Requisitos Funcionais}{32}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Requisitos Não Funcionais}{34}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Restrições do Sistema}{35}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Projeto do Sistema}{36}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Arquitetura do Sistema}{36}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Projeto dos Componentes}{37}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Modelo de Dados}{38}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Projeto da Interface do Usuário}{42}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Diagramas de Interação}{43}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Tecnologias Utilizadas}{44}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Segurança e Controle de Acesso}{45}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Implementação}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Ambiente de Desenvolvimento}{47}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Estrutura da Aplicação}{47}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Implementação dos Componentes}{48}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Integração dos Módulos}{49}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Testes Realizados}{50}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Resultados Obtidos}{51}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Limitações da Implementação}{52}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Conclusão}{53}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Considerações Finais}{53}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Dificuldades Encontradas}{53}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Trabalhos Futuros}{54}{section.6.3}%
+\contentsline {chapter}{REFERÊNCIAS}{55}{section.6.3}%
+\contentsline {chapter}{APÊNDICE A\ -- \MakeUppercase []{Especificação XML do Diagrama de Componentes no UMLet}}{57}{chapter*.17}%
+\contentsline {chapter}{APÊNDICE B\ -- \MakeUppercase []{Trechos de Código-Fonte do MVP (Electron e Validação da Fila)}}{58}{chapter*.18}%
+\contentsline {chapter}{ANEXO A\ -- \MakeUppercase []{Referência Normativa -- Art. 6{\textordmasculine } da Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine } 13.709/2018)}}{60}{chapter*.19}%
+\end{filecontents*}
+\begin{filecontents*}{\jobname.lot}
+\babel@toc {portuguese}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Estudo comparativo entre soluções existentes no mercado e o sistema proposto.\relax }}{22}{table.caption.4}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Regras de negócio do domínio do sistema Karaokê Apache.\relax }}{25}{table.caption.5}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Identificação e caracterização dos atores do sistema Karaokê Apache.\relax }}{28}{table.caption.6}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Especificação dos casos de uso (UC) do sistema Karaokê Apache.\relax }}{30}{table.caption.8}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Requisitos funcionais (RF) do sistema Karaokê Apache.\relax }}{33}{table.caption.9}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Requisitos não funcionais (RNF) do sistema Karaokê Apache.\relax }}{34}{table.caption.10}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Detalhamento técnico dos componentes arquiteturais e suas interfaces.\relax }}{38}{table.caption.12}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Dicionário de dados do modelo relacional do sistema Karaokê Apache.\relax }}{41}{table.caption.13}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Tecnologias, frameworks e ferramentas utilizadas no projeto.\relax }}{45}{table.caption.14}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Testes preliminares realizados sobre a Prova de Conceito e o MVP.\relax }}{51}{table.caption.15}%
+\addvspace {10\p@ }
+\end{filecontents*}
+\begin{filecontents*}{\jobname.lof}
+\babel@toc {portuguese}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Casos de Uso UML -- Sistema Karaokê Apache.\relax }}{29}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Componentes UML (\texttt {diagrama\_de\_componentes.png}).\relax }}{37}{figure.caption.11}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\end{filecontents*}
+
+%% Self-contained embedded PNG images (DiagramaCasoDeUso.png and diagrama_de_componentes.png)
+\begin{filecontents*}{uc_img.b64}
+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
+AAAASUVORK5CYII=
+\end{filecontents*}
+\begin{filecontents*}{comp_img.b64}
+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
+ooF+RQP9igb6FY1+IRr9QjT6FY0I9Csa6Fc00K9ooF/RQL+igX5FA/2KBvoVDfQrGuj3dQK5hVj0
+W+ZcIBr9igb6FQ30KxroVzTQ7ztHM5zP/QfR6LeoWSGekolmBf2WFU04RRNEo9/C1oLxalIQjX5f
+aAD3o7qaFsKDvhvunfNj+330efrPfuV4mRQe8N3wqDQe0e+bqx8ukwL1N6j+Pft9c/XztBAr6m9W
+/Xv2++7qL/VC/Q2rf8d+3139H/5u7cdToZb6T1X/R77vE1p9P/XrmzdQ/73Vf0Kr1Kc+9V9f/dv7
+vdR/b/Wf1ep7qX/z61D/zdV/Uqt3VP/nfztH/VdS/6f63Z769zxY6mu1sJCs9bVaZkgH5sfvBVB/
+i63W718r9bUqJGj1dUIKsQqJ+m+ofq4tnJ6Y1nafvsPw1X8bL203Q6Hqd+uZy1QtP6e+09z7tbq2
+FcMH9avlr9RPzfrncHjezRAvn+lKPc3t4lWGP3uw1P959XNbU/NR/erv1E/LYbpv36rVu6u//tjM
+Ge6apqX+i6u/Cr2kZletfaXp2FxIzX5Vf98002lJkz+X1zJ9bGJ/VH/e5z/j3FbL+lWaPt9l/Vz+
+cn1b53/+Z/tbVz9PC3Gk/kurP2TZhyzqfq7GvGxpj801XbXUXbXb5bXMYfLv676as9VpzHc7qh/y
+j4s+dWf1h1X6wyMp36n/Q/tbVL9umiac1M/Ms7X+S6/1m31fTXn+zv62WdTl0NxqdZWdz75X3WHq
+Xu+SrT584viNUr8fq3m6qF8df0Cc7vSH9je51h+G4desP8fYzPc5Yur/2IIn97TOV6laF+/H5g63
+t92wfsnlMIft5oPVy3rPpj+qv7RVGq7U7/er/PlOp6/6x/Y3tsNzteBZF4M76r+++tPufF57mvXT
+p1l/d5zQL2fBKU/z+XO/1F/vWg2pO8/6f9H+dtXPy8c+Uf/11e+bkP84rPX357V+WNf6+4PNh7vk
+ddFxGV+FX+rv8t2y+n0+/R2z+uHw6DneaRj+ov3tqt+npp1+Rn3X5t5T/Txv18142OHpfu3w1Pvd
+hx2eZkrr5k3T7H6pH+rjD4UpxTn1Qzx8aj3ZjXXq/6L9TV2b+/JlU7/scQiJ+tQXEvWpLyRpUF9I
+0qC+sqVBfWVLg/rKlgb1lS0N6pdXdpjaVEuD+qWV3cU0L4M0qF9Y2aGNizSoX17ZYz1Kg/oFlj2l
+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
+gg==
+\end{filecontents*}
+\begin{filecontents*}{decode_imgs.lua}
+local b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+local function dec(data)
+  data = string.gsub(data, "[^"..b.."=]", "")
+  return (data:gsub(".", function(x)
+    if (x == "=") then return "" end
+    local r,f="",(b:find(x)-1)
+    for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and "1" or "0") end
+    return r;
+  end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(x)
+    if (#x ~= 8) then return "" end
+    local c=0
+    for i=1,8 do c=c+(x:sub(i,i)=="1" and 2^(8-i) or 0) end
+    return string.char(c)
+  end))
+end
+local function b64tofile(infile, outfile)
+  local check = io.open(outfile, "rb")
+  if check then check:close(); return end
+  local f = io.open(infile, "rb")
+  if not f then return end
+  local content = f:read("*all")
+  f:close()
+  local out = io.open(outfile, "wb")
+  if out then
+    out:write(dec(content))
+    out:close()
+  end
+end
+b64tofile("uc_img.b64", "DiagramaCasoDeUso.png")
+b64tofile("comp_img.b64", "diagrama_de_componentes.png")
+\end{filecontents*}
+\ifdefined\directlua\directlua{dofile("decode_imgs.lua")}\fi
+
+%% ========================================================================== %%
+%% Documento estruturado com base no Template ABNTeX2 / ABNTEX-IFPI           %%
+%% Estruturado conforme proposta-documento.md (Fase de MVP)                   %%
+%% ========================================================================== %%
+\documentclass[12pt,oneside,a4paper]{report}
+
+%% -------------------------------------------------------------------------- %%
+%% Pacotes Compatíveis com TeX Live / LuaLaTeX (Canvas e Overleaf)            %%
+%% -------------------------------------------------------------------------- %%
+\usepackage[a4paper,top=30mm,bottom=20mm,left=30mm,right=20mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{babel}
+\babelprovide[import, main]{portuguese}
+\usepackage{lmodern}
+\usepackage{indentfirst}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+
+%% -------------------------------------------------------------------------- %%
+%% Configurações de Cores (configuracoes/cores.tex)                           %%
+%% -------------------------------------------------------------------------- %%
+\definecolor{cor-link}{RGB}{0,0,0}
+\definecolor{cor-quadro}{RGB}{5,28,63}
+\definecolor{codebg}{RGB}{246,248,250}
+\definecolor{codeframe}{RGB}{208,215,222}
+\definecolor{codecomment}{RGB}{87,96,106}
+\definecolor{codekeyword}{RGB}{5,80,174}
+\definecolor{codestring}{RGB}{10,48,105}
+
+%% -------------------------------------------------------------------------- %%
+%% Configurações de Espaçamentos (configuracoes/espacamentos.tex)             %%
+%% -------------------------------------------------------------------------- %%
+\setlength{\parindent}{1.5cm}
+\setlength{\parskip}{4pt plus 1pt minus 1pt}
+\setlength{\headheight}{15pt}
+\linespread{1.35}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+%% -------------------------------------------------------------------------- %%
+%% Comandos e Ambientes do Template ABNTeX2 / ABNTEX-IFPI                     %%
+%% -------------------------------------------------------------------------- %%
+\newcommand{\ABNTEXchapterfont}{\normalfont}
+\newcommand{\ABNTEXchapterfontsize}{\normalsize\bfseries}
+\newcommand{\ABNTEXsectionfont}{\ABNTEXchapterfont}
+\newcommand{\ABNTEXsectionfontsize}{\normalsize}
+\newcommand{\ABNTEXsubsectionfont}{\ABNTEXsectionfont}
+\newcommand{\ABNTEXsubsectionfontsize}{\normalsize\bfseries}
+\newcommand{\ABNTEXsubsubsectionfont}{\ABNTEXsubsectionfont}
+\newcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+\newcommand{\ABNTEXfontereduzida}{\footnotesize}
+\newcommand{\onelineskip}{12pt}
+\newcommand{\SingleSpacing}{\linespread{1.0}\selectfont}
+\newcommand{\OneHalfSpacing}{\linespread{1.35}\selectfont}
+\newcommand{\codigo}[1]{\texttt{#1}}
+\newcommand{\citeonline}[2][]{\cite{#2}}
+
+%% Formatação dos Capítulos e Seções no padrão ABNT (abntex-ifpi.sty)
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{0pt}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \ABNTEXchapterfontsize \thechapter\space \MakeUppercase{#1}\par\nobreak
+    \else
+      \ABNTEXchapterfontsize \MakeUppercase{#1}\par\nobreak
+    \fi
+    \vskip 18\p@
+  }}
+\def\@makeschapterhead#1{%
+  \vspace*{0pt}%
+  {\parindent \z@ \centering \normalfont
+    \ABNTEXchapterfontsize \MakeUppercase{#1}\par\nobreak
+    \vskip 18\p@
+  }}
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+  {-18pt \@plus -4pt \@minus -2pt}%
+  {12pt \@plus 2pt}%
+  {\normalfont\normalsize\bfseries\MakeUppercase}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-14pt \@plus -3pt \@minus -2pt}%
+  {8pt \@plus 2pt}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  {-12pt \@plus -2pt \@minus -2pt}%
+  {6pt \@plus 2pt}%
+  {\normalfont\normalsize\itshape}}
+
+%% Formatação limpa do Sumário (pontilhado até os capítulos)
+\renewcommand*\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 0.6em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode \bfseries
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\leaders\hbox{$\m@th\normalfont\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\makeatother
+
+%% Controle de paginação Pré-Textual vs Textual (ABNT NBR 14724)
+\fancypagestyle{pretextualstyle}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+\fancypagestyle{textualstyle}{%
+  \fancyhf{}%
+  \fancyhead[R]{\small\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+\newcommand{\textual}{%
+  \cleardoublepage%
+  \pagestyle{textualstyle}%
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyhead[R]{\small\thepage}%
+    \renewcommand{\headrulewidth}{0pt}%
+  }%
+}
+\newcommand{\postextual}{\cleardoublepage}
+
+%% Comandos de Metadados (abntex-ifpi.sty & configuracoes/metadados.tex)
+\newcommand{\imprimirinstituicao}{}
+\newcommand{\instituicao}[1]{\renewcommand{\imprimirinstituicao}{#1}}
+\newcommand{\imprimirautor}{}
+\newcommand{\autor}[1]{\renewcommand{\imprimirautor}{#1}}
+\newcommand{\imprimirtitulo}{}
+\newcommand{\titulo}[1]{\renewcommand{\imprimirtitulo}{#1}}
+\newcommand{\imprimirlocal}{}
+\newcommand{\local}[1]{\renewcommand{\imprimirlocal}{#1}}
+\newcommand{\imprimirdata}{}
+\newcommand{\data}[1]{\renewcommand{\imprimirdata}{#1}}
+\newcommand{\imprimirpreambulo}{}
+\newcommand{\preambulo}[1]{\renewcommand{\imprimirpreambulo}{#1}}
+\newcommand{\imprimirorientador}{}
+\newcommand{\orientador}[1]{\renewcommand{\imprimirorientador}{#1}}
+\newcommand{\imprimircoorientador}{}
+\newcommand{\coorientador}[1]{\renewcommand{\imprimircoorientador}{#1}}
+\newcommand{\imprimirtipotrabalho}{}
+\newcommand{\tipotrabalho}[1]{\renewcommand{\imprimirtipotrabalho}{#1}}
+\newcommand{\imprimirnomedocurso}{}
+\newcommand{\nomedocurso}[1]{\renewcommand{\imprimirnomedocurso}{#1}}
+\newcommand{\imprimirmembroum}{}
+\newcommand{\membroum}[1]{\renewcommand{\imprimirmembroum}{#1}}
+\newcommand{\imprimirmembrodois}{}
+\newcommand{\membrodois}[1]{\renewcommand{\imprimirmembrodois}{#1}}
+\newcommand{\imprimirmembrotres}{}
+\newcommand{\membrotres}[1]{\renewcommand{\imprimirmembrotres}{#1}}
+\newcommand{\imprimirdataapresentacao}{}
+\newcommand{\dataapresentacao}[1]{\renewcommand{\imprimirdataapresentacao}{#1}}
+
+%% Comando de Assinatura da Banca
+\newlength{\ABNTEXsignwidth}
+\setlength{\ABNTEXsignwidth}{11cm}
+\newlength{\ABNTEXsignskip}
+\setlength{\ABNTEXsignskip}{0.7cm}
+\newcommand{\assinatura}[1]{%
+  \vspace{\ABNTEXsignskip}%
+  \begin{center}%
+    \rule{\ABNTEXsignwidth}{0.4pt}\\[3pt]%
+    {\SingleSpacing #1\par}%
+  \end{center}%
+}
+
+%% Capa (abntex-ifpi.sty)
+\newcommand{\imprimircapa}{%
+  \begin{titlepage}%
+    \thispagestyle{empty}%
+    \centering%
+    {\ABNTEXchapterfont\bfseries\imprimirinstituicao\par}%
+    \vspace*{2.2cm}%
+    {\ABNTEXchapterfont\bfseries\MakeUppercase{\imprimirautor}\par}%
+    \vspace*{2.2cm}%
+    {\ABNTEXchapterfont\bfseries\MakeUppercase{\imprimirtitulo}\par}%
+    \vfill%
+    {\bfseries\MakeUppercase{\imprimirlocal}\par}%
+    {\bfseries\imprimirdata\par}%
+    \vspace*{1cm}%
+  \end{titlepage}%
+}
+
+%% Folha de Rosto (abntex-ifpi.sty)
+\makeatletter
+\newcommand{\imprimirfolhaderosto}{%
+  \@ifstar{\@imprimirfolhaderosto}{\@imprimirfolhaderosto}%
+}
+\newcommand{\@imprimirfolhaderosto}{%
+  \newpage%
+  \thispagestyle{empty}%
+  \setcounter{page}{1}%
+  \begin{center}%
+    {\ABNTEXchapterfont\MakeUppercase{\imprimirautor}\par}%
+    \vspace*{2.0cm}%
+    {\ABNTEXchapterfont\bfseries\MakeUppercase{\imprimirtitulo}\par}%
+    \vfill%
+    \hspace{.42\textwidth}%
+    \begin{minipage}{.54\textwidth}%
+      \SingleSpacing%
+      \imprimirpreambulo\par%
+      \vspace{0.5cm}%
+      \textbf{Orientador:} \imprimirorientador\par%
+      \vspace{0.2cm}%
+      \textbf{Coorientador:} \imprimircoorientador%
+    \end{minipage}%
+    \vfill%
+    {\MakeUppercase{\imprimirlocal}\par}%
+    {\imprimirdata\par}%
+    \vspace*{1cm}%
+  \end{center}%
+  \newpage%
+}
+\makeatother
+
+%% Folha de Aprovação (abntex-ifpi.sty)
+\newcommand{\imprimirfolhadeaprovacao}{%
+  \newpage%
+  \thispagestyle{empty}%
+  \begin{center}%
+    {\ABNTEXchapterfont\MakeUppercase{\imprimirautor}\par}%
+    \vspace*{0.8cm}%
+    {\ABNTEXchapterfont\bfseries\MakeUppercase{\imprimirtitulo}\par}%
+    \vspace*{0.8cm}%
+    \hspace{.42\textwidth}%
+    \begin{minipage}{.54\textwidth}%
+      \SingleSpacing%
+      \imprimirpreambulo%
+    \end{minipage}%
+    \vspace*{0.6cm}%
+  \end{center}%
+  \noindent Aprovada em \imprimirdataapresentacao.\par%
+  \vspace{0.4cm}%
+  \begin{center}%
+    \textbf{BANCA EXAMINADORA:}%
+  \end{center}%
+  \assinatura{\textbf{\imprimirorientador\ (Orientador)} \\ Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP)}%
+  \assinatura{\textbf{\imprimirmembroum\ (Coorientador)} \\ Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP)}%
+  \assinatura{\textbf{\imprimirmembrodois} \\ Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP)}%
+  \vfill%
+  \begin{center}%
+    {\MakeUppercase{\imprimirlocal}\par}%
+    {\imprimirdata\par}%
+    \vspace*{0.5cm}%
+  \end{center}%
+  \newpage%
+}
+
+%% Ambientes Pré-Textuais do Template
+\newenvironment{fichacatalografica}{\newpage\thispagestyle{empty}}{\newpage}
+\newenvironment{dedicatoria}{\newpage\thispagestyle{empty}}{\newpage}
+\newenvironment{agradecimentos}{%
+  \newpage\thispagestyle{empty}%
+  \begin{center}{\ABNTEXchapterfontsize AGRADECIMENTOS}\end{center}\vspace{1cm}%
+}{\newpage}
+\newenvironment{epigrafe}{\newpage\thispagestyle{empty}}{\newpage}
+\newenvironment{resumo}[1][RESUMO]{%
+  \newpage\thispagestyle{empty}%
+  \begin{center}{\ABNTEXchapterfontsize \MakeUppercase{#1}}\end{center}\vspace{0.8cm}%
+  \SingleSpacing\noindent%
+}{\OneHalfSpacing\newpage}
+\newenvironment{siglas}{%
+  \newpage\thispagestyle{empty}%
+  \begin{center}{\ABNTEXchapterfontsize LISTA DE ABREVIATURAS E SIGLAS}\end{center}\vspace{0.8cm}%
+  \begin{description}\setlength{\itemsep}{4pt}%
+}{\end{description}\newpage}
+\newenvironment{simbolos}{%
+  \newpage\thispagestyle{empty}%
+  \begin{center}{\ABNTEXchapterfontsize LISTA DE SÍMBOLOS}\end{center}\vspace{0.8cm}%
+  \begin{description}\setlength{\itemsep}{4pt}%
+}{\end{description}\newpage}
+
+%% Ambiente de Citação Direta Longa (> 3 linhas) conforme ABNT NBR 10520
+\newenvironment{citacao}{%
+  \vspace{6pt}%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{4cm}%
+    \setlength{\rightmargin}{0cm}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+  }%
+  \item\relax\SingleSpacing\footnotesize%
+}{%
+  \end{list}%
+  \OneHalfSpacing\vspace{6pt}%
+}
+
+%% Comandos de Tabelas Padrão IBGE / ABNT (\IBGEtab, \fonte, \nota, \legend)
+\newcommand{\legend}[1]{\vspace{4pt}{\par\centering\footnotesize #1\par}}
+\newcommand{\fonte}[1]{\vspace{4pt}{\par\noindent\footnotesize\textbf{Fonte:} #1\par}}
+\newcommand{\nota}[2][Nota]{\vspace{2pt}{\par\noindent\footnotesize\textbf{#1:} #2\par}}
+\newcommand{\IBGEtab}[3]{%
+  #1%
+  \begin{center}%
+  #2%
+  \end{center}%
+  #3%
+}
+
+%% Ambiente de Quadro / Diagrama UML estilizado (\begin{caixa}{Título}{label})
+\newcounter{quadrocounter}
+\newenvironment{caixa}[2]{%
+  \refstepcounter{quadrocounter}%
+  \label{#2}%
+  \vspace{10pt}\noindent%
+  \colorbox{cor-quadro}{%
+    \parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+      \vspace{3pt}\color{white}\bfseries\small Quadro \thequadrocounter\ -- #1\vspace{3pt}%
+    }%
+  }\par\nopagebreak\vspace{4pt}\begingroup\footnotesize%
+}{%
+  \endgroup\par\nopagebreak\noindent\textcolor{cor-quadro}{\rule{\textwidth}{1pt}}\vspace{10pt}\par%
+}
+
+%% Ambientes de Apêndices e Anexos com entrada correta no Sumário
+\newcommand{\apendiceitem}[2]{%
+  \refstepcounter{chapter}%
+  \chapter*{APÊNDICE \thechapter\ -- \MakeUppercase{#1}}%
+  \addcontentsline{toc}{chapter}{APÊNDICE \thechapter\ -- \MakeUppercase{#1}}%
+  \label{#2}%
+}
+\newcommand{\anexoitem}[2]{%
+  \refstepcounter{chapter}%
+  \chapter*{ANEXO \thechapter\ -- \MakeUppercase{#1}}%
+  \addcontentsline{toc}{chapter}{ANEXO \thechapter\ -- \MakeUppercase{#1}}%
+  \label{#2}%
+}
+\newenvironment{apendicesenv}{%
+  \newpage%
+  \renewcommand{\thechapter}{\Alph{chapter}}%
+  \setcounter{chapter}{0}%
+}{}
+\newenvironment{anexosenv}{%
+  \newpage%
+  \renewcommand{\thechapter}{\Alph{chapter}}%
+  \setcounter{chapter}{0}%
+}{}
+
+%% Configuração de Listagens de Código
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=t,
+  commentstyle=\color{codecomment}\itshape,
+  frame=single,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{codekeyword}\bfseries,
+  numbers=left,
+  numbersep=8pt,
+  numberstyle=\tiny\color{codecomment},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{codestring},
+  tabsize=2
+}
+
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  labelsep=endash,
+  justification=centering
+}
+
+%% ========================================================================== %%
+%% METADADOS DO TRABALHO (configuracoes/metadados.tex)                        %%
+%% ========================================================================== %%
+\titulo{Karaokê Apache: Sistema Integrado de Gerenciamento de Fila, Pedidos Musicais e Reprodução para Bar de Karaokê}
+
+\autor{João Pedro Rodrigues \\ Josee Hoshi Vellani Bellintani \\ Leonardo Gutierrez Mamani \\ Luiz Eduardo Barbosa Silveira \\ Murillo Andrade Assis \\ Yasmin Bonfim de Moraes}
+
+\nomedocurso{Tecnologia em Análise e Desenvolvimento de Sistemas}
+
+\local{São Paulo, SP}
+
+\preambulo{Relatório Técnico apresentado como exigência parcial para avaliação na disciplina de Projeto Integrado de Extensão do Curso de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo, Campus São Paulo.}
+
+\orientador{Prof. Me. Marcelo Tavares de Santana}
+\coorientador{Prof. Me. Johnata Souza Santicioli}
+
+\tipotrabalho{Relatório Técnico}
+
+\data{2026}
+
+\instituicao{INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE SÃO PAULO \\ CAMPUS SÃO PAULO \\ TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS}
+
+\membroum{Prof. Me. Johnata Souza Santicioli}
+\membrodois{Prof. Me. Membro Avaliador Convidado}
+
+\dataapresentacao{\underline{\hspace{1.0cm}}/\underline{\hspace{1.0cm}}/\underline{\hspace{1.75cm}}}
+
+\hypersetup{
+  pdftitle={Karaokê Apache: Sistema Integrado de Gerenciamento de Fila, Pedidos Musicais e Reprodução para Bar de Karaokê},
+  pdfauthor={João Pedro Rodrigues; Josee Hoshi Vellani Bellintani; Leonardo Gutierrez Mamani; Luiz Eduardo Barbosa Silveira; Murillo Andrade Assis; Yasmin Bonfim de Moraes},
+  pdfsubject={Projeto Integrado de Extensão - IFSP Campus São Paulo},
+  pdfcreator={LaTeX, abntex2, abnTeX-ifpi},
+  pdfkeywords={Sistema web}{Karaokê}{Gerenciamento de fila}{Electron}{React}{MVP},
+  colorlinks=true,
+  linkcolor=cor-link,
+  citecolor=cor-link,
+  filecolor=cor-link,
+  urlcolor=cor-link,
+  bookmarksdepth=4
+}
+
+%% ========================================================================== %%
+%% INÍCIO DO DOCUMENTO                                                        %%
+%% ========================================================================== %%
+\begin{document}
+\pagestyle{pretextualstyle}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+\renewcommand{\contentsname}{SUMÁRIO}
+\renewcommand{\listtablename}{LISTA DE TABELAS}
+\renewcommand{\listfigurename}{LISTA DE ILUSTRAÇÕES}
+\renewcommand{\bibname}{REFERÊNCIAS}
+
+%% ========================================================================== %%
+%% ELEMENTOS PRÉ-TEXTUAIS                                                     %%
+%% ========================================================================== %%
+
+%% 01: Capa
+\imprimircapa
+
+%% 02: Folha de Rosto
+\imprimirfolhaderosto*
+
+%% 03: Ficha Catalográfica
+\begin{fichacatalografica}
+  \vspace*{\fill}
+  \begin{center}
+    \textbf{FICHA CATALOGRÁFICA}\\[0.15cm]
+    {\footnotesize Sistema de Bibliotecas -- Instituto Federal de São Paulo (IFSP -- Campus São Paulo)}\\[0.35cm]
+    \setlength{\fboxsep}{12pt}%
+    \fbox{\begin{minipage}{13.2cm}
+      \SingleSpacing\small\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+      R696k \quad Rodrigues, João Pedro et al.\par
+      \hangindent=1.2cm \hangafter=0
+      Karaokê Apache: Sistema Integrado de Gerenciamento de Fila, Pedidos Musicais e Reprodução para Bar de Karaokê / João Pedro Rodrigues, Josee Hoshi Vellani Bellintani, Leonardo Gutierrez Mamani, Luiz Eduardo Barbosa Silveira, Murillo Andrade Assis, Yasmin Bonfim de Moraes. -- São Paulo, SP, 2026.\par
+      \hangindent=1.2cm \hangafter=0
+      \pageref{LastPage} p. : il. (algumas color.) ; 30 cm.\par
+      \hangindent=1.2cm \hangafter=0
+      Orientador: Prof. Me. Marcelo Tavares de Santana.\\
+      Coorientador: Prof. Me. Johnata Souza Santicioli.\par
+      \hangindent=1.2cm \hangafter=0
+      Relatório Técnico (Projeto Integrado de Extensão) -- Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP), Campus São Paulo, Curso de Tecnologia em Análise e Desenvolvimento de Sistemas, 2026.\par
+      \hangindent=1.2cm \hangafter=0
+      1. Engenharia de Software. 2. Sistema de Karaokê. 3. Electron. 4. React. 5. Projeto de Extensão. I. Santana, Marcelo Tavares de. II. Santicioli, Johnata Souza. III. Instituto Federal de São Paulo. IV. Título.\par
+      \vspace{2pt}
+      \raggedleft \textbf{CDD 005.1}
+    \end{minipage}}
+  \end{center}
+  \vspace*{1cm}
+\end{fichacatalografica}
+
+%% 04: Folha de Aprovação
+\imprimirfolhadeaprovacao
+
+%% 05: Dedicatória
+\begin{dedicatoria}
+  \vspace*{\fill}
+  \begin{flushright}
+    \begin{minipage}{0.65\textwidth}
+      \SingleSpacing\itshape
+      Dedicamos este projeto aos gestores, músicos e frequentadores do estabelecimento parceiro Apache Gru Rock Bar, em Guarulhos -- SP, cuja receptividade e parceria tornaram possível aplicar a engenharia de software na transformação de uma operação cultural e gastronômica real.\\[0.3cm]
+      Dedicamos também aos pequenos empreendedores do setor de bares e entretenimento que buscam na tecnologia acessível um instrumento de organização e valorização da cultura local.
+    \end{minipage}
+  \end{flushright}
+\end{dedicatoria}
+
+%% 06: Agradecimentos
+\begin{agradecimentos}
+Expressamos nossos sinceros agradecimentos a todos os professores e profissionais do Instituto Federal de São Paulo por todo o apoio e orientação durante todo o percurso da graduação. Sobretudo ao Prof. Marcelo Tavares de Santana cujo as orientações técnicas e acadêmicas guiaram cada etapa do desenvolvimento desse projeto.
+
+Ao Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP), Campus São Paulo (SPO), por prover nos promover uma infraestrutura de excelência e o ambiente ideal para a aprendizagem profissional e acadêmica.
+
+À empresa parceira Apache Gru Rock Bar, localizado no bairro Gopouva em Guarulhos - SP por compartilhar os desafios reais de sua operação, nos permitindo devolver para a sociedade o conhecimento técnico desenvolvido durante o curso.
+
+Por último, agradecemos às nossas famílias e companheiros por todo o apoio e suporte socioemocional durante toda a trajetória da graduação.
+\end{agradecimentos}
+
+%% 07: Epígrafe
+\begin{epigrafe}
+  \vspace*{\fill}
+  \begin{flushright}
+    \begin{minipage}{0.65\textwidth}
+      \SingleSpacing
+      \emph{``A engenharia de software cumpre seu propósito mais nobre quando transcende a complexidade técnica do código e se converte em fluidez, organização e experiência coletiva no mundo real.''}\\[0.2cm]
+      --- Engenharia de Software Aplicada
+    \end{minipage}
+  \end{flushright}
+\end{epigrafe}
+
+%% 08: Resumo
+\begin{resumo}
+O presente trabalho documenta a concepção, a análise de domínio, o projeto arquitetural e o desenvolvimento em estágio de Produto Mínimo Viável (MVP) do sistema \textbf{Karaokê Apache}, uma plataforma integrada para gerenciamento de fila, pedidos musicais e reprodução audiovisual destinada ao estabelecimento comercial \textbf{Apache Gru Rock Bar} (\texttt{APACHE GRU ROCK BAR LTDA - ME}, CNPJ 64.687.141/0001-07), localizado em Guarulhos -- SP. O estabelecimento realiza semanalmente a \textit{Noite de Karaokê}, cujo controle manual de pedidos em fichas de papel ocasionava perdas de solicitações, repetição de músicas em curto intervalo, sobrecarga operacional do organizador ao alternar janelas de vídeo no telão e ausência de visibilidade para os clientes sobre a ordem de apresentação. Para solucionar esses gargalos, projetou-se uma arquitetura distribuída em quatro subsistemas: (1) interface móvel \textit{Cliente Web} acessível via leitura de QR Code no telão; (2) painel \textit{Admin Web} para controle e moderação da fila; (3) \textit{API Orquestradora} desenvolvida em Java 21 e acoplada ao banco de dados relacional MySQL para validação das regras de negócio (RN00 a RN04); e (4) o aplicativo desktop nativo \textbf{Karaokê TV Player}, construído em Electron e React com Vite para exibição contínua no telão do palco. O documento estrutura o contexto do parceiro, a modelagem UML (Diagramas de Atividades, Casos de Uso, Classes Conceituais e de Projeto, Componentes, Sequência, Estados, Pacotes e Implantação) e a implementação atual do MVP, cuja Prova de Conceito validou com sucesso a sincronização em tempo real entre a fila web e o reprodutor Electron.
+
+\vspace{\onelineskip}
+\noindent
+\textbf{Palavras-chaves}: Sistema web; Karaokê; Gerenciamento de fila; Electron; React; Produto Mínimo Viável.
+\end{resumo}
+
+%% 09: Abstract
+\begin{resumo}[Abstract]
+This technical report documents the domain analysis, architectural design, and Minimum Viable Product (MVP) development stage of the \textbf{Karaokê Apache} system, an integrated platform for queue management, song requests, and audiovisual playback designed for the commercial venue \textbf{Apache Gru Rock Bar} (\texttt{APACHE GRU ROCK BAR LTDA - ME}, CNPJ 64.687.141/0001-07), located in Guarulhos -- SP, Brazil. The venue hosts a weekly \textit{Karaoke Night} where manual paper-based song requests previously resulted in lost entries, duplicate songs, operational overload when manually switching video windows on the main screen, and lack of queue visibility for patrons. To overcome these bottlenecks, a four-tier distributed architecture was designed comprising: (1) a mobile-first \textit{Client Web} interface accessed via a QR Code displayed on the main screen; (2) an \textit{Admin Web} panel for queue moderation; (3) a centralized \textit{Orchestrator API} built with Java 21 and backed by a MySQL relational database enforcing business rules (RN00 to RN04); and (4) the native desktop application \textbf{Karaokê TV Player}, built with Electron and React/Vite for uninterrupted full-screen playback. This document details the partner context, UML modeling (Activity, Use Case, Conceptual and Design Class, Component, Sequence, State, Package, and Deployment diagrams), and current MVP implementation, whose Proof of Concept validated real-time synchronization between the web queue controller and the Electron TV Player.
+
+\vspace{\onelineskip}
+\noindent
+\textbf{Keywords}: Web system; Karaoke; Queue management; Electron; React; Minimum Viable Product.
+\end{resumo}
+
+%% 10: Lista de Ilustrações e Quadros UML
+\newpage
+\thispagestyle{empty}
+\listoffigures
+\vspace{0.8cm}
+\noindent{\bfseries\normalsize LISTA DE QUADROS E DIAGRAMAS ESTRUTURAIS}\\[0.4cm]
+\noindent \textbf{Quadro 1} -- Diagrama de Atividades UML do fluxo de pedido e execução musical\dotfill \pageref{quad:atividades}\\[5pt]
+\noindent \textbf{Quadro 2} -- Diagrama de Classes Conceitual UML (\texttt{Conceitual.brM3})\dotfill \pageref{quad:classes_conceitual}\\[5pt]
+\noindent \textbf{Quadro 3} -- Diagrama de Classes de Projeto UML\dotfill \pageref{quad:classes_projeto}\\[5pt]
+\noindent \textbf{Quadro 4} -- Representação das interfaces do MVP (Controle Web e Electron TV Player)\dotfill \pageref{quad:interfaces_mvp}\\[5pt]
+\noindent \textbf{Quadro 5} -- Diagrama de Sequência UML da submissão e reprodução de música\dotfill \pageref{quad:sequencia}\\[5pt]
+\noindent \textbf{Quadro 6} -- Diagrama de Estados UML do ciclo de vida de um pedido na fila\dotfill \pageref{quad:estados}\\[5pt]
+\noindent \textbf{Quadro 7} -- Diagrama de Pacotes UML da estrutura da aplicação no MVP\dotfill \pageref{quad:pacotes}\\[5pt]
+\noindent \textbf{Quadro 8} -- Diagrama de Implantação UML do ambiente de execução no bar\dotfill \pageref{quad:implantacao}
+\newpage
+
+%% 11: Lista de Tabelas
+\thispagestyle{empty}
+\listoftables
+\newpage
+
+%% 12: Lista de Abreviaturas e Siglas
+\begin{siglas}
+  \item[ABNT] Associação Brasileira de Normas Técnicas
+  \item[ACID] \textit{Atomicity, Consistency, Isolation, Durability} (Atomicidade, Consistência, Isolamento e Durabilidade)
+  \item[API] \textit{Application Programming Interface} (Interface de Programação de Aplicações)
+  \item[CNAE] Classificação Nacional de Atividades Econômicas
+  \item[CNPJ] Cadastro Nacional da Pessoa Jurídica
+  \item[CORS] \textit{Cross-Origin Resource Sharing} (Compartilhamento de Recursos de Origem Cruzada)
+  \item[CRUD] \textit{Create, Read, Update, Delete} (Criar, Ler, Atualizar e Excluir)
+  \item[CSP] \textit{Content Security Policy} (Política de Segurança de Conteúdo)
+  \item[DER] Diagrama Entidade-Relacionamento
+  \item[FDD] \textit{Feature-Driven Development} (Desenvolvimento Orientado a Funcionalidades)
+  \item[FIFO] \textit{First In, First Out} (Primeiro a Entrar, Primeiro a Sair)
+  \item[HTTP] \textit{Hypertext Transfer Protocol} (Protocolo de Transferência de Hipertexto)
+  \item[IFSP] Instituto Federal de Educação, Ciência e Tecnologia de São Paulo
+  \item[IPC] \textit{Inter-Process Communication} (Comunicação Entre Processos)
+  \item[JSON] \textit{JavaScript Object Notation} (Notação de Objetos JavaScript)
+  \item[JWT] \textit{JSON Web Token}
+  \item[LGPD] Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine} 13.709/2018)
+  \item[ME] Microempresa
+  \item[MER] Modelo Entidade-Relacionamento
+  \item[MPMEs] Micro, Pequenas e Médias Empresas
+  \item[MVP] \textit{Minimum Viable Product} (Produto Mínimo Viável)
+  \item[PoC] \textit{Proof of Concept} (Prova de Conceito)
+  \item[QR Code] \textit{Quick Response Code} (Código de Resposta Rápida)
+  \item[RBAC] \textit{Role-Based Access Control} (Controle de Acesso Baseado em Papéis)
+  \item[REST] \textit{Representational State Transfer} (Transferência de Estado Representacional)
+  \item[RF] Requisito Funcional
+  \item[RN] Regra de Negócio
+  \item[RNF] Requisito Não Funcional
+  \item[SaaS] \textit{Software as a Service} (Software como Serviço)
+  \item[SEBRAE] Serviço Brasileiro de Apoio às Micro e Pequenas Empresas
+  \item[SGBD] Sistema de Gerenciamento de Banco de Dados
+  \item[SPA] \textit{Single Page Application} (Aplicação de Página Única)
+  \item[UC] Caso de Uso (\textit{Use Case})
+  \item[UML] \textit{Unified Modeling Language} (Linguagem de Modelagem Unificada)
+  \item[URL] \textit{Uniform Resource Locator} (Localizador Uniforme de Recursos)
+  \item[XSS] \textit{Cross-Site Scripting}
+\end{siglas}
+
+%% 13: Lista de Símbolos
+\begin{simbolos}
+  \item[$N$] Quantidade total de pedidos musicais ativos na fila de reprodução
+  \item[$T_{\text{médio}}$] Tempo médio de duração de uma faixa musical no karaokê (estimado em 4 minutos)
+  \item[$W_k$] Tempo estimado de espera até a chamada do $k$-ésimo participante da fila
+  \item[$(1,1)$] Cardinalidade mínima e máxima unitária no modelo conceitual
+  \item[$(0,n)$] Cardinalidade opcional com múltiplos registros associados no modelo conceitual
+\end{simbolos}
+
+%% 14: Sumário
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+%% ========================================================================== %%
+%% ELEMENTOS TEXTUAIS (Estruturados exatamente conforme proposta-documento.md)%%
+%% ========================================================================== %%
+\textual
+
+%% -------------------------------------------------------------------------- %%
+%% CAPÍTULO 1: INTRODUÇÃO                                                     %%
+%% -------------------------------------------------------------------------- %%
+\chapter{Introdução} \label{cap:introducao}
+
+Este capítulo apresenta o projeto \textbf{Karaokê Apache} de forma geral, estabelecendo sua caracterização, seus objetivos, sua justificativa, a delimitação de seu escopo atual em nível de Produto Mínimo Viável (MVP) e a organização estrutural do documento.
+
+\section{Caracterização do Projeto}
+
+O projeto \textbf{Karaokê Apache} consiste no desenvolvimento de uma solução computacional integrada, composta por aplicações web responsivas e por um reprodutor desktop dedicado em tela cheia, voltada à automação do gerenciamento de fila de cantores, recepção de pedidos musicais e reprodução audiovisual em eventos de karaokê. O sistema nasce como uma iniciativa acadêmica e extensionista vinculada à disciplina de \textit{Projeto Integrado de Extensão} do Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP -- Campus São Paulo).
+
+A demanda originou-se da observação direta da rotina operacional do estabelecimento parceiro \textbf{Apache Gru Rock Bar}, localizado no município de Guarulhos -- SP. Durante a realização semanal de sua tradicional \textit{Noite de Karaokê}, constatou-se que todo o fluxo de inscrição de participantes, escolha de faixas musicais e acionamento de vídeos no telão ocorria de forma manual, gerando gargalos de atendimento e sobrecarga para a equipe do bar.
+
+Para responder a esse cenário, o projeto propõe uma arquitetura distribuída que descentraliza a entrada de pedidos (permitindo que os próprios clientes pesquisem e escolham vídeos musicais pelo próprio sistema em seus smartphones via leitura do QR Code no telão) e centraliza a moderação da fila e o disparo automático dos vídeos no aplicativo desktop \textbf{Karaokê TV Player}, construído sobre os frameworks Electron e React. O projeto encontra-se atualmente em fase de desenvolvimento do seu \textbf{Produto Mínimo Viável (MVP)}, tendo concluído com êxito a modelagem completa de engenharia de software e a validação prática de sua Prova de Conceito (PoC) funcional.
+
+\section{Objetivos}
+
+Os objetivos a seguir orientam o desenvolvimento do projeto e delimitam os resultados alcançados na modelagem e na construção do MVP.
+
+\subsection{Objetivo Geral}
+
+Projetar e desenvolver o Produto Mínimo Viável (MVP) de um sistema integrado web e desktop para o gerenciamento de fila, recepção de pedidos musicais e reprodução audiovisual automatizada nas noites de karaokê do estabelecimento Apache Gru Rock Bar, substituindo controles manuais em papel por uma solução digital organizada, acessível e de baixo custo.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+  \item Diagnosticar o cenário operacional, o público-alvo e as necessidades do estabelecimento parceiro Apache Gru Rock Bar durante a condução da Noite de Karaokê;
+  \item Especificar as regras de negócio (RN00 a RN04), casos de uso, requisitos funcionais (RF01 a RF12), requisitos não funcionais (RNF01 a RNF08) e restrições do sistema;
+  \item Elaborar a modelagem completa de análise e projeto do sistema utilizando a Linguagem de Modelagem Unificada (UML) e modelagem conceitual/relacional de banco de dados;
+  \item Implementar a Prova de Conceito (PoC) e o núcleo do MVP integrando a interface web de controle e fila em React/Vite com o reprodutor desktop nativo \textbf{Karaokê TV Player} em Electron;
+  \item Validar a sincronização em tempo real entre a fila de pedidos e a tela de reprodução na TV, documentando o progresso atual, os testes preliminares e o roteiro de evolução do MVP.
+\end{itemize}
+
+\section{Justificativa}
+
+A realização do projeto justifica-se em três eixos complementares: relevância operacional para o público atendido, contribuição comunitária/econômica para pequenos negócios locais e formação prática dos estudantes.
+
+Para o estabelecimento parceiro e seus frequentadores, a digitalização do fluxo de pedidos elimina o extravio de fichas de papel no balcão, impede a repetição imediata de músicas já presentes na fila e proporciona transparência aos clientes sobre sua posição exata de subida ao palco. Ao mesmo tempo, o operador do bar deixa de precisar alternar manualmente abas de navegador e arrastar janelas de vídeo para o telão, liberando atenção para a qualidade do som e para o atendimento de salão.
+
+Sob a ótica socioeconômica, dados do \textit{1{\textordmasculine} Panorama da Gestão de Despesas Corporativas no Brasil} \cite{contasimples2025} apontam que 39\% das micro, pequenas e médias empresas brasileiras ainda dependem de controles manuais em suas operações cotidianas, sobretudo em razão do alto custo de licenciamento de softwares comerciais estrangeiros. Como as micro e pequenas empresas respondem por mais de 70\% dos empregos formais no país \cite{sebrae2024}, oferecer uma ferramenta tecnológica gratuita e sob medida para um estabelecimento cultural de Guarulhos cumpre o papel constitucional da extensão universitária pública.
+
+Para a formação acadêmica dos discentes do IFSP, o projeto proporciona a vivência real de todas as etapas da engenharia de software -- desde a elicitação de requisitos com um cliente real e modelagem UML até o desenvolvimento distribuído com React, API REST e Electron, versionamento colaborativo em Git e tratamento de incidentes reais de rede e segurança.
+
+\section{Escopo do Projeto}
+
+O escopo do projeto abrange a especificação completa da arquitetura e a entrega do \textbf{Produto Mínimo Viável (MVP)} do sistema \textbf{Karaokê Apache}, contemplando:
+
+\begin{enumerate}
+  \item Levantamento de requisitos, regras de negócio (RN00 a RN04) e modelagem conceitual e lógica do banco de dados (\texttt{usuario}, \texttt{musica}, \texttt{letra} e \texttt{fila});
+  \item Interface web responsiva acessível via QR Code no telão para que o usuário pesquise e escolha vídeos musicais diretamente pelo próprio sistema, visualize a música em execução (\textit{Tocando Agora}) e acompanhe a fila numerada;
+  \item Funcionalidades administrativas de controle de palco (iniciar música, avançar para a próxima faixa da fila, remover item e limpar fila) com bloqueio automático de duplicidade;
+  \item Aplicativo reprodutor desktop nativo (\textbf{Karaokê TV Player}) em Electron sincronizado em tempo real com a fila para exibição limpa em tela cheia no telão do bar.
+\end{enumerate}
+
+\section{Estrutura do Documento}
+
+O restante deste documento está organizado da seguinte forma:
+
+\begin{itemize}
+  \item \textbf{Capítulo 2 -- Contexto do Projeto:} caracteriza o cenário do parceiro Apache Gru Rock Bar, o estudo de mercado e de concorrentes, o público-alvo, as necessidades identificadas e as regras de negócio conceituais (incluindo o Diagrama de Atividades UML);
+  \item \textbf{Capítulo 3 -- Análise do Sistema:} apresenta a visão geral da solução, os atores envolvidos, os casos de uso (com Diagrama de Casos de Uso UML), o modelo conceitual do domínio (com Diagrama de Classes Conceitual UML), os requisitos funcionais e não funcionais e as restrições do sistema;
+  \item \textbf{Capítulo 4 -- Projeto do Sistema:} detalha a arquitetura distribuída (com Diagrama de Componentes UML), o projeto dos componentes, o modelo relacional de dados (com Diagrama de Classes de Projeto UML), o projeto das interfaces de usuário, os diagramas de interação (Diagrama de Sequência UML), as tecnologias adotadas e os mecanismos de segurança e controle de acesso (com Diagrama de Estados UML);
+  \item \textbf{Capítulo 5 -- Implementação:} descreve a materialização atual da solução em fase de MVP, abordando o ambiente de desenvolvimento, a estrutura de pacotes (Diagrama de Pacotes UML), a implementação e integração dos módulos (Diagrama de Implantação UML), os testes preliminares realizados, os resultados parciais validados e as limitações atuais do MVP;
+  \item \textbf{Capítulo 6 -- Conclusão:} sintetiza as considerações finais sobre o desenvolvimento até o estágio de MVP, relata as dificuldades técnicas superadas e aponta os trabalhos futuros;
+  \item \textbf{Elementos Pós-Textuais:} reúnem as Referências bibliográficas, os Apêndices técnicos (artefatos de código e configuração produzidos pela equipe) e o Anexo normativo (LGPD).
+\end{itemize}
+
+%% -------------------------------------------------------------------------- %%
+%% CAPÍTULO 2: CONTEXTO DO PROJETO                                            %%
+%% -------------------------------------------------------------------------- %%
+\chapter{Contexto do Projeto} \label{cap:contexto}
+
+Este capítulo apresenta o contexto real no qual o projeto \textbf{Karaokê Apache} está inserido, incluindo um estudo sobre o segmento de bares com entretenimento musical, índices de digitalização de micro e pequenas empresas no Brasil, análise de ferramentas concorrentes, caracterização do cenário do estabelecimento parceiro, público-alvo, necessidades identificadas e regras de negócio do domínio.
+
+No panorama nacional de hospitalidade e entretenimento noturno, a adoção de tecnologias de autoatendimento e automação operacional tornou-se um diferencial competitivo decisivo \cite{laudon2022,obrien2013}. Estudos setoriais demonstram que micro e pequenas empresas (MPMEs) enfrentam forte pressão sobre suas margens operacionais e frequentemente operam com equipes reduzidas, nas quais um mesmo colaborador acumula múltiplas funções durante o atendimento noturno \cite{sebrae2024,contasimples2025}. Quando atividades de entretenimento -- como noites de karaokê -- dependem de controles manuais em papel, o gargalo operacional transfere-se diretamente para a experiência do cliente, gerando filas no balcão, atrasos entre uma apresentação e outra e percepção de desorganização.
+
+Por outro lado, a análise do mercado de softwares comerciais de karaokê para estabelecimentos revela que as principais soluções globais possuem custo proibitivo ou baixa aderência ao repertório de bares de rock brasileiros. Plataformas internacionais como o \textbf{Singa Business} \cite{singa2026} e o \textbf{KaraFun Business} \cite{karafun2026} cobram mensalidades em moeda estrangeira (entre US\$ 49,00 e US\$ 149,00 mensais) e restringem a reprodução aos seus catálogos licenciados fechados, impedindo o uso de versões específicas de karaokê disponíveis gratuitamente no YouTube. Já soluções nacionais de \textit{jukebox} digital, como o \textbf{Juks} \cite{juks2026}, destinam-se apenas à música ambiente de fundo, não oferecendo gestão de fila de cantores no palco nem reprodutor dedicado para telão. A Tabela \ref{tab:concorrencia} sintetiza o estudo comparativo de mercado realizado pela equipe.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Estudo comparativo entre soluções existentes no mercado e o sistema proposto.}%
+  \label{tab:concorrencia}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xcccc}
+    \toprule
+    \textbf{Critério / Recurso Analisado} & \textbf{Singa Business} & \textbf{KaraFun Business} & \textbf{Juks} & \textbf{Karaokê Apache} \\
+    \midrule
+    Pedidos pelo celular via QR Code no telão & Parcial & Sim & Sim & Sim \\
+    Escolha de vídeos pelo próprio sistema & Sim & Sim & Sim & Sim \\
+    Fila de cantores com moderação de palco & Sim & Sim & Não & Sim \\
+    Player desktop dedicado em tela cheia (TV) & Sim & Sim & Parcial & Sim (Electron) \\
+    Suporte ao acervo de karaokê do YouTube & Não & Não & Parcial & Sim \\
+    Bloqueio automático de música duplicada & Parcial & Parcial & Sim & Sim \\
+    Custo de licenciamento para o bar parceiro & Alto (US\$) & Alto (US\$) & Médio (R\$) & Gratuito (Extensão) \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Cenário}
+
+O parceiro demandante do projeto é o estabelecimento comercial \textbf{Apache Gru Rock Bar}, registrado sob a razão social \texttt{APACHE GRU ROCK BAR LTDA - ME} e inscrito no CNPJ sob o n{\textordmasculine} \texttt{64.687.141/0001-07} \cite{serasa2026}. O bar está sediado na Rua Torres Tibagy, n{\textordmasculine} 58, no bairro Gopouva, região central do município de Guarulhos -- SP (CEP 07022-060) \cite{apacheinsta2026}.
+
+O estabelecimento atua no ramo de bares especializados em servir bebidas e petiscos com programação musical e cultural (CNAE 5611-2/05), destacando-se na cena rock de Guarulhos \cite{zinesick2026}. Semanalmente, às quintas-feiras (a partir das 19h, com entrada gratuita), o bar realiza a sua tradicional \textbf{Noite de Karaokê} \cite{apachekaraoke2026}. No cenário atual de operação do salão, é utilizado um projetor \textit{whitelabel} com conexão à internet, sendo diretamente por ele acessado o aplicativo do YouTube e colocados os vídeos manualmente a cada apresentação.
+
+Dessa forma, a dinâmica da Noite de Karaokê ocorria de maneira inteiramente manual: os clientes precisavam solicitar suas músicas verbalmente ou em anotações de papel, e o organizador precisava digitar e pesquisar manualmente cada vídeo no YouTube diretamente pela interface do projetor \textit{whitelabel} conectado à internet, interrompendo a fluidez entre uma apresentação e outra e dificultando o controle da fila de espera.
+
+\section{Público-Alvo}
+
+O projeto atende diretamente três perfis de público-alvo envolvidos na operação da Noite de Karaokê do Apache Gru Rock Bar:
+
+\begin{enumerate}
+  \item \textbf{Frequentadores e Cantores Amadores (Clientes do Bar):} jovens e adultos frequentadores do Apache Gru Rock Bar que comparecem individualmente ou em grupos de amigos. Possuem familiaridade cotidiana com smartphones e aplicativos web, mas buscam uma interação rápida e intuitiva em ambiente noturno (baixa luminosidade), sem desejar baixar aplicativos pesados apenas para pedir uma música;
+  \item \textbf{Organizador / Operador de Palco e Som (Administrador Operacional):} colaborador responsável por conduzir a noite de karaokê, chamar o próximo cantor no microfone, controlar o equipamento de áudio e garantir que o telão exiba continuamente a música correta sem interrupções técnicas;
+  \item \textbf{Gestores e Proprietários do Estabelecimento:} responsáveis pela administração do Apache Gru Rock Bar, interessados em aumentar a satisfação e o tempo de permanência dos clientes no salão, reduzir a sobrecarga da equipe de atendimento e conhecer o repertório mais popular entre seus frequentadores.
+\end{enumerate}
+
+\section{Necessidades Identificadas}
+
+A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das conversas com os envolvidos, foram identificadas quatro necessidades fundamentais da comunidade atendida:
+
+\begin{itemize}
+  \item \textbf{N01 -- Autonomia para escolha de vídeos pelo próprio sistema:} necessidade de permitir que o cliente acesse a plataforma via QR Code exibido no telão e escolha o vídeo musical desejado diretamente pelo próprio sistema em seu celular, eliminando o uso de fichas de papel;
+  \item \textbf{N02 -- Transparência e previsibilidade na fila de espera:} necessidade de dar visibilidade pública e em tempo real para todos os participantes sobre qual música está tocando no momento, quantas pessoas estão na fila e qual é a ordem das próximas apresentações;
+  \item \textbf{N03 -- Prevenção de repetições e garantia de rotatividade justa:} necessidade de evitar que uma mesma canção seja cantada repetidas vezes em curto espaço de tempo ou que um único participante monopolize a fila;
+  \item \textbf{N04 -- Automação e limpeza visual da reprodução no telão:} necessidade de substituir a busca manual direta no projetor \textit{whitelabel} por um reprodutor dedicado controlado remotamente, garantindo que o avanço da fila acione automaticamente o vídeo em tela cheia no telão sem expor telas de busca ou menus intermediários.
+\end{itemize}
+
+\section{Regras de Negócio}
+
+Para atender às necessidades identificadas respeitando as políticas operacionais do estabelecimento, foram estabelecidas cinco Regras de Negócio (RN00 a RN04) em nível conceitual, documentadas na planilha de engenharia do projeto (\textit{Regras de Negócio | Requisitos -- Separados por Componentes}) e descritas na Tabela \ref{tab:regras_negocio}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Regras de negócio do domínio do sistema Karaokê Apache.}%
+  \label{tab:regras_negocio}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.4cm}p{3.4cm}X}
+    \toprule
+    \textbf{Código} & \textbf{Regra de Negócio} & \textbf{Descrição Conceitual e Política de Domínio} \\
+    \midrule
+    RN00 & Validação de Disponibilidade da Música & Toda solicitação musical deve referenciar um item disponível no catálogo ou uma fonte audiovisual válida e ativa antes de ingressar na fila de apresentações. \\
+    \addlinespace
+    RN01 & Proibição de Música Duplicada na Fila Ativa & Uma música que já se encontra aguardando execução na fila ativa ou que está sendo reproduzida no momento não pode ser novamente inserida na fila até a conclusão de sua execução atual. \\
+    \addlinespace
+    RN02 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente autenticado possui um limite configurável de pedidos ativos simultâneos na fila (padrão de 1 a 2 músicas pendentes por vez). \\
+    \addlinespace
+    RN03 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, avanço para a próxima faixa, reordenação excepcional por ausência do cantor e remoção de itens da fila são prerrogativas exclusivas do organizador (Administrador). \\
+    \addlinespace
+    RN04 & Ciclo de Vida e Rastreabilidade do Pedido & Todo pedido aceito percorre um fluxo controlado de estados (\textit{Na Fila}, \textit{Reproduzindo}, \textit{Concluído} ou \textit{Cancelado}), mantendo o registro do solicitante e do horário para controle da sessão. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores a partir da planilha de engenharia do projeto (2026).}%
+}
+\end{table}
+
+O Quadro \ref{quad:atividades} apresenta o \textbf{Diagrama de Atividades UML} que modela o fluxo operacional de negócio desde a solicitação da música pelo cliente na mesa até a conclusão da apresentação no palco, destacando os pontos de decisão regidos pelas regras RN00, RN01, RN02 e RN03.
+
+\begin{caixa}{Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}{quad:atividades}
+\begin{verbatim}
+   CLIENTE (Mesa)                 SISTEMA (Regras RN00-RN04)            ORGANIZADOR / TELÃO
+         |                                    |                                  |
+    ( Início )                                |                                  |
+         |                                    |                                  |
+         v                                    |                                  |
+  [Acessa via QR Code no Telão]               |                                  |
+         |                                    |                                  |
+         v                                    |                                  |
+  [Escolhe Vídeo pelo Sistema]--------------->|                                  |
+                                              v                                  |
+                                   < RN00: Música Válida/Ativa? >                |
+                                      /                      \                   |
+                                 [Não]                        [Sim]              |
+                                   /                            \                |
+         +<--[Exibe Alerta de Indisponibilidade]                 v               |
+         |                                            < RN01: Já está na Fila? > |
+         |                                               /                  \    |
+         |                                          [Sim]                    [Não]
+         |                                            /                        \ |
+         +<--[Exibe Aviso: Música Duplicada na Fila]                            v
+                                                                 < RN02: Abaixo do Limite? >
+                                                                        /               \
+                                                                   [Sim]                 [Não]
+                                                                     /                     \
+                                                      [Insere no Final da Fila]   [Bloqueia Excesso]
+                                                      [Status = "Na Fila" RN04]
+                                                                     |
+                                                                     +---------->[Visualiza Fila Atualizada]
+                                                                                             |
+                                                                                             v
+                                                                                 [Aciona Play / Próxima (RN03)]
+                                                                                             |
+                                                                                             v
+                                                                                 [Status = "Reproduzindo"]
+                                                                                 [Exibe Vídeo no Telão Electron]
+                                                                                             |
+                                                                                             v
+                                                                                 [Finaliza -> "Concluída"]
+                                                                                             |
+                                                                                          ( Fim )
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{caixa}
+
+%% -------------------------------------------------------------------------- %%
+%% CAPÍTULO 3: ANÁLISE DO SISTEMA                                             %%
+%% -------------------------------------------------------------------------- %%
+\chapter{Análise do Sistema} \label{cap:analise}
+
+Este capítulo transforma a compreensão do contexto operacional do Apache Gru Rock Bar e das necessidades identificadas em uma visão estruturada do sistema \textbf{Karaokê Apache}, definindo sua visão geral, os atores envolvidos, os casos de uso, o modelo conceitual de domínio, os requisitos funcionais e não funcionais e as restrições do sistema.
+
+\section{Visão Geral do Sistema}
+
+O sistema \textbf{Karaokê Apache} foi concebido como uma plataforma distribuída centrada na orquestração da fila de reprodução musical. Em nível macroscópico, o sistema atua como uma ponte automatizada entre o salão do bar (onde os clientes realizam pedidos e acompanham a fila pelos seus smartphones) e o palco (onde o administrador coordena a ordem de apresentações e o terminal reprodutor exibe os vídeos de karaokê na TV).
+
+Utilizando a abordagem de \textit{Feature-Driven Development} (FDD) adotada pela equipe na fase de análise, as capacidades macroscópicas do sistema organizam-se em três grandes funcionalidades (\textit{Features}) centrais:
+
+\begin{itemize}
+  \item \textbf{FT-001 -- Solicitar música para a fila do karaokê:} permite ao participante autenticado pesquisar e escolher um vídeo musical diretamente pelo próprio sistema, passando pelas validações automáticas de disponibilidade e anti-duplicidade (RN00, RN01 e RN02);
+  \item \textbf{FT-002 -- Gerenciar e moderar a fila de reprodução:} permite ao organizador visualizar a fila ordenada por chegada (FIFO), acionar imediatamente qualquer item, avançar para a próxima música ou remover pedidos inválidos (RN03 e RN04);
+  \item \textbf{FT-003 -- Sincronizar e reproduzir faixa no telão:} atualiza instantaneamente o estado da música ativa para que o reprodutor desktop dedicado renderize o vídeo correspondente em tela cheia na TV do bar.
+\end{itemize}
+
+\section{Atores Envolvidos}
+
+Foram identificados três atores que interagem diretamente com as fronteiras do sistema, cujos papéis são detalhados na Tabela \ref{tab:atores}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Identificação e caracterização dos atores do sistema Karaokê Apache.}%
+  \label{tab:atores}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{3.6cm}p{2.8cm}X}
+    \toprule
+    \textbf{Ator} & \textbf{Tipo de Ator} & \textbf{Papel e Interações com o Sistema} \\
+    \midrule
+    \textbf{Cliente (Cantor)} & Humano (Primário) & Frequentador do Apache Gru Rock Bar que acessa a interface móvel via QR Code no telão para se identificar, pesquisar e escolher vídeos pelo sistema, adicionar pedidos à fila e consultar sua posição de espera. \\
+    \addlinespace
+    \textbf{Administrador (Organizador)} & Humano (Primário) & Operador responsável pela condução da Noite de Karaokê. Possui permissão exclusiva para iniciar faixas, avançar para a próxima música, remover itens, limpar a fila e gerenciar o catálogo. \\
+    \addlinespace
+    \textbf{Reprodutor de Telão (\textit{Karaokê TV Player})} & Sistema / Terminal (Secundário) & Instância desktop em Electron executada no computador conectado à TV do palco, que consome o estado da faixa ativa e renderiza o fluxo de áudio e vídeo do YouTube em tela cheia. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Casos de Uso}
+
+A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC08) que especificam o comportamento esperado do sistema sob a perspectiva de seus usuários. A Figura \ref{fig:casos_uso} apresenta o \textbf{Diagrama de Casos de Uso UML} do sistema, seguido pelo detalhamento descritivo na Tabela \ref{tab:casos_uso}.
+
+\begin{figure}[H]
+  \caption{Diagrama de Casos de Uso UML -- Sistema Karaokê Apache.}
+  \label{fig:casos_uso}
+  \begin{center}
+    \includegraphics[width=0.92\textwidth]{DiagramaCasoDeUso.png}
+  \end{center}
+  \legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Especificação dos casos de uso (UC) do sistema Karaokê Apache.}%
+  \label{tab:casos_uso}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.3cm}p{3.6cm}p{2.6cm}X}
+    \toprule
+    \textbf{Código} & \textbf{Nome do Caso de Uso} & \textbf{Atores} & \textbf{Resumo do Fluxo Principal e Comportamento Esperado} \\
+    \midrule
+    UC01 & Autenticar / Cadastrar Usuário & Cliente, Administrador & O usuário informa suas credenciais (ou realiza cadastro rápido com nome e e-mail) para acessar as funcionalidades correspondentes ao seu perfil. \\
+    \addlinespace
+    UC02 & Pesquisar e Escolher Vídeo no Sistema & Cliente, Administrador & O ator pesquisa vídeos de karaokê disponíveis por título ou artista diretamente na interface do próprio sistema. \\
+    \addlinespace
+    UC03 & Solicitar Música para a Fila & Cliente, Administrador & O ator escolhe o vídeo musical diretamente pelo sistema; a aplicação executa as validações do caso de uso UC04 e adiciona o item ao final da fila. \\
+    \addlinespace
+    UC04 & Validar Regras da Fila & Sistema (\textit{Include} de UC03) & Verifica se o vídeo é válido/disponível (RN00), se não está duplicado na fila ativa (RN01) e se o cliente respeita o limite de pedidos simultâneos (RN02). \\
+    \addlinespace
+    UC05 & Acompanhar Fila e Música Atual & Cliente, Administrador & Exibe em tempo real o card \textit{Tocando Agora} e a lista ordenada de próximas músicas com a quantidade total na fila. \\
+    \addlinespace
+    UC06 & Controlar Reprodução (Play / Próxima) & Administrador & O administrador inicia uma música da fila ou aciona o botão \textit{Próxima música}, promovendo o próximo item da fila para o estado \textit{Reproduzindo}. \\
+    \addlinespace
+    UC07 & Sincronizar e Exibir Vídeo no Telão & Administrador, Reprodutor TV & A alteração da faixa ativa dispara a atualização imediata da janela do \textit{Karaokê TV Player} (Electron), que carrega o vídeo em tela cheia. \\
+    \addlinespace
+    UC08 & Moderar Fila e Gerenciar Catálogo & Administrador & Permite excluir pedidos individuais, limpar a fila ao encerrar a noite e cadastrar ou inativar músicas no banco de dados. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Modelo Conceitual}
+
+O modelo conceitual do domínio foi originalmente construído pela equipe na ferramenta \textbf{brModelo} (arquivo \texttt{Conceitual.brM3} armazenado no acervo do projeto) e traduzido para o \textbf{Diagrama de Classes Conceitual UML} apresentado no Quadro \ref{quad:classes_conceitual}.
+
+O domínio é estruturado em torno de quatro conceitos essenciais, independentes de decisões de implementação:
+
+\begin{itemize}
+  \item \textbf{\texttt{Usuario} (com generalização/especialização em \texttt{Admin} e \texttt{Cliente}):} representa qualquer pessoa cadastrada que interage com o sistema, contendo os atributos conceituais \texttt{nome}, \texttt{email} e \texttt{senha}. A especialização distingue o \texttt{Cliente} (autor dos pedidos musicais) do \texttt{Admin} (responsável pela moderação);
+  \item \textbf{\texttt{Musica}:} representa a obra musical disponível para interpretação no karaokê, caracterizada por \texttt{titulo}, \texttt{artista}, \texttt{url\_video} e estado de disponibilidade (\texttt{disponivel});
+  \item \textbf{\texttt{Letra}:} representa o texto da canção (\texttt{conteudo\_letra}, \texttt{idioma}) vinculado à classe \texttt{Musica} pela associação \textit{Possui} com multiplicidade $1$ para $0..*$ (estrutura de dados já prevista no modelo para suportar a funcionalidade de letras na próxima etapa evolutiva do projeto);
+  \item \textbf{\texttt{Fila} (Classe Associativa \texttt{Adiciona}):} materializa o vínculo temporal e ordenado entre um \texttt{Cliente} ($0..*$) e uma \texttt{Musica} ($0..*$), registrando a \texttt{posicao} na fila, o \texttt{status} do pedido e a data/hora da solicitação (\texttt{dt\_pedido}).
+\end{itemize}
+
+\begin{caixa}{Diagrama de Classes Conceitual UML (Derivado de \texttt{Conceitual.brM3})}{quad:classes_conceitual}
+\begin{verbatim}
+                       +-----------------------------+
+                       |           Usuario           |
+                       +-----------------------------+
+                       | - nome: Texto               |
+                       | - email: Texto              |
+                       | - senha: Texto              |
+                       +--------------+--------------+
+                                      ^
+                                     / \  (Generalização / Herança)
+                                    +---+
+                                      |
+                        +-------------+-------------+
+                        |                           |
+              +---------+---------+       +---------+---------+
+              |       Admin       |       |      Cliente      |
+              +-------------------+       +---------+---------+
+              | + moderarFila()   |                 | 1
+              | + avancarMusica() |                 |
+              +-------------------+                 | realiza
+                                                    |
+                                                    | 0..*
+                                          +---------+---------+
+                                          |   Fila / Pedido   |
+                                          +-------------------+
+                                          | - posicao: Inteiro|
+                                          | - status: Texto   |
+                                          | - dt_pedido: Data |
+                                          +---------+---------+
+                                                    | 0..*
+                                                    |
+                                                    | refere-se a
+                                                    |
+  +-------------------------+  Possui     +---------+---------+
+  |          Letra          | 0..*      1 |      Musica       |
+  +-------------------------+<----------->+-------------------+
+  | - conteudo_letra: Texto |             | - titulo: Texto   |
+  | - idioma: Texto         |             | - artista: Texto  |
+  +-------------------------+             | - url_video: Texto|
+                                          | - disponivel: Bool|
+                                          +-------------------+
+\end{verbatim}
+\legend{Fonte: Adaptado de \texttt{Conceitual.brM3} elaborado pelos autores (2026).}
+\end{caixa}
+
+\section{Requisitos Funcionais}
+
+A Tabela \ref{tab:requisitos_funcionais} especifica de forma objetiva os Requisitos Funcionais (RF01 a RF12) que o sistema deve oferecer para atender às necessidades do Apache Gru Rock Bar.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Requisitos funcionais (RF) do sistema Karaokê Apache.}%
+  \label{tab:requisitos_funcionais}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.4cm}p{3.4cm}X p{1.8cm}}
+    \toprule
+    \textbf{Código} & \textbf{Requisito Funcional} & \textbf{Descrição do Comportamento} & \textbf{Prioridade} \\
+    \midrule
+    RF01 & Cadastro e Autenticação de Usuário & Permitir o cadastro e login de usuários diferenciando os perfis de acesso \textit{Cliente} e \textit{Administrador}. & Média \\
+    \addlinespace
+    RF02 & Pesquisa de Vídeos no Próprio Sistema & Permitir que o usuário pesquise vídeos de karaokê por título, música ou artista diretamente na interface do sistema. & Alta \\
+    \addlinespace
+    RF03 & Seleção de Vídeo pelo Sistema & Permitir que o usuário escolha o vídeo desejado a partir dos resultados exibidos pelo próprio sistema, sem necessidade de copiar links externos. & Alta \\
+    \addlinespace
+    RF04 & Adição de Pedido à Fila & Permitir inserir o vídeo escolhido na fila ativa, registrando a identificação da mídia, o título de exibição e a ordem de chegada. & Alta \\
+    \addlinespace
+    RF05 & Validação de Disponibilidade e Anti-Duplicidade & Validar o identificador do vídeo escolhido (RN00) e bloquear músicas que já estejam presentes na fila ativa ou em reprodução (RN01). & Alta \\
+    \addlinespace
+    RF06 & Visualização da Fila e Faixa Atual & Exibir em tempo real o destaque \textit{Tocando Agora} e a lista numerada de próximas músicas na fila. & Alta \\
+    \addlinespace
+    RF07 & Acionamento Direto de Música (\textit{Play}) & Permitir ao administrador iniciar imediatamente qualquer música listada na fila com um clique. & Alta \\
+    \addlinespace
+    RF08 & Avanço Automático (\textit{Próxima Música}) & Permitir ao administrador encerrar a faixa atual e promover automaticamente o próximo item da fila (FIFO) para execução. & Alta \\
+    \addlinespace
+    RF09 & Remoção Individual e Limpeza da Fila & Permitir ao administrador excluir um pedido específico ou limpar toda a fila ao final do evento. & Alta \\
+    \addlinespace
+    RF10 & Reprodução Dedicada no Telão (Electron) & Carregar e reproduzir automaticamente o vídeo da música ativa na janela nativa do \textit{Karaokê TV Player}. & Alta \\
+    \addlinespace
+    RF11 & Gestão Administrativa do Catálogo & Permitir cadastrar novas músicas/letras no banco de dados e alterar seu status de disponibilidade. & Média \\
+    \addlinespace
+    RF12 & Feedback Visual de Estado e Conexão & Exibir indicadores claros de conexão (\textit{Conectado -- Tocando}) e alertas de validação na interface. & Alta \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Requisitos Não Funcionais}
+
+A Tabela \ref{tab:requisitos_nao_funcionais} apresenta os Requisitos Não Funcionais (RNF01 a RNF08) que estabelecem os padrões de usabilidade, desempenho, compatibilidade, segurança e privacidade do sistema.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Requisitos não funcionais (RNF) do sistema Karaokê Apache.}%
+  \label{tab:requisitos_nao_funcionais}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.4cm}p{2.8cm}p{3.2cm}X}
+    \toprule
+    \textbf{Código} & \textbf{Categoria} & \textbf{Requisito} & \textbf{Critério de Qualidade exigido} \\
+    \midrule
+    RNF01 & Usabilidade & Interface Responsiva e Tema Escuro & A interface web deve adaptar-se a telas móveis e utilizar paleta escura de alto contraste adequada à iluminação noturna do bar. \\
+    \addlinespace
+    RNF02 & Desempenho & Sincronização em Tempo Real & A troca de música acionada na interface de controle deve refletir na janela do reprodutor Electron em menos de 2 segundos na rede local. \\
+    \addlinespace
+    RNF03 & Compatibilidade & Acesso Web Sem Instalação (\textit{Zero-Install}) & Os clientes devem acessar o sistema diretamente por navegadores padrões (Chrome, Safari, Firefox) via leitura do QR Code exibido no telão. \\
+    \addlinespace
+    RNF04 & Segurança & Isolamento de Contexto no Electron & O reprodutor desktop deve executar com isolamento de contexto ativo e sem exposição direta de APIs críticas do sistema operacional a scripts remotos. \\
+    \addlinespace
+    RNF05 & Segurança & Proteção de Credenciais e Sessão & As senhas devem ser armazenadas sob hash criptográfico (Bcrypt) e as rotas administrativas protegidas por controle de perfil. \\
+    \addlinespace
+    RNF06 & Confiabilidade & Consistência de Estado da Fila & A API em Java 21 e o banco de dados MySQL devem garantir integridade transacional na ordenação e transição de status dos pedidos. \\
+    \addlinespace
+    RNF07 & Manutenibilidade & Modularidade por Componentes & O código deve manter separação clara entre as responsabilidades de Usuários, Fila, Pedido de Música e Reprodutor. \\
+    \addlinespace
+    RNF08 & Legal / Privacidade & Conformidade com a LGPD & A coleta de dados dos clientes deve limitar-se ao mínimo necessário para identificação na fila (Art. 6{\textordmasculine} da Lei n{\textordmasculine} 13.709/2018). \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Restrições do Sistema}
+
+O desenvolvimento e a operação do sistema estão sujeitos às seguintes restrições técnicas, operacionais, legais e orçamentárias:
+
+\begin{itemize}
+  \item \textbf{Restrição de Incorporação de Terceiros (YouTube Embed):} determinados vídeos musicais oficiais no YouTube possuem bloqueio de incorporação externa (\textit{Embed Error 101/150}) configurado pelas detentoras de direitos autorais, exigindo que os pedidos priorizem versões de canais de karaokê que habilitam reprodução embarcada;
+  \item \textbf{Dependência de Conectividade com a Internet:} como os fluxos de vídeo do MVP são carregados sob demanda a partir do YouTube, o computador de palco do Apache Gru Rock Bar necessita de conexão ativa à internet durante a Noite de Karaokê;
+  \item \textbf{Restrição Orçamentária (Custo Zero de Licenciamento):} por tratar-se de um projeto acadêmico de extensão voltado a uma microempresa, a solução deve utilizar exclusivamente ferramentas, bibliotecas e bancos de dados gratuitos ou de código aberto (\textit{open source}), reaproveitando o hardware (notebook, TV e som) já existente no bar;
+  \item \textbf{Restrição Temporal e Acadêmica:} o cronograma de desenvolvimento é delimitado pelo semestre letivo da disciplina de Projeto Integrado de Extensão do IFSP, razão pela qual a entrega concentra-se na consolidação e validação do Produto Mínimo Viável (MVP);
+  \item \textbf{Restrições Legais (LGPD):} o sistema não pode coletar dados pessoais sensíveis nem compartilhar cadastros de frequentadores com terceiros sem consentimento expresso \cite{brasil2018lgpd}.
+\end{itemize}
+
+%% -------------------------------------------------------------------------- %%
+%% CAPÍTULO 4: PROJETO DO SISTEMA                                             %%
+%% -------------------------------------------------------------------------- %%
+\chapter{Projeto do Sistema} \label{cap:projeto}
+
+Este capítulo estabelece a especificação técnica da solução \textbf{Karaokê Apache}, transformando o modelo conceitual e os requisitos da análise em uma definição detalhada da arquitetura distribuída, dos componentes de software, do modelo lógico e físico de dados, do projeto das interfaces de usuário, das interações dinâmicas, das tecnologias adotadas e dos mecanismos de segurança.
+
+\section{Arquitetura do Sistema}
+
+A arquitetura do sistema \textbf{Karaokê Apache} foi elaborada a partir dos artefatos de engenharia \texttt{ideia.png} e \texttt{Desenho da Aplicação}, estruturando a solução em quatro subsistemas integrados: \textbf{Cliente Web}, \textbf{Admin Web}, \textbf{API Orquestradora} (conectada ao \textbf{Banco de Dados Relacional}) e o reprodutor desktop \textbf{Electron (Karaokê TV Player)}.
+
+Seguindo os princípios de desacoplamento arquitetural descritos por Sommerville \cite{sommerville2019}, Fowler \cite{fowler2006} e Pressman e Maxim \cite{pressman2016}, a camada de apresentação web e o reprodutor de telão permanecem separados da lógica de persistência, comunicando-se por meio de contratos bem definidos. Na modelagem formal realizada pela equipe na ferramenta UMLet (arquivos \texttt{diagrama\_de\_componentes.uxf} e \texttt{diagrama\_de\_componentes.png}), a arquitetura lógica é organizada em quatro componentes principais (\textbf{Usuários}, \textbf{Fila}, \textbf{Pedido de Música} e \textbf{Reprodutor}), representados no \textbf{Diagrama de Componentes UML} da Figura \ref{fig:uml_componentes}.
+
+\begin{figure}[H]
+  \caption{Diagrama de Componentes UML (\texttt{diagrama\_de\_componentes.png}).}
+  \label{fig:uml_componentes}
+  \begin{center}
+    \includegraphics[width=0.88\textwidth]{diagrama_de_componentes.png}
+  \end{center}
+  \legend{Fonte: Elaborado pelos autores no software UMLet (2026).}
+\end{figure}
+
+\section{Projeto dos Componentes}
+
+Cada componente definido na arquitetura possui responsabilidades coesas e interfaces explícitas de comunicação, detalhadas na Tabela \ref{tab:componentes_uml}:
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Detalhamento técnico dos componentes arquiteturais e suas interfaces.}%
+  \label{tab:componentes_uml}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{3.0cm}p{4.2cm}X}
+    \toprule
+    \textbf{Componente} & \textbf{Interfaces (Fornecidas / Requeridas)} & \textbf{Estrutura Interna e Responsabilidades} \\
+    \midrule
+    \texttt{Usuários} & Fornece: \texttt{IAutenticacao}, \texttt{IPerfilUsuario} & Responsável pelo cadastro, autenticação e diferenciação de permissões entre os papéis \texttt{cliente} (frequentador da mesa) e \texttt{admin} (organizador do palco). \\
+    \addlinespace
+    \texttt{Pedido de Música} & Requer: \texttt{IAutenticacao}; Fornece: \texttt{IPedidoMusica} & Responsável pela pesquisa e escolha de vídeos musicais diretamente pelo sistema, identificação do vídeo selecionado e validação de disponibilidade (RN00). \\
+    \addlinespace
+    \texttt{Fila} & Requer: \texttt{IAutenticacao}, \texttt{IPedidoMusica}; Fornece: \texttt{IControleFila} & Núcleo orquestrador do sistema: gerencia a lista ordenada de pedidos (\texttt{queue}), o item em execução (\texttt{currentSong}), aplica o bloqueio de duplicidade (RN01) e processa os comandos \textit{Play}, \textit{Próxima}, \textit{Remover} e \textit{Limpar}. \\
+    \addlinespace
+    \texttt{Reprodutor} & Requer: \texttt{IControleFila} & Materializado pelo aplicativo desktop \textit{Karaokê TV Player} em Electron: escuta continuamente o estado de \texttt{currentSong} e atualiza o player embarcado em tela cheia na TV do bar. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores a partir de \texttt{diagrama\_de\_componentes.uxf} (2026).}%
+}
+\end{table}
+
+Para o cálculo de estimativa de espera $W_k$ exibido na fila para o $k$-ésimo pedido ($k \in \{1, 2, \dots, N\}$), o componente \textbf{Fila} considera a duração média por música ($T_{\text{médio}} \approx 4\text{ min}$) e o tempo médio de troca de cantor no palco ($T_{\text{palco}} \approx 0,5\text{ min}$):
+
+\begin{equation}
+  W_k = (k - 1) \cdot \left( T_{\text{médio}} + T_{\text{palco}} \right) + T_{\text{restante\_atual}}
+  \label{eq:tempo_espera}
+\end{equation}
+
+\section{Modelo de Dados}
+
+O projeto de dados converte o modelo conceitual em uma estrutura relacional normalizada, acrescentando chaves primárias artificiais (\texttt{PK}), chaves estrangeiras (\texttt{FK}), tipos físicos de dados e métodos de negócio das classes de domínio (mantendo a estrutura da tabela \texttt{letra} já preparada no banco de dados para a próxima etapa do projeto). O Quadro \ref{quad:classes_projeto} apresenta o \textbf{Diagrama de Classes de Projeto UML}, enquanto a Tabela \ref{tab:dicionario_dados} documenta o Dicionário de Dados relacional.
+
+\begin{caixa}{Diagrama de Classes de Projeto UML}{quad:classes_projeto}
+\begin{verbatim}
++---------------------------------------+       +---------------------------------------+
+|              UsuarioModel             |       |               FilaItem                |
++---------------------------------------+       +---------------------------------------+
+| - id_usuario: int {PK}                | 1   * | - id_fila: int {PK}                   |
+| - nome: varchar(120)                  |<------| - id_usuario: int {FK}                |
+| - email: varchar(150) {UNIQUE}        |       | - id_musica: int {FK}                 |
+| - senha_hash: varchar(255)            |       | - video_id: varchar(32)               |
+| - tipo_perfil: enum('cliente','admin')|       | - titulo_exibicao: varchar(180)       |
++---------------------------------------+       | - posicao: int                        |
+| + autenticar(email, senha): TokenJWT  |       | - status: enum('na_fila','tocando',   |
+| + isAdmin(): boolean                  |       |           'concluida','cancelada')    |
++---------------------------------------+       | - dt_pedido: datetime                 |
+                                                +---------------------------------------+
++---------------------------------------+       | + promoverParaTocando(): void         |
+|              LetraModel               |       | + finalizarExecucao(): void           |
++---------------------------------------+       | + cancelarPedido(): void              |
+| - id_letra: int {PK}                  |       +-------------------+-------------------+
+| - id_musica: int {FK}                 |                           | *
+| - conteudo_letra: text                |                           |
+| - idioma: varchar(20)                 |                           | 1
++---------------------------------------+       +-------------------+-------------------+
+| + formatarEstrofes(): string          |       |              MusicaModel              |
++-------------------+-------------------+       +---------------------------------------+
+                    | 0..*                      | - id_musica: int {PK}                 |
+                    +-------------------------->| - titulo: varchar(180)                |
+                                              1 | - artista: varchar(120)               |
+                                                | - youtube_id: varchar(32)             |
+                                                | - url_video: varchar(255)             |
+                                                | - disponivel: boolean                 |
+                                                +---------------------------------------+
+                                                | + extrairVideoId(url): string         |
+                                                | + validarDisponibilidade(): boolean   |
+                                                +---------------------------------------+
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{caixa}
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Dicionário de dados do modelo relacional do sistema Karaokê Apache.}%
+  \label{tab:dicionario_dados}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{2.0cm}p{2.9cm}p{2.7cm}p{2.0cm}X}
+    \toprule
+    \textbf{Tabela} & \textbf{Atributo} & \textbf{Tipo Físico} & \textbf{Restrições} & \textbf{Descrição no Projeto} \\
+    \midrule
+    \texttt{usuario} & \texttt{id\_usuario} & \texttt{INT} & \texttt{PK, AI} & Chave primária do usuário. \\
+    \texttt{usuario} & \texttt{nome} & \texttt{VARCHAR(120)} & \texttt{NOT NULL} & Nome do participante ou operador. \\
+    \texttt{usuario} & \texttt{email} & \texttt{VARCHAR(150)} & \texttt{UNIQUE} & E-mail de login do usuário. \\
+    \texttt{usuario} & \texttt{senha\_hash} & \texttt{VARCHAR(255)} & \texttt{NOT NULL} & Senha criptografada (Bcrypt). \\
+    \texttt{usuario} & \texttt{tipo\_perfil} & \texttt{ENUM('cliente','admin')} & \texttt{NOT NULL} & Perfil de permissão no sistema. \\
+    \midrule
+    \texttt{musica} & \texttt{id\_musica} & \texttt{INT} & \texttt{PK, AI} & Identificador único da música. \\
+    \texttt{musica} & \texttt{titulo} & \texttt{VARCHAR(180)} & \texttt{NOT NULL} & Nome da música no catálogo. \\
+    \texttt{musica} & \texttt{artista} & \texttt{VARCHAR(120)} & \texttt{NOT NULL} & Banda ou intérprete original. \\
+    \texttt{musica} & \texttt{youtube\_id} & \texttt{VARCHAR(32)} & \texttt{NOT NULL} & Código de 11 caracteres do YouTube. \\
+    \texttt{musica} & \texttt{url\_video} & \texttt{VARCHAR(255)} & \texttt{NOT NULL} & URL completa do vídeo de karaokê. \\
+    \texttt{musica} & \texttt{disponivel} & \texttt{BOOLEAN} & \texttt{DEFAULT 1} & Indica se a música está ativa (RN00). \\
+    \midrule
+    \texttt{letra} & \texttt{id\_letra} & \texttt{INT} & \texttt{PK, AI} & Identificador único da letra. \\
+    \texttt{letra} & \texttt{id\_musica} & \texttt{INT} & \texttt{FK, NOT NULL} & Referência à tabela \texttt{musica}. \\
+    \texttt{letra} & \texttt{conteudo\_letra} & \texttt{TEXT} & \texttt{NOT NULL} & Letra completa da canção. \\
+    \texttt{letra} & \texttt{idioma} & \texttt{VARCHAR(20)} & \texttt{DEFAULT 'pt-BR'} & Idioma da letra cadastrada. \\
+    \midrule
+    \texttt{fila} & \texttt{id\_fila} & \texttt{INT} & \texttt{PK, AI} & Identificador único do item na fila. \\
+    \texttt{fila} & \texttt{id\_usuario} & \texttt{INT} & \texttt{FK, NULL} & Referência ao cliente solicitante. \\
+    \texttt{fila} & \texttt{id\_musica} & \texttt{INT} & \texttt{FK, NULL} & Referência à música solicitada. \\
+    \texttt{fila} & \texttt{posicao} & \texttt{INT} & \texttt{NOT NULL} & Ordem de chamada na fila ativa. \\
+    \texttt{fila} & \texttt{status} & \texttt{ENUM('na\_fila', 'tocando', 'concluida', 'cancelada')} & \texttt{DEFAULT 'na\_fila'} & Estado atual do pedido (RN04). \\
+    \texttt{fila} & \texttt{dt\_pedido} & \texttt{DATETIME} & \texttt{DEFAULT NOW()} & Data e hora do registro na fila. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores a partir de \texttt{Conceitual.brM3} (2026).}%
+}
+\end{table}
+
+\section{Projeto da Interface do Usuário}
+
+O projeto visual das interfaces do sistema priorizou simplicidade operacional, alto contraste em tema escuro (\textit{Dark Mode}) para uso confortável no ambiente noturno do Apache Gru Rock Bar e separação rigorosa entre a tela de controle e a tela pública do telão:
+
+\begin{enumerate}
+  \item \textbf{Interface Web de Controle e Fila (\texttt{Karaokê -- Controle e Fila}):} projetada para execução em navegador web (móvel e desktop), apresenta três blocos visuais empilhados:
+    \begin{itemize}
+      \item \textit{Bloco de Busca e Escolha de Vídeo:} permite ao usuário pesquisar e escolher o vídeo musical diretamente pelo próprio sistema, acionando o botão \textbf{Adicionar à fila};
+      \item \textit{Card ``Tocando Agora'':} painel destacado com indicador luminoso verde em tempo real, exibindo o título e o código da música em execução no palco, acompanhado do botão \textbf{Próxima música};
+      \item \textit{Lista ``Fila de Músicas (N)'':} listagem numerada sequencialmente ($1, 2, \dots, N$) com botões de ação rápida para iniciar a faixa (\textbf{Play}), remover um item individual (\textbf{X}) ou acionar \textbf{Limpar fila}.
+    \end{itemize}
+  \item \textbf{Interface Desktop Nativa (\texttt{Karaokê TV Player} em Electron):} projetada para exibição no telão/projetor do bar (junto ao QR Code de acesso rápido), contém uma barra de status superior minimalista (\textit{``Conectado -- Tocando: [ID\_DO\_VIDEO]''}) e dedica a área principal ao reprodutor de vídeo em tela cheia.
+\end{enumerate}
+
+O Quadro \ref{quad:interfaces_mvp} representa a disposição visual (\textit{wireframe} de projeto) das duas interfaces integradas.
+
+\begin{caixa}{Representação das Interfaces de Usuário (Web Controle/Fila e Electron TV Player)}{quad:interfaces_mvp}
+\begin{verbatim}
++------------------------------------------+   +------------------------------------------+
+| KARAOKÊ - CONTROLE E FILA (Web / Mobile) |   | KARAOKÊ TV PLAYER (Telão / Projetor)     |
+| Escolha vídeos pelo sistema e veja a fila|   +------------------------------------------+
++------------------------------------------+   | (*) Conectado - Tocando | [QR Code Fila] |
+| [ Pesquisar música/vídeo no sistema... ] |   +------------------------------------------+
+| [ Selecionado: Scorpions - Still Loving] |   |                                          |
+| [          Adicionar à fila            ] |   |     +------------------------------+     |
++------------------------------------------+   |     |                              |     |
+| (*) TOCANDO AGORA                        |   |     |   SCORPIONS - STILL LOVING   |     |
+| Still Loving You - Scorpions             |   |     |        YOU (KARAOKE)         |     |
+| ID: R2F_hGwD26g       [ Próxima música ] |   |     |                              |     |
++------------------------------------------+   |     |      "Time, it needs time    |     |
+| FILA DE MÚSICAS (2)      [ Limpar fila ] |   |     |    To win back your love..." |     |
+| 1. Oh! Darling - The Beatles  [Play] [X] |   |     |                              |     |
+| 2. Tempo Perdido - Legião     [Play] [X] |   |     +------------------------------+     |
++------------------------------------------+   +------------------------------------------+
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores com base nas telas do projeto e \texttt{Poc.mp4} (2026).}
+\end{caixa}
+
+\section{Diagramas de Interação}
+
+Para demonstrar como os objetos e subsistemas colaboram dinamicamente ao longo do tempo para cumprir os requisitos do sistema, o Quadro \ref{quad:sequencia} apresenta o \textbf{Diagrama de Sequência UML} correspondente ao cenário principal de submissão de um pedido musical e seu posterior acionamento para reprodução no telão em Electron.
+
+\begin{caixa}{Diagrama de Sequência UML -- Submissão de Música e Sincronização com o Telão}{quad:sequencia}
+\begin{verbatim}
+ Cliente/Admin         Interface Web        API / Controlador        Banco de Dados       Electron TV
+      |               (React / Vite)        de Fila (RN00-RN04)          (DB)               Player
+      |                     |                       |                      |                   |
+      |--1. Pesquisa/Escolhe|                       |                      |                   |
+      |   vídeo no sistema  |                       |                      |                   |
+      |                     |--2. Obtém videoId---->|                      |                   |
+      |                     |--3. POST /api/fila--->|                      |                   |
+      |                     |                       |--4. Verifica RN00--->|                   |
+      |                     |                       |     e Duplicidade    |                   |
+      |                     |                       |     (RN01 / RN02)    |                   |
+      |                     |                       |<--5. OK (Não Duplic.)|                   |
+      |                     |                       |--6. INSERT INTO fila>|                   |
+      |                     |<--7. 201 Created------|                      |                   |
+      |<--8. Atualiza Fila--|                       |                      |                   |
+      |                     |                       |                      |                   |
+      |--9. Clica "Play"--->|                       |                      |                   |
+      |   ou "Próxima"      |--10. POST /proxima--->|                      |                   |
+      |                     |                       |--11. Atualiza Status>|                   |
+      |                     |                       |      "tocando" (RN04)|                   |
+      |                     |                       |--12. Notifica Novo currentSong---------->|
+      |                     |<--13. Atualiza Card---|                      |                   |--14. Carrega
+      |                     |    "Tocando Agora"    |                      |                   |   YouTube Embed
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{caixa}
+
+\section{Tecnologias Utilizadas}
+
+A seleção tecnológica do projeto priorizou ferramentas modernas, multiplataforma e amplamente adotadas pelo mercado de desenvolvimento de software, consolidadas na Tabela \ref{tab:tecnologias}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Tecnologias, frameworks e ferramentas utilizadas no projeto.}%
+  \label{tab:tecnologias}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{3.2cm}p{3.4cm}X}
+    \toprule
+    \textbf{Categoria} & \textbf{Tecnologia / Ferramenta} & \textbf{Função Desempenhada no Projeto} \\
+    \midrule
+    Front-end Web & React 19 + Vite \cite{react2025} & Construção reativa da interface de controle e fila (\textit{Single Page Application}), com atualização instantânea de estado e empacotamento rápido via Vite. \\
+    \addlinespace
+    Aplicação Desktop (Telão) & Electron \cite{electron2025} & Encapsulamento nativo do reprodutor \textit{Karaokê TV Player}, garantindo execução dedicada em tela cheia, controle de políticas de rede e isolamento de contexto. \\
+    \addlinespace
+    Back-end / API Orquestradora & Java 21 & Desenvolvimento da API RESTful centralizada, aplicação das regras de negócio (RN00--RN04), autenticação e orquestração da fila de reprodução. \\
+    \addlinespace
+    Banco de Dados & MySQL & Sistema de Gerenciamento de Banco de Dados relacional utilizado para a persistência estruturada das tabelas \texttt{usuario}, \texttt{musica}, \texttt{letra} e \texttt{fila} conforme modelado no arquivo \texttt{Conceitual.brM3}. \\
+    \addlinespace
+    Modelagem de Engenharia & brModelo, UMLet (\texttt{.uxf}) e Draw.io & Construção do Modelo Entidade-Relacionamento conceitual e dos diagramas arquiteturais e UML do sistema. \\
+    \addlinespace
+    Versionamento de Código & Git e GitHub & Controle de versão distribuído e colaboração entre os integrantes da equipe no repositório do projeto (\texttt{MurilloAssis/Projeto-Extensao-Karaoke}). \\
+    \addlinespace
+    Gestão e Documentação & Trello e \LaTeX\ / Overleaf & Acompanhamento das tarefas ágeis em quadro Kanban e editoração científica do relatório segundo as normas da ABNT. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Segurança e Controle de Acesso}
+
+O projeto de segurança e controle de acesso do sistema contempla quatro camadas de proteção, alinhadas às boas práticas de desenvolvimento seguro e à Lei Geral de Proteção de Dados Pessoais -- LGPD (Lei n{\textordmasculine} 13.709/2018) \cite{brasil2018lgpd}:
+
+\begin{enumerate}
+  \item \textbf{Autenticação e Controle de Acesso Baseado em Papéis (RBAC):} distinção entre sessões de \texttt{cliente} (autorizadas apenas a consultar o catálogo/fila e submeter pedidos sob as regras RN00--RN02) e sessões de \texttt{admin} (autorizadas a controlar a reprodução do palco conforme a RN03), utilizando senhas com hash \texttt{bcrypt} e tokens JWT;
+  \item \textbf{Segurança no Processo Electron (\textit{Context Isolation} e CSP):} configuração da janela do \textit{Karaokê TV Player} com \texttt{contextIsolation: true}, \texttt{nodeIntegration: false} e diretivas estritas de \textit{Content Security Policy} (CSP) que limitam a origem de scripts e quadros (\texttt{frame-src}) exclusivamente à aplicação local e ao domínio oficial de incorporação do YouTube;
+  \item \textbf{Isolamento de Variáveis de Ambiente e Credenciais de Banco:} armazenamento das credenciais de conexão ao MySQL e chaves de assinatura em variáveis de ambiente isoladas do código-fonte via \texttt{.gitignore};
+  \item \textbf{Minimização de Dados (Art. 6{\textordmasculine} da LGPD):} coleta restrita ao nome de chamada ao palco e e-mail de identificação do participante.
+\end{enumerate}
+
+O Quadro \ref{quad:estados} apresenta o \textbf{Diagrama de Estados UML} que formaliza as transições de estado permitidas para um pedido musical dentro da fila (RN04) e as guardas de autorização (RN03) exigidas em cada transição.
+
+\begin{caixa}{Diagrama de Estados UML -- Ciclo de Vida de um Pedido Musical na Fila (RN03 e RN04)}{quad:estados}
+\begin{verbatim}
+                                    [RN00, RN01 e RN02 aprovadas]
+   (*) ---> [ Submetido ] ------------------------------------------------> [ Na Fila ]
+                 |                                                           /       \
+                 | [Falha RN00/RN01/RN02]         [Admin aciona Play/Próxima]         [Admin remove ou
+                 v                                         (Guarda: RN03)   /           limpa a fila]
+          [ Rejeitado ] ---> (*)                                           v                 \
+                                                                  [ Reproduzindo ]            v
+                                                                   (No Telão TV)        [ Cancelada ]
+                                                                         |                    |
+                                                 [Término do Vídeo ou    |                    |
+                                                  Admin avança Próxima]  v                    v
+                                                                  [  Concluída  ] ---------> (*)
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{caixa}
+
+%% -------------------------------------------------------------------------- %%
+%% CAPÍTULO 5: IMPLEMENTAÇÃO (FASE ATUAL DE MVP)                              %%
+%% -------------------------------------------------------------------------- %%
+\chapter{Implementação} \label{cap:implementacao}
+
+Este capítulo descreve a materialização do projeto \textbf{Karaokê Apache} em software. Considerando que o projeto encontra-se atualmente em \textbf{fase de Produto Mínimo Viável (MVP)}, as seções a seguir documentam o ambiente configurado, a estrutura da aplicação, os componentes já implementados e validados no núcleo funcional da Prova de Conceito (PoC/MVP), a integração entre a fila web e o reprodutor Electron, bem como os testes preliminares, resultados parciais e limitações próprias do estágio atual de desenvolvimento.
+
+\section{Ambiente de Desenvolvimento}
+
+O desenvolvimento e a execução do MVP foram conduzidos utilizando um ambiente padronizado entre os integrantes da equipe de desenvolvimento, composto pelos seguintes recursos de hardware, sistema operacional e ferramentas:
+
+\begin{itemize}
+  \item \textbf{Estações de Trabalho e Sistemas Operacionais:} computadores pessoais dos desenvolvedores e máquinas dos laboratórios de informática do IFSP -- Campus São Paulo, executando sistemas operacionais Windows 10/11 (64 bits) e distribuições Linux;
+  \item \textbf{Linguagens, Banco de Dados e Ferramentas de Construção:} kit de desenvolvimento \textit{Java 21 (JDK 21)} para a API de back-end, Sistema de Gerenciamento de Banco de Dados \textit{MySQL}, ambiente \textit{Node.js} (com gerenciador de pacotes \texttt{npm}), empacotador \textit{Vite} e framework \textit{Electron} para o front-end e reprodutor de telão;
+  \item \textbf{IDEs e Repositório de Código no GitHub:} desenvolvimento utilizando \textit{Visual Studio Code} / IDEs Java e versionamento distribuído centralizado no repositório oficial \url{https://github.com/MurilloAssis/Projeto-Extensao-Karaoke}.
+\end{itemize}
+
+\section{Estrutura da Aplicação}
+
+A organização física de diretórios e pacotes da aplicação no estágio atual de MVP separa claramente o código do processo nativo do Electron, os componentes visuais em React e a camada de serviços/estado da fila. O Quadro \ref{quad:pacotes} apresenta o \textbf{Diagrama de Pacotes UML} da estrutura implementada.
+
+\begin{caixa}{Diagrama de Pacotes UML -- Estrutura de Diretórios e Módulos do MVP}{quad:pacotes}
+\begin{verbatim}
++-----------------------------------------------------------------------------------+
+|                                  karaoke-apache                                   |
+|                                                                                   |
+|  +-----------------------------+         +-------------------------------------+  |
+|  |         <<package>>         |         |             <<package>>             |  |
+|  |          electron/          |         |                src/                 |  |
+|  |-----------------------------|         |-------------------------------------|  |
+|  | - main.js (BrowserWindow)   |         |  +-------------------------------+  |  |
+|  | - preload.js (contextBridge)|         |  | components/                   |  |  |
+|  +--------------+--------------+         |  | - SongSearch (Escolha Vídeo)  |  |  |
+|                 |                        |  | - NowPlayingCard (Tocando)    |  |  |
+|                 | carrega / sincroniza   |  | - QueueList (Fila Numerada)   |  |  |
+|                 +----------------------->|  | - TvPlayerView (Embed Vídeo)  |  |  |
+|                                          |  +-------------------------------+  |  |
+|  +-----------------------------+         |  +-------------------------------+  |  |
+|  |         <<package>>         |         |  | services/ & utils/            |  |  |
+|  |   api (Java 21) & MySQL     |<------->|  | - videoValidator.js (RN00/01) |  |  |
+|  |-----------------------------|         |  | - queueSync.js (Estado/Fila)  |  |  |
+|  | - API REST (Java 21)        |         |  +-------------------------------+  |  |
+|  | - Banco Relacional (MySQL)  |         +-------------------------------------+  |
+|  +-----------------------------+                                                  |
++-----------------------------------------------------------------------------------+
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{caixa}
+
+\section{Implementação dos Componentes}
+
+Na fase atual de MVP, a implementação priorizou os componentes críticos responsáveis por validar a proposta central do sistema: receber pedidos musicais, organizar a fila sem duplicidades e controlar remotamente o que é reproduzido na TV do bar.
+
+\begin{itemize}
+  \item \textbf{Componente \textit{Pedido de Música}:} foi construído o módulo que permite a seleção de vídeos de karaokê pelo sistema e valida o identificador do vídeo escolhido. Caso o vídeo seja inválido/indisponível (RN00) ou o identificador já conste na fila ativa ou em reprodução (RN01), a inclusão na fila é bloqueada;
+  \item \textbf{Componente \textit{Fila}:} foi implementada a gestão reativa da lista de músicas (\texttt{queue}) e da faixa ativa (\texttt{currentSong}). A interface permite adicionar itens ao final da fila, acionar o botão \textbf{Play} em qualquer posição, avançar para a \textbf{Próxima música} (promovendo automaticamente o primeiro item da fila para reprodução), excluir itens individuais e limpar toda a fila;
+  \item \textbf{Componente \textit{Reprodutor} -- \textit{Karaokê TV Player}:} foi implementado o processo principal do Electron (\texttt{main.js}) que instancia uma janela dedicada (\texttt{BrowserWindow}) conectada ao estado da fila. Sempre que o estado de \texttt{currentSong} é atualizado na interface de controle, o \textit{Karaokê TV Player} exibe o código da faixa no cabeçalho (\textit{``Conectado -- Tocando: [ID]''}) e renderiza o player de vídeo do YouTube;
+  \item \textbf{Componente \textit{Usuários} e Persistência Relacional (Java 21 e MySQL):} compreende a estruturação da API em Java 21 integrada ao banco de dados MySQL (\texttt{Conceitual.brM3}) para gerenciamento das entidades \texttt{usuario} (\texttt{admin}/\texttt{cliente}), \texttt{musica}, \texttt{letra} e \texttt{fila}.
+\end{itemize}
+
+\section{Integração dos Módulos}
+
+Em ambiente de execução, os módulos da aplicação comunicam-se na mesma rede local do estabelecimento: o servidor web disponibiliza a interface de controle e fila em React/Vite (\texttt{http://localhost:5173}), enquanto a instância do aplicativo desktop \textbf{Karaokê TV Player} em Electron permanece aberta na saída de vídeo secundária conectada ao telão do palco. Qualquer ação de adição ou troca de música efetuada no controlador web propaga-se instantaneamente para a janela do Electron. O Quadro \ref{quad:implantacao} apresenta o \textbf{Diagrama de Implantação UML} que ilustra a topologia física de execução da solução no Apache Gru Rock Bar.
+
+\begin{caixa}{Diagrama de Implantação UML -- Topologia de Execução no Apache Gru Rock Bar}{quad:implantacao}
+\begin{verbatim}
++------------------------------------+          +------------------------------------------+
+|           <<device>>               |          |                <<device>>                |
+|   Smartphone do Cliente (Salão)    |          |   Computador / Notebook de Palco (Bar)   |
+|  +------------------------------+  |  Wi-Fi   |  +------------------------------------+  |
+|  | <<executionEnvironment>>     |  |  Local   |  | <<executionEnvironment>>           |  |
+|  | Navegador (QR Code no Telão) |<-+----------+->| Servidor Vite / Node.js (:5173)    |  |
+|  | - Interface Cliente/Fila Web |  |  HTTP /  |  | - Estado da Fila e Regras RN00-04  |  |
+|  +------------------------------+  |  WS      |  +-----------------+------------------+  |
++------------------------------------+          |                    | IPC / Loopback      |
+                                                |                    v                     |
++------------------------------------+          |  +------------------------------------+  |
+|           <<device>>               |   Cabo   |  | <<executionEnvironment>>           |  |
+|   Telão / Smart TV do Palco        |   HDMI   |  | Processo Nativo Electron           |  |
+|  +------------------------------+  |<---------+--| - Karaokê TV Player (BrowserWindow)|  |
+|  | Exibição Fullscreen Vídeo/Som|  |  Áudio e |  +------------------------------------+  |
+|  +------------------------------+  |  Vídeo   +------------------------------------------+
++------------------------------------+
+\end{verbatim}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{caixa}
+
+\section{Testes Realizados}
+
+Como o projeto encontra-se em estágio de MVP, os procedimentos de teste concentraram-se na validação prática dos fluxos essenciais implementados na Prova de Conceito (registrada no vídeo \texttt{Poc.mp4}) e na verificação do funcionamento do reprodutor Electron em diferentes ambientes de rede. A Tabela \ref{tab:testes_mvp} sumariza os testes realizados até o momento.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Testes preliminares realizados sobre a Prova de Conceito e o MVP.}%
+  \label{tab:testes_mvp}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.3cm}p{3.2cm}X p{2.2cm}}
+    \toprule
+    \textbf{ID} & \textbf{Aspecto Avaliado} & \textbf{Procedimento Executado e Resultado Observado} & \textbf{Situação no MVP} \\
+    \midrule
+    TST-01 & Escolha e Adição de Vídeo à Fila pelo Sistema & Seleção de vídeos de karaokê (como \textit{Still Loving You -- Scorpions}, ID \texttt{R2F\_hGwD26g}, e \textit{Oh! Darling -- The Beatles}) na interface web; os itens foram validados e listados corretamente na fila numerada. & Validado (\texttt{Poc.mp4}) \\
+    \addlinespace
+    TST-02 & Sincronização do Comando \textit{Play} com o Electron & Acionamento do botão \textit{Play} na interface web (\texttt{localhost:5173}); o \textit{Karaokê TV Player} em Electron atualizou imediatamente o status para \textit{Conectado -- Tocando} e iniciou o vídeo. & Validado (\texttt{Poc.mp4}) \\
+    \addlinespace
+    TST-03 & Avanço de Faixa (\textit{Próxima música}) e Limpeza & Acionamento do botão \textit{Próxima música} e exclusão de itens; a fila avançou corretamente na ordem FIFO e atualizou a tela do reprodutor. & Validado (\texttt{Poc.mp4}) \\
+    \addlinespace
+    TST-04 & Bloqueio de Música Duplicada na Fila (RN01) & Tentativa de inserção repetida de um vídeo já presente na fila ativa; o sistema bloqueou a duplicidade e preservou a integridade da fila. & Validado \\
+    \addlinespace
+    TST-05 & Integração da API Java 21 com o MySQL & Testes de persistência das entidades modeladas e autenticação por perfil (\texttt{admin}/\texttt{cliente}) no banco de dados MySQL. & Em andamento (MVP) \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Resultados Obtidos}
+
+Até o presente estágio de MVP, os resultados alcançados confirmam a viabilidade técnica da arquitetura proposta e atendem ao propósito central que motivou o projeto junto ao Apache Gru Rock Bar:
+
+\begin{itemize}
+  \item \textbf{Validação prática da orquestração entre Web e Electron (\texttt{Poc.mp4}):} comprovou-se que o operador do bar pode gerenciar a fila de músicas em uma interface web limpa enquanto o aplicativo desktop \textbf{Karaokê TV Player} reproduz automaticamente os vídeos selecionados em uma janela independente dedicada à TV, eliminando a necessidade de procurar vídeos manualmente e arrastar abas para o telão;
+  \item \textbf{Consolidação da arquitetura e das regras do negócio:} o levantamento junto ao parceiro resultou em um conjunto coerente de regras de negócio (RN00 a RN04), modelo de dados (\texttt{Conceitual.brM3}) e divisão modular em quatro componentes (\textit{Usuários}, \textit{Fila}, \textit{Pedido de Música} e \textit{Reprodutor});
+  \item \textbf{Adequação econômica ao parceiro:} toda a pilha tecnológica validada no MVP opera com custo zero de licenciamento, podendo ser executada diretamente no equipamento já disponível no estabelecimento.
+\end{itemize}
+
+\section{Limitações da Implementação}
+
+Por tratar-se de uma versão em fase de Produto Mínimo Viável (MVP), registram-se as seguintes limitações atuais e pontos conhecidos que orientam a continuidade imediata do desenvolvimento:
+
+\begin{itemize}
+  \item \textbf{Escopo parcial da persistência e autenticação na PoC inicial:} no recorte validado na PoC (\texttt{Poc.mp4}), a fila e o estado da música atual operam de forma reativa em sessão local para validar a comunicação com o Electron, estando o acoplamento completo das telas de login/cadastro com o banco de dados relacional em fase de finalização no MVP;
+  \item \textbf{Restrições externas de incorporação (\textit{embed}) do YouTube:} alguns vídeos musicais específicos possuem bloqueio de reprodução em quadros externos definido pelos canais proprietários no YouTube; no estágio atual do MVP, caso um link com bloqueio seja inserido, o operador utiliza o botão \textit{Próxima música} para avançar imediatamente para a faixa seguinte;
+  \item \textbf{Transição automática ao final do vídeo:} na versão inicial do protótipo, o avanço para a próxima música pode ser acionado manualmente pelo organizador no botão \textit{Próxima música} ao término dos aplausos no palco, prevendo-se o gatilho opcional de avanço automático via eventos da API de IFrame do YouTube (\texttt{onStateChange}) nos incrementos seguintes.
+\end{itemize}
+
+%% -------------------------------------------------------------------------- %%
+%% CAPÍTULO 6: CONCLUSÃO                                                      %%
+%% -------------------------------------------------------------------------- %%
+\chapter{Conclusão} \label{cap:conclusao}
+
+Este capítulo encerra o documento sintetizando as considerações finais sobre o desenvolvimento do projeto \textbf{Karaokê Apache} até a sua fase atual de MVP, relatando as principais dificuldades superadas pela equipe e apresentando as possibilidades de evolução futura do sistema.
+
+\section{Considerações Finais}
+
+O desenvolvimento do projeto \textbf{Karaokê Apache} demonstrou como a aplicação estruturada de conceitos de Engenharia de Software, Análise de Sistemas e Arquitetura de Aplicações Distribuídas permite construir uma solução tecnológica diretamente alinhada à realidade de um pequeno negócio local. Ao investigar a rotina da \textit{Noite de Karaokê} no estabelecimento parceiro \textbf{Apache Gru Rock Bar}, em Guarulhos -- SP, foi possível traduzir gargalos operacionais concretos -- antes resolvidos no improviso com anotações em papel e janelas manuais de navegador -- em requisitos objetivos, regras de negócio bem definidas (RN00 a RN04) e uma arquitetura modular clara.
+
+Mesmo encontrando-se em fase de Produto Mínimo Viável (MVP), os resultados obtidos na implementação da Prova de Conceito (\texttt{Poc.mp4}) cumpriram o objetivo de validar o núcleo mais sensível da solução: a sincronização em tempo real entre a fila web em React/Vite e o reprodutor desktop dedicado \textbf{Karaokê TV Player} em Electron. Dessa forma, o projeto entrega ao estabelecimento parceiro uma base funcional sólida, gratuita e adaptada à sua infraestrutura física, ao mesmo tempo em que consolida a formação prática dos estudantes do IFSP.
+
+\section{Dificuldades Encontradas}
+
+Ao longo do ciclo de levantamento, modelagem e implementação do MVP, a equipe enfrentou e solucionou três dificuldades principais:
+
+\begin{enumerate}
+  \item \textbf{Sincronização em tempo real entre a fila web e o reprodutor desktop:} garantir que as ações de controle da fila refletissem imediatamente na janela dedicada do \textit{Karaokê TV Player} em Electron sem necessidade de recarregar a página exigiu o desacoplamento claro entre o estado da fila e o componente de exibição;
+  \item \textbf{Políticas de incorporação (\textit{embed}) e \textit{autoplay} de vídeos:} navegadores modernos e o próprio YouTube impõem restrições a vídeos embarcados e ao início automático de áudio, o que exigiu testes específicos dentro do container Chromium do Electron e a inclusão de controles diretos (\textit{Play} e \textit{Próxima música}) para o operador do palco;
+  \item \textbf{Calibragem do escopo para o calendário semestral:} foi necessário delimitar criteriosamente o escopo do MVP, descartando ideias iniciais que criariam barreiras de uso para os clientes do bar (como obrigar o download de um aplicativo nativo nas lojas móveis) em favor de uma interface web acessível instantaneamente via QR Code no telão.
+\end{enumerate}
+
+\section{Trabalhos Futuros}
+
+Como continuidade natural após a conclusão e implantação definitiva do MVP no Apache Gru Rock Bar, destacam-se os seguintes trabalhos futuros:
+
+\begin{itemize}
+  \item \textbf{Implementação do módulo de letras no celular e painel de estatísticas musicais:} ativar na próxima etapa do projeto o preenchimento e exibição da tabela \texttt{letra} (já estruturada na modelagem de dados) para acompanhamento no celular, bem como relatórios das músicas mais cantadas no Apache Gru Rock Bar;
+  \item \textbf{Notificação automática de proximidade na fila:} emitir um alerta visual no celular do cliente quando faltar apenas uma música para sua chamada ao palco;
+  \item \textbf{Detecção automática de bloqueio de \textit{embed} via YouTube IFrame API:} validar preventivamente no momento do pedido se o vídeo do YouTube permite reprodução embarcada, sugerindo automaticamente versões alternativas de karaokê;
+  \item \textbf{Interação da plateia e integração com o cardápio digital da casa:} permitir que as mesas enviem reações visuais para o telão durante as apresentações e disponibilizar um atalho rápido na tela da fila para o cardápio de bebidas e porções do bar.
+\end{itemize}
+
+%% ========================================================================== %%
+%% ELEMENTOS PÓS-TEXTUAIS                                                     %%
+%% ========================================================================== %%
+\postextual
+
+%% -------------------------------------------------------------------------- %%
+%% REFERÊNCIAS                                                                %%
+%% -------------------------------------------------------------------------- %%
+\addcontentsline{toc}{chapter}{REFERÊNCIAS}
+\begin{thebibliography}{99}
+
+\bibitem{apacheinsta2026}
+APACHE GRU ROCK BAR. \textbf{Perfil Oficial e Localização -- Rua Torres Tibagy, 58, Gopouva, Guarulhos -- SP}. Guarulhos, 2026. Disponível em: \url{https://www.instagram.com/p/DZp6UdPxioN/}. Acesso em: 10 out. 2026.
+
+\bibitem{apachekaraoke2026}
+APACHE GRU ROCK BAR. \textbf{Noite de Karaokê no Apache Gru Rock Bar}. Guarulhos, 2026. Disponível em: \url{https://www.instagram.com/p/DYgSE9PsXhQ/}. Acesso em: 10 out. 2026.
+
+\bibitem{armbrust2009}
+ARMBRUST, Michael et al. \textbf{Above the Clouds: A Berkeley View of Cloud Computing}. Berkeley: University of California at Berkeley, Technical Report No. UCB/EECS-2009-28, 2009.
+
+\bibitem{brasil2018lgpd}
+BRASIL. \textbf{Lei n{\textordmasculine} 13.709, de 14 de agosto de 2018}. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, 2018. Disponível em: \url{https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm}. Acesso em: 12 out. 2026.
+
+\bibitem{contasimples2025}
+CONTA SIMPLES; VISA. \textbf{1{\textordmasculine} Panorama da Gestão de Despesas Corporativas no Brasil}. São Paulo, 2025. Disponível em: \url{https://lp.contasimples.com/panorama-da-gestao-de-despesas-corporativas-no-brasil}. Acesso em: 12 out. 2026.
+
+\bibitem{electron2025}
+ELECTRON. \textbf{Electron Documentation: Process Model and Context Isolation}. 2025. Disponível em: \url{https://www.electronjs.org/docs}. Acesso em: 15 out. 2026.
+
+\bibitem{fowler2006}
+FOWLER, Martin. \textbf{Padrões de Arquitetura de Aplicações Corporativas}. Porto Alegre: Bookman, 2006.
+
+\bibitem{juks2026}
+JUKS. \textbf{Juks -- O Jukebox Digital do Seu Bar}. São Paulo, 2026. Disponível em: \url{https://juks.com.br/}. Acesso em: 14 out. 2026.
+
+\bibitem{karafun2026}
+KARAFUN BUSINESS. \textbf{KaraFun Business \& KaraFun Pro: Professional Karaoke Solutions for Venues}. Lille, 2026. Disponível em: \url{https://business.karafun.com/}. Acesso em: 14 out. 2026.
+
+\bibitem{laudon2022}
+LAUDON, Kenneth C.; LAUDON, Jane P. \textbf{Sistemas de Informação Gerenciais: Administrando a Empresa Digital}. 17. ed. Porto Alegre: Bookman, 2022.
+
+\bibitem{mell2011}
+MELL, Peter; GRANCE, Timothy. \textbf{The NIST Definition of Cloud Computing}. Gaithersburg: National Institute of Standards and Technology (NIST), Special Publication 800-145, 2011.
+
+\bibitem{obrien2013}
+O'BRIEN, James A.; MARAKAS, George M. \textbf{Administração de Sistemas de Informação}. 16. ed. São Paulo: McGraw-Hill, 2013.
+
+\bibitem{pressman2016}
+PRESSMAN, Roger S.; MAXIM, Bruce R. \textbf{Engenharia de Software: Uma Abordagem Profissional}. 8. ed. Porto Alegre: AMGH, 2016.
+
+\bibitem{react2025}
+REACT. \textbf{React Documentation: Describing the UI and Managing State}. 2025. Disponível em: \url{https://react.dev/}. Acesso em: 15 out. 2026.
+
+\bibitem{sebrae2024}
+SERVIÇO BRASILEIRO DE APOIO ÀS MICRO E PEQUENAS EMPRESAS (SEBRAE). \textbf{Panorama dos Pequenos Negócios 2024}. Brasília, DF: Sebrae Nacional, 2024.
+
+\bibitem{serasa2026}
+SERASA EXPERIAN. \textbf{Consulta Cadastral de Pessoa Jurídica: APACHE GRU ROCK BAR LTDA - ME (CNPJ 64.687.141/0001-07)}. São Paulo, 2026. Disponível em: \url{https://empresas.serasaexperian.com.br/consulta-gratis/APACHE-GRU-ROCK-BAR-LTDA-ME-64687141000107}. Acesso em: 10 out. 2026.
+
+\bibitem{singa2026}
+SINGA BUSINESS. \textbf{Professional Karaoke Software for Bars, Venues and KTV Rooms}. Helsinki, 2026. Disponível em: \url{https://singa.com/business/}. Acesso em: 14 out. 2026.
+
+\bibitem{sommerville2019}
+SOMMERVILLE, Ian. \textbf{Engenharia de Software}. 10. ed. São Paulo: Pearson Education do Brasil, 2019.
+
+\bibitem{weber2014}
+WEBER, Verena. \textbf{Cloud Computing: The Concept, Impacts and the Role of Government Policy}. Paris: OECD Publishing, 2014.
+
+\bibitem{zinesick2026}
+ZINE SICK. \textbf{Guia de Casas Underground: Apache Gru Rock Bar (Guarulhos -- SP)}. 2026. Disponível em: \url{https://www.lojasick.com.br/zine/casa/apache-gru-rock-bar}. Acesso em: 10 out. 2026.
+
+\end{thebibliography}
+
+%% -------------------------------------------------------------------------- %%
+%% APÊNDICES                                                                  %%
+%% -------------------------------------------------------------------------- %%
+\begin{apendicesenv}
+
+\apendiceitem{Especificação XML do Diagrama de Componentes no UMLet}{apendice:uml}
+
+O trecho XML reproduzido na Listagem \ref{lst:umlet} corresponde ao arquivo \texttt{diagrama\_de\_componentes.uxf}, produzido pelos autores na ferramenta UMLet para modelar os componentes \textit{Usuários}, \textit{Fila}, \textit{Pedido de Música} e \textit{Reprodutor}.
+
+\begin{lstlisting}[language=XML, caption={Estrutura do arquivo diagrama\_de\_componentes.uxf (UMLet).}, label={lst:umlet}]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates><x>250</x><y>80</y><w>430</w><h>110</h></coordinates>
+    <panel_attributes>symbol=component
+Usuarios</panel_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates><x>250</x><y>280</y><w>430</w><h>100</h></coordinates>
+    <panel_attributes>symbol=component
+Fila</panel_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates><x>160</x><y>530</y><w>200</w><h>100</h></coordinates>
+    <panel_attributes>symbol=component
+Pedido de Musica</panel_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates><x>520</x><y>520</y><w>200</w><h>100</h></coordinates>
+    <panel_attributes>symbol=component
+Reprodutor</panel_attributes>
+  </element>
+</diagram>
+\end{lstlisting}
+
+\apendiceitem{Trechos de Código-Fonte do MVP (Electron e Validação da Fila)}{apendice:codigo}
+
+A Listagem \ref{lst:electron_main} apresenta o script principal de inicialização do \textbf{Karaokê TV Player} em Electron (\texttt{main.js}), incluindo a configuração da janela dedicada de exibição e o isolamento de contexto.
+
+\begin{lstlisting}[language=Java, caption={Inicialização do reprodutor desktop Karaokê TV Player em Electron (main.js).}, label={lst:electron_main}]
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+
+function createPlayerWindow() {
+  const playerWindow = new BrowserWindow({
+    width: 1280,
+    height: 720,
+    title: 'Karaoke TV Player - Apache Gru Rock Bar',
+    autoHideMenuBar: true,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true
+    }
+  });
+
+  const playerUrl = process.env.ELEC_PLAYER_URL || 'http://localhost:5173/player';
+  playerWindow.loadURL(playerUrl);
+}
+
+app.whenReady().then(() => {
+  createPlayerWindow();
+});
+\end{lstlisting}
+
+A Listagem \ref{lst:youtube_parser} demonstra a função de extração de identificadores de vídeo do YouTube e validação das regras RN00 e RN01 antes da inserção na fila.
+
+\begin{lstlisting}[language=Java, caption={Extração de ID do YouTube e validação anti-duplicidade na fila (RN00 e RN01).}, label={lst:youtube_parser}]
+export function extractYouTubeId(url) {
+  if (!url || typeof url !== 'string') return null;
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+  const match = url.trim().match(regex);
+  return match ? match[1] : null;
+}
+
+export function validateQueueInsertion(videoUrl, customTitle, activeQueue, currentSong) {
+  const videoId = extractYouTubeId(videoUrl);
+  if (!videoId) {
+    return { valid: false, error: 'RN00: Link do YouTube invalido ou nao suportado.' };
+  }
+  const alreadyPlaying = currentSong && currentSong.videoId === videoId;
+  const alreadyInQueue = activeQueue.some((item) => item.videoId === videoId);
+  if (alreadyPlaying || alreadyInQueue) {
+    return { valid: false, error: 'RN01: Esta musica ja esta na fila ou em reproducao.' };
+  }
+  return {
+    valid: true,
+    songItem: {
+      videoId,
+      title: customTitle?.trim() || `Musica (${videoId})`,
+      status: 'na_fila',
+      requestedAt: new Date().toISOString()
+    }
+  };
+}
+\end{lstlisting}
+
+\end{apendicesenv}
+
+%% -------------------------------------------------------------------------- %%
+%% ANEXOS                                                                     %%
+%% -------------------------------------------------------------------------- %%
+\begin{anexosenv}
+
+\anexoitem{Referência Normativa -- Art. 6{\textordmasculine} da Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine} 13.709/2018)}{anexo:lgpd}
+
+Transcrição do Art. 6{\textordmasculine} da Lei n{\textordmasculine} 13.709, de 14 de agosto de 2018 (LGPD) \cite{brasil2018lgpd}, utilizado como referência normativa para as restrições de privacidade e minimização de dados cadastrais no sistema \textbf{Karaokê Apache}:
+
+\begin{citacao}
+Art. 6{\textordmasculine} As atividades de tratamento de dados pessoais deverão observar a boa-fé e os seguintes princípios:
+
+I -- finalidade: realização do tratamento para propósitos legítimos, específicos, explícitos e informados ao titular, sem possibilidade de tratamento posterior de forma incompatível com essas finalidades;
+
+II -- adequação: compatibilidade do tratamento com as finalidades informadas ao titular, de acordo com o contexto do tratamento;
+
+III -- necessidade: limitação do tratamento ao mínimo necessário para a realização de suas finalidades, com abrangência dos dados pertinentes, proporcionais e não excessivos em relação às finalidades do tratamento de dados;
+
+VII -- segurança: utilização de medidas técnicas e administrativas aptas a proteger os dados pessoais de acessos não autorizados e de situações acidentais ou ilícitas de destruição, perda, alteração, comunicação ou difusão.
+\end{citacao}
+
+\end{anexosenv}
+\label{LastPage}
+\end{document}

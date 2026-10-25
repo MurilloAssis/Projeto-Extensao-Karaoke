@@ -1,0 +1,51 @@
+% !TEX root = ../documento.tex
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
+%% Elementos Pré-Textuais
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
+
+%% 01: Capa
+\imprimircapa
+
+%% 02: Folha de Rosto
+\imprimirfolhaderosto*
+
+%% Ficha Catalográfica
+\input{pre-textual/ficha-catalografica}
+
+%% 03: Errata (opcional)
+\input{pre-textual/errata}
+
+%% 04: Folha de Aprovação
+\imprimirfolhadeaprovacao
+
+%% 05: Dedicatória
+\input{pre-textual/dedicatoria}
+
+%% 06: Agradecimentos
+\input{pre-textual/agradecimentos}
+
+%% 07: Epígrafe
+\input{pre-textual/epigrafe}
+
+%% 08: Resumo em Português
+\input{pre-textual/resumo}
+
+%% 09: Abstract em Língua Estrangeira
+\input{pre-textual/resumo-lingua-estrangeira}
+
+%% 10: Lista de Ilustrações
+\input{pre-textual/lista-de-ilustracoes}
+
+%% 11: Lista de Tabelas
+\input{pre-textual/lista-de-tabelas}
+
+%% 12: Lista de Abreviaturas e Siglas
+\input{pre-textual/siglas}
+
+%% 13: Lista de Símbolos
+\input{pre-textual/simbolos}
+
+%% 14: Sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
