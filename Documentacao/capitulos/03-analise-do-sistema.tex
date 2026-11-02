@@ -2,6 +2,8 @@
 
 Este capítulo transforma a compreensão do contexto operacional do Apache Gru Rock Bar e das necessidades identificadas em uma visão estruturada do sistema \textbf{Karaokê Apache}, definindo sua visão geral, os atores envolvidos, os casos de uso, o modelo conceitual de domínio, os requisitos funcionais e não funcionais e as restrições do sistema.
 
+A análise mantém o foco no comportamento esperado do sistema e nas regras do negócio. As decisões relacionadas à arquitetura, às tecnologias, à organização dos componentes e aos detalhes de implementação são apresentadas nos capítulos posteriores.
+
 \section{Visão Geral do Sistema}
 
 O sistema \textbf{Karaokê Apache} é uma plataforma distribuída centrada na organização da fila de apresentações. Ele conecta o salão do bar, onde os clientes fazem pedidos e acompanham a fila pelos seus smartphones, ao palco, onde o administrador conduz a ordem de apresentações e o reprodutor exibe os vídeos de karaokê na TV.
@@ -14,9 +16,11 @@ As funcionalidades do sistema organizam-se em três grupos principais:
   \item \textbf{FT-003 -- Sincronizar e reproduzir faixa no telão:} atualiza em tempo real o estado da música ativa para que o reprodutor exiba no telão o vídeo correspondente, aberto pelo link, ao lado da interface própria do sistema.
 \end{itemize}
 
+O limite do sistema começa no acesso do cliente à interface de solicitação e termina na atualização do estado do pedido e na exibição da música ativa. O sistema não substitui a atuação do organizador, o equipamento de áudio ou a operação artística do evento. Também não é responsável pela produção do conteúdo audiovisual nem pela disponibilidade dos vídeos de terceiros.
+
 \section{Atores Envolvidos}
 
-Foram identificados três atores que interagem diretamente com as fronteiras do sistema, cujos papéis são detalhados na Tabela \ref{tab:atores}.
+Foram identificados três atores que interagem diretamente com o sistema, cujos papéis são detalhados na Tabela \ref{tab:atores}. Os gestores do estabelecimento são partes interessadas do projeto, mas não constituem um ator separado, pois utilizam as mesmas funcionalidades do administrador.
 
 \begin{table}[H]
 \IBGEtab{%
@@ -42,7 +46,7 @@ Foram identificados três atores que interagem diretamente com as fronteiras do 
 
 \section{Casos de Uso}
 
-A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC08) que especificam o comportamento esperado do sistema sob a perspectiva de seus usuários. A Figura \ref{fig:casos_uso} apresenta o \textbf{Diagrama de Casos de Uso UML} do sistema, seguido pelo detalhamento descritivo na Tabela \ref{tab:casos_uso}.
+A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC08) que especificam o comportamento esperado do sistema sob a perspectiva de seus usuários. A Figura \ref{fig:casos_uso} apresenta o \textbf{Diagrama de Casos de Uso UML} do sistema, seguido pelo detalhamento descritivo na Tabela \ref{tab:casos_uso}. O caso de uso UC04 é incluído por UC03, pois suas validações fazem parte da solicitação de uma música, e o UC07 representa a comunicação do estado da fila com o reprodutor de telão, sem definir a tecnologia utilizada para essa comunicação.
 
 \begin{figure}[H]
   \caption{Diagrama de Casos de Uso UML -- Sistema Karaokê Apache}
@@ -118,7 +122,7 @@ A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC
     \addlinespace
     UC06 & Controlar Reprodução (Play / Próxima) & Administrador & O administrador inicia o primeiro pedido da fila (\textit{Play}, quando nenhuma música está em reprodução) ou aciona o botão \textit{Próxima música}, que conclui o pedido atual e promove o seguinte para o estado \textit{Reproduzindo}. \\
     \addlinespace
-    UC07 & Sincronizar e Exibir Vídeo no Telão & Reprodutor TV & A alteração da faixa ativa (UC06) dispara a atualização imediata da janela do \textit{Karaokê TV Player} (Electron), que abre o vídeo pelo link em uma das duas visões. \\
+    UC07 & Sincronizar e Exibir Vídeo no Telão & Reprodutor TV & A alteração da faixa ativa (UC06) dispara a atualização imediata da janela do \textit{Karaokê TV Player} (Electron), que abre o vídeo pelo link em uma das duas visões. Quando não há música ativa, o telão exibe um estado de espera. \\
     \addlinespace
     UC08 & Moderar Fila e Gerenciar Catálogo & Administrador & Permite excluir pedidos individuais, limpar a fila ao encerrar a noite e cadastrar ou inativar músicas no banco de dados. \\
     \bottomrule
@@ -218,11 +222,73 @@ A Tabela \ref{tab:requisitos_funcionais} especifica de forma objetiva os Requisi
     \addlinespace
     RF09 & Remoção Individual e Limpeza da Fila & Permitir ao administrador excluir um pedido específico ou limpar toda a fila ao final do evento. & Alta \\
     \addlinespace
-    RF10 & Reprodução Dedicada no Telão (Electron) & Exibir no telão, na janela do \textit{Karaokê TV Player}, o vídeo da música ativa aberto pelo link, ao lado da interface própria do sistema (duas visões), sempre que a faixa ativa mudar. & Alta \\
+    RF10 & Reprodução Dedicada no Telão (Electron) & Exibir no telão, na janela do \textit{Karaokê TV Player}, o vídeo da música ativa aberto pelo link, ao lado da interface própria do sistema (duas visões), sempre que a faixa ativa mudar, e um estado de espera quando não houver apresentação. & Alta \\
     \addlinespace
     RF11 & Gestão Administrativa do Catálogo & Permitir cadastrar novas músicas no banco de dados e alterar seu status de disponibilidade. & Média \\
     \addlinespace
     RF12 & Feedback Visual de Estado e Conexão & Exibir indicadores claros de conexão (\textit{Conectado -- Tocando}) e alertas de validação na interface. & Alta \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\subsection{Critérios de Aceitação dos Requisitos Centrais}
+
+Os requisitos centrais devem ser verificáveis por meio de cenários de uso. A Tabela \ref{tab:criterios_aceitacao} apresenta os critérios de aceitação iniciais do MVP, que orientam os testes descritos no Capítulo \ref{cap:implementacao}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Critérios de aceitação dos requisitos centrais.}%
+  \label{tab:criterios_aceitacao}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}X}
+    \toprule
+    \textbf{Requisito} & \textbf{Critério de aceitação} \\
+    \midrule
+    RF01 & Dado que o cliente informe apenas um nome, o sistema deverá permitir seu acesso como visitante; dado que alguém tente acessar as funções de administrador, o sistema deverá exigir e-mail e senha de uma conta com perfil \texttt{admin}. \\
+    \addlinespace
+    RF04, RF05 & Dado que a música esteja disponível, não esteja na fila nem em reprodução e o cliente esteja abaixo do limite de pedidos, ao confirmar a solicitação o sistema deverá criar o pedido no final da fila, com estado \textit{Na Fila}. \\
+    \addlinespace
+    RF05, RF12 & Dado que a música já esteja na fila ou em reprodução, ou que o cliente tenha atingido o limite de pedidos, o sistema deverá recusar o pedido e informar o motivo. \\
+    \addlinespace
+    RF06 & Dado que existam pedidos ativos, ao acessar a fila o usuário deverá visualizar a música atual e a ordem de chegada dos próximos pedidos. \\
+    \addlinespace
+    RF07, RF08 & Dado que nenhuma música esteja em reprodução, o \textit{Play} deverá levar o primeiro pedido da fila ao estado \textit{Reproduzindo}; ao acionar \textit{Próxima música}, o pedido atual deverá passar a \textit{Concluído} e o seguinte, a \textit{Reproduzindo}. \\
+    \addlinespace
+    RF10 & Dado que exista uma música ativa, o reprodutor deverá abrir o vídeo correspondente no telão, ao lado da interface do sistema; sem música ativa, deverá exibir o estado de espera. \\
+    \addlinespace
+    RF12 & Dado que uma operação seja concluída ou recusada, o sistema deverá apresentar uma mensagem que permita ao usuário compreender o resultado. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\subsection{Rastreabilidade entre Necessidades, Regras e Requisitos}
+
+A Tabela \ref{tab:rastreabilidade} relaciona as necessidades identificadas no Capítulo \ref{cap:contexto} às regras de negócio, aos casos de uso e aos requisitos funcionais correspondentes.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Matriz de rastreabilidade da análise do sistema.}%
+  \label{tab:rastreabilidade}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.1cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.6cm}X}
+    \toprule
+    \textbf{Nec.} & \textbf{Necessidade} & \textbf{Regras} & \textbf{Casos de uso} & \textbf{Requisitos funcionais} \\
+    \midrule
+    N01 & Escolha de vídeos pelo próprio sistema & RN00 & UC01, UC02, UC03, UC04 & RF01 a RF05, RF11 \\
+    \addlinespace
+    N02 & Transparência e previsibilidade da fila & RN03, RN04 & UC05, UC07 & RF06, RF10, RF12 \\
+    \addlinespace
+    N03 & Prevenção de repetições e rotatividade justa & RN01, RN02, RN03 & UC03, UC04, UC08 & RF04, RF05, RF09 \\
+    \addlinespace
+    N04 & Reprodução dedicada no telão & RN03, RN04 & UC06, UC07 & RF07, RF08, RF10 \\
     \bottomrule
   \end{tabularx}%
 }{%
