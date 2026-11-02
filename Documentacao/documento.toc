@@ -19,7 +19,7 @@
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{Contexto do Projeto}}{20}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Cenário}{21}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Público-Alvo}{21}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Público-Alvo}{22}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Necessidades Identificadas}{22}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Regras de Negócio}{23}{section.2.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
@@ -61,14 +61,14 @@
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {A}\MakeTextUppercase []{Especificação XML do Diagrama de Componentes no UMLet}}{51}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {A}\MakeTextUppercase []{Especificação XML do Diagrama de Componentes no UMLet}}{52}{appendix.A}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {B}\MakeTextUppercase []{Trechos de Código-Fonte do MVP (Electron e Validação da Fila)}}{52}{appendix.B}%
+\contentsline {appendix}{\chapternumberline {B}\MakeTextUppercase []{Trechos de Código-Fonte do MVP (Electron e Validação da Fila)}}{53}{appendix.B}%
 \cftinsert {AAA}
 \renewcommand *{\cftappendixname }{ANEXO \space }
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {A}\MakeTextUppercase []{Referência Normativa -- Art. 6{\textordmasculine } da Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine } 13.709/2018)}}{54}{appendix.anexochapback.1}%
+\contentsline {appendix}{\chapternumberline {A}\MakeTextUppercase []{Referência Normativa -- Art. 6{\textordmasculine } da Lei Geral de Proteção de Dados Pessoais (Lei n{\textordmasculine } 13.709/2018)}}{55}{appendix.anexochapback.1}%

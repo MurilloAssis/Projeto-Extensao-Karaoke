@@ -1,10 +1,12 @@
 \chapter{Contexto do Projeto} \label{cap:contexto}
 
-Este capítulo apresenta o contexto real no qual o projeto \textbf{Karaokê Apache} está inserido, incluindo um estudo sobre o segmento de bares com entretenimento musical, índices de digitalização de micro e pequenas empresas no Brasil, análise de ferramentas concorrentes, caracterização do cenário do estabelecimento parceiro, público-alvo, necessidades identificadas e regras de negócio do domínio.
+Este capítulo apresenta o contexto real no qual o projeto \textbf{Karaokê Apache} está inserido, englobando um estudo sobre o segmento de bares com entretenimento musical, os índices de digitalização de micro e pequenas empresas (MPEs) no Brasil e uma análise crítica das ferramentas concorrentes. Além disso, detalha a caracterização do estabelecimento parceiro, o Apache Gru Rock Bar, seu público-alvo, as necessidades operacionais identificadas e as regras de negócio intrínsecas ao domínio.
 
-No panorama nacional de hospitalidade e entretenimento noturno, a adoção de tecnologias de autoatendimento e automação operacional tornou-se um diferencial competitivo decisivo \cite{laudon2022,obrien2013}. Estudos setoriais demonstram que micro e pequenas empresas (MPMEs) enfrentam forte pressão sobre suas margens operacionais e frequentemente operam com equipes reduzidas, nas quais um mesmo colaborador acumula múltiplas funções durante o atendimento noturno \cite{sebrae2024,contasimples2025}. Quando atividades de entretenimento -- como noites de karaokê -- dependem de controles manuais em papel, o gargalo operacional transfere-se diretamente para a experiência do cliente, gerando filas no balcão, atrasos entre uma apresentação e outra e percepção de desorganização.
+Estudos setoriais demonstram empresas da subclasse "Bares e outros estabelecimentos especializados em servir bebidas, com entretenimento", enfrentam forte pressão sobre suas margens operacionais e frequentemente operam com equipes reduzidas, nas quais um mesmo colaborador acumula múltiplas funções durante o atendimento noturno, com uma média de 2 empregados por empresa numa visão nacional \cite{sebrae2026observatorio}. Nesse cenário, quando atividades de entretenimento — como noites de karaokê — dependem de controles manuais baseados em anotações de papel e chamados em voz alta, o gargalo operacional transfere-se diretamente para a jornada do consumidor (Customer Experience). A falta de automação gera filas de espera no balcão, atrasos na transição entre apresentações, sobrecarga da equipe e uma percepção geral de desorganização no ambiente.
 
 Por outro lado, a análise do mercado de softwares comerciais de karaokê para estabelecimentos revela que as principais soluções globais possuem custo proibitivo ou baixa aderência ao repertório de bares de rock brasileiros. Plataformas internacionais como o \textbf{Singa Business} \cite{singa2026} e o \textbf{KaraFun Business} \cite{karafun2026} cobram mensalidades em moeda estrangeira (entre US\$ 49,00 e US\$ 149,00 mensais) e restringem a reprodução aos seus catálogos licenciados fechados, impedindo o uso de versões específicas de karaokê disponíveis gratuitamente no YouTube. Já soluções nacionais de \textit{jukebox} digital, como o \textbf{Juks} \cite{juks2026}, destinam-se apenas à música ambiente de fundo, não oferecendo gestão de fila de cantores no palco nem reprodutor dedicado para telão. A Tabela \ref{tab:concorrencia} sintetiza o estudo comparativo de mercado realizado pela equipe.
+
+Apesar das barreiras técnicas, o Indicador de Maturidade Digital de Pequenos Negócios aponta um forte apetite dos empresários para modernizarem suas operações, registrando um aumento de 10\% na busca por digitalização em relação a 2024, especialmente na faixa de negócios emergentes \cite{sebraeimd2026}. É neste hiato que o projeto se posiciona. Ao propor o uso de uma aplicação desktop em Electron para emular um navegador com a conta autenticada do YouTube Premium, o sistema contorna as restrições técnicas da mídia de forma inovadora. Paralelamente, orquestra o atendimento descentralizando o controle dos pedidos, permitindo que os clientes entrem na sessão de karaokê através da leitura de um QR Code em seus próprios celulares. A Tabela \ref{tab:concorrencia} sintetiza o estudo comparativo de mercado, evidenciando como a proposta tecnológica soluciona a dor negocial.
 
 \begin{table}[H]
 \IBGEtab{%
@@ -34,7 +36,7 @@ Por outro lado, a análise do mercado de softwares comerciais de karaokê para e
 
 O parceiro demandante do projeto é o estabelecimento comercial \textbf{Apache Gru Rock Bar}, registrado sob a razão social \texttt{APACHE GRU ROCK BAR LTDA - ME} e inscrito no CNPJ sob o n{\textordmasculine} \texttt{64.687.141/0001-07} \cite{serasa2026}. O bar está sediado na Rua Torres Tibagy, n{\textordmasculine} 58, no bairro Gopouva, região central do município de Guarulhos -- SP (CEP 07022-060) \cite{apacheinsta2026}.
 
-O estabelecimento atua no ramo de bares especializados em servir bebidas e petiscos com programação musical e cultural (CNAE 5611-2/05), destacando-se na cena rock de Guarulhos \cite{zinesick2026}. Semanalmente, às quintas-feiras (a partir das 19h, com entrada gratuita), o bar realiza a sua tradicional \textbf{Noite de Karaokê} \cite{apachekaraoke2026}. No cenário atual de operação do salão, é utilizado um projetor \textit{whitelabel} com conexão à internet, sendo diretamente por ele acessado o aplicativo do YouTube e colocados os vídeos manualmente a cada apresentação.
+O estabelecimento atua no ramo de bares especializados em servir bebidas e petiscos com programação musical e cultural (CNAE 5611-2/05), destacando-se na cena rock de Guarulhos \cite{listabaresderock2026}. Semanalmente, às quintas-feiras (a partir das 19h, com entrada gratuita), o bar realiza a sua tradicional \textbf{Noite de Karaokê} \cite{apachepostkaraoke2026}. No cenário atual de operação do salão, é utilizado um projetor \textit{whitelabel} com conexão à internet, sendo diretamente por ele acessado o aplicativo do YouTube e colocados os vídeos manualmente a cada apresentação.
 
 Dessa forma, a dinâmica da Noite de Karaokê ocorria de maneira inteiramente manual: os clientes precisavam solicitar suas músicas verbalmente ou em anotações de papel, e o organizador precisava digitar e pesquisar manualmente cada vídeo no YouTube diretamente pela interface do projetor \textit{whitelabel} conectado à internet, interrompendo a fluidez entre uma apresentação e outra e dificultando o controle da fila de espera.
 
@@ -44,7 +46,7 @@ O projeto atende diretamente três perfis de público-alvo envolvidos na operaç
 
 \begin{enumerate}
   \item \textbf{Frequentadores e Cantores Amadores (Clientes do Bar):} jovens e adultos frequentadores do Apache Gru Rock Bar que comparecem individualmente ou em grupos de amigos. Possuem familiaridade cotidiana com smartphones e aplicativos web, mas buscam uma interação rápida e intuitiva em ambiente noturno (baixa luminosidade), sem desejar baixar aplicativos pesados apenas para pedir uma música;
-  \item \textbf{Organizador / Operador de Palco e Som (Administrador Operacional):} colaborador responsável por conduzir a noite de karaokê, chamar o próximo cantor no microfone, controlar o equipamento de áudio e garantir que o telão exiba continuamente a música correta sem interrupções técnicas;
+  \item \textbf{Organizador / Operador de Palco e Som (Administrador Operacional):} colaborador responsável por conduzir a noite de karaokê, que atualmente chama o próximo cantor no microfone, controla o equipamento de áudio e garante que o telão exiba continuamente a música correta sem interrupções técnicas;
   \item \textbf{Gestores e Proprietários do Estabelecimento:} responsáveis pela administração do Apache Gru Rock Bar, interessados em aumentar a satisfação e o tempo de permanência dos clientes no salão, reduzir a sobrecarga da equipe de atendimento e conhecer o repertório mais popular entre seus frequentadores.
 \end{enumerate}
 
@@ -55,13 +57,13 @@ A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das 
 \begin{itemize}
   \item \textbf{N01 -- Autonomia para escolha de vídeos pelo próprio sistema:} necessidade de permitir que o cliente acesse a plataforma via QR Code exibido no telão e escolha o vídeo musical desejado diretamente pelo próprio sistema em seu celular, eliminando o uso de fichas de papel;
   \item \textbf{N02 -- Transparência e previsibilidade na fila de espera:} necessidade de dar visibilidade pública e em tempo real para todos os participantes sobre qual música está tocando no momento, quantas pessoas estão na fila e qual é a ordem das próximas apresentações;
-  \item \textbf{N03 -- Prevenção de repetições e garantia de rotatividade justa:} necessidade de evitar que uma mesma canção seja cantada repetidas vezes em curto espaço de tempo ou que um único participante monopolize a fila;
+  \item \textbf{N03 -- Prevenção de repetições e garantia de rotatividade justa:} necessidade de evitar que um único participante monopolize a fila com múltiplos pedidos e permitir a entrada de novas pessoas na noite sem obstáculos;
   \item \textbf{N04 -- Automação e limpeza visual da reprodução no telão:} necessidade de substituir a busca manual direta no projetor \textit{whitelabel} por um reprodutor dedicado controlado remotamente, garantindo que o avanço da fila acione automaticamente o vídeo em tela cheia no telão sem expor telas de busca ou menus intermediários.
 \end{itemize}
 
 \section{Regras de Negócio}
 
-Para atender às necessidades identificadas respeitando as políticas operacionais do estabelecimento, foram estabelecidas cinco Regras de Negócio (RN00 a RN04) em nível conceitual, documentadas na planilha de engenharia do projeto (\textit{Regras de Negócio | Requisitos -- Separados por Componentes}) e descritas na Tabela \ref{tab:regras_negocio}.
+Para atender às necessidades identificadas respeitando as políticas operacionais do estabelecimento, foram estabelecidas quatro Regras de Negócio (RN00 a RN03) em nível conceitual, documentadas na planilha de engenharia do projeto (\textit{Regras de Negócio | Requisitos -- Separados por Componentes}) e descritas na Tabela \ref{tab:regras_negocio}.
 
 \begin{table}[H]
 \IBGEtab{%
@@ -75,13 +77,11 @@ Para atender às necessidades identificadas respeitando as políticas operaciona
     \midrule
     RN00 & Validação de Disponibilidade da Música & Toda solicitação musical deve referenciar um item disponível no catálogo ou uma fonte audiovisual válida e ativa antes de ingressar na fila de apresentações. \\
     \addlinespace
-    RN01 & Proibição de Música Duplicada na Fila Ativa & Uma música que já se encontra aguardando execução na fila ativa ou que está sendo reproduzida no momento não pode ser novamente inserida na fila até a conclusão de sua execução atual. \\
+    RN01 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente autenticado possui um limite configurável de pedidos ativos simultâneos na fila (padrão de 1 a 2 músicas pendentes por vez). \\
     \addlinespace
-    RN02 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente autenticado possui um limite configurável de pedidos ativos simultâneos na fila (padrão de 1 a 2 músicas pendentes por vez). \\
+    RN02 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, avanço para a próxima faixa, reordenação excepcional por ausência do cantor e remoção de itens da fila são prerrogativas exclusivas do organizador (Administrador). \\
     \addlinespace
-    RN03 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, avanço para a próxima faixa, reordenação excepcional por ausência do cantor e remoção de itens da fila são prerrogativas exclusivas do organizador (Administrador). \\
-    \addlinespace
-    RN04 & Ciclo de Vida e Rastreabilidade do Pedido & Todo pedido aceito percorre um fluxo controlado de estados (\textit{Na Fila}, \textit{Reproduzindo}, \textit{Concluído} ou \textit{Cancelado}), mantendo o registro do solicitante e do horário para controle da sessão. \\
+    RN03 & Ciclo de Vida e Rastreabilidade do Pedido & Todo pedido aceito percorre um fluxo controlado de estados (\textit{Na Fila}, \textit{Reproduzindo}, \textit{Concluído} ou \textit{Cancelado}), mantendo o registro do solicitante e do horário para controle da sessão. \\
     \bottomrule
   \end{tabularx}%
 }{%
@@ -94,7 +94,7 @@ O Quadro \ref{quad:atividades} apresenta o \textbf{Diagrama de Atividades UML} q
 \Needspace{20cm}
 \begin{caixa}{Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}{quad:atividades}
 \begin{center}
-  \includegraphics[width=0.95\textwidth,height=0.78\textheight,keepaspectratio]{imagens/diagrama_atividades.png}
+  \includegraphics[width=0.95\textwidth,height=0.78\textheight,keepaspectratio]{imagens/diagrama_atividades.jpeg}
 \end{center}
 \legend{Fonte: Elaborado pelos autores (2026).}
 \end{caixa}

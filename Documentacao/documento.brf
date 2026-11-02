@@ -1,16 +1,14 @@
 \backcite {contasimples2025}{{17}{1.3}{section.1.3}}
 \backcite {sebrae2024}{{18}{1.3}{section.1.3}}
-\backcite {laudon2022,obrien2013}{{20}{2}{chapter.2}}
-\backcite {laudon2022,obrien2013}{{20}{2}{chapter.2}}
-\backcite {sebrae2024,contasimples2025}{{20}{2}{chapter.2}}
-\backcite {sebrae2024,contasimples2025}{{20}{2}{chapter.2}}
+\backcite {sebrae2026observatorio}{{20}{2}{chapter.2}}
 \backcite {singa2026}{{20}{2}{chapter.2}}
 \backcite {karafun2026}{{20}{2}{chapter.2}}
 \backcite {juks2026}{{20}{2}{chapter.2}}
+\backcite {sebraeimd2026}{{20}{2}{chapter.2}}
 \backcite {serasa2026}{{21}{2.1}{section.2.1}}
 \backcite {apacheinsta2026}{{21}{2.1}{section.2.1}}
-\backcite {zinesick2026}{{21}{2.1}{section.2.1}}
-\backcite {apachekaraoke2026}{{21}{2.1}{section.2.1}}
+\backcite {listabaresderock2026}{{21}{2.1}{section.2.1}}
+\backcite {apachepostkaraoke2026}{{21}{2.1}{section.2.1}}
 \backcite {brasil2018lgpd}{{32}{3.7}{section.3.7}}
 \backcite {sommerville2019}{{33}{4.1}{section.4.1}}
 \backcite {fowler2006}{{33}{4.1}{section.4.1}}
@@ -18,4 +16,4 @@
 \backcite {react2025}{{40}{9}{table.caption.29}}
 \backcite {electron2025}{{40}{9}{table.caption.29}}
 \backcite {brasil2018lgpd}{{40}{4.7}{section.4.7}}
-\backcite {brasil2018lgpd}{{54}{A}{appendix.anexochapback.1}}
+\backcite {brasil2018lgpd}{{55}{A}{appendix.anexochapback.1}}
