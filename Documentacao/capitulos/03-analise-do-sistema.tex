@@ -9,7 +9,7 @@ O sistema \textbf{Karaokê Apache} foi concebido como uma plataforma distribuíd
 Utilizando a abordagem de \textit{Feature-Driven Development} (FDD) adotada pela equipe na fase de análise, as capacidades macroscópicas do sistema organizam-se em três grandes funcionalidades (\textit{Features}) centrais:
 
 \begin{itemize}
-  \item \textbf{FT-001 -- Solicitar música para a fila do karaokê:} permite ao participante autenticado pesquisar e escolher um vídeo musical diretamente pelo próprio sistema, passando pelas validações automáticas de disponibilidade e anti-duplicidade (RN00, RN01 e RN02);
+  \item \textbf{FT-001 -- Solicitar música para a fila do karaokê:} permite ao participante identificado (como visitante ou com conta) pesquisar e escolher um vídeo musical diretamente pelo próprio sistema, passando pelas validações automáticas de disponibilidade e anti-duplicidade (RN00, RN01 e RN02);
   \item \textbf{FT-002 -- Gerenciar e moderar a fila de reprodução:} permite ao organizador visualizar a fila ordenada por chegada (FIFO), iniciar a reprodução do primeiro item, avançar para a próxima música ou remover pedidos inválidos (RN03 e RN04);
   \item \textbf{FT-003 -- Sincronizar e reproduzir faixa no telão:} atualiza instantaneamente o estado da música ativa para que o reprodutor desktop dedicado renderize o vídeo correspondente em tela cheia na TV do bar.
 \end{itemize}
@@ -28,7 +28,7 @@ Foram identificados três atores que interagem diretamente com as fronteiras do 
     \toprule
     \textbf{Ator} & \textbf{Tipo de Ator} & \textbf{Papel e Interações com o Sistema} \\
     \midrule
-    \textbf{Cliente (Cantor)} & Humano (Primário) & Frequentador do Apache Gru Rock Bar que acessa a interface móvel via QR Code no telão para se identificar, pesquisar e escolher vídeos pelo sistema, adicionar pedidos à fila e consultar sua posição de espera. \\
+    \textbf{Cliente (Cantor)} & Humano (Primário) & Frequentador do Apache Gru Rock Bar que acessa a interface móvel via QR Code no telão para se identificar (informando apenas um nome ou, opcionalmente, fazendo login), pesquisar e escolher vídeos pelo sistema, adicionar pedidos à fila e consultar sua posição de espera. \\
     \addlinespace
     \textbf{Administrador (Organizador)} & Humano (Primário) & Operador responsável pela condução da Noite de Karaokê. Possui permissão exclusiva para iniciar faixas, avançar para a próxima música, remover itens, limpar a fila e gerenciar o catálogo. \\
     \addlinespace
@@ -63,7 +63,7 @@ A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC
     \toprule
     \textbf{Código} & \textbf{Nome do Caso de Uso} & \textbf{Atores} & \textbf{Resumo do Fluxo Principal e Comportamento Esperado} \\
     \midrule
-    UC01 & Autenticar / Cadastrar Usuário & Cliente, Administrador & O usuário informa suas credenciais (ou realiza cadastro rápido com nome e e-mail) para acessar as funcionalidades correspondentes ao seu perfil. \\
+    UC01 & Identificar-se / Autenticar & Cliente, Administrador & O cliente pode entrar como visitante, informando apenas o nome usado na chamada ao palco, ou, opcionalmente, fazer login ou criar uma conta com nome, e-mail e senha. O administrador sempre se autentica com e-mail e senha para acessar as funções do seu perfil. \\
     \addlinespace
     UC02 & Pesquisar e Escolher Vídeo no Sistema & Cliente, Administrador & O ator pesquisa vídeos de karaokê disponíveis por título ou artista diretamente na interface do próprio sistema. \\
     \addlinespace
@@ -92,7 +92,7 @@ O modelo conceitual do domínio foi originalmente construído pela equipe na fer
 O domínio é estruturado em torno de quatro conceitos essenciais, independentes de decisões de implementação:
 
 \begin{itemize}
-  \item \textbf{\texttt{Usuario} (com generalização/especialização em \texttt{Admin} e \texttt{Cliente}):} representa qualquer pessoa cadastrada que interage com o sistema, contendo os atributos conceituais \texttt{nome}, \texttt{email} e \texttt{senha}. A especialização distingue o \texttt{Cliente} (autor dos pedidos musicais) do \texttt{Admin} (responsável pela moderação);
+  \item \textbf{\texttt{Usuario} (com generalização/especialização em \texttt{Admin} e \texttt{Cliente}):} representa qualquer pessoa que interage com o sistema, contendo os atributos conceituais \texttt{nome}, \texttt{email} e \texttt{senha}; o cliente que entra como visitante informa apenas o \texttt{nome}, e \texttt{email} e \texttt{senha} existem somente para quem possui conta. A especialização distingue o \texttt{Cliente} (autor dos pedidos musicais) do \texttt{Admin} (responsável pela moderação);
   \item \textbf{\texttt{Musica}:} representa a obra musical disponível para interpretação no karaokê, caracterizada por \texttt{titulo}, \texttt{artista}, \texttt{url\_video} e estado de disponibilidade (\texttt{disponivel});
   \item \textbf{\texttt{Letra}:} representa o texto da canção (\texttt{conteudo\_letra}, \texttt{idioma}) vinculado à classe \texttt{Musica} pela associação \textit{Possui} com multiplicidade $1$ para $0..*$ (estrutura de dados já prevista no modelo para suportar a funcionalidade de letras na próxima etapa evolutiva do projeto);
   \item \textbf{\texttt{Fila} (Classe Associativa \texttt{Adiciona}):} materializa o vínculo temporal e ordenado entre um \texttt{Cliente} ($0..*$) e uma \texttt{Musica} ($0..*$), registrando a \texttt{posicao} na fila, o \texttt{status} do pedido e a data/hora da solicitação (\texttt{dt\_pedido}).
@@ -122,7 +122,7 @@ A Tabela \ref{tab:requisitos_funcionais} especifica de forma objetiva os Requisi
     \toprule
     \textbf{Código} & \textbf{Requisito Funcional} & \textbf{Descrição do Comportamento} & \textbf{Prioridade} \\
     \midrule
-    RF01 & Cadastro e Autenticação de Usuário & Permitir o cadastro e login de usuários diferenciando os perfis de acesso \textit{Cliente} e \textit{Administrador}. & Média \\
+    RF01 & Identificação e Autenticação de Usuário & Permitir que o cliente use o sistema como visitante, informando apenas um nome, ou, opcionalmente, com cadastro e login; exigir login com e-mail e senha para o perfil \textit{Administrador}. & Média \\
     \addlinespace
     RF02 & Pesquisa de Vídeos no Próprio Sistema & Permitir que o usuário pesquise vídeos de karaokê por título, música ou artista diretamente na interface do sistema. & Alta \\
     \addlinespace
@@ -174,7 +174,7 @@ A Tabela \ref{tab:requisitos_nao_funcionais} apresenta os Requisitos Não Funcio
     \addlinespace
     RNF04 & Segurança & Isolamento de Contexto no Electron & O reprodutor desktop deve executar com isolamento de contexto ativo e sem exposição direta de APIs críticas do sistema operacional a scripts remotos. \\
     \addlinespace
-    RNF05 & Segurança & Proteção de Credenciais e Sessão & As senhas devem ser armazenadas sob hash criptográfico (Bcrypt) e as rotas administrativas protegidas por controle de perfil. \\
+    RNF05 & Segurança & Proteção de Credenciais e Sessão & As senhas das contas devem ser armazenadas sob hash criptográfico (Bcrypt) e as rotas administrativas protegidas por controle de perfil. \\
     \addlinespace
     RNF06 & Confiabilidade & Consistência de Estado da Fila & A API em Java 21 com Spring Boot e o banco de dados MySQL devem garantir integridade transacional na ordenação e transição de status dos pedidos. \\
     \addlinespace

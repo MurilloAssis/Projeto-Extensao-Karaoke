@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.25)  1 NOV 2026 21:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.25)  1 NOV 2026 21:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2506,94 +2506,106 @@ e 24.
 (pdftex.def)             Requested size: 400.40222pt x 324.20905pt.
  [35 <./imagens/diagrama_de_componentes.png>] [36] [37]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 145.
+(Font)              <10.95> on input line 146.
 
-Overfull \hbox (4.64174pt too wide) in paragraph at lines 191--191
-[]|\T1/pcr/m/n/10 ENUM('cliente',  
+Underfull \hbox (badness 2837) in paragraph at lines 192--192
+[]|\T1/lmr/m/n/10 (+20) Senha crip-to-gra-fada (\T1/lmr/m/it/10 (+20) bcrypt\T1
+/lmr/m/n/10 (+20) );
  []
 
 
-Overfull \hbox (4.64174pt too wide) in paragraph at lines 191--191
+Overfull \hbox (16.64174pt too wide) in paragraph at lines 192--192
+[]|\T1/pcr/m/n/10 ENUM('visitante',  
+ []
+
+
+Overfull \hbox (4.64174pt too wide) in paragraph at lines 192--192
 []|\T1/pcr/m/n/10 ENUM('na_fila',  
  []
 
 
-Overfull \hbox (2.84174pt too wide) in paragraph at lines 191--191
+Overfull \hbox (2.84174pt too wide) in paragraph at lines 192--192
 \T1/pcr/m/n/10 'reproduzindo',  
  []
 
 
-Overfull \hbox (5.26082pt too wide) in paragraph at lines 191--191
+Overfull \hbox (5.26082pt too wide) in paragraph at lines 192--192
 \T1/pcr/m/n/10 CURRENT_TIMESTAMP|  
  []
 
 
-Overfull \hbox (4.64174pt too wide) in paragraph at lines 191--191
-[]|\T1/pcr/m/n/10 ENUM('cliente',  
+Underfull \hbox (badness 2837) in paragraph at lines 192--192
+[]|\T1/lmr/m/n/10 (+20) Senha crip-to-gra-fada (\T1/lmr/m/it/10 (+20) bcrypt\T1
+/lmr/m/n/10 (+20) );
  []
 
 
-Overfull \hbox (4.64174pt too wide) in paragraph at lines 191--191
+Overfull \hbox (16.64174pt too wide) in paragraph at lines 192--192
+[]|\T1/pcr/m/n/10 ENUM('visitante',  
+ []
+
+
+Overfull \hbox (4.64174pt too wide) in paragraph at lines 192--192
 []|\T1/pcr/m/n/10 ENUM('na_fila',  
  []
 
 
-Overfull \hbox (2.84174pt too wide) in paragraph at lines 191--191
+Overfull \hbox (2.84174pt too wide) in paragraph at lines 192--192
 \T1/pcr/m/n/10 'reproduzindo',  
  []
 
 
-Overfull \hbox (5.26082pt too wide) in paragraph at lines 191--191
+Overfull \hbox (5.26082pt too wide) in paragraph at lines 192--192
 \T1/pcr/m/n/10 CURRENT_TIMESTAMP|  
  []
 
 [38] [39] [40] [41] [42] [43] [44] [45]
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) Aplicação Desk-top
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) Comunicação em
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) WebSocket ([][]\T1/lmr/m/n/8 (+20) FETTE;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 \T1/lmr/m/n/8 (+20) MEL-NI-KOV[][]\T1/lmr/m/n/10 (+20) , [][]2011[][][])
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) brModelo, UM-Let
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) Aplicação Desk-top
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) Comunicação em
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) WebSocket ([][]\T1/lmr/m/n/8 (+20) FETTE;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 \T1/lmr/m/n/8 (+20) MEL-NI-KOV[][]\T1/lmr/m/n/10 (+20) , [][]2011[][][])
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--459
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) brModelo, UM-Let
  []
 
@@ -2601,7 +2613,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 459--459
 <imagens/diagrama_estados.png, id=638, 1378.14874pt x 1718.42pt>
 File: imagens/diagrama_estados.png Graphic file (type png)
 <use imagens/diagrama_estados.png>
-Package pdftex.def Info: imagens/diagrama_estados.png  used on input line 480.
+Package pdftex.def Info: imagens/diagrama_estados.png  used on input line 483.
 (pdftex.def)             Requested size: 442.88817pt x 552.2393pt.
 ) (capitulos/05-implementacao.tex [49 <./imagens/diagrama_estados.png>]
 Cap\'{\i }tulo 5.
@@ -2661,14 +2673,14 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `documento.brf' has not changed.
-(rerunfilecheck)             Checksum: 4B5E31AD5806CE827513A0EA13EE6A80;2021.
+(rerunfilecheck)             Checksum: 965016975C77C51F6E5229B9C85F17DD;2021.
  ) 
 Here is how much of TeX's memory you used:
- 46412 strings out of 467871
- 937367 string characters out of 5417407
- 1565772 words of memory out of 5000000
- 73779 multiletter control sequences out of 15000+600000
- 743879 words of font info for 326 fonts, out of 8000000 for 9000
+ 46413 strings out of 467871
+ 937376 string characters out of 5417407
+ 1567114 words of memory out of 5000000
+ 73778 multiletter control sequences out of 15000+600000
+ 744024 words of font info for 327 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,18n,134p,1823b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.
@@ -2692,7 +2704,7 @@ public/lm/lmri8.pfb><C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/type1
 pe1/public/lm/lmsy8.pfb><C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/urw/courier/ucrb8a.pfb><C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fon
 ts/type1/urw/courier/ucrr8a.pfb>
-Output written on documento.pdf (62 pages, 1382188 bytes).
+Output written on documento.pdf (62 pages, 1384234 bytes).
 PDF statistics:
  1094 PDF objects out of 1200 (max. 8388607)
  202 named destinations out of 1000 (max. 500000)

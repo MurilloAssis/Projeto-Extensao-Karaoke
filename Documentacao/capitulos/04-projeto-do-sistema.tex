@@ -9,7 +9,7 @@ A solução \textbf{Karaokê Apache} é estruturada em quatro subsistemas: \text
 A organização segue o estilo cliente-servidor descrito por Sommerville \cite{sommerville2019}: as interfaces web e o Electron são clientes que acessam serviços oferecidos por um servidor central, a API Orquestradora. Nessa API, as regras de negócio ficam concentradas em uma camada de serviço, no sentido do padrão \textit{Service Layer} de Fowler \cite{fowler2006}, de modo que nenhum cliente acessa o banco de dados diretamente. A divisão resultante separa duas responsabilidades:
 
 \begin{itemize}
-  \item \textbf{Gestão do karaokê (subsistemas web e API):} \textbf{Cliente Web}, \textbf{Admin Web} e \textbf{API Orquestradora} reúnem o que envolve a interação das pessoas com o sistema: o cadastro e a autenticação de usuários, a pesquisa e o pedido de músicas e o gerenciamento da fila (ordenação, remoção, limpeza e definição da faixa ativa). A API, apoiada pelo banco de dados relacional, mantém o estado oficial da fila;
+  \item \textbf{Gestão do karaokê (subsistemas web e API):} \textbf{Cliente Web}, \textbf{Admin Web} e \textbf{API Orquestradora} reúnem o que envolve a interação das pessoas com o sistema: a identificação dos clientes (como visitantes ou com conta) e a autenticação do administrador, a pesquisa e o pedido de músicas e o gerenciamento da fila (ordenação, remoção, limpeza e definição da faixa ativa). A API, apoiada pelo banco de dados relacional, mantém o estado oficial da fila;
   \item \textbf{Reprodução no telão (subsistema Electron):} o aplicativo desktop \textbf{Karaokê TV Player} é responsável por \textbf{buscar as músicas que estão na fila} e \textbf{reproduzi-las} na TV do bar. Ele não realiza cadastros, não registra pedidos e não decide a ordem da fila. Sua única informação de retorno é o aviso de término do vídeo, a partir do qual a API conclui o pedido e promove o próximo item (RN04).
 \end{itemize}
 
@@ -40,7 +40,7 @@ Seguindo a orientação de Pressman e Maxim \cite{pressman2016} para o projeto e
     \toprule
     \textbf{Subsistema} & \textbf{Componentes} & \textbf{Papel na Arquitetura} \\
     \midrule
-    \textbf{Cliente Web} & \texttt{Usuários}, \texttt{Pedido de Música}, \texttt{Fila} (consulta) & Interface do frequentador: cadastro e login, busca e pedido de músicas e acompanhamento da sua posição na fila. \\
+    \textbf{Cliente Web} & \texttt{Usuários}, \texttt{Pedido de Música}, \texttt{Fila} (consulta) & Interface do frequentador: identificação como visitante (login opcional), busca e pedido de músicas e acompanhamento da sua posição na fila. \\
     \addlinespace
     \textbf{Admin Web} & \texttt{Usuários}, \texttt{Fila} (gerenciamento) & Interface do organizador do palco: autenticação como \texttt{admin} e gerenciamento da fila (\textit{Play}, \textit{Próxima}, \textit{Remover} e \textit{Limpar}). \\
     \addlinespace
@@ -66,7 +66,7 @@ A Tabela \ref{tab:componentes_uml} detalha as responsabilidades de cada componen
     \toprule
     \textbf{Componente} & \textbf{Interfaces (Fornecidas / Requeridas)} & \textbf{Estrutura Interna e Responsabilidades} \\
     \midrule
-    \texttt{Usuários} \newline (Web + API) & Fornece: \texttt{IAutenticacao}, \texttt{IPerfilUsuario} & Responsável pelo cadastro, autenticação e diferenciação de permissões entre os papéis \texttt{cliente} (frequentador da mesa) e \texttt{admin} (organizador do palco). \\
+    \texttt{Usuários} \newline (Web + API) & Fornece: \texttt{IAutenticacao}, \texttt{IPerfilUsuario} & Responsável pela identificação dos clientes como visitantes (apenas com o nome), pelo cadastro e autenticação de contas e pela diferenciação de permissões entre os papéis \texttt{visitante} e \texttt{cliente} (frequentador da mesa) e \texttt{admin} (organizador do palco). \\
     \addlinespace
     \texttt{Pedido de Música} \newline (Web + API) & Requer: \texttt{IAutenticacao}, \texttt{IBuscaVideos} (externa); Fornece: \texttt{IPedidoMusica} & Responsável pela pesquisa e escolha de vídeos musicais diretamente pelo sistema (RF02, RF03), pela identificação do vídeo selecionado e pela validação de disponibilidade (RN00). A pesquisa é feita pela API, que consulta a \textit{YouTube Data API v3} por meio de \texttt{IBuscaVideos}. \\
     \addlinespace
@@ -100,10 +100,11 @@ O projeto de dados converte o modelo conceitual em uma estrutura relacional na t
   \umlclass[x=0,y=0]{UsuarioModel}{
     - id\_usuario : int \{PK\} \\
     - nome : varchar(120) \\
-    - email : varchar(150) \{UNIQUE\} \\
-    - senha\_hash : varchar(255) \\
-    - tipo\_perfil : enum(`cliente',`admin')
+    - email : varchar(150) \{UNIQUE, NULL\} \\
+    - senha\_hash : varchar(255) \{NULL\} \\
+    - tipo\_perfil : enum(`visitante',`cliente',`admin')
   }{
+    + identificarVisitante(nome) : TokenJWT \\
     + autenticar(email, senha) : TokenJWT \\
     + isAdmin() : boolean
   }
@@ -159,10 +160,10 @@ O projeto de dados converte o modelo conceitual em uma estrutura relacional na t
     \midrule
     \multicolumn{4}{l}{\textbf{Tabela \texttt{usuario}}} \\
     \texttt{id\_usuario} & \texttt{INT} & \texttt{PK}, \texttt{AI} & Chave primária do usuário. \\
-    \texttt{nome} & \texttt{VARCHAR(120)} & \texttt{NOT NULL} & Nome do participante ou operador. \\
-    \texttt{email} & \texttt{VARCHAR(150)} & \texttt{NOT NULL}, \texttt{UNIQUE} & E-mail de login do usuário. \\
-    \texttt{senha\_hash} & \texttt{VARCHAR(255)} & \texttt{NOT NULL} & Senha criptografada (\textit{bcrypt}). \\
-    \texttt{tipo\_perfil} & \texttt{ENUM('cliente',} \newline \texttt{'admin')} & \texttt{NOT NULL}, \newline \texttt{DEFAULT 'cliente'} & Perfil de permissão no sistema. \\
+    \texttt{nome} & \texttt{VARCHAR(120)} & \texttt{NOT NULL} & Nome do participante (usado na chamada ao palco) ou do operador. \\
+    \texttt{email} & \texttt{VARCHAR(150)} & \texttt{NULL}, \texttt{UNIQUE} & E-mail de login; preenchido apenas para quem possui conta. \\
+    \texttt{senha\_hash} & \texttt{VARCHAR(255)} & \texttt{NULL} & Senha criptografada (\textit{bcrypt}); preenchida apenas para quem possui conta. \\
+    \texttt{tipo\_perfil} & \texttt{ENUM('visitante',} \newline \texttt{'cliente',} \newline \texttt{'admin')} & \texttt{NOT NULL}, \newline \texttt{DEFAULT} \newline \texttt{'visitante'} & Perfil de permissão no sistema. \\
     \midrule
     \multicolumn{4}{l}{\textbf{Tabela \texttt{musica}}} \\
     \texttt{id\_musica} & \texttt{INT} & \texttt{PK}, \texttt{AI} & Identificador único da música. \\
@@ -195,6 +196,7 @@ As decisões de projeto refletidas no modelo são as seguintes:
 
 \begin{itemize}
   \item \textbf{Normalização:} cada atributo não chave depende apenas da chave da sua tabela. Por isso, a tabela \texttt{fila} não repete o identificador nem o título do vídeo, que pertencem à música e são obtidos pela chave estrangeira \texttt{id\_musica}. Pelo mesmo motivo, a URL do vídeo não é armazenada: ela é montada a partir de \texttt{youtube\_id} (\texttt{https://www.youtube.com/watch?v=} seguido do identificador);
+  \item \textbf{Identificação do cliente:} o login não é obrigatório para o cliente. Quem entra como visitante informa apenas o nome usado na chamada ao palco, e a API cria um registro em \texttt{usuario} com perfil \texttt{visitante}, sem e-mail e sem senha, e devolve um token JWT para a sessão. Quem prefere ter conta cadastra nome, e-mail e senha (perfil \texttt{cliente}). O perfil \texttt{admin} exige sempre e-mail e senha, regra verificada pela API. Como todo pedido fica vinculado a um registro de \texttt{usuario}, o limite de pedidos (RN02) vale igualmente para visitantes e clientes com conta;
   \item \textbf{Registro das músicas pedidas:} quando o cliente escolhe um vídeo na pesquisa, a API procura em \texttt{musica} um registro com o mesmo \texttt{youtube\_id}. Se ele não existir, a música é cadastrada automaticamente com o identificador e o título retornados pelo YouTube; em seguida, o pedido é inserido em \texttt{fila} referenciando esse registro. Assim, toda música pedida passa a fazer parte do catálogo local, o que também alimenta a consulta prévia ao catálogo descrita na Seção \ref{sec:projeto_componentes};
   \item \textbf{Ordem da fila (FIFO):} a ordem de chamada é a ordem de chegada dos pedidos, dada por \texttt{dt\_pedido} e, em caso de empate, por \texttt{id\_fila}. A posição de cada pedido não é armazenada: ela é calculada na consulta, entre os pedidos com status \texttt{na\_fila}. Um índice sobre (\texttt{status}, \texttt{dt\_pedido}) atende a essa consulta. O administrador não reordena a fila; quando um cantor está ausente, o pedido é removido (status \texttt{cancelado});
   \item \textbf{Regras verificadas pela API:} a RN01 (música repetida) e a RN02 (limite de pedidos) dependem de outros registros da tabela e, por isso, não são expressas como restrições do banco. Antes de inserir um pedido, a API verifica, na mesma transação, se já existe um pedido da mesma música com status \texttt{na\_fila} ou \texttt{reproduzindo} e se a quantidade de pedidos ativos do cliente (status \texttt{na\_fila} ou \texttt{reproduzindo}) está abaixo do limite da RN02. Esse limite é controlado pela própria API no momento da validação do pedido de música e, por isso, não é armazenado no banco de dados;
@@ -209,7 +211,7 @@ O projeto visual das interfaces priorizou a simplicidade de uso e o tema escuro 
 \begin{enumerate}
   \item \textbf{Cliente Web:} aplicação web responsiva, acessada pelo navegador do celular a partir do QR Code exibido no telão, sem instalação (RNF03). Reúne:
     \begin{itemize}
-      \item \textit{Login e cadastro:} acesso com e-mail e senha ou cadastro rápido com nome e e-mail (RF01);
+      \item \textit{Identificação:} o cliente entra como visitante informando apenas seu nome, usado na chamada ao palco; o login e o cadastro de conta, com e-mail e senha, são opcionais (RF01);
       \item \textit{Pesquisa e pedido:} campo de pesquisa e lista de resultados obtidos pela API, cada um com o botão \textbf{Adicionar} (RF02 a RF04);
       \item \textit{Acompanhamento:} música em reprodução e posição do pedido do cliente na fila (RF06);
       \item \textit{Alertas de validação:} mensagens exibidas quando um pedido é recusado, como música já presente na fila (RN01) ou limite de pedidos atingido (RN02), conforme o RF12.
@@ -235,17 +237,18 @@ A Figura \ref{fig:interfaces} apresenta o \textit{wireframe} dessas interfaces.
     btn/.style={font=\tiny\bfseries, text=white, fill=#1, rounded corners=2pt, inner sep=2.5pt},
     wft/.style={font=\scriptsize\bfseries, anchor=south}]
     % (a) Login
-    \node[wft] at (2.5,0.1) {(a) Login e cadastro};
+    \node[wft] at (2.5,0.1) {(a) Identificação};
     \draw[scr] (0,0) rectangle (5,-8.6);
     \node[hdr] at (0.3,-0.5) {Karaokê Apache};
     \node[sub] at (0.3,-0.9) {Peça sua música pelo celular};
-    \node[fld] at (0.3,-1.9) {E-mail};
-    \node[fld] at (0.3,-2.7) {Senha};
-    \node[btn=blue!60!black, minimum width=4.3cm] at (2.5,-3.6) {Entrar};
-    \node[sub] at (0.95,-4.3) {Não tem conta? \textcolor{blue!40}{Cadastre-se}};
-    \node[fld] at (0.3,-5.6) {Nome (cadastro rápido)};
-    \node[fld] at (0.3,-6.4) {E-mail};
-    \node[btn=gray!50!black, minimum width=4.3cm] at (2.5,-7.3) {Cadastrar};
+    \node[sub] at (0.3,-1.6) {Seu nome para o palco};
+    \node[fld, text=white] at (0.3,-2.2) {Ana};
+    \node[btn=blue!60!black, minimum width=4.3cm] at (2.5,-3.1) {Entrar como visitante};
+    \node[sub] at (2.05,-4.0) {ou, se preferir};
+    \node[fld] at (0.3,-4.8) {E-mail};
+    \node[fld] at (0.3,-5.6) {Senha};
+    \node[btn=gray!50!black, minimum width=4.3cm] at (2.5,-6.5) {Entrar com conta};
+    \node[sub] at (0.95,-7.3) {Não tem conta? \textcolor{blue!40}{Cadastre-se}};
     % (b) Cliente Web
     \node[wft] at (8,0.1) {(b) Cliente Web};
     \draw[scr] (5.5,0) rectangle (10.5,-8.6);
@@ -329,7 +332,7 @@ A Figura \ref{fig:interfaces} apresenta o \textit{wireframe} dessas interfaces.
 
 Os Diagramas de Sequência UML a seguir mostram como os subsistemas colaboram ao longo do tempo. O cenário foi dividido em dois diagramas, um para cada ator: o pedido de música feito pelo cliente (Figura \ref{fig:sequencia_pedido}) e o controle do palco feito pelo administrador, com a consequente reprodução no telão (Figura \ref{fig:sequencia_reproducao}).
 
-Em ambos, a comunicação segue duas regras. Os comandos (login, pesquisa, pedido e controle da fila) são requisições HTTP à API Orquestradora, sob o prefixo \texttt{/api}, e as requisições de usuários autenticados levam o token JWT obtido no login. As mudanças na fila são comunicadas pela API, por meio de \textbf{WebSocket} \cite{rfc6455} com o protocolo de mensagens \textbf{STOMP} \cite{stomp2012}, com o evento \texttt{fila-atualizada}, enviado a \textbf{todas as telas conectadas} (Cliente Web, Admin Web e Electron), e não apenas a quem fez a requisição. Esse envio imediato é o que permite atender ao RNF02 (atualização em menos de 2 segundos).
+Em ambos, a comunicação segue duas regras. Os comandos (identificação, pesquisa, pedido e controle da fila) são requisições HTTP à API Orquestradora, sob o prefixo \texttt{/api}, e as requisições de usuários identificados levam o token JWT obtido na identificação, seja como visitante, seja por login. As mudanças na fila são comunicadas pela API, por meio de \textbf{WebSocket} \cite{rfc6455} com o protocolo de mensagens \textbf{STOMP} \cite{stomp2012}, com o evento \texttt{fila-atualizada}, enviado a \textbf{todas as telas conectadas} (Cliente Web, Admin Web e Electron), e não apenas a quem fez a requisição. Esse envio imediato é o que permite atender ao RNF02 (atualização em menos de 2 segundos).
 
 \Needspace{24cm}
 \begin{figure}[H]
@@ -345,10 +348,10 @@ Em ambos, a comunicação segue duas regras. Os comandos (login, pesquisa, pedid
   \seqhead{13.2}{YouTube\\Data API v3}{-25.3}
   \seqhead{16.5}{Telas conectadas\\(WebSocket)}{-25.3}
   % Autenticação
-  \seqcall{0}{3.3}{-1.4}{1. Informa e-mail e senha}
-  \seqcall{3.3}{6.6}{-2.4}{2. POST /api/auth/login}
-  \seqcall{6.6}{9.9}{-3.4}{3. Busca usuário por e-mail}
-  \seqret{9.9}{6.6}{-4.4}{4. Usuário (senha\_hash, perfil)}
+  \seqcall{0}{3.3}{-1.4}{1. Informa o nome (ou e-mail e senha)}
+  \seqcall{3.3}{6.6}{-2.4}{2. POST /api/auth/visitante (ou /login)}
+  \seqcall{6.6}{9.9}{-3.4}{3. Cria visitante (ou busca a conta)}
+  \seqret{9.9}{6.6}{-4.4}{4. Usuário (id, perfil)}
   \seqret{6.6}{3.3}{-5.4}{5. 200 OK + token JWT}
   % Pesquisa
   \seqcall{0}{3.3}{-6.5}{6. Pesquisa música (termo)}
@@ -464,10 +467,10 @@ A seleção tecnológica do projeto priorizou ferramentas modernas, multiplatafo
 O projeto de segurança e controle de acesso do sistema contempla quatro camadas de proteção, alinhadas às boas práticas de desenvolvimento seguro e à Lei Geral de Proteção de Dados Pessoais -- LGPD (Lei n{\textordmasculine} 13.709/2018) \cite{brasil2018lgpd}:
 
 \begin{enumerate}
-  \item \textbf{Autenticação e Controle de Acesso Baseado em Papéis (RBAC):} distinção entre sessões de \texttt{cliente} (autorizadas apenas a consultar o catálogo/fila e submeter pedidos sob as regras RN00--RN02) e sessões de \texttt{admin} (autorizadas a controlar a reprodução do palco conforme a RN03), utilizando senhas com hash \texttt{bcrypt} e tokens JWT;
+  \item \textbf{Autenticação e Controle de Acesso Baseado em Papéis (RBAC):} distinção entre sessões de \texttt{visitante} e \texttt{cliente} (autorizadas apenas a consultar o catálogo/fila e submeter pedidos sob as regras RN00--RN02) e sessões de \texttt{admin} (autorizadas a controlar a reprodução do palco conforme a RN03), utilizando tokens JWT para todas as sessões e senhas com hash \texttt{bcrypt} para as contas. O login com e-mail e senha é obrigatório apenas para o perfil \texttt{admin};
   \item \textbf{Segurança no Processo Electron (\textit{Context Isolation} e CSP):} as duas visões da janela do \textit{Karaokê TV Player} são configuradas com \texttt{contextIsolation: true}, \texttt{nodeIntegration: false} e \texttt{sandbox: true}. A visão da interface própria do sistema aplica uma \textit{Content Security Policy} (CSP) que restringe a origem de scripts à aplicação local (\texttt{script-src}) e as conexões de rede à API Orquestradora (\texttt{connect-src}). A visão do vídeo carrega uma página externa do YouTube e, por isso, não recebe nenhum acesso privilegiado do Electron; sua navegação é limitada ao domínio do YouTube, e tentativas de abrir outros endereços ou novas janelas são bloqueadas;
   \item \textbf{Isolamento de Variáveis de Ambiente e Credenciais de Banco:} armazenamento das credenciais de conexão ao MySQL e chaves de assinatura em variáveis de ambiente isoladas do código-fonte via \texttt{.gitignore};
-  \item \textbf{Minimização de Dados (Art. 6{\textordmasculine} da LGPD):} coleta restrita ao nome de chamada ao palco e e-mail de identificação do participante.
+  \item \textbf{Minimização de Dados (Art. 6{\textordmasculine} da LGPD):} o visitante informa apenas o nome de chamada ao palco; o e-mail é coletado somente de quem opta por criar uma conta.
 \end{enumerate}
 
 A Figura \ref{fig:estados} apresenta o \textbf{Diagrama de Estados UML} que formaliza as transições de estado permitidas para um pedido musical dentro da fila (RN04) e as guardas de autorização (RN03) exigidas em cada transição.
