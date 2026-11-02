@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.25)  1 NOV 2026 21:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.25)  1 NOV 2026 22:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2225,28 +2225,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--19
 (pre-textual/resumo-lingua-estrangeira.tex [8
 
 ])
-(pre-textual/lista-de-ilustracoes.tex (documento.lof
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 5.
-
-
-(C:\Users\Murillo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `pcr' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-)
-[9
-
-{C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]) 
-(pre-textual/lista-de-tabelas.tex (documento.lot) [10
+(pre-textual/lista-de-ilustracoes.tex (documento.lof) [9
 
 ])
-(pre-textual/siglas.tex
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-2.
+(pre-textual/lista-de-tabelas.tex (documento.lot) [10
 
+]) (pre-textual/siglas.tex
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+1.
 (C:\Users\Murillo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -2273,7 +2259,20 @@ Cap\'{\i }tulo 1.
 [16
 
 
-] [17] [18] [19]) (capitulos/02-contexto-do-projeto.tex [20]
+] [17]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 48
+.
+
+(C:\Users\Murillo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `pcr' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+[18{C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
+] [19]) (capitulos/02-contexto-do-projeto.tex [20]
 Cap\'{\i }tulo 2.
 
 Underfull \hbox (badness 1394) in paragraph at lines 30--30
@@ -2317,15 +2316,7 @@ Underfull \hbox (badness 4441) in paragraph at lines 89--89
 []|\T1/lmr/m/n/10 (+20) Exclusividade Ad-mi-
  []
 
-[24]
-<imagens/diagrama_atividades.png, id=384, 3011.25pt x 2659.9375pt>
-File: imagens/diagrama_atividades.png Graphic file (type png)
-<use imagens/diagrama_atividades.png>
-Package pdftex.def Info: imagens/diagrama_atividades.png  used on input line 99
-.
-(pdftex.def)             Requested size: 432.23204pt x 381.80498pt.
-) (capitulos/03-analise-do-sistema.tex [25 <./imagens/diagrama_atividades.png (
-PNG copy)>]
+[24]) (capitulos/03-analise-do-sistema.tex [25]
 Cap\'{\i }tulo 3.
 
 Underfull \hbox (badness 3758) in paragraph at lines 40--40
@@ -2369,145 +2360,102 @@ Underfull \hbox (badness 7558) in paragraph at lines 40--40
 
 [26
 
-]
-<imagens/DiagramaCasoDeUso.png, id=396, 544.28343pt x 480.29437pt>
-File: imagens/DiagramaCasoDeUso.png Graphic file (type png)
-<use imagens/DiagramaCasoDeUso.png>
-Package pdftex.def Info: imagens/DiagramaCasoDeUso.png  used on input line 51.
-(pdftex.def)             Requested size: 418.59917pt x 369.38074pt.
- [27]
-Underfull \hbox (badness 10000) in paragraph at lines 85--85
-[]|\T1/lmr/m/n/10 (+20) Administrador,
- []
+] [27] [28]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 184.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--85
-[]|\T1/lmr/m/n/10 (+20) Administrador,
- []
-
-[28 <./imagens/DiagramaCasoDeUso.png>] [29]
-<imagens/diagrama_classes_conceitual.png, id=414, 1531.7225pt x 1118.1775pt>
-File: imagens/diagrama_classes_conceitual.png Graphic file (type png)
-<use imagens/diagrama_classes_conceitual.png>
-Package pdftex.def Info: imagens/diagrama_classes_conceitual.png  used on input
- line 106.
-(pdftex.def)             Requested size: 454.9861pt x 332.14581pt.
-
-Overfull \hbox (0.8337pt too wide) in paragraph at lines 152--152
+Overfull \hbox (0.8337pt too wide) in paragraph at lines 230--230
 []|\T1/lmr/bx/n/10 (-20) Prioridade| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--152
-[]|\T1/lmr/m/n/10 (+20) Validação de Dis-
- []
-
-
-Underfull \hbox (badness 2158) in paragraph at lines 152--152
-\T1/lmr/m/n/10 (+20) po-ni-bi-li-dade e Anti-
- []
-
-
-Underfull \hbox (badness 7685) in paragraph at lines 152--152
+Underfull \hbox (badness 7685) in paragraph at lines 230--230
 []|\T1/lmr/m/n/10 (+20) Acionamento Di-reto
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--152
-[]|\T1/lmr/m/n/10 (+20) Avanço Au-to-má-tico
+Underfull \hbox (badness 1466) in paragraph at lines 230--230
+[]|\T1/lmr/m/n/10 (+20) Avanço para a Pró-
  []
 
 
-Overfull \hbox (0.8337pt too wide) in paragraph at lines 152--152
+Overfull \hbox (0.8337pt too wide) in paragraph at lines 230--230
 []|\T1/lmr/bx/n/10 (-20) Prioridade| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--152
-[]|\T1/lmr/m/n/10 (+20) Validação de Dis-
- []
-
-
-Underfull \hbox (badness 2158) in paragraph at lines 152--152
-\T1/lmr/m/n/10 (+20) po-ni-bi-li-dade e Anti-
- []
-
-
-Underfull \hbox (badness 7685) in paragraph at lines 152--152
+Underfull \hbox (badness 7685) in paragraph at lines 230--230
 []|\T1/lmr/m/n/10 (+20) Acionamento Di-reto
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--152
-[]|\T1/lmr/m/n/10 (+20) Avanço Au-to-má-tico
+Underfull \hbox (badness 1466) in paragraph at lines 230--230
+[]|\T1/lmr/m/n/10 (+20) Avanço para a Pró-
  []
 
-[30{C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy
-.enc} <./imagens/diagrama_classes_conceitual.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+[29{C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy
+.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Sincronização em
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Acesso Web Sem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 \T1/lmr/m/n/10 (+20) Ins-ta-la-ção (\T1/lmr/m/it/10 (+20) Zero-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Modularidade por
  []
 
 
-Underfull \hbox (badness 3746) in paragraph at lines 188--188
+Underfull \hbox (badness 3746) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Legal / Pri-va-ci-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Sincronização em
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Acesso Web Sem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 \T1/lmr/m/n/10 (+20) Ins-ta-la-ção (\T1/lmr/m/it/10 (+20) Zero-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Modularidade por
  []
 
 
-Underfull \hbox (badness 3746) in paragraph at lines 188--188
+Underfull \hbox (badness 3746) in paragraph at lines 268--268
 []|\T1/lmr/m/n/10 (+20) Legal / Pri-va-ci-
  []
 
-[31] [32]) (capitulos/04-projeto-do-sistema.tex [33]
+[30] [31]) (capitulos/04-projeto-do-sistema.tex [32]
 Cap\'{\i }tulo 4.
-[34
+[33
 
 ]
-<imagens/diagrama_de_componentes.png, id=459, 764.8575pt x 619.31375pt>
+<imagens/diagrama_de_componentes.png, id=465, 764.8575pt x 619.31375pt>
 File: imagens/diagrama_de_componentes.png Graphic file (type png)
 <use imagens/diagrama_de_componentes.png>
 Package pdftex.def Info: imagens/diagrama_de_componentes.png  used on input lin
 e 24.
 (pdftex.def)             Requested size: 400.40222pt x 324.20905pt.
- [35 <./imagens/diagrama_de_componentes.png>] [36] [37]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 146.
-
+ [34 <./imagens/diagrama_de_componentes.png>] [35] [36]
 Underfull \hbox (badness 2837) in paragraph at lines 192--192
 []|\T1/lmr/m/n/10 (+20) Senha crip-to-gra-fada (\T1/lmr/m/it/10 (+20) bcrypt\T1
 /lmr/m/n/10 (+20) );
@@ -2559,7 +2507,7 @@ Overfull \hbox (5.26082pt too wide) in paragraph at lines 192--192
 \T1/pcr/m/n/10 CURRENT_TIMESTAMP|  
  []
 
-[38] [39] [40] [41] [42] [43] [44] [45]
+[37] [38] [39] [40] [41] [42] [43] [44]
 Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) Aplicação Desk-top
  []
@@ -2609,15 +2557,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []|\T1/lmr/m/n/10 (+20) brModelo, UM-Let
  []
 
-[46] [47] [48]
-<imagens/diagrama_estados.png, id=638, 1378.14874pt x 1718.42pt>
+[45] [46] [47]
+<imagens/diagrama_estados.png, id=641, 1378.14874pt x 1718.42pt>
 File: imagens/diagrama_estados.png Graphic file (type png)
 <use imagens/diagrama_estados.png>
 Package pdftex.def Info: imagens/diagrama_estados.png  used on input line 483.
 (pdftex.def)             Requested size: 442.88817pt x 552.2393pt.
-) (capitulos/05-implementacao.tex [49 <./imagens/diagrama_estados.png>]
+) (capitulos/05-implementacao.tex [48 <./imagens/diagrama_estados.png>]
 Cap\'{\i }tulo 5.
-[50
+[49
 
 ]
 Overfull \hbox (18.62317pt too wide) in paragraph at lines 32--33
@@ -2626,11 +2574,11 @@ n/12 (-20) ), que ins-tan-cia uma ja-nela de-di-cada (\T1/pcr/m/n/12 BrowserWin
 dow\T1/lmr/m/n/12 (-20) )
  []
 
-[51] [52] [53] [54] [55]) (capitulos/06-conclusao.tex [56]
+[50] [51] [52] [53] [54]) (capitulos/06-conclusao.tex [55]
 Cap\'{\i }tulo 6.
-[57
+[56
 
-])) [58]
+])) [57]
 \openout2 = `estrutura/pos-textual.aux'.
 
  (estrutura/pos-textual.tex (pos-textual/referencias.tex
@@ -2647,12 +2595,12 @@ or-[]sete-[]em-[]cada-[]10-[]empregos-[]formais-[]gerados-[]ate-[]novembro-[]de
 -[]2025 / 
  []
 
-[59
+[58
 
 
-])) (pos-textual/glossario.tex) (pos-textual/anexos.tex [60]
+])) (pos-textual/glossario.tex) (pos-textual/anexos.tex [59]
 ANEXO A.
-) (pos-textual/indices.tex)) [61
+) (pos-textual/indices.tex)) [60
 
 ]
 \tf@lof=\write6
@@ -2673,14 +2621,14 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `documento.brf' has not changed.
-(rerunfilecheck)             Checksum: 965016975C77C51F6E5229B9C85F17DD;2021.
+(rerunfilecheck)             Checksum: 4DF78B18B5BF0C7DA20728165F24B8D8;2075.
  ) 
 Here is how much of TeX's memory you used:
- 46413 strings out of 467871
- 937376 string characters out of 5417407
- 1567114 words of memory out of 5000000
- 73778 multiletter control sequences out of 15000+600000
- 744024 words of font info for 327 fonts, out of 8000000 for 9000
+ 46884 strings out of 467871
+ 945355 string characters out of 5417407
+ 1578986 words of memory out of 5000000
+ 74242 multiletter control sequences out of 15000+600000
+ 744475 words of font info for 331 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,18n,134p,1823b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.
@@ -2704,9 +2652,9 @@ public/lm/lmri8.pfb><C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/type1
 pe1/public/lm/lmsy8.pfb><C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/urw/courier/ucrb8a.pfb><C:/Users/Murillo/AppData/Local/Programs/MiKTeX/fon
 ts/type1/urw/courier/ucrr8a.pfb>
-Output written on documento.pdf (62 pages, 1384234 bytes).
+Output written on documento.pdf (61 pages, 884180 bytes).
 PDF statistics:
- 1094 PDF objects out of 1200 (max. 8388607)
- 202 named destinations out of 1000 (max. 500000)
- 62526 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1099 PDF objects out of 1200 (max. 8388607)
+ 201 named destinations out of 1000 (max. 500000)
+ 62511 words of extra memory for PDF output out of 74296 (max. 10000000)
 

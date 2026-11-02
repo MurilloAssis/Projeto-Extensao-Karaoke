@@ -34,9 +34,9 @@ Por outro lado, as principais soluções comerciais de karaokê para estabelecim
 
 O parceiro demandante do projeto é o estabelecimento comercial \textbf{Apache Gru Rock Bar}, registrado sob a razão social \texttt{APACHE GRU ROCK BAR LTDA} e inscrito no CNPJ sob o n{\textordmasculine} \texttt{64.687.141/0001-07}. O bar está localizado na Avenida Torres Tibagy, n{\textordmasculine} 58, no bairro Gopouva, em Guarulhos -- SP (CEP 07062-000), e sua atividade principal é classificada no CNAE 5611-2/05, que corresponde a bares e outros estabelecimentos especializados em servir bebidas, com entretenimento \cite{cnpjapi2026}.
 
-O Apache Gru é um bar de rock que recebe apresentações de bandas, como os shows do tributo \textit{Roots -- Sepultura Tributo} realizados em agosto de 2025 e janeiro de 2026 \cite{setlistfm2026}. Às quintas-feiras, a partir das 20h, o bar realiza a sua \textbf{Noite de Karaokê}, sem cobrança para cantar \cite{motofest2026}. No cenário atual de operação do salão, é utilizado um projetor \textit{whitelabel} com conexão à internet, sendo diretamente por ele acessado o aplicativo do YouTube e colocados os vídeos manualmente a cada apresentação.
+O Apache Gru é um bar de rock que recebe apresentações de bandas, como os shows do tributo \textit{Roots -- Sepultura Tributo} realizados em agosto de 2025 e janeiro de 2026 \cite{setlistfm2026}. Às quintas-feiras, a partir das 20h, o bar realiza a sua \textbf{Noite de Karaokê}, sem cobrança para cantar \cite{motofest2026}. Atualmente, o salão utiliza um projetor \textit{whitelabel} com conexão à internet, no qual o aplicativo do YouTube é acessado diretamente e os vídeos são colocados manualmente a cada apresentação.
 
-Dessa forma, a dinâmica da Noite de Karaokê ocorria de maneira inteiramente manual: os clientes precisavam solicitar suas músicas verbalmente ou em anotações de papel, e o organizador precisava digitar e pesquisar manualmente cada vídeo no YouTube diretamente pela interface do projetor \textit{whitelabel} conectado à internet, interrompendo a fluidez entre uma apresentação e outra e dificultando o controle da fila de espera.
+Dessa forma, a dinâmica da Noite de Karaokê é inteiramente manual: os clientes solicitam suas músicas verbalmente ou em anotações de papel, e o organizador digita e pesquisa cada vídeo no YouTube pela interface do projetor, o que interrompe a fluidez entre uma apresentação e outra e dificulta o controle da fila de espera.
 
 \section{Público-Alvo}
 
@@ -45,12 +45,12 @@ O projeto atende diretamente três perfis de público-alvo envolvidos na operaç
 \begin{enumerate}
   \item \textbf{Frequentadores e Cantores Amadores (Clientes do Bar):} jovens e adultos frequentadores do Apache Gru Rock Bar que comparecem individualmente ou em grupos de amigos. Possuem familiaridade cotidiana com smartphones e aplicativos web, mas buscam uma interação rápida e intuitiva em ambiente noturno (baixa luminosidade), sem desejar baixar aplicativos pesados apenas para pedir uma música;
   \item \textbf{Organizador / Operador de Palco e Som (Administrador Operacional):} colaborador responsável por conduzir a noite de karaokê, chamar o próximo cantor no microfone, controlar o equipamento de áudio e garantir que o telão exiba continuamente a música correta sem interrupções técnicas;
-  \item \textbf{Gestores e Proprietários do Estabelecimento:} responsáveis pela administração do Apache Gru Rock Bar, interessados em aumentar a satisfação e o tempo de permanência dos clientes no salão, reduzir a sobrecarga da equipe de atendimento e conhecer o repertório mais popular entre seus frequentadores.
+  \item \textbf{Gestores e Proprietários do Estabelecimento:} responsáveis pela administração do Apache Gru Rock Bar, interessados em aumentar a satisfação e o tempo de permanência dos clientes no salão, reduzir a sobrecarga da equipe de atendimento e, em etapa futura, conhecer o repertório mais popular entre seus frequentadores (Seção \ref{sec:trabalhos_futuros}).
 \end{enumerate}
 
 \section{Necessidades Identificadas}
 
-A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das conversas com os envolvidos, foram identificadas quatro necessidades fundamentais da comunidade atendida:
+A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das conversas com os envolvidos, foram identificadas quatro necessidades da comunidade atendida:
 
 \begin{itemize}
   \item \textbf{N01 -- Autonomia para escolha de vídeos pelo próprio sistema:} necessidade de permitir que o cliente acesse a plataforma via QR Code exibido no telão e escolha o vídeo musical desejado diretamente pelo próprio sistema em seu celular, eliminando o uso de fichas de papel;
@@ -61,7 +61,7 @@ A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das 
 
 \section{Regras de Negócio}
 
-Para atender às necessidades identificadas respeitando as políticas operacionais do estabelecimento, foram estabelecidas cinco Regras de Negócio (RN00 a RN04) em nível conceitual, documentadas na planilha de engenharia do projeto (\textit{Regras de Negócio | Requisitos -- Separados por Componentes}) e descritas na Tabela \ref{tab:regras_negocio}.
+Para atender às necessidades identificadas respeitando as políticas operacionais do estabelecimento, foram estabelecidas cinco Regras de Negócio (RN00 a RN04) em nível conceitual, descritas na Tabela \ref{tab:regras_negocio}.
 
 \begin{table}[H]
 \IBGEtab{%
@@ -73,11 +73,11 @@ Para atender às necessidades identificadas respeitando as políticas operaciona
     \toprule
     \textbf{Código} & \textbf{Regra de Negócio} & \textbf{Descrição Conceitual e Política de Domínio} \\
     \midrule
-    RN00 & Validação de Disponibilidade da Música & Toda solicitação musical deve referenciar um item disponível no catálogo ou uma fonte audiovisual válida e ativa antes de ingressar na fila de apresentações. \\
+    RN00 & Validação de Disponibilidade da Música & Toda solicitação musical deve referenciar uma música disponível no catálogo antes de ingressar na fila de apresentações. Quando o vídeo escolhido na pesquisa ainda não consta no catálogo, ele é cadastrado automaticamente; músicas marcadas como indisponíveis pelo administrador não podem ser pedidas. \\
     \addlinespace
     RN01 & Proibição de Música Duplicada na Fila Ativa & Uma música que já se encontra aguardando execução na fila ativa ou que está sendo reproduzida no momento não pode ser novamente inserida na fila até a conclusão de sua execução atual. \\
     \addlinespace
-    RN02 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente, identificado como visitante ou por sua conta, possui um limite configurável de pedidos ativos simultâneos na fila (padrão de 1 a 2 músicas pendentes por vez). \\
+    RN02 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente, identificado como visitante ou por sua conta, possui um limite de pedidos ativos simultâneos na fila, definido na configuração do sistema (padrão de 1 a 2 músicas pendentes por vez). \\
     \addlinespace
     RN03 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, o avanço para a próxima faixa e a remoção de itens da fila (inclusive por ausência do cantor) são prerrogativas exclusivas do organizador (Administrador). A ordem da fila segue a ordem de chegada dos pedidos (FIFO) e não é alterada manualmente. \\
     \addlinespace
@@ -85,18 +85,72 @@ Para atender às necessidades identificadas respeitando as políticas operaciona
     \bottomrule
   \end{tabularx}%
 }{%
-  \fonte{Elaborado pelos autores a partir da planilha de engenharia do projeto (2026).}%
+  \fonte{Elaborado pelos autores (2026).}%
 }
 \end{table}
 
-A Figura \ref{fig:atividades} apresenta o \textbf{Diagrama de Atividades UML} que modela o fluxo operacional de negócio desde a solicitação da música pelo cliente na mesa até a conclusão da apresentação no palco, destacando os pontos de decisão regidos pelas regras RN00, RN01, RN02 e RN03.
+A Figura \ref{fig:atividades} apresenta o \textbf{Diagrama de Atividades UML} que modela o fluxo operacional de negócio, desde o acesso do cliente pelo QR Code até a conclusão da apresentação no palco, destacando os pontos de decisão regidos pelas regras RN00 a RN04.
 
-\Needspace{20cm}
 \begin{figure}[H]
   \caption{Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}
   \label{fig:atividades}
 \begin{center}
-  \includegraphics[width=0.95\textwidth,height=0.78\textheight,keepaspectratio]{imagens/diagrama_atividades.png}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  act/.style={draw, rounded corners=6pt, fill=white, align=center, font=\scriptsize, text width=3.4cm, minimum height=0.8cm, inner sep=3pt},
+  alr/.style={act, fill=red!10},
+  dec/.style={draw, diamond, aspect=2.2, fill=yellow!15, align=center, font=\scriptsize, inner sep=1pt},
+  flx/.style={-latex, thick},
+  lbl/.style={font=\tiny\bfseries, fill=white, inner sep=1pt}]
+  % Raias
+  \foreach \x/\t/\c in {0/Cliente/blue!8, 4/Sistema (API)/yellow!8, 8/Administrador/green!8, 12/Reprodutor (Electron)/orange!10} {
+    \fill[\c] (\x,0) rectangle ++(4,-20.6);
+    \draw (\x,0) rectangle ++(4,-20.6);
+    \draw (\x,-0.6) -- ++(4,0);
+    \node[font=\scriptsize\bfseries] at (\x+2,-0.3) {\t};
+  }
+  % Nós
+  \fill (2,-1.2) circle (0.15) coordinate (ini);
+  \node[act] (a1) at (2,-2.2) {Lê o QR Code exibido no telão};
+  \node[act] (a2) at (2,-3.4) {Identifica-se: nome (visitante) ou login};
+  \node[act] (a3) at (2,-4.6) {Pesquisa a música};
+  \node[act] (s1) at (6,-4.6) {Pesquisa no catálogo local e, se preciso, no YouTube};
+  \node[act] (a4) at (2,-5.8) {Escolhe o vídeo};
+  \node[dec] (d0) at (6,-7.6) {RN00: música\\disponível?};
+  \node[dec] (d1) at (6,-9.6) {RN01: já está\\na fila?};
+  \node[dec] (d2) at (6,-11.6) {RN02: abaixo\\do limite?};
+  \node[alr] (al) at (2,-9.6) {Recebe alerta com o motivo da recusa (RF12)};
+  \node[act] (s2) at (6,-13.5) {Insere o pedido (\textit{Na Fila}) e notifica as telas};
+  \node[act] (a5) at (2,-13.5) {Acompanha a posição na fila};
+  \node[act] (m1) at (10,-14.9) {Aciona \textit{Play} ou \textit{Próxima música} (RN03)};
+  \node[act] (s3) at (6,-16.3) {Atualiza o pedido para \textit{Reproduzindo} (RN04)};
+  \node[act] (r1) at (14,-16.3) {Abre o vídeo pelo link (duas visões)};
+  \node[act] (m2) at (10,-17.6) {Aciona \textit{Próxima música} ao fim da apresentação};
+  \node[act] (s4) at (6,-18.9) {Atualiza o pedido para \textit{Concluído} e promove o próximo};
+  \draw (6,-20.1) circle (0.2); \fill (6,-20.1) circle (0.12);
+  % Fluxos
+  \draw[flx] (ini) -- (a1);
+  \draw[flx] (a1) -- (a2);
+  \draw[flx] (a2) -- (a3);
+  \draw[flx] (a3) -- (s1);
+  \draw[flx] (s1.south) |- (a4.east);
+  \draw[flx] (a4.south) -- ++(0,-0.45) -| (d0.north);
+  \draw[flx] (d0.west) -| node[lbl, pos=0.25] {não} (al.north);
+  \draw[flx] (d0.south) -- node[lbl, right] {sim} (d1.north);
+  \draw[flx] (d1.west) -- node[lbl] {sim} (al.east);
+  \draw[flx] (d1.south) -- node[lbl, right] {não} (d2.north);
+  \draw[flx] (d2.west) -| node[lbl, pos=0.25] {não} (al.south);
+  \draw[flx] (d2.south) -- node[lbl, right] {sim} (s2.north);
+  \draw[flx] (al.west) -- ++(-0.25,0) |- (a4.west);
+  \draw[flx, dashed] (s2.west) -- (a5.east);
+  \draw[flx] (s2.south) |- (m1.west);
+  \draw[flx] (m1.south) -- ++(0,-0.3) -| (s3.north);
+  \draw[flx] (s3.east) -- (r1.west);
+  \draw[flx] (r1.south) |- (m2.east);
+  \draw[flx] (m2.south) |- (s4.east);
+  \draw[flx] (s4.south) -- (6,-19.9);
+\end{tikzpicture}%
+}
 \end{center}
 \legend{Fonte: Elaborado pelos autores (2026).}
 \end{figure}
