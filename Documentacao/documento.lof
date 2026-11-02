@@ -1,4 +1,12 @@
 \babel@toc {brazil}{}\relax 
 \babel@toc {brazil}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama de Casos de Uso UML -- Sistema Karaokê Apache.}}{27}{figure.caption.22}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Diagrama de Componentes UML (\texttt {diagrama\_de\_componentes.png}).}}{34}{figure.caption.26}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}}{25}{figure.caption.21}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Diagrama de Casos de Uso UML -- Sistema Karaokê Apache}}{28}{figure.caption.23}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Diagrama de Classes Conceitual UML (Derivado de \texttt {Conceitual.brM3})}}{30}{figure.caption.25}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Diagrama de Componentes UML}}{35}{figure.caption.28}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Diagrama de Classes de Projeto UML}}{38}{figure.caption.31}%
+\contentsline {figure}{\numberline {6}{\ignorespaces \textit {Wireframe} das Interfaces do Sistema}}{42}{figure.caption.33}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Diagrama de Sequência UML -- Pedido de Música pelo Cliente}}{44}{figure.caption.34}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Diagrama de Sequência UML -- Controle do Palco e Reprodução no Telão}}{45}{figure.caption.35}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Diagrama de Estados UML -- Ciclo de Vida de um Pedido Musical na Fila (RN03 e RN04)}}{49}{figure.caption.37}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Diagrama de Implantação UML -- Topologia de Execução do MVP}}{53}{figure.caption.38}%

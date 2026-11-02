@@ -1,12 +1,13 @@
 \babel@toc {brazil}{}\relax 
 \babel@toc {brazil}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Estudo comparativo entre soluções existentes no mercado e o sistema proposto.}}{21}{table.caption.19}%
-\contentsline {table}{\numberline {2}{\ignorespaces Regras de negócio do domínio do sistema Karaokê Apache.}}{23}{table.caption.20}%
-\contentsline {table}{\numberline {3}{\ignorespaces Identificação e caracterização dos atores do sistema Karaokê Apache.}}{26}{table.caption.21}%
-\contentsline {table}{\numberline {4}{\ignorespaces Especificação dos casos de uso (UC) do sistema Karaokê Apache.}}{28}{table.caption.23}%
-\contentsline {table}{\numberline {5}{\ignorespaces Requisitos funcionais (RF) do sistema Karaokê Apache.}}{30}{table.caption.24}%
-\contentsline {table}{\numberline {6}{\ignorespaces Requisitos não funcionais (RNF) do sistema Karaokê Apache.}}{31}{table.caption.25}%
-\contentsline {table}{\numberline {7}{\ignorespaces Detalhamento técnico dos componentes arquiteturais e suas interfaces.}}{35}{table.caption.27}%
-\contentsline {table}{\numberline {8}{\ignorespaces Dicionário de dados do modelo relacional do sistema Karaokê Apache.}}{37}{table.caption.28}%
-\contentsline {table}{\numberline {9}{\ignorespaces Tecnologias, frameworks e ferramentas utilizadas no projeto.}}{40}{table.caption.29}%
-\contentsline {table}{\numberline {10}{\ignorespaces Testes preliminares realizados sobre a Prova de Conceito e o MVP.}}{46}{table.caption.30}%
+\contentsline {table}{\numberline {1}{\ignorespaces Estudo comparativo entre soluções existentes no mercado e o sistema proposto.}}{22}{table.caption.19}%
+\contentsline {table}{\numberline {2}{\ignorespaces Regras de negócio do domínio do sistema Karaokê Apache.}}{24}{table.caption.20}%
+\contentsline {table}{\numberline {3}{\ignorespaces Identificação e caracterização dos atores do sistema Karaokê Apache.}}{27}{table.caption.22}%
+\contentsline {table}{\numberline {4}{\ignorespaces Especificação dos casos de uso (UC) do sistema Karaokê Apache.}}{29}{table.caption.24}%
+\contentsline {table}{\numberline {5}{\ignorespaces Requisitos funcionais (RF) do sistema Karaokê Apache.}}{31}{table.caption.26}%
+\contentsline {table}{\numberline {6}{\ignorespaces Requisitos não funcionais (RNF) do sistema Karaokê Apache.}}{32}{table.caption.27}%
+\contentsline {table}{\numberline {7}{\ignorespaces Correspondência entre subsistemas e componentes lógicos.}}{36}{table.caption.29}%
+\contentsline {table}{\numberline {8}{\ignorespaces Detalhamento técnico dos componentes arquiteturais e suas interfaces.}}{37}{table.caption.30}%
+\contentsline {table}{\numberline {9}{\ignorespaces Dicionário de dados do modelo relacional do sistema Karaokê Apache.}}{39}{table.caption.32}%
+\contentsline {table}{\numberline {10}{\ignorespaces Tecnologias, frameworks e ferramentas utilizadas no projeto.}}{47}{table.caption.36}%
+\contentsline {table}{\numberline {11}{\ignorespaces Testes realizados na Prova de Conceito e testes planejados para o MVP.}}{54}{table.caption.39}%

@@ -10,7 +10,7 @@ Utilizando a abordagem de \textit{Feature-Driven Development} (FDD) adotada pela
 
 \begin{itemize}
   \item \textbf{FT-001 -- Solicitar música para a fila do karaokê:} permite ao participante autenticado pesquisar e escolher um vídeo musical diretamente pelo próprio sistema, passando pelas validações automáticas de disponibilidade e anti-duplicidade (RN00, RN01 e RN02);
-  \item \textbf{FT-002 -- Gerenciar e moderar a fila de reprodução:} permite ao organizador visualizar a fila ordenada por chegada (FIFO), acionar imediatamente qualquer item, avançar para a próxima música ou remover pedidos inválidos (RN03 e RN04);
+  \item \textbf{FT-002 -- Gerenciar e moderar a fila de reprodução:} permite ao organizador visualizar a fila ordenada por chegada (FIFO), iniciar a reprodução do primeiro item, avançar para a próxima música ou remover pedidos inválidos (RN03 e RN04);
   \item \textbf{FT-003 -- Sincronizar e reproduzir faixa no telão:} atualiza instantaneamente o estado da música ativa para que o reprodutor desktop dedicado renderize o vídeo correspondente em tela cheia na TV do bar.
 \end{itemize}
 
@@ -45,7 +45,7 @@ Foram identificados três atores que interagem diretamente com as fronteiras do 
 A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC08) que especificam o comportamento esperado do sistema sob a perspectiva de seus usuários. A Figura \ref{fig:casos_uso} apresenta o \textbf{Diagrama de Casos de Uso UML} do sistema, seguido pelo detalhamento descritivo na Tabela \ref{tab:casos_uso}.
 
 \begin{figure}[H]
-  \caption{Diagrama de Casos de Uso UML -- Sistema Karaokê Apache.}
+  \caption{Diagrama de Casos de Uso UML -- Sistema Karaokê Apache}
   \label{fig:casos_uso}
   \begin{center}
     \includegraphics[width=0.92\textwidth]{imagens/DiagramaCasoDeUso.png}
@@ -87,7 +87,7 @@ A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC
 
 \section{Modelo Conceitual}
 
-O modelo conceitual do domínio foi originalmente construído pela equipe na ferramenta \textbf{brModelo} (arquivo \texttt{Conceitual.brM3} armazenado no acervo do projeto) e traduzido para o \textbf{Diagrama de Classes Conceitual UML} apresentado no Quadro \ref{quad:classes_conceitual}.
+O modelo conceitual do domínio foi originalmente construído pela equipe na ferramenta \textbf{brModelo} (arquivo \texttt{Conceitual.brM3} armazenado no acervo do projeto) e traduzido para o \textbf{Diagrama de Classes Conceitual UML} apresentado na Figura \ref{fig:classes_conceitual}.
 
 O domínio é estruturado em torno de quatro conceitos essenciais, independentes de decisões de implementação:
 
@@ -99,12 +99,14 @@ O domínio é estruturado em torno de quatro conceitos essenciais, independentes
 \end{itemize}
 
 \Needspace{14.5cm}
-\begin{caixa}{Diagrama de Classes Conceitual UML (Derivado de \texttt{Conceitual.brM3})}{quad:classes_conceitual}
+\begin{figure}[H]
+  \caption{Diagrama de Classes Conceitual UML (Derivado de \texttt{Conceitual.brM3})}
+  \label{fig:classes_conceitual}
 \begin{center}
   \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{imagens/diagrama_classes_conceitual.png}
 \end{center}
 \legend{Fonte: Adaptado de \texttt{Conceitual.brM3} elaborado pelos autores (2026).}
-\end{caixa}
+\end{figure}
 
 \section{Requisitos Funcionais}
 
@@ -132,7 +134,7 @@ A Tabela \ref{tab:requisitos_funcionais} especifica de forma objetiva os Requisi
     \addlinespace
     RF06 & Visualização da Fila e Faixa Atual & Exibir em tempo real o destaque \textit{Tocando Agora} e a lista numerada de próximas músicas na fila. & Alta \\
     \addlinespace
-    RF07 & Acionamento Direto de Música (\textit{Play}) & Permitir ao administrador iniciar imediatamente qualquer música listada na fila com um clique. & Alta \\
+    RF07 & Acionamento Direto de Música (\textit{Play}) & Permitir ao administrador iniciar com um clique a reprodução do primeiro pedido da fila, respeitando a ordem de chegada (FIFO). & Alta \\
     \addlinespace
     RF08 & Avanço Automático (\textit{Próxima Música}) & Permitir ao administrador encerrar a faixa atual e promover automaticamente o próximo item da fila (FIFO) para execução. & Alta \\
     \addlinespace
@@ -140,7 +142,7 @@ A Tabela \ref{tab:requisitos_funcionais} especifica de forma objetiva os Requisi
     \addlinespace
     RF10 & Reprodução Dedicada no Telão (Electron) & Carregar e reproduzir automaticamente o vídeo da música ativa na janela nativa do \textit{Karaokê TV Player}. & Alta \\
     \addlinespace
-    RF11 & Gestão Administrativa do Catálogo & Permitir cadastrar novas músicas/letras no banco de dados e alterar seu status de disponibilidade. & Média \\
+    RF11 & Gestão Administrativa do Catálogo & Permitir cadastrar novas músicas no banco de dados e alterar seu status de disponibilidade. & Média \\
     \addlinespace
     RF12 & Feedback Visual de Estado e Conexão & Exibir indicadores claros de conexão (\textit{Conectado -- Tocando}) e alertas de validação na interface. & Alta \\
     \bottomrule
@@ -166,7 +168,7 @@ A Tabela \ref{tab:requisitos_nao_funcionais} apresenta os Requisitos Não Funcio
     \midrule
     RNF01 & Usabilidade & Interface Responsiva e Tema Escuro & A interface web deve adaptar-se a telas móveis e utilizar paleta escura de alto contraste adequada à iluminação noturna do bar. \\
     \addlinespace
-    RNF02 & Desempenho & Sincronização em Tempo Real & A troca de música acionada na interface de controle deve refletir na janela do reprodutor Electron em menos de 2 segundos na rede local. \\
+    RNF02 & Desempenho & Sincronização em Tempo Real & A troca de música acionada na interface de controle deve refletir na janela do reprodutor Electron em menos de 2 segundos, em condições normais de conexão com a internet. \\
     \addlinespace
     RNF03 & Compatibilidade & Acesso Web Sem Instalação (\textit{Zero-Install}) & Os clientes devem acessar o sistema diretamente por navegadores padrões (Chrome, Safari, Firefox) via leitura do QR Code exibido no telão. \\
     \addlinespace
@@ -174,7 +176,7 @@ A Tabela \ref{tab:requisitos_nao_funcionais} apresenta os Requisitos Não Funcio
     \addlinespace
     RNF05 & Segurança & Proteção de Credenciais e Sessão & As senhas devem ser armazenadas sob hash criptográfico (Bcrypt) e as rotas administrativas protegidas por controle de perfil. \\
     \addlinespace
-    RNF06 & Confiabilidade & Consistência de Estado da Fila & A API em Java 21 e o banco de dados MySQL devem garantir integridade transacional na ordenação e transição de status dos pedidos. \\
+    RNF06 & Confiabilidade & Consistência de Estado da Fila & A API em Java 21 com Spring Boot e o banco de dados MySQL devem garantir integridade transacional na ordenação e transição de status dos pedidos. \\
     \addlinespace
     RNF07 & Manutenibilidade & Modularidade por Componentes & O código deve manter separação clara entre as responsabilidades de Usuários, Fila, Pedido de Música e Reprodutor. \\
     \addlinespace
@@ -186,14 +188,14 @@ A Tabela \ref{tab:requisitos_nao_funcionais} apresenta os Requisitos Não Funcio
 }
 \end{table}
 
-\section{Restrições do Sistema}
+\section{Restrições do Sistema} \label{sec:restricoes}
 
 O desenvolvimento e a operação do sistema estão sujeitos às seguintes restrições técnicas, operacionais, legais e orçamentárias:
 
 \begin{itemize}
-  \item \textbf{Restrição de Incorporação de Terceiros (YouTube Embed):} determinados vídeos musicais oficiais no YouTube possuem bloqueio de incorporação externa (\textit{Embed Error 101/150}) configurado pelas detentoras de direitos autorais, exigindo que os pedidos priorizem versões de canais de karaokê que habilitam reprodução embarcada;
+  \item \textbf{Cota de Uso da API de Pesquisa do YouTube:} a pesquisa de vídeos depende da \textit{YouTube Data API v3}, cuja cota padrão é de 10.000 unidades por dia, com cada pesquisa consumindo 100 unidades \cite{youtubedataapi2026}; isso limita o sistema a cerca de 100 pesquisas diárias, o que exige o uso do catálogo local e de \textit{cache} para reduzir as consultas ao serviço;
   \item \textbf{Dependência de Conectividade com a Internet:} como os fluxos de vídeo do MVP são carregados sob demanda a partir do YouTube, o computador de palco do Apache Gru Rock Bar necessita de conexão ativa à internet durante a Noite de Karaokê;
-  \item \textbf{Restrição Orçamentária (Custo Zero de Licenciamento):} por tratar-se de um projeto acadêmico de extensão voltado a uma microempresa, a solução deve utilizar exclusivamente ferramentas, bibliotecas e bancos de dados gratuitos ou de código aberto (\textit{open source}), reaproveitando o hardware (notebook, TV e som) já existente no bar;
+  \item \textbf{Restrição Orçamentária (Baixo Custo):} por tratar-se de um projeto acadêmico de extensão voltado a uma microempresa, a solução deve utilizar exclusivamente ferramentas, bibliotecas e bancos de dados gratuitos ou de código aberto (\textit{open source}), sem custo de licenciamento, e reaproveitar o hardware (computador, TV e som) já existente no bar. O único custo previsto é o da plataforma de hospedagem em nuvem da aplicação web, da API e do banco de dados, que deve ser baixo e compatível com o porte do estabelecimento;
   \item \textbf{Restrição Temporal e Acadêmica:} o cronograma de desenvolvimento é delimitado pelo semestre letivo da disciplina de Projeto Integrado de Extensão do IFSP, razão pela qual a entrega concentra-se na consolidação e validação do Produto Mínimo Viável (MVP);
   \item \textbf{Restrições Legais (LGPD):} o sistema não pode coletar dados pessoais sensíveis nem compartilhar cadastros de frequentadores com terceiros sem consentimento expresso \cite{brasil2018lgpd}.
 \end{itemize}

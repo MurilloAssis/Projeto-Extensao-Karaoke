@@ -1,30 +1,32 @@
 \chapter{Conclusão} \label{cap:conclusao}
 
-Este capítulo encerra o documento sintetizando as considerações finais sobre o desenvolvimento do projeto \textbf{Karaokê Apache} até a sua fase atual de MVP, relatando as principais dificuldades superadas pela equipe e apresentando as possibilidades de evolução futura do sistema.
+Este capítulo encerra o documento com as considerações finais sobre o desenvolvimento do projeto \textbf{Karaokê Apache} até a fase atual de MVP, relacionando os resultados aos objetivos estabelecidos, relatando as principais dificuldades enfrentadas pela equipe e apresentando as possibilidades de evolução do sistema.
 
 \section{Considerações Finais}
 
-O desenvolvimento do projeto \textbf{Karaokê Apache} demonstrou como a aplicação estruturada de conceitos de Engenharia de Software, Análise de Sistemas e Arquitetura de Aplicações Distribuídas permite construir uma solução tecnológica diretamente alinhada à realidade de um pequeno negócio local. Ao investigar a rotina da \textit{Noite de Karaokê} no estabelecimento parceiro \textbf{Apache Gru Rock Bar}, em Guarulhos -- SP, foi possível traduzir gargalos operacionais concretos -- antes resolvidos no improviso com anotações em papel e janelas manuais de navegador -- em requisitos objetivos, regras de negócio bem definidas (RN00 a RN04) e uma arquitetura modular clara.
+O desenvolvimento do projeto \textbf{Karaokê Apache} mostrou como conceitos de Engenharia de Software, Análise de Sistemas e Arquitetura de Aplicações Distribuídas podem ser aplicados à realidade de um pequeno negócio local. A partir da rotina da \textit{Noite de Karaokê} no estabelecimento parceiro \textbf{Apache Gru Rock Bar}, em Guarulhos -- SP, problemas operacionais concretos -- antes resolvidos com anotações em papel e janelas de navegador manipuladas manualmente -- foram traduzidos em requisitos, em regras de negócio (RN00 a RN04) e em uma arquitetura dividida em quatro subsistemas.
 
-Mesmo encontrando-se em fase de Produto Mínimo Viável (MVP), os resultados obtidos na implementação da Prova de Conceito (\texttt{Poc.mp4}) cumpriram o objetivo de validar o núcleo mais sensível da solução: a sincronização em tempo real entre a fila web em React/Vite e o reprodutor desktop dedicado \textbf{Karaokê TV Player} em Electron. Dessa forma, o projeto entrega ao estabelecimento parceiro uma base funcional sólida, gratuita e adaptada à sua infraestrutura física, ao mesmo tempo em que consolida a formação prática dos estudantes do IFSP.
+Em relação ao objetivo geral, o projeto entregou a especificação completa do sistema e uma Prova de Conceito funcional, mas o MVP ainda não está concluído. Os objetivos específicos de diagnóstico, especificação e modelagem foram atendidos. A Prova de Conceito validou a sincronização em tempo real entre a fila web em React/Vite e o reprodutor desktop \textbf{Karaokê TV Player} em Electron, por meio de WebSocket com o protocolo STOMP. Permanecem em implementação a API em Spring Boot com persistência em MySQL, a pesquisa de músicas pela \textit{YouTube Data API v3} e a reprodução em duas visões no Electron, conforme detalhado nas Seções \ref{sec:limitacoes} e \ref{sec:trabalhos_futuros}. Ao longo do trabalho, o projeto também contribuiu para a formação prática dos estudantes do IFSP, que conduziram todas as etapas, do levantamento junto ao parceiro à implementação.
 
 \section{Dificuldades Encontradas}
 
-Ao longo do ciclo de levantamento, modelagem e implementação do MVP, a equipe enfrentou e solucionou três dificuldades principais:
+Ao longo do ciclo de levantamento, modelagem e implementação do MVP, a equipe enfrentou quatro dificuldades principais:
 
 \begin{enumerate}
-  \item \textbf{Sincronização em tempo real entre a fila web e o reprodutor desktop:} garantir que as ações de controle da fila refletissem imediatamente na janela dedicada do \textit{Karaokê TV Player} em Electron sem necessidade de recarregar a página exigiu o desacoplamento claro entre o estado da fila e o componente de exibição;
-  \item \textbf{Políticas de incorporação (\textit{embed}) e \textit{autoplay} de vídeos:} navegadores modernos e o próprio YouTube impõem restrições a vídeos embarcados e ao início automático de áudio, o que exigiu testes específicos dentro do container Chromium do Electron e a inclusão de controles diretos (\textit{Play} e \textit{Próxima música}) para o operador do palco;
-  \item \textbf{Calibragem do escopo para o calendário semestral:} foi necessário delimitar criteriosamente o escopo do MVP, descartando ideias iniciais que criariam barreiras de uso para os clientes do bar (como obrigar o download de um aplicativo nativo nas lojas móveis) em favor de uma interface web acessível instantaneamente via QR Code no telão.
+  \item \textbf{Sincronização em tempo real entre a fila web e o reprodutor desktop:} as ações de controle da fila precisavam aparecer imediatamente na janela do \textit{Karaokê TV Player}, sem recarregar a página. A solução adotada foi a comunicação por WebSocket com o protocolo STOMP: a cada mudança, o evento \texttt{fila-atualizada} é enviado a todas as telas, e o Electron busca a faixa ativa para reproduzi-la;
+  \item \textbf{Falhas na reprodução de vídeos incorporados:} muitos vídeos de karaokê apresentavam falhas quando incorporados a uma página, em razão de restrições de direitos autorais definidas pelos detentores do conteúdo. A equipe passou então a abrir o vídeo diretamente pelo seu link, em uma das duas visões da janela do Electron, deixando a outra para a interface própria do sistema;
+  \item \textbf{Limite de uso da API de pesquisa do YouTube:} a cota diária da \textit{YouTube Data API v3} permite cerca de 100 pesquisas, número baixo para uma noite de karaokê. Isso levou à decisão de consultar primeiro o catálogo local e manter um \textit{cache} das pesquisas recentes, recorrendo ao YouTube apenas quando necessário;
+  \item \textbf{Calibragem do escopo para o calendário semestral:} foi necessário delimitar o escopo do MVP, descartando ideias iniciais que criariam barreiras de uso para os clientes do bar (como obrigar o download de um aplicativo nativo nas lojas móveis) em favor de uma interface web acessível via QR Code exibido no telão. Pelo mesmo motivo, a exibição de letras foi mantida no modelo de dados, mas deixada fora do MVP.
 \end{enumerate}
 
-\section{Trabalhos Futuros}
+\section{Trabalhos Futuros} \label{sec:trabalhos_futuros}
 
-Como continuidade natural após a conclusão e implantação definitiva do MVP no Apache Gru Rock Bar, destacam-se os seguintes trabalhos futuros:
+Após a conclusão e a implantação do MVP no Apache Gru Rock Bar, destacam-se os seguintes trabalhos futuros:
 
 \begin{itemize}
-  \item \textbf{Implementação do módulo de letras no celular e painel de estatísticas musicais:} ativar na próxima etapa do projeto o preenchimento e exibição da tabela \texttt{letra} (já estruturada na modelagem de dados) para acompanhamento no celular, bem como relatórios das músicas mais cantadas no Apache Gru Rock Bar;
-  \item \textbf{Notificação automática de proximidade na fila:} emitir um alerta visual no celular do cliente quando faltar apenas uma música para sua chamada ao palco;
-  \item \textbf{Detecção automática de bloqueio de \textit{embed} via YouTube IFrame API:} validar preventivamente no momento do pedido se o vídeo do YouTube permite reprodução embarcada, sugerindo automaticamente versões alternativas de karaokê;
-  \item \textbf{Interação da plateia e integração com o cardápio digital da casa:} permitir que as mesas enviem reações visuais para o telão durante as apresentações e disponibilizar um atalho rápido na tela da fila para o cardápio de bebidas e porções do bar.
+  \item \textbf{Avanço automático ao término do vídeo:} definir o mecanismo pelo qual o Reprodutor identifica o fim do vídeo na visão do YouTube e enviar esse aviso à API, que conclui o pedido e promove o próximo da fila, dispensando o acionamento manual do botão \textit{Próxima música};
+  \item \textbf{Escolha do provedor de nuvem:} selecionar o provedor que hospedará a aplicação web, a API e o banco de dados, considerando custo, desempenho e facilidade de manutenção, e realizar a implantação do MVP nesse ambiente;
+  \item \textbf{Módulo de letras no celular e painel de estatísticas musicais:} utilizar a tabela \texttt{letra}, já prevista no modelo de dados mas fora do escopo do MVP, para exibir as letras no celular do cliente, e gerar relatórios das músicas mais pedidas a partir dos registros da tabela \texttt{fila} (\texttt{id\_musica} e \texttt{dt\_pedido});
+  \item \textbf{Notificação de proximidade na fila:} aproveitar o canal WebSocket já existente para emitir um alerta no celular do cliente quando faltar apenas uma música para sua chamada ao palco;
+  \item \textbf{Interação da plateia e integração com o cardápio digital da casa:} permitir que as mesas enviem reações visuais para o telão durante as apresentações e disponibilizar um atalho na tela da fila para o cardápio de bebidas e porções do bar.
 \end{itemize}

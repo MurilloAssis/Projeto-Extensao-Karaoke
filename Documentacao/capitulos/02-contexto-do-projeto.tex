@@ -2,9 +2,9 @@
 
 Este capítulo apresenta o contexto real no qual o projeto \textbf{Karaokê Apache} está inserido, incluindo um estudo sobre o segmento de bares com entretenimento musical, índices de digitalização de micro e pequenas empresas no Brasil, análise de ferramentas concorrentes, caracterização do cenário do estabelecimento parceiro, público-alvo, necessidades identificadas e regras de negócio do domínio.
 
-No panorama nacional de hospitalidade e entretenimento noturno, a adoção de tecnologias de autoatendimento e automação operacional tornou-se um diferencial competitivo decisivo \cite{laudon2022,obrien2013}. Estudos setoriais demonstram que micro e pequenas empresas (MPMEs) enfrentam forte pressão sobre suas margens operacionais e frequentemente operam com equipes reduzidas, nas quais um mesmo colaborador acumula múltiplas funções durante o atendimento noturno \cite{sebrae2024,contasimples2025}. Quando atividades de entretenimento -- como noites de karaokê -- dependem de controles manuais em papel, o gargalo operacional transfere-se diretamente para a experiência do cliente, gerando filas no balcão, atrasos entre uma apresentação e outra e percepção de desorganização.
+Sistemas de informação permitem às empresas melhorar a eficiência de suas operações e a qualidade do atendimento aos clientes \cite{obrien2013}. No setor de bares e restaurantes, essa informatização já alcança as rotinas comerciais: pesquisa da Abrasel com mais de 1,5 mil empresários indicou que 83\% dos estabelecimentos usam algum software para controlar as vendas e 75\% usam ferramentas de controle financeiro, com espaço de crescimento em outras áreas da operação \cite{jornaldocomercio2023}. Ainda assim, a gestão manual permanece comum entre as micro, pequenas e médias empresas: 39\% delas controlam as despesas com planilhas e cadernos, e 44\% apontam o custo como motivo para não adotar sistemas especializados \cite{folhape2025}. Quando atividades de entretenimento, como noites de karaokê, dependem de controles manuais em papel, o problema operacional chega à experiência do cliente, com pedidos esquecidos, atrasos entre uma apresentação e outra e incerteza sobre a ordem de chamada, como observado no estabelecimento parceiro (Seção \ref{sec:cenario}).
 
-Por outro lado, a análise do mercado de softwares comerciais de karaokê para estabelecimentos revela que as principais soluções globais possuem custo proibitivo ou baixa aderência ao repertório de bares de rock brasileiros. Plataformas internacionais como o \textbf{Singa Business} \cite{singa2026} e o \textbf{KaraFun Business} \cite{karafun2026} cobram mensalidades em moeda estrangeira (entre US\$ 49,00 e US\$ 149,00 mensais) e restringem a reprodução aos seus catálogos licenciados fechados, impedindo o uso de versões específicas de karaokê disponíveis gratuitamente no YouTube. Já soluções nacionais de \textit{jukebox} digital, como o \textbf{Juks} \cite{juks2026}, destinam-se apenas à música ambiente de fundo, não oferecendo gestão de fila de cantores no palco nem reprodutor dedicado para telão. A Tabela \ref{tab:concorrencia} sintetiza o estudo comparativo de mercado realizado pela equipe.
+Por outro lado, as principais soluções comerciais de karaokê para estabelecimentos têm custo elevado para um pequeno bar brasileiro e não utilizam o acervo do YouTube. Plataformas internacionais como o \textbf{Singa Business} \cite{singa2026} e o \textbf{KaraFun Business} \cite{karafun2026} cobram mensalidades em dólar: os planos do KaraFun Stage, voltados a apresentações com cantores, custam de US\$ 49,99 a US\$ 209,99 por mês, com compromisso de 12 meses \cite{karafunstage2026}, e os do Singa Business partem de US\$ 59 por mês \cite{singablog2026}. Ambas trabalham com catálogos próprios licenciados, com mais de 90 mil músicas no KaraFun e mais de 140 mil no Singa \cite{karafun2026,singablog2026}, o que impede o uso de versões de karaokê disponíveis no YouTube. Já o \textbf{Juks} apresenta-se como uma \textit{jukebox} digital para bares e restaurantes \cite{juks2026}, voltada à execução de músicas no ambiente, e não à organização de apresentações de karaokê. A Tabela \ref{tab:concorrencia} sintetiza o estudo comparativo realizado pela equipe.
 
 \begin{table}[H]
 \IBGEtab{%
@@ -19,22 +19,22 @@ Por outro lado, a análise do mercado de softwares comerciais de karaokê para e
     Pedidos pelo celular via QR Code no telão & Parcial & Sim & Sim & Sim \\
     Escolha de vídeos pelo próprio sistema & Sim & Sim & Sim & Sim \\
     Fila de cantores com moderação de palco & Sim & Sim & Não & Sim \\
-    Player desktop dedicado em tela cheia (TV) & Sim & Sim & Parcial & Sim (Electron) \\
+    Reprodutor dedicado para o telão (TV) & Sim & Sim & Parcial & Sim (Electron) \\
     Suporte ao acervo de karaokê do YouTube & Não & Não & Parcial & Sim \\
     Bloqueio automático de música duplicada & Parcial & Parcial & Sim & Sim \\
-    Custo de licenciamento para o bar parceiro & Alto (US\$) & Alto (US\$) & Médio (R\$) & Gratuito (Extensão) \\
+    Custo para o bar parceiro & Alto (US\$) & Alto (US\$) & Médio (R\$) & \begin{tabular}[t]{@{}c@{}}Baixo (somente\\hospedagem)\end{tabular} \\
     \bottomrule
   \end{tabularx}%
 }{%
-  \fonte{Elaborado pelos autores (2026).}%
+  \fonte{Elaborado pelos autores a partir de \citeonline{karafunstage2026}, \citeonline{singablog2026} e \citeonline{juks2026}.}%
 }
 \end{table}
 
-\section{Cenário}
+\section{Cenário} \label{sec:cenario}
 
-O parceiro demandante do projeto é o estabelecimento comercial \textbf{Apache Gru Rock Bar}, registrado sob a razão social \texttt{APACHE GRU ROCK BAR LTDA - ME} e inscrito no CNPJ sob o n{\textordmasculine} \texttt{64.687.141/0001-07} \cite{serasa2026}. O bar está sediado na Rua Torres Tibagy, n{\textordmasculine} 58, no bairro Gopouva, região central do município de Guarulhos -- SP (CEP 07022-060) \cite{apacheinsta2026}.
+O parceiro demandante do projeto é o estabelecimento comercial \textbf{Apache Gru Rock Bar}, registrado sob a razão social \texttt{APACHE GRU ROCK BAR LTDA} e inscrito no CNPJ sob o n{\textordmasculine} \texttt{64.687.141/0001-07}. O bar está localizado na Avenida Torres Tibagy, n{\textordmasculine} 58, no bairro Gopouva, em Guarulhos -- SP (CEP 07062-000), e sua atividade principal é classificada no CNAE 5611-2/05, que corresponde a bares e outros estabelecimentos especializados em servir bebidas, com entretenimento \cite{cnpjapi2026}.
 
-O estabelecimento atua no ramo de bares especializados em servir bebidas e petiscos com programação musical e cultural (CNAE 5611-2/05), destacando-se na cena rock de Guarulhos \cite{zinesick2026}. Semanalmente, às quintas-feiras (a partir das 19h, com entrada gratuita), o bar realiza a sua tradicional \textbf{Noite de Karaokê} \cite{apachekaraoke2026}. No cenário atual de operação do salão, é utilizado um projetor \textit{whitelabel} com conexão à internet, sendo diretamente por ele acessado o aplicativo do YouTube e colocados os vídeos manualmente a cada apresentação.
+O Apache Gru é um bar de rock que recebe apresentações de bandas, como os shows do tributo \textit{Roots -- Sepultura Tributo} realizados em agosto de 2025 e janeiro de 2026 \cite{setlistfm2026}. Às quintas-feiras, a partir das 20h, o bar realiza a sua \textbf{Noite de Karaokê}, sem cobrança para cantar \cite{motofest2026}. No cenário atual de operação do salão, é utilizado um projetor \textit{whitelabel} com conexão à internet, sendo diretamente por ele acessado o aplicativo do YouTube e colocados os vídeos manualmente a cada apresentação.
 
 Dessa forma, a dinâmica da Noite de Karaokê ocorria de maneira inteiramente manual: os clientes precisavam solicitar suas músicas verbalmente ou em anotações de papel, e o organizador precisava digitar e pesquisar manualmente cada vídeo no YouTube diretamente pela interface do projetor \textit{whitelabel} conectado à internet, interrompendo a fluidez entre uma apresentação e outra e dificultando o controle da fila de espera.
 
@@ -56,7 +56,7 @@ A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das 
   \item \textbf{N01 -- Autonomia para escolha de vídeos pelo próprio sistema:} necessidade de permitir que o cliente acesse a plataforma via QR Code exibido no telão e escolha o vídeo musical desejado diretamente pelo próprio sistema em seu celular, eliminando o uso de fichas de papel;
   \item \textbf{N02 -- Transparência e previsibilidade na fila de espera:} necessidade de dar visibilidade pública e em tempo real para todos os participantes sobre qual música está tocando no momento, quantas pessoas estão na fila e qual é a ordem das próximas apresentações;
   \item \textbf{N03 -- Prevenção de repetições e garantia de rotatividade justa:} necessidade de evitar que uma mesma canção seja cantada repetidas vezes em curto espaço de tempo ou que um único participante monopolize a fila;
-  \item \textbf{N04 -- Automação e limpeza visual da reprodução no telão:} necessidade de substituir a busca manual direta no projetor \textit{whitelabel} por um reprodutor dedicado controlado remotamente, garantindo que o avanço da fila acione automaticamente o vídeo em tela cheia no telão sem expor telas de busca ou menus intermediários.
+  \item \textbf{N04 -- Automação e limpeza visual da reprodução no telão:} necessidade de substituir a busca manual direta no projetor \textit{whitelabel} por um reprodutor dedicado, controlado remotamente a partir da fila, que exiba no telão o vídeo da música da vez sem expor telas de busca ou menus intermediários.
 \end{itemize}
 
 \section{Regras de Negócio}
@@ -79,7 +79,7 @@ Para atender às necessidades identificadas respeitando as políticas operaciona
     \addlinespace
     RN02 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente autenticado possui um limite configurável de pedidos ativos simultâneos na fila (padrão de 1 a 2 músicas pendentes por vez). \\
     \addlinespace
-    RN03 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, avanço para a próxima faixa, reordenação excepcional por ausência do cantor e remoção de itens da fila são prerrogativas exclusivas do organizador (Administrador). \\
+    RN03 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, o avanço para a próxima faixa e a remoção de itens da fila (inclusive por ausência do cantor) são prerrogativas exclusivas do organizador (Administrador). A ordem da fila segue a ordem de chegada dos pedidos (FIFO) e não é alterada manualmente. \\
     \addlinespace
     RN04 & Ciclo de Vida e Rastreabilidade do Pedido & Todo pedido aceito percorre um fluxo controlado de estados (\textit{Na Fila}, \textit{Reproduzindo}, \textit{Concluído} ou \textit{Cancelado}), mantendo o registro do solicitante e do horário para controle da sessão. \\
     \bottomrule
@@ -89,14 +89,16 @@ Para atender às necessidades identificadas respeitando as políticas operaciona
 }
 \end{table}
 
-O Quadro \ref{quad:atividades} apresenta o \textbf{Diagrama de Atividades UML} que modela o fluxo operacional de negócio desde a solicitação da música pelo cliente na mesa até a conclusão da apresentação no palco, destacando os pontos de decisão regidos pelas regras RN00, RN01, RN02 e RN03.
+A Figura \ref{fig:atividades} apresenta o \textbf{Diagrama de Atividades UML} que modela o fluxo operacional de negócio desde a solicitação da música pelo cliente na mesa até a conclusão da apresentação no palco, destacando os pontos de decisão regidos pelas regras RN00, RN01, RN02 e RN03.
 
 \Needspace{20cm}
-\begin{caixa}{Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}{quad:atividades}
+\begin{figure}[H]
+  \caption{Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}
+  \label{fig:atividades}
 \begin{center}
   \includegraphics[width=0.95\textwidth,height=0.78\textheight,keepaspectratio]{imagens/diagrama_atividades.png}
 \end{center}
 \legend{Fonte: Elaborado pelos autores (2026).}
-\end{caixa}
+\end{figure}
 
 %% -------------------------------------------------------------------------- %%

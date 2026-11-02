@@ -5,8 +5,29 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
+\bibitem[Baldo 2026]{sebrae2026}
+\abntrefinfo{Baldo}{BALDO}{2026}
+{BALDO, R. \textbf{Micro e pequenas empresas foram responsáveis por sete em
+  cada 10 empregos formais gerados até novembro de 2025}. Brasília, DF:
+  Agência Sebrae de Notícias, 2026.
+Publicado em 7 jan. 2026.
+Dispon{\'\i}vel em:
+  \url{https://agenciasebrae.com.br/dados/micro-e-pequenas-empresas-foram-responsaveis-por-sete-em-cada-10-empregos-formais-gerados-ate-novembro-de-2025/}.
+  Acesso em: 1 nov. 2026.}
+
+\bibitem[BRASIL 2008]{brasil2008lei11892}
+\abntrefinfo{BRASIL}{BRASIL}{2008}
+{BRASIL. \textbf{Lei n{\textordmasculine} 11.892, de 29 de dezembro de 2008.
+  Institui a Rede Federal de Educação Profissional, Científica e
+  Tecnológica, cria os Institutos Federais de Educação, Ciência e
+  Tecnologia, e dá outras providências}. Brasília, DF: Presidência da
+  República, 2008.
+Dispon{\'\i}vel em:
+  \url{https://www.planalto.gov.br/ccivil\_03/\_ato2007-2010/2008/lei/l11892.htm}.
+  Acesso em: 1 nov. 2026.}
+
 \bibitem[BRASIL 2018]{brasil2018lgpd}
-\abntrefinfo{BRASIL}{BRASIL}{2018}
+\abntrefinfo{BRASIL}{BRASIL}{2018a}
 {BRASIL. \textbf{Lei n{\textordmasculine} 13.709, de 14 de agosto de 2018. Lei
   Geral de Proteção de Dados Pessoais (LGPD)}. Brasília, DF: Presidência da
   República, 2018.
@@ -14,13 +35,20 @@ Dispon{\'\i}vel em:
   \url{https://www.planalto.gov.br/ccivil\_03/\_ato2015-2018/2018/lei/l13709.htm}.
   Acesso em: 12 out. 2026.}
 
-\bibitem[{CONTA SIMPLES} \& {VISA} 2025]{contasimples2025}
-\abntrefinfo{{CONTA SIMPLES} \& {VISA}}{{CONTA SIMPLES}; {VISA}}{2025}
-{{CONTA SIMPLES}; {VISA}. \textbf{1{\textordmasculine} Panorama da Gestão de
-  Despesas Corporativas no Brasil}. São Paulo: [s.n.], 2025.
-Dispon{\'\i}vel em:
-  \url{https://lp.contasimples.com/panorama-da-gestao-de-despesas-corporativas-no-brasil}.
-  Acesso em: 12 out. 2026.}
+\bibitem[BRASIL 2018]{brasil2018cne7}
+\abntrefinfo{BRASIL}{BRASIL}{2018b}
+{BRASIL. \textbf{Resolução CNE/CES n{\textordmasculine} 7, de 18 de dezembro
+  de 2018. Estabelece as Diretrizes para a Extensão na Educação Superior
+  Brasileira}. Brasília, DF: Ministério da Educação, Conselho Nacional de
+  Educação, 2018.
+Diário Oficial da União, seção 1, p. 49--50, 19 dez. 2018.}
+
+\bibitem[{CNPJ API} 2026]{cnpjapi2026}
+\abntrefinfo{{CNPJ API}}{{CNPJ API}}{2026}
+{{CNPJ API}. \textbf{CNPJ 64.687.141/0001-07: APACHE GRU ROCK BAR LTDA}. 2026.
+Dados públicos do Cadastro Nacional da Pessoa Jurídica.
+Dispon{\'\i}vel em: \url{https://cnpj-api.com/en/cnpj/64687141000107}. Acesso
+  em: 1 nov. 2026.}
 
 \bibitem[{ELECTRON} 2025]{electron2025}
 \abntrefinfo{{ELECTRON}}{{ELECTRON}}{2025}
@@ -29,18 +57,78 @@ Dispon{\'\i}vel em:
 Dispon{\'\i}vel em: \url{https://www.electronjs.org/docs}. Acesso em: 15 out.
   2026.}
 
+\bibitem[Fette \& Melnikov 2011]{rfc6455}
+\abntrefinfo{Fette \& Melnikov}{FETTE; MELNIKOV}{2011}
+{FETTE, I.; MELNIKOV, A. \textbf{RFC 6455: The WebSocket Protocol}. Internet
+  Engineering Task Force (IETF), 2011.
+Dispon{\'\i}vel em: \url{https://www.rfc-editor.org/rfc/rfc6455}. Acesso em: 1
+  nov. 2026.}
+
+\bibitem[{FOLHA DE PERNAMBUCO} 2025]{folhape2025}
+\abntrefinfo{{FOLHA DE PERNAMBUCO}}{{FOLHA DE PERNAMBUCO}}{2025}
+{{FOLHA DE PERNAMBUCO}. \textbf{Pesquisa mostra que 39\% das MPMEs ainda
+  controlam despesas de forma manual}. Recife: Folha de Pernambuco, 2025.
+Publicado em 20 jan. 2025.
+Dispon{\'\i}vel em:
+  \url{https://www.folhape.com.br/economia/pesquisa-mostra-que-39-das-mpmes-ainda-controlam-despesas-de-forma/385706/}.
+  Acesso em: 1 nov. 2026.}
+
+\bibitem[Fowler 2006]{fowler2006}
+\abntrefinfo{Fowler}{FOWLER}{2006}
+{FOWLER, M. \textbf{Padrões de Arquitetura de Aplicações Corporativas}.
+  Porto Alegre: Bookman, 2006.}
+
+\bibitem[{GOOGLE} 2026]{youtubedataapi2026}
+\abntrefinfo{{GOOGLE}}{{GOOGLE}}{2026}
+{{GOOGLE}. \textbf{YouTube Data API v3: Quota and Compliance Audits}. 2026.
+Dispon{\'\i}vel em:
+  \url{https://developers.google.com/youtube/v3/guides/quota\_and\_compliance\_audits}.
+  Acesso em: 1 nov. 2026.}
+
+\bibitem[{JORNAL DO COMÉRCIO} 2023]{jornaldocomercio2023}
+\abntrefinfo{{JORNAL DO COMÉRCIO}}{{JORNAL DO COMÉRCIO}}{2023}
+{{JORNAL DO COMÉRCIO}. \textbf{Bares e restaurantes estão mais digitais na
+  gestão, mostra pesquisa}. Porto Alegre: Jornal do Comércio, 2023.
+Publicado em 31 maio 2023.
+Dispon{\'\i}vel em:
+  \url{https://www.jornaldocomercio.com/economia/2023/05/1108971-bares-e-restaurantes-estao-mais-digitais-na-gestao-mostra-pesquisa.html}.
+  Acesso em: 1 nov. 2026.}
+
 \bibitem[{JUKS} 2026]{juks2026}
 \abntrefinfo{{JUKS}}{{JUKS}}{2026}
-{{JUKS}. \textbf{Juks -- O Jukebox Digital do Seu Bar}. São Paulo: [s.n.],
-  2026.
-Dispon{\'\i}vel em: \url{https://juks.com.br/}. Acesso em: 14 out. 2026.}
+{{JUKS}. \textbf{Juks: Jukebox Digital para Bares e Restaurantes}. 2026.
+Dispon{\'\i}vel em: \url{https://juks.com.br/}. Acesso em: 1 nov. 2026.}
 
 \bibitem[{KARAFUN BUSINESS} 2026]{karafun2026}
-\abntrefinfo{{KARAFUN BUSINESS}}{{KARAFUN BUSINESS}}{2026}
-{{KARAFUN BUSINESS}. \textbf{KaraFun Business \& KaraFun Pro: Professional
-  Karaoke Solutions for Venues}. Lille: [s.n.], 2026.
-Dispon{\'\i}vel em: \url{https://business.karafun.com/}. Acesso em: 14 out.
+\abntrefinfo{{KARAFUN BUSINESS}}{{KARAFUN BUSINESS}}{2026a}
+{{KARAFUN BUSINESS}. \textbf{KaraFun Business: Karaoke Solutions for
+  Professionals}. Lille: Recisio, 2026.
+Dispon{\'\i}vel em: \url{https://business.karafun.com/}. Acesso em: 1 nov.
   2026.}
+
+\bibitem[{KARAFUN BUSINESS} 2026]{karafunstage2026}
+\abntrefinfo{{KARAFUN BUSINESS}}{{KARAFUN BUSINESS}}{2026b}
+{{KARAFUN BUSINESS}. \textbf{KaraFun Stage: Pricing}. Lille: Recisio, 2026.
+Dispon{\'\i}vel em: \url{https://business.karafun.com/stage/pricing}. Acesso
+  em: 1 nov. 2026.}
+
+\bibitem[{MOTOFEST BRASIL} 2026]{motofest2026}
+\abntrefinfo{{MOTOFEST BRASIL}}{{MOTOFEST BRASIL}}{2026}
+{{MOTOFEST BRASIL}. \textbf{Noite do Karaokê no Apache GRU Rock Bar em
+  Guarulhos - SP}. 2026.
+Dispon{\'\i}vel em:
+  \url{https://motofestbrasil.com.br/motofest/noite-do-karaoke-no-apache-gru-rock-bar-em-guarulhos-sp}.
+  Acesso em: 1 nov. 2026.}
+
+\bibitem[O'Brien \& Marakas 2013]{obrien2013}
+\abntrefinfo{O'Brien \& Marakas}{O'BRIEN; MARAKAS}{2013}
+{O'BRIEN, J.~A.; MARAKAS, G.~M. \textbf{Administração de Sistemas de
+  Informação}. Porto Alegre: AMGH, 2013.}
+
+\bibitem[Pressman \& Maxim 2016]{pressman2016}
+\abntrefinfo{Pressman \& Maxim}{PRESSMAN; MAXIM}{2016}
+{PRESSMAN, R.~S.; MAXIM, B.~R. \textbf{Engenharia de Software: uma abordagem
+  profissional}. 8. ed. Porto Alegre: AMGH, 2016.}
 
 \bibitem[{REACT} 2025]{react2025}
 \abntrefinfo{{REACT}}{{REACT}}{2025}
@@ -48,19 +136,43 @@ Dispon{\'\i}vel em: \url{https://business.karafun.com/}. Acesso em: 14 out.
   2025.
 Dispon{\'\i}vel em: \url{https://react.dev/}. Acesso em: 15 out. 2026.}
 
-\bibitem[{SERASA EXPERIAN} 2026]{serasa2026}
-\abntrefinfo{{SERASA EXPERIAN}}{{SERASA EXPERIAN}}{2026}
-{{SERASA EXPERIAN}. \textbf{Consulta Cadastral de Pessoa Jurídica: APACHE GRU
-  ROCK BAR LTDA - ME (CNPJ 64.687.141/0001-07)}. São Paulo: [s.n.], 2026.
+\bibitem[{SETLIST.FM} 2026]{setlistfm2026}
+\abntrefinfo{{SETLIST.FM}}{{SETLIST.FM}}{2026}
+{{SETLIST.FM}. \textbf{Apache GRU, Guarulhos, Brazil: Concert Setlists}. 2026.
 Dispon{\'\i}vel em:
-  \url{https://empresas.serasaexperian.com.br/consulta-gratis/APACHE-GRU-ROCK-BAR-LTDA-ME-64687141000107}.
-  Acesso em: 10 out. 2026.}
+  \url{https://www.setlist.fm/venue/apache-gru-guarulhos-brazil-5bde7f84.html}.
+  Acesso em: 1 nov. 2026.}
+
+\bibitem[{SINGA} 2026]{singablog2026}
+\abntrefinfo{{SINGA}}{{SINGA}}{2026}
+{{SINGA}. \textbf{Best Karaoke Software for Business}. Helsinki: Singa, 2026.
+Atualizado em 14 set. 2026.
+Dispon{\'\i}vel em:
+  \url{https://singa.com/blog/best-karaoke-software-for-business/}. Acesso em:
+  1 nov. 2026.}
 
 \bibitem[{SINGA BUSINESS} 2026]{singa2026}
 \abntrefinfo{{SINGA BUSINESS}}{{SINGA BUSINESS}}{2026}
 {{SINGA BUSINESS}. \textbf{Professional Karaoke Software for Bars, Venues and
-  KTV Rooms}. Helsinki: [s.n.], 2026.
+  KTV Rooms}. Helsinki: Singa, 2026.
 Dispon{\'\i}vel em: \url{https://singa.com/business/}. Acesso em: 14 out.
   2026.}
+
+\bibitem[Sommerville 2019]{sommerville2019}
+\abntrefinfo{Sommerville}{SOMMERVILLE}{2019}
+{SOMMERVILLE, I. \textbf{Engenharia de Software}. 10. ed. São Paulo: Pearson
+  Education do Brasil, 2019.}
+
+\bibitem[{SPRING} 2026]{springboot2026}
+\abntrefinfo{{SPRING}}{{SPRING}}{2026}
+{{SPRING}. \textbf{Spring Boot Reference Documentation}. 2026.
+Dispon{\'\i}vel em: \url{https://docs.spring.io/spring-boot/}. Acesso em: 1
+  nov. 2026.}
+
+\bibitem[{STOMP} 2012]{stomp2012}
+\abntrefinfo{{STOMP}}{{STOMP}}{2012}
+{{STOMP}. \textbf{STOMP Protocol Specification, Version 1.2}. 2012.
+Dispon{\'\i}vel em: \url{https://stomp.github.io/stomp-specification-1.2.html}.
+  Acesso em: 1 nov. 2026.}
 
 \end{thebibliography}
