@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor da Fila</title>
+<style>
+  :root { --fundo: #0b0e14; --painel: #151a24; --texto: #e6e8ee; --suave: #8a93a6; --ok: #3ccf7a; --erro: #d91c24; --destaque: #1a4b84; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 16px; background: var(--fundo); color: var(--texto); font: 14px/1.4 system-ui, sans-serif; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  h1 { font-size: 18px; margin: 0; }
+  #estado { padding: 4px 10px; border-radius: 999px; background: var(--painel); }
+  #estado.ok { color: var(--ok); } #estado.erro { color: var(--erro); }
+  .grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; }
+  @media (max-width: 760px) { .grade { grid-template-columns: 1fr; } }
+  section { background: var(--painel); border-radius: 8px; padding: 12px; min-width: 0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--suave); margin: 0 0 8px; }
+  .atual { font-size: 16px; padding: 8px; border-left: 3px solid var(--destaque); margin-bottom: 8px; }
+  ol { margin: 0; padding-left: 20px; }
+  .vazio { color: var(--suave); }
+  #log { list-style: none; padding: 0; margin: 0; max-height: 70vh; overflow: auto; }
+  #log li { border-bottom: 1px solid #222a38; padding: 6px 0; overflow-wrap: anywhere; }
+  .motivo { font-weight: 600; } .meta { color: var(--suave); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Monitor da fila — fila-atualizada</h1>
+  <span id="estado">Conectando…</span>
+</header>
+<div class="grade">
+  <section>
+    <h2>Tocando agora</h2>
+    <div id="atual" class="atual vazio">Telão em espera</div>
+    <h2>Próximos</h2>
+    <ol id="proximos"></ol>
+  </section>
+  <section>
+    <h2>Mensagens recebidas</h2>
+    <ul id="log"></ul>
+  </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+<script>
+  const estado = document.getElementById('estado');
+  const log = document.getElementById('log');
+  let ultimaVersao = 0;
+
+  function mostrarFila(fila) {
+    const atual = document.getElementById('atual');
+    if (fila.atual) {
+      atual.textContent = `#${fila.atual.idFila} — ${fila.atual.musica.titulo}`;
+      atual.classList.remove('vazio');
+    } else {
+      atual.textContent = 'Telão em espera';
+      atual.classList.add('vazio');
+    }
+    const lista = document.getElementById('proximos');
+    lista.replaceChildren(...fila.proximos.map(item => {
+      const li = document.createElement('li');
+      li.textContent = `#${item.idFila} — ${item.musica.titulo}`;
+      return li;
+    }));
+  }
+
+  function registrar(msg) {
+    const atraso = Date.now() - Date.parse(msg.emitidoEm);
+    const li = document.createElement('li');
+    li.innerHTML = '<span class="motivo"></span> <span class="meta"></span>';
+    li.querySelector('.motivo').textContent = msg.motivo;
+    li.querySelector('.meta').textContent =
+      `versão ${msg.versao} · pedido ${msg.idFila ?? '-'} · ${new Date().toLocaleTimeString()} · atraso ${atraso} ms`;
+    log.prepend(li);
+  }
+
+  async function carregarFila() {
+    const resposta = await fetch('/api/fila');
+    mostrarFila(await resposta.json());
+  }
+
+  const cliente = new StompJs.Client({
+    brokerURL: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`,
+    reconnectDelay: 3000,
+    heartbeatIncoming: 10000,
+    heartbeatOutgoing: 10000,
+  });
+  cliente.onConnect = () => {
+    estado.textContent = 'Conectado';
+    estado.className = 'ok';
+    ultimaVersao = 0; // a API pode ter reiniciado; o estado vem do GET abaixo
+    carregarFila();
+    cliente.subscribe('/topic/fila-atualizada', frame => {
+      const msg = JSON.parse(frame.body);
+      if (msg.versao <= ultimaVersao) return;
+      ultimaVersao = msg.versao;
+      registrar(msg);
+      mostrarFila(msg.fila);
+    });
+  };
+  cliente.onWebSocketClose = () => { estado.textContent = 'Desconectado — tentando reconectar'; estado.className = 'erro'; };
+  cliente.activate();
+</script>
+</body>
+</html>

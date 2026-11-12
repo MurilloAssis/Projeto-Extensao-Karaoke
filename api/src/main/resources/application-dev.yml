@@ -1,3 +1,9 @@
 logging:
   level:
     br.edu.ifsp.karaoke: DEBUG
+
+# Ferramentas de desenvolvimento (ex.: /dev/monitor-fila.html), publicadas só neste perfil.
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/dev-static/

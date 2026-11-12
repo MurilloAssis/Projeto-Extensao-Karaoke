@@ -16,9 +16,11 @@ spring:
 
 karaoke:
   fila:
-    limite-pedidos: ${KARAOKE_LIMITE_PEDIDOS:5}
+    limite-pedidos: ${KARAOKE_LIMITE_PEDIDOS:2}
   reprodutor:
     chave: ${PLAYER_API_KEY:teste}
+  cors:
+    origens: ${CORS_ORIGINS:http://localhost:5173}
 
 management:
   endpoints:

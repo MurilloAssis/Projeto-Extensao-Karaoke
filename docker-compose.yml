@@ -38,6 +38,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       KARAOKE_LIMITE_PEDIDOS: ${KARAOKE_LIMITE_PEDIDOS:-2}
       PLAYER_API_KEY: ${PLAYER_API_KEY}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
     ports:
       - "8080:8080"
 
