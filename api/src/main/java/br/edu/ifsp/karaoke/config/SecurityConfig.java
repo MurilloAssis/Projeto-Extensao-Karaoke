@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,13 +36,20 @@ public class SecurityConfig {
                                 @Value("${karaoke.reprodutor.chave:}") String chaveReprodutor,
                                 @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolvedorErros)
             throws Exception {
+        boolean perfilDev = ambiente.acceptsProfiles(Profiles.of("dev"));
         http
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .logout(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(rotas -> rotas
+                .authorizeHttpRequests(rotas -> {
+                    if (perfilDev) {
+                        rotas.requestMatchers(GET, "/dev/**").permitAll();
+                    }
+                    rotas
+                        .requestMatchers(GET, WebSocketConfig.ENDPOINT).permitAll()
                         .requestMatchers(GET, "/api/fila", "/api/fila/atual").permitAll()
                         .requestMatchers(GET, "/api/fila/admin").hasRole(ADMIN)
                         .requestMatchers(GET, "/api/fila/meus-pedidos").hasAnyRole(CLIENTES)
@@ -51,7 +59,8 @@ public class SecurityConfig {
                         .requestMatchers(DELETE, "/api/fila", "/api/fila/*").hasRole(ADMIN)
                         .requestMatchers("/actuator/health", "/swagger-ui.html", "/swagger-ui/**",
                                 "/v3/api-docs/**", "/error").permitAll()
-                        .anyRequest().denyAll())
+                        .anyRequest().denyAll();
+                })
                 .exceptionHandling(erros -> erros
                         .authenticationEntryPoint((req, res, e) -> resolvedorErros.resolveException(req, res, null, e))
                         .accessDeniedHandler((req, res, e) -> resolvedorErros.resolveException(req, res, null, e)))

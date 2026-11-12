@@ -3,3 +3,5 @@ karaoke:
     limite-pedidos: 2
   reprodutor:
     chave: chave-de-teste
+  cors:
+    origens: http://localhost:5173

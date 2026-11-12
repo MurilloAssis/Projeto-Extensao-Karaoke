@@ -18,10 +18,10 @@ br.edu.ifsp.karaoke
 ├── dto/
 │   ├── request/          Dados recebidos pelos endpoints
 │   └── response/         Dados devolvidos pelos endpoints
-├── event/                Eventos de alteração da fila (base para o WebSocket)
+├── event/                Eventos de alteração da fila e envio de fila-atualizada (WebSocket)
 ├── exception/            Exceções de negócio e códigos de erro
 ├── security/             Identificação do usuário e do reprodutor
-└── config/               Configuração do Spring (segurança, relógio, OpenAPI)
+└── config/               Configuração do Spring (segurança, CORS, WebSocket, relógio, OpenAPI)
 ```
 
 ## Rodar tudo no Docker
@@ -49,7 +49,8 @@ docker compose up -d --build
 | `DB_URL` | `jdbc:mysql://localhost:3306/karaoke_apache?connectionTimeZone=UTC` | conexão |
 | `DB_USER` / `DB_PASSWORD` | `karaoke_app` / vazio | credenciais |
 | `KARAOKE_LIMITE_PEDIDOS` | `2` | RN02 |
-| `PLAYER_API_KEY` | vazio (desativado) | chave do Karaokê TV Player |
+| `PLAYER_API_KEY` | `teste` | chave do Karaokê TV Player (defina um valor forte em produção) |
+| `CORS_ORIGINS` | `http://localhost:5173` | origens do React/Electron, separadas por vírgula (HTTP e WebSocket) |
 
 3. Suba no perfil `dev`:
 
@@ -88,6 +89,60 @@ curl localhost:8080/api/fila
 | POST | `/api/fila/{idFila}/concluir` | reprodutor (`X-Player-Key`) |
 
 Erros seguem o formato ProblemDetail com o campo `codigo` (ex.: `RN01_MUSICA_JA_NA_FILA`).
+
+## Tempo real (WebSocket/STOMP)
+
+Comandos vão sempre por HTTP. Depois de cada alteração salva, a API avisa **todas** as telas
+pelo evento `fila-atualizada` (Seção 4.5 do documento).
+
+- Endpoint: `ws://localhost:8080/ws` (`wss://` em produção), STOMP sem SockJS
+- Tópico: `/topic/fila-atualizada` (público, somente leitura; envio de mensagens pelas telas é recusado)
+- Heartbeat: 10 s
+
+```json
+{
+  "evento": "fila-atualizada",
+  "motivo": "PROXIMA",
+  "idFila": 12,
+  "versao": 37,
+  "emitidoEm": "2026-11-12T23:41:05.312Z",
+  "fila": { "atual": { "...": "igual a GET /api/fila" }, "proximos": [], "total": 0 }
+}
+```
+
+`motivo`: `PEDIDO_ADICIONADO`, `REPRODUCAO_INICIADA`, `PROXIMA`, `PEDIDO_REMOVIDO`, `FILA_LIMPA`, `PEDIDO_CONCLUIDO`.
+`fila` é a visão pública (sem nomes). O Admin Web busca `GET /api/fila/admin` ao receber o aviso; o Cliente Web,
+`GET /api/fila/meus-pedidos`.
+
+Exemplo com [`@stomp/stompjs`](https://www.npmjs.com/package/@stomp/stompjs):
+
+```js
+import { Client } from '@stomp/stompjs';
+
+let ultimaVersao = 0;
+const cliente = new Client({
+  brokerURL: 'ws://localhost:8080/ws',
+  reconnectDelay: 3000,
+  heartbeatIncoming: 10000,
+  heartbeatOutgoing: 10000,
+});
+cliente.onConnect = async () => {
+  ultimaVersao = 0;
+  atualizarTela(await (await fetch('http://localhost:8080/api/fila')).json()); // estado ao (re)conectar
+  cliente.subscribe('/topic/fila-atualizada', frame => {
+    const msg = JSON.parse(frame.body);
+    if (msg.versao <= ultimaVersao) return; // descarta mensagem antiga
+    ultimaVersao = msg.versao;
+    atualizarTela(msg.fila);
+  });
+};
+cliente.activate();
+```
+
+A origem da tela precisa estar em `CORS_ORIGINS`.
+
+**Monitor (perfil `dev`):** `http://localhost:8080/dev/monitor-fila.html` mostra a fila e cada mensagem
+recebida, com versão, motivo e atraso. Útil junto com a collection do Postman. Fora do perfil `dev`, a página não existe.
 
 ## Collection Postman
 

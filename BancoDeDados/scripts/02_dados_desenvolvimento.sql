@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 USE karaoke_apache;
 
 INSERT INTO usuario (id_usuario, nome, email, senha_hash, tipo_perfil) VALUES
