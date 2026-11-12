@@ -1,0 +1,68 @@
+\chapter{Introdução} \label{cap:introducao}
+
+Este capítulo apresenta o projeto \textbf{Karaokê Apache} de forma geral, estabelecendo sua caracterização, seus objetivos, sua justificativa, a delimitação de seu escopo atual em nível de Produto Mínimo Viável (MVP) e a organização estrutural do documento.
+
+\section{Caracterização do Projeto}
+
+O projeto \textbf{Karaokê Apache} consiste no desenvolvimento de uma solução computacional integrada, composta por aplicações web responsivas, por uma API hospedada em nuvem e por um reprodutor desktop dedicado ao telão, voltada à automação do gerenciamento de fila de cantores, recepção de pedidos musicais e reprodução audiovisual em eventos de karaokê. O sistema nasce como uma iniciativa acadêmica e extensionista vinculada à disciplina de \textit{Projeto Integrado de Extensão} do Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP -- Campus São Paulo).
+
+A demanda originou-se da observação direta da rotina operacional do estabelecimento parceiro \textbf{Apache Gru Rock Bar}, localizado no município de Guarulhos -- SP. Durante a realização semanal de sua tradicional \textit{Noite de Karaokê}, constatou-se que todo o fluxo de inscrição de participantes, escolha de faixas musicais e acionamento de vídeos no telão ocorria de forma manual, gerando gargalos de atendimento e sobrecarga para a equipe do bar.
+
+Para responder a esse cenário, o projeto propõe uma arquitetura distribuída que descentraliza a entrada de pedidos, permitindo que os próprios clientes pesquisem e escolham vídeos musicais pelo sistema em seus smartphones, a partir da leitura do QR Code exibido no telão. A moderação da fila fica com o organizador, em uma interface web própria, e a reprodução dos vídeos fica com o aplicativo desktop \textbf{Karaokê TV Player}, construído com Electron e executado no computador do bar, que exibe no telão o vídeo da música da vez ao lado da interface do sistema. O projeto encontra-se em fase de desenvolvimento do seu \textbf{Produto Mínimo Viável (MVP)}, com a modelagem de engenharia de software concluída e a Prova de Conceito (PoC) validada.
+
+\section{Objetivos}
+
+Os objetivos a seguir orientam o desenvolvimento do projeto e delimitam os resultados alcançados na modelagem e na construção do MVP.
+
+\subsection{Objetivo Geral}
+
+Projetar e desenvolver o Produto Mínimo Viável (MVP) de um sistema integrado web e desktop para o gerenciamento de fila, recepção de pedidos musicais e reprodução audiovisual automatizada nas noites de karaokê do estabelecimento Apache Gru Rock Bar, substituindo controles manuais em papel por uma solução digital organizada, acessível e de baixo custo.
+
+\subsection{Objetivos Específicos} \label{sec:objetivos_especificos}
+
+\begin{itemize}
+  \item Diagnosticar o cenário operacional, o público-alvo e as necessidades do estabelecimento parceiro Apache Gru Rock Bar durante a condução da Noite de Karaokê;
+  \item Especificar as regras de negócio (RN00 a RN04), casos de uso, requisitos funcionais (RF01 a RF12), requisitos não funcionais (RNF01 a RNF09) e restrições do sistema;
+  \item Elaborar a modelagem completa de análise e projeto do sistema utilizando a Linguagem de Modelagem Unificada (UML) e modelagem conceitual/relacional de banco de dados;
+  \item Implementar a Prova de Conceito (PoC) e o núcleo do MVP integrando a interface web de controle e fila em React/Vite com o reprodutor desktop nativo \textbf{Karaokê TV Player} em Electron;
+  \item Validar a sincronização em tempo real entre a fila de pedidos e a tela de reprodução na TV, documentando o progresso atual, os testes preliminares e o roteiro de evolução do MVP.
+\end{itemize}
+
+\section{Justificativa}
+
+A realização do projeto justifica-se em três eixos complementares: a relevância operacional para o estabelecimento atendido, a contribuição para pequenos negócios locais e o cumprimento da função extensionista da instituição, com a formação prática dos estudantes.
+
+Para o estabelecimento parceiro e seus frequentadores, a digitalização do fluxo de pedidos elimina o uso de fichas de papel, impede a repetição de músicas já presentes na fila e dá aos clientes visibilidade sobre sua posição na ordem de apresentações. Ao mesmo tempo, o organizador deixa de pesquisar e digitar manualmente cada vídeo no aplicativo do YouTube do projetor (Capítulo \ref{cap:contexto}), o que libera sua atenção para a condução do palco e o atendimento do salão.
+
+No setor de bares e restaurantes, a informatização avançou sobretudo nas rotinas comerciais. Pesquisa da Associação Brasileira de Bares e Restaurantes (Abrasel) com mais de 1,5 mil empresários indicou que 83\% dos estabelecimentos usam algum tipo de software para controlar as vendas e 75\% usam ferramentas de controle financeiro, mas apontou espaço de crescimento em outras áreas da operação, como o controle de reservas \cite{jornaldocomercio2023}. No estabelecimento parceiro, a Noite de Karaokê é um exemplo dessas áreas ainda não atendidas por sistemas: a organização dos pedidos e da fila de cantores continua manual.
+
+Entre as micro, pequenas e médias empresas (MPMEs) em geral, a gestão manual ainda é frequente. O \textit{1{\textordmasculine} Panorama da Gestão de Despesas Corporativas no Brasil}, da Conta Simples e da Visa, realizado com 1.524 empresários entre novembro e dezembro de 2024, mostrou que 39\% das MPMEs controlam suas despesas de forma manual, com planilhas e cadernos, percentual que chega a 45\% entre as microempresas. Entre os motivos para não adotar sistemas especializados, 44\% dos entrevistados citaram o custo percebido como alto \cite{folhape2025}. Esse cenário reforça a importância de soluções de baixo custo, como a proposta neste projeto, cujo único custo previsto é o da hospedagem em nuvem (Seção \ref{sec:restricoes}). A relevância econômica desses negócios também é expressiva: segundo o Sebrae, com base no Caged, as micro e pequenas empresas responderam por sete em cada dez empregos formais gerados no Brasil entre janeiro e novembro de 2025 \cite{sebrae2026}.
+
+Por fim, o projeto cumpre a função extensionista do IFSP. A Lei n{\textordmasculine} 11.892/2008, que criou os Institutos Federais, inclui entre suas finalidades desenvolver programas de extensão (art. 6{\textordmasculine}, VII) e, entre seus objetivos, desenvolver atividades de extensão em articulação com o mundo do trabalho e os segmentos sociais (art. 7{\textordmasculine}, IV) \cite{brasil2008lei11892}. A Resolução CNE/CES n{\textordmasculine} 7/2018 estabelece que as atividades de extensão devem compor, no mínimo, 10\% da carga horária curricular dos cursos de graduação \cite{brasil2018cne7}, e a disciplina de Projeto Integrado de Extensão, na qual este trabalho se insere, é uma das formas de cumprir essa diretriz. Para os discentes, o projeto proporciona a vivência de todas as etapas da engenharia de software com um cliente real: a elicitação de requisitos, a modelagem UML, o desenvolvimento com React, Spring Boot e Electron, o versionamento colaborativo em Git e a tomada de decisões técnicas diante de restrições concretas, como as limitações de reprodução de vídeos protegidos por direitos autorais e a cota de uso da API do YouTube.
+
+\section{Escopo do Projeto}
+
+O escopo do projeto abrange a especificação completa da arquitetura e a entrega do \textbf{Produto Mínimo Viável (MVP)} do sistema \textbf{Karaokê Apache}, contemplando:
+
+\begin{enumerate}
+  \item Levantamento de requisitos, regras de negócio (RN00 a RN04) e modelagem conceitual e lógica do banco de dados (\texttt{usuario}, \texttt{musica} e \texttt{fila}, além da tabela \texttt{letra}, prevista no modelo mas fora do escopo do MVP);
+  \item Interface web responsiva acessível via QR Code no telão para que o usuário pesquise e escolha vídeos musicais diretamente pelo próprio sistema, visualize a música em execução (\textit{Tocando Agora}) e acompanhe a fila numerada;
+  \item Funcionalidades administrativas de controle de palco (iniciar música, avançar para a próxima faixa da fila, remover item e limpar fila) com bloqueio automático de duplicidade;
+  \item API Orquestradora em Java 21 com Spring Boot e banco de dados MySQL, hospedados em nuvem, responsáveis pelas regras de negócio, pela pesquisa de vídeos na \textit{YouTube Data API v3} e pela sincronização da fila em tempo real;
+  \item Aplicativo reprodutor desktop (\textbf{Karaokê TV Player}) em Electron, executado no computador do bar e sincronizado em tempo real com a fila, que exibe no telão o vídeo da música da vez e a interface própria do sistema, em duas visões.
+\end{enumerate}
+
+\section{Estrutura do Documento}
+
+O restante deste documento está organizado da seguinte forma:
+
+\begin{itemize}
+  \item \textbf{Capítulo 2 -- Contexto do Projeto:} caracteriza o cenário do parceiro Apache Gru Rock Bar, o estudo de mercado e de concorrentes, o público-alvo, as necessidades identificadas e as regras de negócio conceituais (incluindo o Diagrama de Atividades UML);
+  \item \textbf{Capítulo 3 -- Análise do Sistema:} apresenta a visão geral da solução, os atores envolvidos, os casos de uso (com Diagrama de Casos de Uso UML), o modelo conceitual do domínio (com Diagrama de Classes Conceitual UML), os requisitos funcionais e não funcionais e as restrições do sistema;
+  \item \textbf{Capítulo 4 -- Projeto do Sistema:} detalha a arquitetura (com Diagrama de Componentes UML), o projeto dos componentes e a integração com o YouTube, o modelo relacional de dados (com Diagrama de Classes de Projeto UML), o projeto das interfaces de usuário, os diagramas de interação (dois Diagramas de Sequência UML: pedido de música pelo cliente e controle do palco com reprodução no telão), as tecnologias adotadas e os mecanismos de segurança e controle de acesso (com Diagrama de Estados UML do ciclo de vida do pedido);
+  \item \textbf{Capítulo 5 -- Implementação:} descreve a implementação da solução, distinguindo o que foi validado na Prova de Conceito do que está em implementação no MVP, e aborda o ambiente de desenvolvimento, a estrutura da aplicação, os componentes, a integração dos módulos (com Diagrama de Implantação UML), os testes realizados e planejados, os resultados em relação aos objetivos e as limitações atuais;
+  \item \textbf{Capítulo 6 -- Conclusão:} retoma os objetivos do projeto, sintetiza as considerações finais sobre o desenvolvimento até o estágio de MVP, relata as dificuldades enfrentadas e aponta os trabalhos futuros;
+  \item \textbf{Elementos Pós-Textuais:} reúnem as Referências e o Anexo normativo (LGPD).
+\end{itemize}
+
+%% -------------------------------------------------------------------------- %%

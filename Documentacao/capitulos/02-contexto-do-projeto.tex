@@ -1,0 +1,158 @@
+\chapter{Contexto do Projeto} \label{cap:contexto}
+
+Este capítulo apresenta o contexto real no qual o projeto \textbf{Karaokê Apache} está inserido, incluindo um estudo sobre o segmento de bares com entretenimento musical, índices de digitalização de micro e pequenas empresas no Brasil, análise de ferramentas concorrentes, caracterização do cenário do estabelecimento parceiro, público-alvo, necessidades identificadas e regras de negócio do domínio.
+
+Sistemas de informação permitem às empresas melhorar a eficiência de suas operações e a qualidade do atendimento aos clientes \cite{obrien2013}. No setor de bares e restaurantes, essa informatização já alcança as rotinas comerciais: pesquisa da Abrasel com mais de 1,5 mil empresários indicou que 83\% dos estabelecimentos usam algum software para controlar as vendas e 75\% usam ferramentas de controle financeiro, com espaço de crescimento em outras áreas da operação \cite{jornaldocomercio2023}. Ainda assim, a gestão manual permanece comum entre as micro, pequenas e médias empresas: 39\% delas controlam as despesas com planilhas e cadernos, e 44\% apontam o custo como motivo para não adotar sistemas especializados \cite{folhape2025}. Quando atividades de entretenimento, como noites de karaokê, dependem de controles manuais em papel, o problema operacional chega à experiência do cliente, com pedidos esquecidos, atrasos entre uma apresentação e outra e incerteza sobre a ordem de chamada, como observado no estabelecimento parceiro (Seção \ref{sec:cenario}).
+
+Por outro lado, as principais soluções comerciais de karaokê para estabelecimentos têm custo elevado para um pequeno bar brasileiro e não utilizam o acervo do YouTube. Plataformas internacionais como o \textbf{Singa Business} \cite{singa2026} e o \textbf{KaraFun Business} \cite{karafun2026} cobram mensalidades em dólar: os planos do KaraFun Stage, voltados a apresentações com cantores, custam de US\$ 49,99 a US\$ 209,99 por mês, com compromisso de 12 meses \cite{karafunstage2026}, e os do Singa Business partem de US\$ 59 por mês \cite{singablog2026}. Ambas trabalham com catálogos próprios licenciados, com mais de 90 mil músicas no KaraFun e mais de 140 mil no Singa \cite{karafun2026,singablog2026}, o que impede o uso de versões de karaokê disponíveis no YouTube. Já o \textbf{Juks} apresenta-se como uma \textit{jukebox} digital para bares e restaurantes \cite{juks2026}, voltada à execução de músicas no ambiente, e não à organização de apresentações de karaokê. A Tabela \ref{tab:concorrencia} sintetiza o estudo comparativo realizado pela equipe.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Estudo comparativo entre soluções existentes no mercado e o sistema proposto.}%
+  \label{tab:concorrencia}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xcccc}
+    \toprule
+    \textbf{Critério / Recurso Analisado} & \textbf{Singa Business} & \textbf{KaraFun Business} & \textbf{Juks} & \textbf{Karaokê Apache} \\
+    \midrule
+    Pedidos pelo celular via QR Code no telão & Parcial & Sim & Sim & Sim \\
+    Escolha de vídeos pelo próprio sistema & Sim & Sim & Sim & Sim \\
+    Fila de cantores com moderação de palco & Sim & Sim & Não & Sim \\
+    Reprodutor dedicado para o telão (TV) & Sim & Sim & Parcial & Sim (Electron) \\
+    Suporte ao acervo de karaokê do YouTube & Não & Não & Parcial & Sim \\
+    Bloqueio automático de música duplicada & Parcial & Parcial & Sim & Sim \\
+    Custo para o bar parceiro & Alto (US\$) & Alto (US\$) & Médio (R\$) & \begin{tabular}[t]{@{}c@{}}Baixo (somente\\hospedagem)\end{tabular} \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores a partir de \citeonline{karafunstage2026}, \citeonline{singablog2026} e \citeonline{juks2026}.}%
+}
+\end{table}
+
+\section{Cenário} \label{sec:cenario}
+
+O parceiro demandante do projeto é o estabelecimento comercial \textbf{Apache Gru Rock Bar}, registrado sob a razão social \texttt{APACHE GRU ROCK BAR LTDA} e inscrito no CNPJ sob o n{\textordmasculine} \texttt{64.687.141/0001-07}. O bar está localizado na Avenida Torres Tibagy, n{\textordmasculine} 58, no bairro Gopouva, em Guarulhos -- SP (CEP 07062-000), e sua atividade principal é classificada no CNAE 5611-2/05, que corresponde a bares e outros estabelecimentos especializados em servir bebidas, com entretenimento \cite{cnpjapi2026}.
+
+O Apache Gru é um bar de rock que recebe apresentações de bandas, como os shows do tributo \textit{Roots -- Sepultura Tributo} realizados em agosto de 2025 e janeiro de 2026 \cite{setlistfm2026}. Às quintas-feiras, a partir das 20h, o bar realiza a sua \textbf{Noite de Karaokê}, sem cobrança para cantar. Atualmente, o salão utiliza um projetor \textit{whitelabel} com conexão à internet, no qual o aplicativo do YouTube é acessado diretamente e os vídeos são colocados manualmente a cada apresentação.
+
+Dessa forma, a dinâmica da Noite de Karaokê é inteiramente manual: os clientes solicitam suas músicas verbalmente ou em anotações de papel, e o organizador digita e pesquisa cada vídeo no YouTube pela interface do projetor, o que interrompe a fluidez entre uma apresentação e outra e dificulta o controle da fila de espera.
+
+\section{Público-Alvo}
+
+O projeto atende diretamente três perfis de público-alvo envolvidos na operação da Noite de Karaokê do Apache Gru Rock Bar:
+
+\begin{enumerate}
+  \item \textbf{Frequentadores e Cantores Amadores (Clientes do Bar):} jovens e adultos frequentadores do Apache Gru Rock Bar que comparecem individualmente ou em grupos de amigos. Possuem familiaridade cotidiana com smartphones e aplicativos web, mas buscam uma interação rápida e intuitiva em ambiente noturno (baixa luminosidade), sem desejar baixar aplicativos pesados apenas para pedir uma música;
+  \item \textbf{Organizador / Operador de Palco e Som (Administrador Operacional):} colaborador responsável por conduzir a noite de karaokê, chamar o próximo cantor no microfone, controlar o equipamento de áudio e garantir que o telão exiba continuamente a música correta sem interrupções técnicas;
+  \item \textbf{Gestores e Proprietários do Estabelecimento:} responsáveis pela administração do Apache Gru Rock Bar, interessados em aumentar a satisfação e o tempo de permanência dos clientes no salão, reduzir a sobrecarga da equipe de atendimento e, em etapa futura, conhecer o repertório mais popular entre seus frequentadores (Seção \ref{sec:trabalhos_futuros}).
+\end{enumerate}
+
+\section{Necessidades Identificadas}
+
+A partir do acompanhamento do cenário operacional do Apache Gru Rock Bar e das conversas com os envolvidos, foram identificadas quatro necessidades da comunidade atendida:
+
+\begin{itemize}
+  \item \textbf{N01 -- Autonomia para escolha de vídeos pelo próprio sistema:} necessidade de permitir que o cliente acesse a plataforma via QR Code exibido no telão e escolha o vídeo musical desejado diretamente pelo próprio sistema em seu celular, eliminando o uso de fichas de papel;
+  \item \textbf{N02 -- Transparência e previsibilidade na fila de espera:} necessidade de dar visibilidade pública e em tempo real para todos os participantes sobre qual música está tocando no momento, quantas pessoas estão na fila e qual é a ordem das próximas apresentações;
+  \item \textbf{N03 -- Prevenção de repetições e garantia de rotatividade justa:} necessidade de evitar que uma mesma canção seja cantada repetidas vezes em curto espaço de tempo ou que um único participante monopolize a fila;
+  \item \textbf{N04 -- Automação e limpeza visual da reprodução no telão:} necessidade de substituir a busca manual direta no projetor \textit{whitelabel} por um reprodutor dedicado, controlado remotamente a partir da fila, que exiba no telão o vídeo da música da vez sem expor telas de busca ou menus intermediários.
+\end{itemize}
+
+\section{Regras de Negócio}
+
+Para atender às necessidades identificadas respeitando as políticas operacionais do estabelecimento, foram estabelecidas cinco Regras de Negócio (RN00 a RN04) em nível conceitual, descritas na Tabela \ref{tab:regras_negocio}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Regras de negócio do domínio do sistema Karaokê Apache.}%
+  \label{tab:regras_negocio}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.4cm}p{3.4cm}X}
+    \toprule
+    \textbf{Código} & \textbf{Regra de Negócio} & \textbf{Descrição Conceitual e Política de Domínio} \\
+    \midrule
+    RN00 & Validação de Disponibilidade da Música & Toda solicitação musical deve referenciar uma música disponível no catálogo antes de ingressar na fila de apresentações. Quando o vídeo escolhido na pesquisa ainda não consta no catálogo, ele é cadastrado automaticamente; músicas marcadas como indisponíveis pelo administrador não podem ser pedidas. \\
+    \addlinespace
+    RN01 & Proibição de Música Duplicada na Fila Ativa & Uma música que já se encontra aguardando execução na fila ativa ou que está sendo reproduzida no momento não pode ser novamente inserida na fila até a conclusão de sua execução atual. \\
+    \addlinespace
+    RN02 & Limite de Pedidos Simultâneos por Participante & Para preservar a rotatividade entre as mesas do bar, cada cliente, identificado como visitante ou por sua conta, possui um limite de pedidos ativos simultâneos na fila, definido na configuração do sistema (padrão de 1 a 2 músicas pendentes por vez). \\
+    \addlinespace
+    RN03 & Exclusividade Administrativa do Controle de Palco & O acionamento de início da reprodução, o avanço para a próxima faixa e a remoção de itens da fila (inclusive por ausência do cantor) são prerrogativas exclusivas do organizador (Administrador). A ordem da fila segue a ordem de chegada dos pedidos (FIFO) e não é alterada manualmente. \\
+    \addlinespace
+    RN04 & Ciclo de Vida e Rastreabilidade do Pedido & Todo pedido aceito percorre um fluxo controlado de estados (\textit{Na Fila}, \textit{Reproduzindo}, \textit{Concluído} ou \textit{Cancelado}), mantendo o registro do solicitante e do horário para controle da sessão. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+A Figura \ref{fig:atividades} apresenta o \textbf{Diagrama de Atividades UML} que modela o fluxo operacional de negócio, desde o acesso do cliente pelo QR Code até a conclusão da apresentação no palco, destacando os pontos de decisão regidos pelas regras RN00 a RN04.
+
+\begin{figure}[H]
+  \caption{Diagrama de Atividades UML -- Fluxo de Pedido Musical e Execução na Fila}
+  \label{fig:atividades}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  act/.style={draw, rounded corners=6pt, fill=white, align=center, font=\scriptsize, text width=3.4cm, minimum height=0.8cm, inner sep=3pt},
+  alr/.style={act, fill=red!10},
+  dec/.style={draw, diamond, aspect=2.2, fill=yellow!15, align=center, font=\scriptsize, inner sep=1pt},
+  flx/.style={-latex, thick},
+  lbl/.style={font=\tiny\bfseries, fill=white, inner sep=1pt}]
+  % Raias
+  \foreach \x/\t/\c in {0/Cliente/blue!8, 4/Sistema (API)/yellow!8, 8/Administrador/green!8, 12/Reprodutor (Electron)/orange!10} {
+    \fill[\c] (\x,0) rectangle ++(4,-20.6);
+    \draw (\x,0) rectangle ++(4,-20.6);
+    \draw (\x,-0.6) -- ++(4,0);
+    \node[font=\scriptsize\bfseries] at (\x+2,-0.3) {\t};
+  }
+  % Nós
+  \fill (2,-1.2) circle (0.15) coordinate (ini);
+  \node[act] (a1) at (2,-2.2) {Lê o QR Code exibido no telão};
+  \node[act] (a2) at (2,-3.4) {Identifica-se: nome (visitante) ou login};
+  \node[act] (a3) at (2,-4.6) {Pesquisa a música};
+  \node[act] (s1) at (6,-4.6) {Pesquisa no catálogo local e, se preciso, no YouTube};
+  \node[act] (a4) at (2,-5.8) {Escolhe o vídeo};
+  \node[dec] (d0) at (6,-7.6) {RN00: música\\disponível?};
+  \node[dec] (d1) at (6,-9.6) {RN01: já está\\na fila?};
+  \node[dec] (d2) at (6,-11.6) {RN02: abaixo\\do limite?};
+  \node[alr] (al) at (2,-9.6) {Recebe alerta com o motivo da recusa (RF12)};
+  \node[act] (s2) at (6,-13.5) {Insere o pedido (\textit{Na Fila}) e notifica as telas};
+  \node[act] (a5) at (2,-13.5) {Acompanha a posição na fila};
+  \node[act] (m1) at (10,-14.9) {Aciona \textit{Play} ou \textit{Próxima música} (RN03)};
+  \node[act] (s3) at (6,-16.3) {Atualiza o pedido para \textit{Reproduzindo} (RN04)};
+  \node[act] (r1) at (14,-16.3) {Abre o vídeo pelo link (duas visões)};
+  \node[act] (m2) at (10,-17.6) {Aciona \textit{Próxima música} ao fim da apresentação};
+  \node[act] (s4) at (6,-18.9) {Atualiza o pedido para \textit{Concluído} e promove o próximo};
+  \draw (6,-20.1) circle (0.2); \fill (6,-20.1) circle (0.12);
+  % Fluxos
+  \draw[flx] (ini) -- (a1);
+  \draw[flx] (a1) -- (a2);
+  \draw[flx] (a2) -- (a3);
+  \draw[flx] (a3) -- (s1);
+  \draw[flx] (s1.south) |- (a4.east);
+  \draw[flx] (a4.south) -- ++(0,-0.45) -| (d0.north);
+  \draw[flx] (d0.west) -| node[lbl, pos=0.25] {não} (al.north);
+  \draw[flx] (d0.south) -- node[lbl, right] {sim} (d1.north);
+  \draw[flx] (d1.west) -- node[lbl] {sim} (al.east);
+  \draw[flx] (d1.south) -- node[lbl, right] {não} (d2.north);
+  \draw[flx] (d2.west) -| node[lbl, pos=0.25] {não} (al.south);
+  \draw[flx] (d2.south) -- node[lbl, right] {sim} (s2.north);
+  \draw[flx] (al.west) -- ++(-0.25,0) |- (a4.west);
+  \draw[flx, dashed] (s2.west) -- (a5.east);
+  \draw[flx] (s2.south) |- (m1.west);
+  \draw[flx] (m1.south) -- ++(0,-0.3) -| (s3.north);
+  \draw[flx] (s3.east) -- (r1.west);
+  \draw[flx] (r1.south) |- (m2.east);
+  \draw[flx] (m2.south) |- (s4.east);
+  \draw[flx] (s4.south) -- (6,-19.9);
+\end{tikzpicture}%
+}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+%% -------------------------------------------------------------------------- %%

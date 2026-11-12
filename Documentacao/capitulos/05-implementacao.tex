@@ -1,0 +1,168 @@
+\chapter{Implementação} \label{cap:implementacao}
+
+Este capítulo descreve a materialização do projeto \textbf{Karaokê Apache} em software. O projeto encontra-se em \textbf{fase de Produto Mínimo Viável (MVP)}, e a implementação ocorreu em duas etapas: uma \textbf{Prova de Conceito (PoC)}, que validou a integração entre a interface web e o reprodutor Electron, e o \textbf{MVP}, em desenvolvimento, que implementa a arquitetura definida no Capítulo \ref{cap:projeto}. As seções a seguir distinguem o que foi validado na PoC do que está em implementação no MVP e apresentam o ambiente utilizado, a organização da aplicação, a integração entre os módulos, os testes, os resultados e as limitações atuais.
+
+\section{Ambiente de Desenvolvimento}
+
+O desenvolvimento e a execução da PoC e do MVP foram conduzidos em um ambiente padronizado entre os integrantes da equipe, composto pelos seguintes recursos:
+
+\begin{itemize}
+  \item \textbf{Estações de Trabalho e Sistemas Operacionais:} computadores pessoais dos desenvolvedores e máquinas dos laboratórios de informática do IFSP -- Campus São Paulo, executando sistemas operacionais Windows 10/11 (64 bits) e distribuições Linux;
+  \item \textbf{Linguagens, Banco de Dados e Ferramentas de Construção:} kit de desenvolvimento \textit{Java 21 (JDK 21)} e framework \textit{Spring Boot} para a API de back-end, Sistema de Gerenciamento de Banco de Dados \textit{MySQL}, ambiente \textit{Node.js} (com gerenciador de pacotes \texttt{npm}), empacotador \textit{Vite} e framework \textit{Electron} para o front-end e o reprodutor do telão;
+  \item \textbf{IDEs e Repositório de Código no GitHub:} desenvolvimento utilizando \textit{Visual Studio Code} / IDEs Java e versionamento distribuído centralizado no repositório oficial \url{https://github.com/MurilloAssis/Projeto-Extensao-Karaoke}.
+\end{itemize}
+
+\section{Estrutura da Aplicação}
+
+A aplicação está organizada em três partes, que correspondem aos subsistemas definidos na arquitetura (Seção \ref{sec:projeto_componentes}):
+
+\begin{itemize}
+  \item \textbf{Aplicação web (React e Vite):} reúne as interfaces do Cliente Web e do Admin Web, com as telas de identificação (visitante ou login), pesquisa e pedido de músicas, acompanhamento da fila e controle do palco. Comunica-se com a API por HTTP e recebe as atualizações da fila por WebSocket;
+  \item \textbf{API Orquestradora (Java 21 e Spring Boot):} concentra as regras de negócio (RN00 a RN04), a autenticação, o acesso ao banco de dados MySQL, a integração com a \textit{YouTube Data API v3} e o canal WebSocket por onde são enviados os eventos da fila;
+  \item \textbf{Reprodutor (Electron):} contém o processo principal do aplicativo desktop \textit{Karaokê TV Player}, responsável pela janela exibida no telão, e a interface própria do reprodutor.
+\end{itemize}
+
+\section{Implementação dos Componentes}
+
+A implementação priorizou os componentes necessários para validar a proposta central do sistema: receber pedidos musicais, organizar a fila sem duplicidades e controlar remotamente o que é reproduzido na TV do bar.
+
+\begin{itemize}
+  \item \textbf{Componente \textit{Pedido de Música}:} na PoC, o vídeo escolhido era informado pela interface web, que extraía o identificador do vídeo e bloqueava a inclusão quando o vídeo era inválido ou indisponível (RN00) ou quando o identificador já constava na fila ativa ou em reprodução (RN01). No MVP, a pesquisa passa a ser feita pela API, por meio da \textit{YouTube Data API v3}, e as validações, incluindo o limite de pedidos por cliente (RN02), passam a ser executadas pela API (Seções \ref{sec:projeto_componentes} e \ref{sec:modelo_dados});
+  \item \textbf{Componente \textit{Fila}:} na PoC, foi implementada a gestão da lista de músicas (\texttt{queue}) e da faixa ativa (\texttt{currentSong}). A interface permite adicionar itens ao final da fila, acionar os botões \textbf{Play} e \textbf{Próxima música}, excluir itens individuais e limpar toda a fila. As alterações eram propagadas às telas conectadas por \textbf{WebSocket com o protocolo STOMP} \cite{stomp2012}. No MVP, a fila passa a ser persistida no banco de dados, em ordem de chegada (FIFO);
+  \item \textbf{Componente \textit{Reprodutor} -- \textit{Karaokê TV Player}:} foi implementado o processo principal do Electron (\texttt{main.js}), que instancia uma janela dedicada (\texttt{BrowserWindow}) responsável pela reprodução. O \textit{Karaokê TV Player} recebe pelo WebSocket as mudanças da faixa ativa e, a cada nova música, exibe o status de conexão e carrega o vídeo correspondente. Na PoC, o vídeo era incorporado à página do reprodutor; as falhas de reprodução causadas por restrições de direitos autorais levaram à decisão de abrir o vídeo pelo link, em uma janela dividida em duas visões (Seção \ref{sec:arquitetura}), que está em implementação no MVP;
+  \item \textbf{Componente \textit{Usuários} e persistência relacional (Java 21, Spring Boot e MySQL):} está em implementação no MVP a API em Java 21 com Spring Boot, integrada ao banco de dados MySQL, para a identificação de visitantes, o cadastro e a autenticação de contas (\texttt{admin}/\texttt{cliente}) e a persistência das tabelas \texttt{usuario}, \texttt{musica} e \texttt{fila}, conforme o modelo de dados da Seção \ref{sec:modelo_dados}.
+\end{itemize}
+
+\section{Integração dos Módulos} \label{sec:integracao}
+
+No MVP, a aplicação web e a API Orquestradora, com o banco de dados MySQL, serão executadas em um \textbf{provedor de nuvem}, ainda não definido pela equipe. O \textbf{Karaokê TV Player} em Electron é executado localmente, no computador do estabelecimento conectado ao telão do palco. Os clientes e o administrador acessam as interfaces web pelo navegador de seus dispositivos, e todos os módulos comunicam-se com a API pela internet. A integração segue dois canais:
+
+\begin{itemize}
+  \item \textbf{Comandos por HTTP:} o cadastro de usuários, a pesquisa, os pedidos de música e o gerenciamento da fila são requisições das interfaces web à API Orquestradora;
+  \item \textbf{Atualizações por WebSocket (STOMP):} sempre que a fila muda, a API publica o evento \texttt{fila-atualizada}, recebido por todas as telas inscritas, incluindo o Electron, que então busca a faixa ativa e reproduz o vídeo. Esse mecanismo, já utilizado na PoC, é o que permite que uma adição ou troca de música feita na interface web apareça imediatamente no telão.
+\end{itemize}
+
+A Figura \ref{fig:implantacao} apresenta o \textbf{Diagrama de Implantação UML} com a topologia de execução do MVP. Na PoC, todos os módulos eram executados localmente, no mesmo computador.
+
+\Needspace{13cm}
+\begin{figure}[H]
+  \caption{Diagrama de Implantação UML -- Topologia de Execução do MVP}
+  \label{fig:implantacao}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  env/.style={draw, fill=white, align=center, font=\scriptsize, minimum width=4.6cm, minimum height=1.2cm, inner sep=3pt},
+  ttl/.style={font=\scriptsize, align=center, anchor=south, inner sep=2pt},
+  dev/.style={draw, thick, rounded corners=2pt, inner sep=6pt},
+  lnk/.style={draw, thick},
+  lbl/.style={font=\tiny, fill=white, inner sep=1pt, align=center}]
+  % Dispositivos dos usuários
+  \node[env] (nav1) at (2.5,-1.6) {\guillemotleft executionEnvironment\guillemotright\\\textbf{Navegador}\\Cliente Web};
+  \node[ttl] (t1) at ([yshift=4pt]nav1.north) {\guillemotleft device\guillemotright\\\textbf{Smartphone do cliente}};
+  \node[env] (nav2) at (2.5,-6.0) {\guillemotleft executionEnvironment\guillemotright\\\textbf{Navegador}\\Admin Web};
+  \node[ttl] (t2) at ([yshift=4pt]nav2.north) {\guillemotleft device\guillemotright\\\textbf{Dispositivo do administrador}};
+  % Nuvem
+  \node[env] (web) at (11,-1.6) {\guillemotleft executionEnvironment\guillemotright\\\textbf{Servidor Web}\\Aplicação web (React/Vite)};
+  \node[env] (api) at (11,-4.4) {\guillemotleft executionEnvironment\guillemotright\\\textbf{JVM -- Java 21}\\API Orquestradora (Spring Boot)};
+  \node[env] (db) at (11,-7.2) {\guillemotleft database\guillemotright\\\textbf{MySQL}\\usuario, musica, fila};
+  \node[ttl] (t3) at ([yshift=4pt]web.north) {\guillemotleft cloud\guillemotright\\\textbf{Provedor de nuvem (a definir)}};
+  % YouTube
+  \node[env] (yt1) at (19.5,-1.6) {\textbf{YouTube Data API v3}\\pesquisa de vídeos};
+  \node[env] (yt2) at (19.5,-4.4) {\textbf{YouTube}\\página do vídeo};
+  \node[ttl] (t4) at ([yshift=4pt]yt1.north) {\guillemotleft external\guillemotright\\\textbf{Serviços do YouTube}};
+  % Estabelecimento
+  \node[env] (ele) at (19.5,-10.6) {\guillemotleft executionEnvironment\guillemotright\\\textbf{Electron -- Karaokê TV Player}\\Reprodutor (duas visões)};
+  \node[ttl] (t5) at ([yshift=4pt]ele.north) {\guillemotleft device\guillemotright\\\textbf{Computador do bar (local)}};
+  \node[env] (tv) at (11,-10.6) {\textbf{Exibição no telão}\\vídeo e interface do sistema};
+  \node[ttl] (t6) at ([yshift=4pt]tv.north) {\guillemotleft device\guillemotright\\\textbf{Telão / TV do palco}};
+  % Molduras
+  \begin{scope}[on background layer]
+    \node[dev, fill=blue!6, fit=(t1)(nav1)] (f1) {};
+    \node[dev, fill=blue!6, fit=(t2)(nav2)] (f2) {};
+    \node[dev, dashed, fill=gray!10, inner sep=10pt, fit=(t3)(web)(api)(db)] (cloud) {};
+    \node[dev, fill=red!6, fit=(t4)(yt1)(yt2)] (f4) {};
+    \node[dev, fill=orange!10, fit=(t5)(ele)] (f5) {};
+    \node[dev, fill=green!8, fit=(t6)(tv)] (f6) {};
+  \end{scope}
+  % Conexões
+  \draw[lnk] (f1.east) -- node[lbl] {HTTPS (REST)\\WSS (STOMP)} (cloud.west |- f1.east);
+  \draw[lnk] (f2.east) -- node[lbl] {HTTPS (REST)\\WSS (STOMP)} (cloud.west |- f2.east);
+  \draw[lnk] (api) -- node[lbl] {JDBC} (db);
+  \draw[lnk] (cloud.east |- yt1) -- node[lbl] {HTTPS} (f4.west |- yt1);
+  \draw[lnk] (f5.north west) -- node[lbl] {HTTPS (REST)\\WSS (STOMP)} (cloud.east |- db);
+  \draw[lnk] (f5.north) -- node[lbl] {HTTPS} (f4.south);
+  \draw[lnk] (f5.west) -- node[lbl] {HDMI} (f6.east);
+\end{tikzpicture}%
+}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+\section{Testes Realizados}
+
+Os testes desta etapa são testes de sistema manuais, conduzidos pela equipe sobre os fluxos essenciais, com o objetivo de verificar se o comportamento da aplicação corresponde aos requisitos especificados \cite{sommerville2019}. Os testes da PoC foram executados com a interface web e o Electron em funcionamento simultâneo e registrados em vídeo pela equipe. A Tabela \ref{tab:testes_mvp} sumariza os testes realizados e os testes planejados para o MVP.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Testes realizados na Prova de Conceito e testes planejados para o MVP.}%
+  \label{tab:testes_mvp}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{3.2cm}X>{\raggedright\arraybackslash}p{2.2cm}}
+    \toprule
+    \textbf{ID} & \textbf{Aspecto Avaliado} & \textbf{Procedimento Executado e Resultado Observado} & \textbf{Situação} \\
+    \midrule
+    TST-01 & Escolha e adição de vídeo à fila & Seleção de vídeos de karaokê (como \textit{Still Loving You -- Scorpions} e \textit{Oh! Darling -- The Beatles}) na interface web; os itens foram validados e listados corretamente na fila numerada. & Validado na PoC (registro em vídeo) \\
+    \addlinespace
+    TST-02 & Sincronização do comando \textit{Play} com o Electron & Acionamento do botão \textit{Play} na interface web; o \textit{Karaokê TV Player} recebeu a atualização pelo WebSocket (STOMP), mudou o status para \textit{Conectado -- Tocando} e iniciou o vídeo. & Validado na PoC (registro em vídeo) \\
+    \addlinespace
+    TST-03 & Avanço de faixa (\textit{Próxima música}) e limpeza & Acionamento do botão \textit{Próxima música} e exclusão de itens; a fila avançou na ordem de chegada e a tela do reprodutor foi atualizada. & Validado na PoC (registro em vídeo) \\
+    \addlinespace
+    TST-04 & Bloqueio de música duplicada na fila (RN01) & Tentativa de inserir novamente um vídeo já presente na fila ativa; a inclusão foi bloqueada e a fila permaneceu inalterada. & Validado na PoC \\
+    \addlinespace
+    TST-05 & Integração da API (Java 21 e Spring Boot) com o MySQL & Testes de persistência das entidades modeladas e de autenticação por perfil (\texttt{admin}/\texttt{cliente}). & Em andamento \\
+    \addlinespace
+    TST-06 & Limite de pedidos por cliente (RN02) & Tentar exceder o limite de pedidos ativos de um cliente; o pedido excedente deve ser recusado com alerta. & Planejado \\
+    \addlinespace
+    TST-07 & Controle de acesso (RN03) & Tentar acionar \textit{Play} ou \textit{Próxima música} com um usuário \texttt{cliente}; a API deve recusar a requisição. & Planejado \\
+    \addlinespace
+    TST-08 & Pesquisa pela \textit{YouTube Data API v3} & Pesquisar músicas presentes e ausentes do catálogo local; verificar os resultados e o uso do \textit{cache}. & Planejado \\
+    \addlinespace
+    TST-09 & Tempo de atualização (RNF02) & Medir o tempo entre o comando na interface web e a atualização do telão; o resultado deve ser inferior a 2 segundos. & Planejado \\
+    \addlinespace
+    TST-10 & Reprodução em duas visões no Electron & Verificar a abertura do vídeo pelo link em uma visão e a interface própria do sistema na outra. & Planejado \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Resultados Obtidos}
+
+Os resultados alcançados até o momento são relacionados abaixo aos objetivos específicos (Seção \ref{sec:objetivos_especificos}) e às necessidades identificadas no Capítulo \ref{cap:contexto}:
+
+\begin{itemize}
+  \item \textbf{Diagnóstico, especificação e modelagem (objetivos 1 a 3):} atendidos. O levantamento junto ao parceiro resultou nas regras de negócio (RN00 a RN04), nos requisitos e na modelagem UML e de dados apresentados nos Capítulos 2 a 4, com a divisão em quatro componentes (\textit{Usuários}, \textit{Fila}, \textit{Pedido de Música} e \textit{Reprodutor});
+  \item \textbf{Implementação da PoC e do núcleo do MVP (objetivo 4):} parcialmente atendido. A PoC integrou a interface web em React/Vite ao reprodutor em Electron; a API em Spring Boot com MySQL, a pesquisa pelo YouTube e a reprodução em duas visões estão em implementação;
+  \item \textbf{Sincronização em tempo real (objetivo 5 e necessidade N02):} atendido na PoC. A comunicação por WebSocket com STOMP mostrou que o operador pode gerenciar a fila na interface web enquanto o \textbf{Karaokê TV Player} exibe as músicas em uma janela dedicada à TV, sem procurar vídeos manualmente nem arrastar abas para o telão. A medição formal do tempo de atualização (RNF02) está planejada (TST-09);
+  \item \textbf{Prevenção de repetições (necessidade N03):} parcialmente atendido. O bloqueio de músicas duplicadas (RN01) foi validado; o limite de pedidos por cliente (RN02) será validado no MVP;
+  \item \textbf{Autonomia na escolha de vídeos e reprodução no telão (necessidades N01 e N04):} parcialmente atendido. A escolha do vídeo pelo sistema e o controle remoto do telão foram validados na PoC; o acesso do cliente pelo celular, como visitante ou com conta, a pesquisa pelo YouTube e o avanço automático ao fim do vídeo dependem das etapas seguintes;
+  \item \textbf{Custo (objetivo geral):} atendido. A solução tem baixo custo para o estabelecimento: as ferramentas utilizadas são gratuitas ou de código aberto, sem custo de licenciamento, e a \textit{YouTube Data API v3} é gratuita dentro da cota diária do serviço (tratada como limitação na Seção \ref{sec:limitacoes}). O único custo previsto é o da plataforma de hospedagem em nuvem da aplicação web, da API e do banco de dados, cujo valor dependerá do provedor escolhido e do plano contratado.
+\end{itemize}
+
+\section{Limitações da Implementação} \label{sec:limitacoes}
+
+Por tratar-se de uma versão em fase de MVP, registram-se as seguintes limitações atuais, que orientam a continuidade do desenvolvimento:
+
+\begin{itemize}
+  \item \textbf{Persistência e autenticação:} na PoC, a fila e a faixa ativa não eram persistidas no banco de dados relacional. A integração das telas de login e cadastro com a API e o MySQL está em finalização no MVP;
+  \item \textbf{Reprodução em duas visões:} a PoC exibia o vídeo incorporado à página do reprodutor. A abertura do vídeo pelo link, em uma das duas visões da janela do Electron, está em implementação;
+  \item \textbf{Transição automática ao final do vídeo:} o avanço para a próxima música é acionado manualmente pelo organizador no botão \textit{Próxima música}. O avanço automático depende de o Reprodutor identificar o término do vídeo na visão do YouTube, mecanismo ainda a ser definido pela equipe;
+  \item \textbf{Cota da \textit{YouTube Data API v3}:} a cota padrão limita o sistema a cerca de 100 pesquisas por dia \cite{youtubedataapi2026}. O catálogo local e o \textit{cache} reduzem esse consumo, mas não eliminam o limite;
+  \item \textbf{Dependência de internet:} a aplicação web e a API são executadas em nuvem, e os vídeos são carregados do YouTube durante a apresentação. Sem conexão ativa no estabelecimento, nem os pedidos nem a reprodução funcionam;
+  \item \textbf{Provedor de nuvem não definido:} a escolha do provedor que hospedará a aplicação web, a API e o banco de dados ainda está pendente;
+  \item \textbf{Mecanismos de segurança pendentes:} HTTPS, CORS e limitação de requisições (\textit{rate limiting}) ainda não foram implementados.
+\end{itemize}
+
+%% -------------------------------------------------------------------------- %%

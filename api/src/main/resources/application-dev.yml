@@ -1,0 +1,3 @@
+logging:
+  level:
+    br.edu.ifsp.karaoke: DEBUG

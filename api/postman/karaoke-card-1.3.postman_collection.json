@@ -1,0 +1,1254 @@
+{
+  "info": {
+    "name": "Karaokê Apache — Card 1.3 (Motor da Fila)",
+    "description": "Roteiro de testes do card 1.3. Execute na ordem pelo Collection Runner: cada pasta depende da anterior.\n\nPré-requisitos:\n1. Banco com BancoDeDados/scripts/02_dados_desenvolvimento.sql (admin id 1; visitantes 2, 3 e 4; músicas DEVTESTE001–005).\n2. API no perfil dev: ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev\n3. Variável de ambiente PLAYER_API_KEY igual à variável playerKey da collection (padrão: teste).\n4. KARAOKE_LIMITE_PEDIDOS = 2 (padrão).\n\nA primeira requisição limpa a fila, então o roteiro pode ser repetido.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "admin",
+      "value": "1"
+    },
+    {
+      "key": "ana",
+      "value": "2"
+    },
+    {
+      "key": "bruno",
+      "value": "3"
+    },
+    {
+      "key": "carla",
+      "value": "4"
+    },
+    {
+      "key": "playerKey",
+      "value": "teste"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Preparação",
+      "item": [
+        {
+          "name": "Limpar fila (admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Telão em espera",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/atual",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "atual"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Pedidos de música (RF04/RF05)",
+      "item": [
+        {
+          "name": "Ana pede DEVTESTE001",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE001\",\n  \"titulo\": \"Still Loving You (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"status na_fila e posição 1\", () => { pm.expect(r.status).to.eql(\"na_fila\"); pm.expect(r.posicao).to.eql(1); });",
+                  "pm.test(\"urlVideo montada\", () => pm.expect(r.musica.urlVideo).to.eql(\"https://www.youtube.com/watch?v=DEVTESTE001\"));",
+                  "pm.test(\"sem nome do solicitante\", () => pm.expect(r).to.not.have.property(\"solicitante\"));",
+                  "pm.collectionVariables.set(\"pedidoAna1\", r.idFila);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Bruno pede DEVTESTE002",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{bruno}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE002\",\n  \"titulo\": \"Oh! Darling (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"posição 2\", () => pm.expect(r.posicao).to.eql(2));",
+                  "pm.collectionVariables.set(\"pedidoBruno\", r.idFila);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RN01 — Carla pede música já na fila",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{carla}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE001\",\n  \"titulo\": \"Still Loving You (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN01_MUSICA_JA_NA_FILA\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN01_MUSICA_JA_NA_FILA\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ana pede DEVTESTE003 (2º pedido)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE003\",\n  \"titulo\": \"Tempo Perdido (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"posição 3\", () => pm.expect(r.posicao).to.eql(3));",
+                  "pm.collectionVariables.set(\"pedidoAna2\", r.idFila);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RN02 — Ana excede o limite",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE004\",\n  \"titulo\": \"Pais e Filhos (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN02_LIMITE_PEDIDOS\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN02_LIMITE_PEDIDOS\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RN00 — música indisponível",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{carla}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE005\",\n  \"titulo\": \"Música Indisponível (RN00)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN00_MUSICA_INDISPONIVEL\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN00_MUSICA_INDISPONIVEL\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validação — videoId inválido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{carla}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"curto\",\n  \"titulo\": \"Qualquer\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"codigo = VALIDACAO\", () => pm.expect(pm.response.json().codigo).to.eql(\"VALIDACAO\"));",
+                  "pm.test(\"aponta o campo videoId\", () => pm.expect(pm.response.json().campos).to.have.property(\"videoId\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pedido sem identificação",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE004\",\n  \"titulo\": \"Pais e Filhos (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"codigo = NAO_IDENTIFICADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"NAO_IDENTIFICADO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RN03 — admin não faz pedidos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE004\",\n  \"titulo\": \"Pais e Filhos (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"codigo = RN03_ACESSO_NEGADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN03_ACESSO_NEGADO\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Consultas (RF06)",
+      "item": [
+        {
+          "name": "Fila pública",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"nada tocando e 3 na fila\", () => { pm.expect(r.atual).to.eql(null); pm.expect(r.total).to.eql(3); });",
+                  "pm.test(\"ordem FIFO\", () => pm.expect(r.proximos.map(p => p.idFila)).to.eql([",
+                  "    pm.collectionVariables.get(\"pedidoAna1\"), pm.collectionVariables.get(\"pedidoBruno\"), pm.collectionVariables.get(\"pedidoAna2\")]));",
+                  "pm.test(\"sem nomes (LGPD)\", () => r.proximos.forEach(p => pm.expect(p).to.not.have.property(\"solicitante\")));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Fila do admin (com nomes)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/admin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "admin"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"mostra o solicitante\", () => pm.expect(pm.response.json().proximos[0].solicitante.nome).to.be.a(\"string\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Meus pedidos (Ana)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/meus-pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "meus-pedidos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"posições 1 e 3\", () => pm.expect(pm.response.json().map(p => p.posicao)).to.eql([1, 3]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RN03 — visitante não vê a fila do admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/admin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "admin"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"codigo = RN03_ACESSO_NEGADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN03_ACESSO_NEGADO\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Controle de palco (RF07–RF09, RN03/RN04)",
+      "item": [
+        {
+          "name": "RN03 — visitante tenta Play",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/play",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "play"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"codigo = RN03_ACESSO_NEGADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN03_ACESSO_NEGADO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Próxima sem música tocando",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/proxima",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "proxima"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN04_NADA_REPRODUZINDO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN04_NADA_REPRODUZINDO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Play",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/play",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "play"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"1º da fila está reproduzindo\", () => { pm.expect(r.atual.idFila).to.eql(pm.collectionVariables.get(\"pedidoAna1\")); pm.expect(r.atual.status).to.eql(\"reproduzindo\"); });",
+                  "pm.test(\"restam 2\", () => pm.expect(r.total).to.eql(2));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Play com música tocando",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/play",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "play"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN04_JA_REPRODUZINDO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN04_JA_REPRODUZINDO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Música atual (telão)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/atual",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "atual"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"DEVTESTE001 com link\", () => { pm.expect(r.musica.youtubeId).to.eql(\"DEVTESTE001\"); pm.expect(r.musica.urlVideo).to.include(\"watch?v=DEVTESTE001\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remover pedido em reprodução",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/{{pedidoAna1}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "{{pedidoAna1}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN04_PEDIDO_NAO_REMOVIVEL\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN04_PEDIDO_NAO_REMOVIVEL\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remover pedido do Bruno",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/{{pedidoBruno}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "{{pedidoBruno}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remover pedido inexistente",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "999999"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"codigo = PEDIDO_NAO_ENCONTRADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"PEDIDO_NAO_ENCONTRADO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Próxima música",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/proxima",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "proxima"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"2º pedido da Ana assumiu\", () => pm.expect(r.atual.idFila).to.eql(pm.collectionVariables.get(\"pedidoAna2\")));",
+                  "pm.test(\"fila vazia\", () => pm.expect(r.total).to.eql(0));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RN02 — Ana volta a ter vaga",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{ana}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"videoId\": \"DEVTESTE004\",\n  \"titulo\": \"Pais e Filhos (Karaokê)\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"pedidoAna3\", pm.response.json().idFila);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Reprodutor — fim do vídeo",
+      "item": [
+        {
+          "name": "Concluir sem chave",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/{{pedidoAna2}}/concluir",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "{{pedidoAna2}}",
+                "concluir"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"codigo = NAO_IDENTIFICADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"NAO_IDENTIFICADO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Concluir pedido que não é o atual",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Player-Key",
+                "value": "{{playerKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/{{pedidoAna3}}/concluir",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "{{pedidoAna3}}",
+                "concluir"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"codigo = RN04_PEDIDO_NAO_ATIVO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN04_PEDIDO_NAO_ATIVO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Concluir o pedido atual",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Player-Key",
+                "value": "{{playerKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila/{{pedidoAna2}}/concluir",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila",
+                "{{pedidoAna2}}",
+                "concluir"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"próximo promovido\", () => pm.expect(pm.response.json().atual.idFila).to.eql(pm.collectionVariables.get(\"pedidoAna3\")));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Encerramento",
+      "item": [
+        {
+          "name": "RN03 — visitante tenta limpar",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{carla}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"codigo = RN03_ACESSO_NEGADO\", () => pm.expect(pm.response.json().codigo).to.eql(\"RN03_ACESSO_NEGADO\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Limpar fila",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Usuario-Id",
+                "value": "{{admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Fila vazia",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fila",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fila"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"sem atual e sem próximos\", () => { pm.expect(r.atual).to.eql(null); pm.expect(r.total).to.eql(0); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

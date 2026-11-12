@@ -1,0 +1,488 @@
+\chapter{Projeto do Sistema} \label{cap:projeto}
+
+Este capítulo estabelece a especificação técnica da solução \textbf{Karaokê Apache}, transformando o modelo conceitual e os requisitos da análise em uma definição detalhada da arquitetura distribuída, dos componentes de software, do modelo lógico e físico de dados, do projeto das interfaces de usuário, das interações dinâmicas, das tecnologias adotadas e dos mecanismos de segurança.
+
+\section{Arquitetura do Sistema} \label{sec:arquitetura}
+
+A solução \textbf{Karaokê Apache} é estruturada em quatro subsistemas: \textbf{Cliente Web}, \textbf{Admin Web}, \textbf{API Orquestradora} (conectada ao \textbf{Banco de Dados Relacional}) e o reprodutor desktop \textbf{Electron (Karaokê TV Player)}. Além deles, o sistema depende de um serviço externo, a \textit{YouTube Data API v3}, usada na pesquisa de vídeos \cite{youtubedataapi2026}. A reprodução não utiliza API do YouTube: o Electron abre diretamente o link do vídeo registrado no item da fila.
+
+A organização segue o estilo cliente-servidor descrito por Sommerville \cite{sommerville2019}: as interfaces web e o Electron são clientes que acessam serviços oferecidos por um servidor central, a API Orquestradora. Nessa API, as regras de negócio ficam concentradas em uma camada de serviço, no sentido do padrão \textit{Service Layer} de Fowler \cite{fowler2006}, de modo que nenhum cliente acessa o banco de dados diretamente. A divisão resultante separa duas responsabilidades:
+
+\begin{itemize}
+  \item \textbf{Gestão do karaokê (subsistemas web e API):} \textbf{Cliente Web}, \textbf{Admin Web} e \textbf{API Orquestradora} reúnem o que envolve a interação das pessoas com o sistema: a identificação dos clientes (como visitantes ou com conta) e a autenticação do administrador, a pesquisa e o pedido de músicas e o gerenciamento da fila (ordenação, remoção, limpeza e definição da faixa ativa). A API, apoiada pelo banco de dados relacional, mantém o estado oficial da fila;
+  \item \textbf{Reprodução no telão (subsistema Electron):} o aplicativo desktop \textbf{Karaokê TV Player} é responsável por \textbf{buscar as músicas que estão na fila} e \textbf{reproduzi-las} na TV do bar. Ele não realiza cadastros, não registra pedidos e não decide a ordem da fila. Sua única informação de retorno é o aviso de término do vídeo, a partir do qual a API conclui o pedido e promove o próximo item (RN04).
+\end{itemize}
+
+A janela do Electron exibida no telão é dividida em \textbf{duas visões}. A primeira carrega o vídeo do YouTube a partir do link registrado no item da fila e ocupa uma parte da tela. A segunda, no restante da tela, apresenta a interface própria do sistema. O vídeo é aberto pelo seu link, e não incorporado a uma página por meio do \textit{YouTube IFrame Player API}, porque no contexto do karaokê muitos vídeos apresentam falhas de reprodução quando incorporados, em razão de restrições de direitos autorais definidas pelos detentores do conteúdo.
+
+No nível lógico, essa divisão é expressa em quatro componentes (\textbf{Usuários}, \textbf{Pedido de Música}, \textbf{Fila} e \textbf{Reprodutor}), representados no \textbf{Diagrama de Componentes UML} da Figura \ref{fig:uml_componentes}. Os três primeiros pertencem aos subsistemas de gestão (web e API), e o \textbf{Reprodutor} corresponde ao subsistema Electron. Os dois lados se comunicam apenas pelas interfaces fornecidas pelo componente \textbf{Fila}. A distribuição física dos subsistemas nos equipamentos do bar é apresentada no Diagrama de Implantação do Capítulo \ref{cap:implementacao} (Figura \ref{fig:implantacao}).
+
+\begin{figure}[H]
+  \caption{Diagrama de Componentes UML}
+  \label{fig:uml_componentes}
+  \begin{center}
+    \includegraphics[width=0.88\textwidth]{imagens/diagrama_de_componentes.png}
+  \end{center}
+  \legend{Fonte: Elaborado pelos autores no software UMLet (2026).}
+\end{figure}
+
+\section{Projeto dos Componentes} \label{sec:projeto_componentes}
+
+Seguindo a orientação de Pressman e Maxim \cite{pressman2016} para o projeto em nível de componente, cada componente reúne responsabilidades de um mesmo assunto e se comunica com os demais apenas por interfaces declaradas. A Tabela \ref{tab:subsistemas_componentes} relaciona cada subsistema aos componentes que ele materializa: o Electron abriga apenas o componente \textbf{Reprodutor}, e os demais componentes estão distribuídos entre as interfaces web e a API.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Correspondência entre subsistemas e componentes lógicos.}%
+  \label{tab:subsistemas_componentes}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{3.6cm}X}
+    \toprule
+    \textbf{Subsistema} & \textbf{Componentes} & \textbf{Papel na Arquitetura} \\
+    \midrule
+    \textbf{Cliente Web} & \texttt{Usuários}, \texttt{Pedido de Música}, \texttt{Fila} (consulta) & Interface do frequentador: identificação como visitante (login opcional), busca e pedido de músicas e acompanhamento da sua posição na fila. \\
+    \addlinespace
+    \textbf{Admin Web} & \texttt{Usuários}, \texttt{Fila} (gerenciamento) & Interface do organizador do palco: autenticação como \texttt{admin} e gerenciamento da fila (\textit{Play}, \textit{Próxima}, \textit{Remover} e \textit{Limpar}). \\
+    \addlinespace
+    \textbf{API Orquestradora} + Banco de Dados & \texttt{Usuários}, \texttt{Pedido de Música}, \texttt{Fila} (regras e persistência) & Aplica as regras de negócio (RN00--RN04), persiste usuários, músicas e pedidos e mantém o estado oficial da fila e da faixa ativa. \\
+    \addlinespace
+    \textbf{Electron} (\textit{Karaokê TV Player}) & \texttt{Reprodutor} & Busca na fila a música a ser executada, exibe no telão o vídeo (por meio do link) ao lado da interface própria do sistema e avisa a API quando o vídeo termina. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+A Tabela \ref{tab:componentes_uml} detalha as responsabilidades de cada componente e nomeia as interfaces fornecidas e requeridas, inclusive a interface com o serviço externo de pesquisa do YouTube.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Detalhamento técnico dos componentes arquiteturais e suas interfaces.}%
+  \label{tab:componentes_uml}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{4.2cm}X}
+    \toprule
+    \textbf{Componente} & \textbf{Interfaces (Fornecidas / Requeridas)} & \textbf{Estrutura Interna e Responsabilidades} \\
+    \midrule
+    \texttt{Usuários} \newline (Web + API) & Fornece: \texttt{IAutenticacao}, \texttt{IPerfilUsuario} & Responsável pela identificação dos clientes como visitantes (apenas com o nome), pelo cadastro e autenticação de contas e pela diferenciação de permissões entre os papéis \texttt{visitante} e \texttt{cliente} (frequentador da mesa) e \texttt{admin} (organizador do palco). \\
+    \addlinespace
+    \texttt{Pedido de Música} \newline (Web + API) & Requer: \texttt{IAutenticacao}, \texttt{IBuscaVideos} (externa); Fornece: \texttt{IPedidoMusica} & Responsável pela pesquisa e escolha de vídeos musicais diretamente pelo sistema (RF02, RF03), pela identificação do vídeo selecionado e pela validação de disponibilidade (RN00). A pesquisa é feita pela API, que consulta a \textit{YouTube Data API v3} por meio de \texttt{IBuscaVideos}. \\
+    \addlinespace
+    \texttt{Fila} \newline (Web + API) & Requer: \texttt{IAutenticacao}, \texttt{IPedidoMusica}; Fornece: \texttt{IControleFila}, \texttt{IEventoReproducao} & Gerencia a lista ordenada de pedidos (\texttt{queue}) e o item em execução (\texttt{currentSong}), aplica o bloqueio de duplicidade (RN01) e as transições de estado do pedido (RN04). \texttt{IControleFila} reúne as operações de consulta (faixa ativa e próximos itens) e as de gerenciamento (\textit{Play}, \textit{Próxima}, \textit{Remover} e \textit{Limpar}), estas restritas ao perfil \texttt{admin} (RN03). \texttt{IEventoReproducao} recebe o aviso de término do vídeo e marca o pedido como concluído. \\
+    \addlinespace
+    \texttt{Reprodutor} \newline (Electron) & Requer: \texttt{IControleFila} (somente consulta), \texttt{IEventoReproducao} & Único componente do aplicativo desktop \textit{Karaokê TV Player}: busca na \texttt{Fila} a música que deve ser executada (\texttt{currentSong}) e o link do vídeo correspondente. Organiza a janela do telão em duas visões: o vídeo do YouTube, carregado diretamente pelo link, ocupa uma parte da tela, e a interface própria do sistema ocupa o restante. Ao identificar o término do vídeo, comunica-o por \texttt{IEventoReproducao}. Não realiza cadastros, pedidos nem alterações na ordem dos itens. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+O fluxo de pedido funciona da seguinte forma: o cliente digita o termo de pesquisa na interface web, e a API consulta a \textit{YouTube Data API v3}, que devolve, para cada resultado, o identificador do vídeo (\texttt{videoId}) e dados de exibição, como o título. Ao clicar na música desejada, o cliente a adiciona à fila. A API registra a música no catálogo local, caso ainda não exista, e insere o pedido na fila referenciando-a (Seção \ref{sec:modelo_dados}). Posteriormente, o \textbf{Reprodutor} monta o link do vídeo a partir do identificador da música e o abre no telão.
+
+A integração com o YouTube impõe duas decisões de projeto ao componente \textbf{Pedido de Música}. A primeira é que a chave de acesso da \textit{YouTube Data API v3} fica armazenada \textbf{somente no back-end}: as interfaces web enviam o termo de pesquisa à API Orquestradora, que consulta o YouTube e devolve os resultados, sem expor a chave aos navegadores. A segunda decorre da cota de uso do serviço: um projeto recebe, por padrão, 10.000 unidades por dia, e cada chamada de pesquisa (\texttt{search.list}) consome 100 unidades \cite{youtubedataapi2026}, o que limita o bar a cerca de 100 pesquisas diárias. Para reduzir esse consumo, a API consulta primeiro o catálogo local (tabela \texttt{musica}) e mantém um \textit{cache} dos resultados de pesquisas recentes, recorrendo ao YouTube apenas quando a música não é encontrada.
+
+O aviso de término enviado pelo Reprodutor corresponde à transição \textit{Reproduzindo} $\rightarrow$ \textit{Concluído} do ciclo de vida do pedido (RN04). No estágio atual do MVP, o avanço para a próxima música ainda é acionado manualmente pelo administrador, e o avanço automático por esse evento está previsto como incremento seguinte (Capítulo \ref{cap:implementacao}).
+
+\section{Modelo de Dados} \label{sec:modelo_dados}
+
+O projeto de dados converte o modelo conceitual em uma estrutura relacional na terceira forma normal (3FN), acrescentando chaves primárias artificiais (\texttt{PK}), chaves estrangeiras (\texttt{FK}), tipos físicos de dados, restrições de integridade e métodos de negócio das classes de domínio. O modelo é composto por quatro tabelas: \texttt{usuario}, \texttt{musica} e \texttt{fila}, que compõem o escopo do MVP, e \texttt{letra}, que já integra o modelo, mas \textbf{não faz parte do escopo do MVP}. A Figura \ref{fig:classes_projeto} apresenta o \textbf{Diagrama de Classes de Projeto UML}, e a Tabela \ref{tab:dicionario_dados} documenta o Dicionário de Dados relacional.
+
+\Needspace{10.5cm}
+\begin{figure}[H]
+  \caption{Diagrama de Classes de Projeto UML}
+  \label{fig:classes_projeto}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+  \umlclass[x=0,y=0]{UsuarioModel}{
+    - id\_usuario : int \{PK\} \\
+    - nome : varchar(120) \\
+    - email : varchar(150) \{UNIQUE, NULL\} \\
+    - senha\_hash : varchar(255) \{NULL\} \\
+    - tipo\_perfil : enum(`visitante',`cliente',`admin')
+  }{
+    + identificarVisitante(nome) : TokenJWT \\
+    + autenticar(email, senha) : TokenJWT \\
+    + isAdmin() : boolean
+  }
+  \umlclass[x=11,y=0]{FilaModel}{
+    - id\_fila : int \{PK\} \\
+    - id\_usuario : int \{FK\} \\
+    - id\_musica : int \{FK\} \\
+    - status : enum(`na\_fila',`reproduzindo', \\
+    \quad `concluido',`cancelado') \\
+    - dt\_pedido : datetime
+  }{
+    + iniciarReproducao() : void \\
+    + concluir() : void \\
+    + cancelar() : void
+  }
+  \umlclass[x=22,y=0]{MusicaModel}{
+    - id\_musica : int \{PK\} \\
+    - youtube\_id : char(11) \{UNIQUE\} \\
+    - titulo : varchar(180) \\
+    - artista : varchar(120) \\
+    - disponivel : boolean
+  }{
+    + montarUrlVideo() : string \\
+    + validarDisponibilidade() : boolean
+  }
+  \umlclass[x=22,y=-8]{LetraModel}{
+    - id\_letra : int \{PK\} \\
+    - id\_musica : int \{FK\} \\
+    - conteudo\_letra : text \\
+    - idioma : varchar(20)
+  }{
+    + formatarEstrofes() : string
+  }
+  \umlnote[x=12,y=-8,width=5cm]{LetraModel}{Fora do escopo do MVP: prevista para etapa futura.}
+  \umlassoc[mult1=0..*, mult2=1]{LetraModel}{MusicaModel}
+  \umlassoc[mult1=1, mult2=0..*]{UsuarioModel}{FilaModel}
+  \umlassoc[mult1=0..*, mult2=1]{FilaModel}{MusicaModel}
+\end{tikzpicture}%
+}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Dicionário de dados do modelo relacional do sistema Karaokê Apache.}%
+  \label{tab:dicionario_dados}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.4cm}X}
+    \toprule
+    \textbf{Atributo} & \textbf{Tipo Físico} & \textbf{Restrições} & \textbf{Descrição no Projeto} \\
+    \midrule
+    \multicolumn{4}{l}{\textbf{Tabela \texttt{usuario}}} \\
+    \texttt{id\_usuario} & \texttt{INT} & \texttt{PK}, \texttt{AI} & Chave primária do usuário. \\
+    \texttt{nome} & \texttt{VARCHAR(120)} & \texttt{NOT NULL} & Nome do participante (usado na chamada ao palco) ou do operador. \\
+    \texttt{email} & \texttt{VARCHAR(150)} & \texttt{NULL}, \texttt{UNIQUE} & E-mail de login; preenchido apenas para quem possui conta. \\
+    \texttt{senha\_hash} & \texttt{VARCHAR(255)} & \texttt{NULL} & Senha criptografada (\textit{bcrypt}); preenchida apenas para quem possui conta. \\
+    \texttt{tipo\_perfil} & \texttt{ENUM('visitante',} \newline \texttt{'cliente',} \newline \texttt{'admin')} & \texttt{NOT NULL}, \newline \texttt{DEFAULT} \newline \texttt{'visitante'} & Perfil de permissão no sistema. \\
+    \midrule
+    \multicolumn{4}{l}{\textbf{Tabela \texttt{musica}}} \\
+    \texttt{id\_musica} & \texttt{INT} & \texttt{PK}, \texttt{AI} & Identificador único da música. \\
+    \texttt{youtube\_id} & \texttt{CHAR(11)} & \texttt{NOT NULL}, \texttt{UNIQUE} & Identificador do vídeo no YouTube (\texttt{videoId}), com 11 caracteres. O link do vídeo é montado a partir dele. \\
+    \texttt{titulo} & \texttt{VARCHAR(180)} & \texttt{NOT NULL} & Título da música, obtido do resultado da pesquisa ou do cadastro administrativo. \\
+    \texttt{artista} & \texttt{VARCHAR(120)} & \texttt{NULL} & Banda ou intérprete, preenchido quando conhecido (por exemplo, no cadastro administrativo -- RF11). \\
+    \texttt{disponivel} & \texttt{BOOLEAN} & \texttt{NOT NULL}, \newline \texttt{DEFAULT TRUE} & Indica se a música pode ser pedida (RN00). \\
+    \midrule
+    \multicolumn{4}{l}{\textbf{Tabela \texttt{fila}}} \\
+    \texttt{id\_fila} & \texttt{INT} & \texttt{PK}, \texttt{AI} & Identificador único do pedido na fila. \\
+    \texttt{id\_usuario} & \texttt{INT} & \texttt{FK} $\rightarrow$ \texttt{usuario}, \newline \texttt{NOT NULL} & Cliente que fez o pedido. \\
+    \texttt{id\_musica} & \texttt{INT} & \texttt{FK} $\rightarrow$ \texttt{musica}, \newline \texttt{NOT NULL} & Música pedida. \\
+    \texttt{status} & \texttt{ENUM('na\_fila',} \newline \texttt{'reproduzindo',} \newline \texttt{'concluido',} \newline \texttt{'cancelado')} & \texttt{NOT NULL}, \newline \texttt{DEFAULT 'na\_fila'} & Estado atual do pedido (RN04). \\
+    \texttt{dt\_pedido} & \texttt{DATETIME} & \texttt{NOT NULL}, \newline \texttt{DEFAULT} \newline \texttt{CURRENT\_TIMESTAMP} & Data e hora do pedido; define a ordem de chamada (FIFO). \\
+    \midrule
+    \multicolumn{4}{l}{\textbf{Tabela \texttt{letra}} (fora do escopo do MVP)} \\
+    \texttt{id\_letra} & \texttt{INT} & \texttt{PK}, \texttt{AI} & Identificador único da letra. \\
+    \texttt{id\_musica} & \texttt{INT} & \texttt{FK} $\rightarrow$ \texttt{musica}, \newline \texttt{NOT NULL} & Música à qual a letra pertence. \\
+    \texttt{conteudo\_letra} & \texttt{TEXT} & \texttt{NOT NULL} & Letra completa da canção. \\
+    \texttt{idioma} & \texttt{VARCHAR(20)} & \texttt{NOT NULL}, \newline \texttt{DEFAULT 'pt-BR'} & Idioma da letra cadastrada. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+  \nota{PK: chave primária; FK: chave estrangeira; AI: \texttt{AUTO\_INCREMENT}.}%
+}
+\end{table}
+
+As decisões de projeto refletidas no modelo são as seguintes:
+
+\begin{itemize}
+  \item \textbf{Normalização:} cada atributo não chave depende apenas da chave da sua tabela. Por isso, a tabela \texttt{fila} não repete o identificador nem o título do vídeo, que pertencem à música e são obtidos pela chave estrangeira \texttt{id\_musica}. Pelo mesmo motivo, a URL do vídeo não é armazenada: ela é montada a partir de \texttt{youtube\_id} (\texttt{https://www.youtube.com/watch?v=} seguido do identificador);
+  \item \textbf{Identificação do cliente:} o login não é obrigatório para o cliente. Quem entra como visitante informa apenas o nome usado na chamada ao palco, e a API cria um registro em \texttt{usuario} com perfil \texttt{visitante}, sem e-mail e sem senha, e devolve um token JWT para a sessão. Quem prefere ter conta cadastra nome, e-mail e senha (perfil \texttt{cliente}). O perfil \texttt{admin} exige sempre e-mail e senha, regra verificada pela API. Como todo pedido fica vinculado a um registro de \texttt{usuario}, o limite de pedidos (RN02) vale igualmente para visitantes e clientes com conta;
+  \item \textbf{Registro das músicas pedidas:} quando o cliente escolhe um vídeo na pesquisa, a API procura em \texttt{musica} um registro com o mesmo \texttt{youtube\_id}. Se ele não existir, a música é cadastrada automaticamente com o identificador e o título retornados pelo YouTube; em seguida, o pedido é inserido em \texttt{fila} referenciando esse registro. Assim, toda música pedida passa a fazer parte do catálogo local, o que também alimenta a consulta prévia ao catálogo descrita na Seção \ref{sec:projeto_componentes};
+  \item \textbf{Ordem da fila (FIFO):} a ordem de chamada é a ordem de chegada dos pedidos, dada por \texttt{dt\_pedido} e, em caso de empate, por \texttt{id\_fila}. A posição de cada pedido não é armazenada: ela é calculada na consulta, entre os pedidos com status \texttt{na\_fila}. Um índice sobre (\texttt{status}, \texttt{dt\_pedido}) atende a essa consulta. O administrador não reordena a fila; quando um cantor está ausente, o pedido é removido (status \texttt{cancelado});
+  \item \textbf{Regras verificadas pela API:} a RN01 (música repetida) e a RN02 (limite de pedidos) dependem de outros registros da tabela e, por isso, não são expressas como restrições do banco. Antes de inserir um pedido, a API verifica, na mesma transação, se já existe um pedido da mesma música com status \texttt{na\_fila} ou \texttt{reproduzindo} e se a quantidade de pedidos ativos do cliente (status \texttt{na\_fila} ou \texttt{reproduzindo}) está abaixo do limite da RN02. Esse limite é controlado pela própria API no momento da validação do pedido de música e, por isso, não é armazenado no banco de dados;
+  \item \textbf{Estados do pedido:} os valores de \texttt{status} correspondem aos estados da RN04 (\textit{Na Fila}, \textit{Reproduzindo}, \textit{Concluído} e \textit{Cancelado}). Os estados \textit{Submetido} e \textit{Rejeitado} do Diagrama de Estados (Figura \ref{fig:estados}) não são persistidos, porque um pedido rejeitado na validação nunca chega a ser inserido na tabela;
+  \item \textbf{Letras das músicas:} a tabela \texttt{letra} é mantida no modelo, mas não faz parte do escopo do MVP. Ela não é preenchida nem consultada nesta etapa e será utilizada quando a funcionalidade de letras for desenvolvida (Seção \ref{sec:trabalhos_futuros}).
+\end{itemize}
+
+\section{Projeto da Interface do Usuário}
+
+O projeto visual das interfaces priorizou a simplicidade de uso e o tema escuro de alto contraste (RNF01), adequado ao ambiente noturno do Apache Gru Rock Bar. As telas seguem a separação de perfis definida na RN03: o cliente faz pedidos e acompanha a fila, e apenas o administrador controla a reprodução. O sistema tem três interfaces:
+
+\begin{enumerate}
+  \item \textbf{Cliente Web:} aplicação web responsiva, acessada pelo navegador do celular a partir do QR Code exibido no telão, sem instalação (RNF03). Reúne:
+    \begin{itemize}
+      \item \textit{Identificação:} o cliente entra como visitante informando apenas seu nome, usado na chamada ao palco; o login e o cadastro de conta, com e-mail e senha, são opcionais (RF01);
+      \item \textit{Pesquisa e pedido:} campo de pesquisa e lista de resultados obtidos pela API, cada um com o botão \textbf{Adicionar} (RF02 a RF04);
+      \item \textit{Acompanhamento:} música em reprodução e posição do pedido do cliente na fila (RF06);
+      \item \textit{Alertas de validação:} mensagens exibidas quando um pedido é recusado, como música já presente na fila (RN01) ou limite de pedidos atingido (RN02), conforme o RF12.
+    \end{itemize}
+  \item \textbf{Admin Web:} aplicação web acessada pelo organizador após login com perfil \texttt{admin}. Apresenta o \textit{card} \textit{Tocando agora}, com os botões \textbf{Play} e \textbf{Próxima música}, e a fila numerada em ordem de chegada, com o botão \textbf{Remover} em cada pedido e o botão \textbf{Limpar fila}. Como a fila segue a ordem de chegada (FIFO), o \textit{Play} atua apenas sobre o primeiro pedido e só fica disponível quando nenhuma música está em reprodução. A gestão do catálogo (RF11) fica em uma área própria dessa interface;
+  \item \textbf{Karaokê TV Player (Electron):} janela exibida no telão, dividida em duas visões. A visão do vídeo, que ocupa a maior parte da tela, abre a página do YouTube pelo link da música da vez. A visão da interface própria do sistema mostra o indicador de conexão (RF12), a música em reprodução, as próximas músicas da fila e o QR Code de acesso ao Cliente Web. O identificador técnico do vídeo não é exibido aos usuários.
+\end{enumerate}
+
+A Figura \ref{fig:interfaces} apresenta o \textit{wireframe} dessas interfaces.
+
+\begin{figure}[H]
+  \caption{\textit{Wireframe} das Interfaces do Sistema}
+  \label{fig:interfaces}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    scr/.style={draw=black!70, fill=black!85, rounded corners=6pt, line width=0.8pt},
+    hdr/.style={font=\scriptsize\bfseries, text=white, anchor=west},
+    txt/.style={font=\scriptsize, text=white, anchor=west},
+    sub/.style={font=\tiny, text=gray!60, anchor=west},
+    fld/.style={draw=gray!60, fill=black!95, rounded corners=2pt, font=\tiny, text=gray!70, anchor=west, minimum height=0.5cm, text width=4.1cm, inner sep=3pt},
+    row/.style={fill=black!70, rounded corners=2pt, font=\tiny, text=white, anchor=west, minimum height=0.6cm, text width=2.75cm, inner sep=3pt},
+    btn/.style={font=\tiny\bfseries, text=white, fill=#1, rounded corners=2pt, inner sep=2.5pt},
+    wft/.style={font=\scriptsize\bfseries, anchor=south}]
+    % (a) Login
+    \node[wft] at (2.5,0.1) {(a) Identificação};
+    \draw[scr] (0,0) rectangle (5,-8.6);
+    \node[hdr] at (0.3,-0.5) {Karaokê Apache};
+    \node[sub] at (0.3,-0.9) {Peça sua música pelo celular};
+    \node[sub] at (0.3,-1.6) {Seu nome para o palco};
+    \node[fld, text=white] at (0.3,-2.2) {Ana};
+    \node[btn=blue!60!black, minimum width=4.3cm] at (2.5,-3.1) {Entrar como visitante};
+    \node[sub] at (2.05,-4.0) {ou, se preferir};
+    \node[fld] at (0.3,-4.8) {E-mail};
+    \node[fld] at (0.3,-5.6) {Senha};
+    \node[btn=gray!50!black, minimum width=4.3cm] at (2.5,-6.5) {Entrar com conta};
+    \node[sub] at (0.95,-7.3) {Não tem conta? \textcolor{blue!40}{Cadastre-se}};
+    % (b) Cliente Web
+    \node[wft] at (8,0.1) {(b) Cliente Web};
+    \draw[scr] (5.5,0) rectangle (10.5,-8.6);
+    \node[hdr] at (5.8,-0.5) {Karaokê Apache};
+    \node[fld, text=white] at (5.8,-1.3) {still loving you};
+    \node[sub] at (5.8,-1.95) {Resultados da pesquisa};
+    \node[row] at (5.8,-2.6) {Still Loving You -- Scorpions};
+    \node[btn=blue!60!black] at (9.65,-2.6) {Adicionar};
+    \node[row] at (5.8,-3.45) {Still Loving You (Karaokê)};
+    \node[btn=blue!60!black] at (9.65,-3.45) {Adicionar};
+    \node[draw=red!60, fill=red!25!black, rounded corners=2pt, font=\tiny, text=white, anchor=west, text width=4.1cm, inner sep=3pt] at (5.8,-4.35) {Esta música já está na fila (RN01).};
+    \node[sub] at (5.8,-5.1) {Tocando agora};
+    \node[txt] at (5.8,-5.5) {Oh! Darling -- The Beatles};
+    \node[sub] at (5.8,-6.15) {Seu pedido};
+    \node[draw=green!50!black, fill=green!15!black, rounded corners=2pt, font=\tiny, text=white, anchor=west, text width=4.1cm, inner sep=3pt] at (5.8,-6.9) {Tempo Perdido -- Legião Urbana\\2.\textsuperscript{o} na fila};
+    \node[sub] at (5.8,-7.95) {Fila atualizada em tempo real};
+    % (c) Admin Web
+    \node[wft] at (13.5,0.1) {(c) Admin Web};
+    \draw[scr] (11,0) rectangle (16,-8.6);
+    \node[hdr] at (11.3,-0.5) {Karaokê Apache -- Admin};
+    \draw[draw=green!50!black, fill=green!15!black, rounded corners=3pt] (11.3,-1.0) rectangle (15.7,-2.9);
+    \node[font=\tiny\bfseries, text=green!70, anchor=west] at (11.45,-1.3) {$\bullet$ TOCANDO AGORA};
+    \node[txt] at (11.45,-1.75) {Oh! Darling -- The Beatles};
+    \node[btn=gray!40!black, text=gray!70] at (12.05,-2.45) {Play};
+    \node[btn=blue!60!black] at (14.6,-2.45) {Próxima música};
+    \node[sub] at (11.3,-3.4) {Fila (3)};
+    \node[btn=gray!50!black] at (15.0,-3.4) {Limpar fila};
+    \node[row] at (11.3,-4.15) {1. Tempo Perdido -- Legião Urbana};
+    \node[btn=red!50!black] at (15.15,-4.15) {Remover};
+    \node[row] at (11.3,-4.95) {2. Still Loving You -- Scorpions};
+    \node[btn=red!50!black] at (15.15,-4.95) {Remover};
+    \node[row] at (11.3,-5.75) {3. Pais e Filhos -- Legião Urbana};
+    \node[btn=red!50!black] at (15.15,-5.75) {Remover};
+    \node[sub, text width=4.3cm, align=left] at (11.3,-6.9) {O \textit{Play} inicia o 1.\textsuperscript{o} pedido da fila e só fica ativo quando nenhuma música está em reprodução (FIFO).};
+    \node[btn=gray!50!black, minimum width=4.3cm] at (13.5,-7.95) {Gerenciar catálogo};
+    % (d) Telão
+    \node[wft] at (8,-9.4) {(d) Karaokê TV Player (Electron) no telão -- duas visões};
+    \draw[scr] (0,-9.5) rectangle (16,-17.2);
+    \draw[fill=black, draw=gray!50, dashed] (0.3,-9.8) rectangle (10.9,-16.9);
+    \node[font=\scriptsize\bfseries, text=gray!70, align=center] at (5.6,-12.8) {Visão do vídeo\\[2pt]\tiny página do YouTube aberta pelo link da música da vez};
+    \draw[fill=gray!60] (5.3,-13.9) -- (5.3,-14.9) -- (6.1,-14.4) -- cycle;
+    \draw[fill=black!75, draw=gray!50, rounded corners=3pt] (11.2,-9.8) rectangle (15.7,-16.9);
+    \node[font=\tiny\bfseries, text=green!70, anchor=west] at (11.4,-10.2) {$\bullet$ Conectado};
+    \node[sub] at (11.4,-10.8) {Tocando agora};
+    \node[txt] at (11.4,-11.2) {Oh! Darling -- The Beatles};
+    \node[sub] at (11.4,-11.9) {Próximas};
+    \node[font=\tiny, text=white, anchor=north west, align=left] at (11.4,-12.1) {1. Tempo Perdido\\2. Still Loving You\\3. Pais e Filhos};
+    \draw[fill=white] (12.45,-14.0) rectangle (14.45,-16.0);
+    \foreach \i/\j in {0/0,0/1,1/0,2/2,3/1,1/3,0/3,3/3,3/0,2/0,1/2,2/1} {
+      \fill[black] ({12.55+\i*0.45},{-14.1-\j*0.45}) rectangle ++(0.35,-0.35);
+    }
+    \node[sub, anchor=north] at (13.45,-16.05) {Peça sua música};
+  \end{tikzpicture}%
+  }
+  \end{center}
+  \legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+\section{Diagramas de Interação}
+
+% Elementos auxiliares dos diagramas de sequência
+\newcommand{\seqhead}[3]{%
+  \node[draw, rounded corners=2pt, fill=blue!6, minimum width=2.5cm, minimum height=0.9cm, align=center, font=\scriptsize\bfseries] at (#1,0) {#2};
+  \draw[dashed, gray] (#1,-0.45) -- (#1,#3);}
+\newcommand{\seqlabel}[5]{% estilo, x origem, x destino, y, rótulo
+  \pgfmathsetmacro{\seqw}{abs(#3-#2)-0.4}
+  \draw[#1] (#2,#4) -- node[above, font=\scriptsize, align=center, text width=\seqw cm] {#5} (#3,#4);}
+\newcommand{\seqcall}[4]{\seqlabel{-latex}{#1}{#2}{#3}{#4}}
+\newcommand{\seqret}[4]{\seqlabel{dashed, ->}{#1}{#2}{#3}{#4}}
+\newcommand{\seqasync}[4]{\seqlabel{->}{#1}{#2}{#3}{#4}}
+\newcommand{\seqself}[3]{%
+  \draw[-latex] (#1,#2) -- ++(0.5,0) -- ++(0,-0.35) -- ++(-0.5,0);
+  \node[font=\scriptsize, anchor=south west, align=left, text width=2.8cm, xshift=1mm] at (#1,#2) {#3};}
+\newcommand{\seqfrag}[6]{%
+  \draw (#1,#3) rectangle (#2,#4);
+  \node[draw, fill=white, anchor=north west, font=\scriptsize\bfseries, inner sep=2pt] at (#1,#3) {#5};
+  \node[anchor=north west, font=\scriptsize, inner sep=2pt] at ({#1+0.55},#3) {[#6]};}
+\newcommand{\seqelse}[4]{%
+  \draw[dashed] (#1,#3) -- (#2,#3);
+  \node[anchor=north west, font=\scriptsize] at (#1,#3) {[#4]};}
+
+Os Diagramas de Sequência UML a seguir mostram como os subsistemas colaboram ao longo do tempo. O cenário foi dividido em dois diagramas, um para cada ator: o pedido de música feito pelo cliente (Figura \ref{fig:sequencia_pedido}) e o controle do palco feito pelo administrador, com a consequente reprodução no telão (Figura \ref{fig:sequencia_reproducao}).
+
+Em ambos, a comunicação segue duas regras. Os comandos (identificação, pesquisa, pedido e controle da fila) são requisições HTTP à API Orquestradora, sob o prefixo \texttt{/api}, e as requisições de usuários identificados levam o token JWT obtido na identificação, seja como visitante, seja por login. As mudanças na fila são comunicadas pela API, por meio de \textbf{WebSocket} \cite{rfc6455} com o protocolo de mensagens \textbf{STOMP} \cite{stomp2012}, com o evento \texttt{fila-atualizada}, enviado a \textbf{todas as telas conectadas} (Cliente Web, Admin Web e Electron), e não apenas a quem fez a requisição. Esse envio imediato é o que permite atender ao RNF02 (atualização em menos de 2 segundos).
+
+\Needspace{24cm}
+\begin{figure}[H]
+  \caption{Diagrama de Sequência UML -- Pedido de Música pelo Cliente}
+  \label{fig:sequencia_pedido}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+  \seqhead{0}{\guillemotleft ator\guillemotright\\Cliente}{-25.3}
+  \seqhead{3.3}{Cliente Web}{-25.3}
+  \seqhead{6.6}{API\\Orquestradora}{-25.3}
+  \seqhead{9.9}{Banco de\\Dados}{-25.3}
+  \seqhead{13.2}{YouTube\\Data API v3}{-25.3}
+  \seqhead{16.5}{Telas conectadas\\(WebSocket)}{-25.3}
+  % Autenticação
+  \seqcall{0}{3.3}{-1.4}{1. Informa o nome (ou e-mail e senha)}
+  \seqcall{3.3}{6.6}{-2.4}{2. POST /api/auth/visitante (ou /login)}
+  \seqcall{6.6}{9.9}{-3.4}{3. Cria visitante (ou busca a conta)}
+  \seqret{9.9}{6.6}{-4.4}{4. Usuário (id, perfil)}
+  \seqret{6.6}{3.3}{-5.4}{5. 200 OK + token JWT}
+  % Pesquisa
+  \seqcall{0}{3.3}{-6.5}{6. Pesquisa música (termo)}
+  \seqcall{3.3}{6.6}{-7.5}{7. GET /api/musicas/busca ?q=termo + JWT}
+  \seqcall{6.6}{9.9}{-8.5}{8. Consulta catálogo local}
+  \seqret{9.9}{6.6}{-9.5}{9. Músicas encontradas}
+  \seqfrag{6.1}{14.0}{-9.9}{-12.2}{opt}{sem resultado no catálogo ou no \textit{cache}}
+  \seqcall{6.6}{13.2}{-10.9}{10. search.list(q=termo)}
+  \seqret{13.2}{6.6}{-11.9}{11. videoId e título de cada resultado}
+  \seqret{6.6}{3.3}{-13.1}{12. Lista de resultados}
+  \seqret{3.3}{0}{-14.1}{13. Exibe resultados}
+  % Pedido
+  \seqcall{0}{3.3}{-15.2}{14. Clica na música desejada}
+  \seqcall{3.3}{6.6}{-16.2}{15. POST /api/fila \{videoId, título\} + JWT}
+  \seqcall{6.6}{9.9}{-17.2}{16. Verifica RN00, RN01 e RN02}
+  \seqret{9.9}{6.6}{-18.2}{17. Resultado das verificações}
+  \seqfrag{-0.7}{17.3}{-18.6}{-24.9}{alt}{regras atendidas}
+  \seqcall{6.6}{9.9}{-20.0}{18. Insere música (se nova) e pedido (na\_fila)}
+  \seqret{6.6}{3.3}{-20.9}{19. 201 Created}
+  \seqasync{6.6}{16.5}{-21.8}{20. Evento fila-atualizada para todas as telas}
+  \seqelse{-0.7}{17.3}{-22.1}{alguma regra violada}
+  \seqret{6.6}{3.3}{-23.7}{21. 409 Conflict + motivo (RN00, RN01 ou RN02)}
+  \seqret{3.3}{0}{-24.6}{22. Exibe alerta (RF12)}
+\end{tikzpicture}%
+}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+No pedido, o \texttt{videoId} vem da pesquisa no YouTube (mensagens 10 e 11), e não da API do sistema. A consulta ao YouTube só ocorre quando a música não é encontrada no catálogo local nem no \textit{cache} (fragmento \textit{opt}), o que economiza a cota diária da \textit{YouTube Data API v3}. Na mensagem 16, a API verifica separadamente a disponibilidade da música (RN00), a existência de um pedido ativo da mesma música (RN01) e o limite de pedidos ativos do cliente (RN02). Se alguma dessas regras for violada, o pedido não é inserido e o cliente recebe um alerta com o motivo (fragmento \textit{alt}).
+
+\Needspace{20cm}
+\begin{figure}[H]
+  \caption{Diagrama de Sequência UML -- Controle do Palco e Reprodução no Telão}
+  \label{fig:sequencia_reproducao}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+  \seqhead{0}{\guillemotleft ator\guillemotright\\Administrador}{-18.4}
+  \seqhead{3.3}{Admin Web}{-18.4}
+  \seqhead{6.6}{API\\Orquestradora}{-18.4}
+  \seqhead{9.9}{Banco de\\Dados}{-18.4}
+  \seqhead{13.2}{Electron\\(Reprodutor)}{-18.4}
+  \seqhead{16.5}{YouTube\\(página do vídeo)}{-18.4}
+  % Comando do administrador
+  \seqcall{0}{3.3}{-1.4}{1. Clica em \textit{Próxima música}}
+  \seqcall{3.3}{6.6}{-2.4}{2. POST /api/fila/proxima + JWT}
+  \seqself{6.6}{-3.4}{3. Verifica perfil admin (RN03)}
+  \seqcall{6.6}{9.9}{-5.2}{4. Conclui o atual e promove o próximo (RN04)}
+  \seqret{9.9}{6.6}{-6.2}{5. Item em reprodução}
+  \seqret{6.6}{3.3}{-7.0}{6. 200 OK}
+  \seqasync{6.6}{3.3}{-7.9}{7. fila-atualizada}
+  \seqasync{6.6}{13.2}{-7.9}{7. Evento fila-atualizada (WebSocket)}
+  % Reprodução
+  \seqcall{13.2}{6.6}{-8.8}{8. GET /api/fila/atual}
+  \seqret{6.6}{13.2}{-9.7}{9. currentSong (youtube\_id, título)}
+  \seqself{13.2}{-11.0}{10. Monta o link e atualiza as duas visões}
+  \seqcall{13.2}{16.5}{-12.4}{11. Abre o link na visão do vídeo}
+  \seqfrag{6.1}{17.3}{-12.8}{-18.0}{opt}{o vídeo chega ao fim}
+  \seqself{13.2}{-14.0}{12. Identifica o término do vídeo}
+  \seqcall{13.2}{6.6}{-15.2}{13. POST /api/fila/\{id\}/concluir}
+  \seqcall{6.6}{9.9}{-16.8}{14. Conclui o item e promove o próximo (RN04)}
+  \seqasync{6.6}{13.2}{-17.7}{15. Evento fila-atualizada (WebSocket)}
+  \node[draw, fill=yellow!15, font=\scriptsize, align=left, text width=5cm, anchor=north west] at (-0.7,-18.7) {Os eventos \texttt{fila-atualizada} são enviados a todas as telas conectadas: Cliente Web, Admin Web e Electron.};
+\end{tikzpicture}%
+}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+Como a fila segue a ordem de chegada (FIFO), os comandos do administrador atuam sempre sobre o início da fila: \textit{Play} inicia o primeiro pedido com status \texttt{na\_fila} quando nenhuma música está em reprodução, e \textit{Próxima música} conclui o pedido atual e promove o seguinte. Ao receber o evento \texttt{fila-atualizada}, o Electron busca na API a faixa ativa (mensagens 8 e 9) e abre o vídeo pelo link na visão correspondente. O fragmento \textit{opt} representa o aviso de término do vídeo enviado pelo Reprodutor por meio de \texttt{IEventoReproducao}, que conclui o pedido e promove o próximo; no MVP atual, esse avanço automático ainda é um incremento previsto, e o avanço é feito pelo administrador.
+
+\section{Tecnologias Utilizadas}
+
+A seleção tecnológica do projeto priorizou ferramentas modernas, multiplataforma e amplamente adotadas pelo mercado de desenvolvimento de software, consolidadas na Tabela \ref{tab:tecnologias}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Tecnologias, frameworks e ferramentas utilizadas no projeto.}%
+  \label{tab:tecnologias}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{3.2cm}p{3.4cm}X}
+    \toprule
+    \textbf{Categoria} & \textbf{Tecnologia / Ferramenta} & \textbf{Função Desempenhada no Projeto} \\
+    \midrule
+    Front-end Web & React 19 + Vite \cite{react2025} & Construção reativa da interface de controle e fila (\textit{Single Page Application}), com atualização instantânea de estado e empacotamento rápido via Vite. \\
+    \addlinespace
+    Aplicação Desktop (Telão) & Electron \cite{electron2025} & Encapsulamento nativo do reprodutor \textit{Karaokê TV Player}, garantindo execução dedicada em tela cheia, controle de políticas de rede e isolamento de contexto. \\
+    \addlinespace
+    Back-end / API Orquestradora & Java 21 + Spring Boot \cite{springboot2026} & Desenvolvimento da API RESTful centralizada, aplicação das regras de negócio (RN00--RN04), autenticação e orquestração da fila de reprodução. O Spring Boot fornece a base da aplicação: exposição dos \textit{endpoints} HTTP, acesso ao banco de dados MySQL e canal WebSocket para o envio dos eventos da fila. \\
+    \addlinespace
+    Hospedagem & Provedor de nuvem (a definir) & Execução da aplicação web, da API Orquestradora e do banco de dados MySQL; o Electron é executado localmente no computador do estabelecimento (Seção \ref{sec:integracao}). \\
+    \addlinespace
+    Comunicação em Tempo Real & WebSocket \cite{rfc6455} com STOMP \cite{stomp2012} & Envio do evento \texttt{fila-atualizada} da API para todas as telas conectadas (Cliente Web, Admin Web e Electron) sempre que a fila muda, atendendo ao RNF02. \\
+    \addlinespace
+    Banco de Dados & MySQL & Sistema de Gerenciamento de Banco de Dados relacional utilizado para a persistência estruturada das tabelas \texttt{usuario}, \texttt{musica} e \texttt{fila}, conforme o modelo de dados da Seção \ref{sec:modelo_dados}. \\
+    \addlinespace
+    Modelagem de Engenharia & brModelo, UMLet (\texttt{.uxf}) e Draw.io & Construção do Modelo Entidade-Relacionamento conceitual e dos diagramas arquiteturais e UML do sistema. \\
+    \addlinespace
+    Versionamento de Código & Git e GitHub & Controle de versão distribuído e colaboração entre os integrantes da equipe no repositório do projeto (\texttt{MurilloAssis/Projeto-Extensao-Karaoke}). \\
+    \addlinespace
+    Gestão e Documentação & Trello e \LaTeX\ & Acompanhamento das tarefas ágeis em quadro Kanban e editoração científica do relatório segundo as normas da ABNT. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Segurança e Controle de Acesso}
+
+O projeto de segurança e controle de acesso do sistema contempla quatro camadas de proteção, alinhadas às boas práticas de desenvolvimento seguro e à Lei Geral de Proteção de Dados Pessoais -- LGPD (Lei n{\textordmasculine} 13.709/2018) \cite{brasil2018lgpd}:
+
+\begin{enumerate}
+  \item \textbf{Autenticação e Controle de Acesso Baseado em Papéis (RBAC):} distinção entre sessões de \texttt{visitante} e \texttt{cliente} (autorizadas apenas a consultar o catálogo/fila e submeter pedidos sob as regras RN00--RN02) e sessões de \texttt{admin} (autorizadas a controlar a reprodução do palco conforme a RN03), utilizando tokens JWT para todas as sessões e senhas com hash \texttt{bcrypt} para as contas. O login com e-mail e senha é obrigatório apenas para o perfil \texttt{admin};
+  \item \textbf{Segurança no Processo Electron (\textit{Context Isolation} e CSP):} as duas visões da janela do \textit{Karaokê TV Player} são configuradas com \texttt{contextIsolation: true}, \texttt{nodeIntegration: false} e \texttt{sandbox: true}. A visão da interface própria do sistema aplica uma \textit{Content Security Policy} (CSP) que restringe a origem de scripts à aplicação local (\texttt{script-src}) e as conexões de rede à API Orquestradora (\texttt{connect-src}). A visão do vídeo carrega uma página externa do YouTube e, por isso, não recebe nenhum acesso privilegiado do Electron; sua navegação é limitada ao domínio do YouTube, e tentativas de abrir outros endereços ou novas janelas são bloqueadas;
+  \item \textbf{Isolamento de Variáveis de Ambiente e Credenciais de Banco:} armazenamento das credenciais de conexão ao MySQL e chaves de assinatura em variáveis de ambiente isoladas do código-fonte via \texttt{.gitignore};
+  \item \textbf{Minimização de Dados (Art. 6{\textordmasculine} da LGPD):} o visitante informa apenas o nome de chamada ao palco; o e-mail é coletado somente de quem opta por criar uma conta.
+\end{enumerate}
+
+A Figura \ref{fig:estados} apresenta o \textbf{Diagrama de Estados UML} que formaliza as transições de estado permitidas para um pedido musical dentro da fila (RN04) e as guardas de autorização (RN03) exigidas em cada transição.
+
+\Needspace{20cm}
+\begin{figure}[H]
+  \caption{Diagrama de Estados UML -- Ciclo de Vida de um Pedido Musical na Fila (RN03 e RN04)}
+  \label{fig:estados}
+\begin{center}
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{imagens/diagrama_estados.png}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+%% -------------------------------------------------------------------------- %%

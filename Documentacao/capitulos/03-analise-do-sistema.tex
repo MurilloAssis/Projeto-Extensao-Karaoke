@@ -1,0 +1,349 @@
+\chapter{Análise do Sistema} \label{cap:analise}
+
+Este capítulo transforma a compreensão do contexto operacional do Apache Gru Rock Bar e das necessidades identificadas em uma visão estruturada do sistema \textbf{Karaokê Apache}, definindo sua visão geral, os atores envolvidos, os casos de uso, o modelo conceitual de domínio, os requisitos funcionais e não funcionais e as restrições do sistema.
+
+A análise mantém o foco no comportamento esperado do sistema e nas regras do negócio. As decisões relacionadas à arquitetura, às tecnologias, à organização dos componentes e aos detalhes de implementação são apresentadas nos capítulos posteriores.
+
+\section{Visão Geral do Sistema}
+
+O sistema \textbf{Karaokê Apache} é uma plataforma distribuída centrada na organização da fila de apresentações. Ele conecta o salão do bar, onde os clientes fazem pedidos e acompanham a fila pelos seus smartphones, ao palco, onde o administrador conduz a ordem de apresentações e o reprodutor exibe os vídeos de karaokê na TV.
+
+As funcionalidades do sistema organizam-se em três grupos principais:
+
+\begin{itemize}
+  \item \textbf{FT-001 -- Solicitar música para a fila do karaokê:} permite ao participante identificado (como visitante ou com conta) pesquisar e escolher um vídeo musical pelo próprio sistema, passando pelas validações de disponibilidade (RN00), duplicidade (RN01) e limite de pedidos (RN02);
+  \item \textbf{FT-002 -- Gerenciar e moderar a fila de reprodução:} permite ao organizador visualizar a fila ordenada por chegada (FIFO), iniciar a reprodução do primeiro item, avançar para a próxima música ou remover pedidos (RN03 e RN04);
+  \item \textbf{FT-003 -- Sincronizar e reproduzir faixa no telão:} atualiza em tempo real o estado da música ativa para que o reprodutor exiba no telão o vídeo correspondente, aberto pelo link, ao lado da interface própria do sistema.
+\end{itemize}
+
+O limite do sistema começa no acesso do cliente à interface de solicitação e termina na atualização do estado do pedido e na exibição da música ativa. O sistema não substitui a atuação do organizador, o equipamento de áudio ou a operação artística do evento. Também não é responsável pela produção do conteúdo audiovisual nem pela disponibilidade dos vídeos de terceiros.
+
+\section{Atores Envolvidos}
+
+Foram identificados três atores que interagem diretamente com o sistema, cujos papéis são detalhados na Tabela \ref{tab:atores}. Os gestores do estabelecimento são partes interessadas do projeto, mas não constituem um ator separado, pois utilizam as mesmas funcionalidades do administrador.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Identificação e caracterização dos atores do sistema Karaokê Apache.}%
+  \label{tab:atores}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{3.6cm}p{2.8cm}X}
+    \toprule
+    \textbf{Ator} & \textbf{Tipo de Ator} & \textbf{Papel e Interações com o Sistema} \\
+    \midrule
+    \textbf{Cliente (Cantor)} & Humano (Primário) & Frequentador do Apache Gru Rock Bar que acessa a interface móvel via QR Code no telão para se identificar (informando apenas um nome ou, opcionalmente, fazendo login), pesquisar e escolher vídeos pelo sistema, adicionar pedidos à fila e consultar sua posição de espera. \\
+    \addlinespace
+    \textbf{Administrador (Organizador)} & Humano (Primário) & Operador responsável pela condução da Noite de Karaokê. Possui permissão exclusiva para iniciar faixas, avançar para a próxima música, remover itens, limpar a fila e gerenciar o catálogo. \\
+    \addlinespace
+    \textbf{Reprodutor de Telão (\textit{Karaokê TV Player})} & Sistema / Terminal (Secundário) & Aplicativo desktop em Electron executado no computador do bar conectado à TV do palco, que consulta a faixa ativa e abre o vídeo do YouTube pelo link, exibindo-o ao lado da interface própria do sistema (duas visões). \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Casos de Uso}
+
+A partir dos atores identificados, foram levantados oito Casos de Uso (UC01 a UC08) que especificam o comportamento esperado do sistema sob a perspectiva de seus usuários. A Figura \ref{fig:casos_uso} apresenta o \textbf{Diagrama de Casos de Uso UML} do sistema, seguido pelo detalhamento descritivo na Tabela \ref{tab:casos_uso}. O caso de uso UC04 é incluído por UC03, pois suas validações fazem parte da solicitação de uma música, e o UC07 representa a comunicação do estado da fila com o reprodutor de telão, sem definir a tecnologia utilizada para essa comunicação.
+
+\begin{figure}[H]
+  \caption{Diagrama de Casos de Uso UML -- Sistema Karaokê Apache}
+  \label{fig:casos_uso}
+  \begin{center}
+  \resizebox{0.95\textwidth}{!}{%
+  \begin{tikzpicture}[
+    uc/.style={draw, ellipse, fill=white, align=center, font=\scriptsize, minimum width=3.6cm, minimum height=1.1cm, text width=2.9cm},
+    inc/.style={-latex, dashed},
+    ilb/.style={font=\tiny, fill=white, inner sep=1pt}]
+    \newcommand{\ucactor}[3]{%
+      \begin{scope}[shift={#2}]
+        \draw[thick] (0,0.45) circle (0.2);
+        \draw[thick] (0,0.25) -- (0,-0.3) (-0.35,0.05) -- (0.35,0.05) (0,-0.3) -- (-0.28,-0.75) (0,-0.3) -- (0.28,-0.75);
+        \node[font=\scriptsize\bfseries, align=center] at (0,-1.15) {#3};
+        \coordinate (#1) at (0,0);
+      \end{scope}}
+    % Fronteira do sistema
+    \draw[fill=gray!6, rounded corners=4pt] (3.6,-0.2) rectangle (14.4,-10.6);
+    \node[font=\scriptsize\bfseries] at (9,-0.5) {Sistema Karaokê Apache};
+    % Casos de uso
+    \node[uc] (uc02) at (6.4,-1.7) {UC02: Pesquisar e escolher vídeo};
+    \node[uc] (uc03) at (6.4,-3.3) {UC03: Solicitar música para a fila};
+    \node[uc] (uc01) at (6.4,-4.9) {UC01: Identificar-se / autenticar};
+    \node[uc] (uc05) at (6.4,-6.5) {UC05: Acompanhar fila e música atual};
+    \node[uc] (uc06) at (6.4,-8.1) {UC06: Controlar reprodução (\textit{Play} / Próxima)};
+    \node[uc] (uc08) at (6.4,-9.7) {UC08: Moderar fila e gerenciar catálogo};
+    \node[uc] (uc04) at (11.6,-3.3) {UC04: Validar regras da fila (RN00--RN02)};
+    \node[uc] (uc07) at (11.6,-8.1) {UC07: Sincronizar e exibir vídeo no telão};
+    % Atores
+    \ucactor{cli}{(0.8,-3.3)}{Cliente}
+    \ucactor{adm}{(0.8,-8.1)}{Administrador}
+    \ucactor{rep}{(16.4,-8.1)}{Reprodutor\\(Karaokê TV Player)}
+    % Associações
+    \draw (cli) -- (uc02.west);
+    \draw (cli) -- (uc03.west);
+    \draw (cli) -- (uc01.west);
+    \draw (cli) -- (uc05.west);
+    \draw (adm) -- (uc01.west);
+    \draw (adm) -- (uc05.west);
+    \draw (adm) -- (uc06.west);
+    \draw (adm) -- (uc08.west);
+    \draw (rep) -- (uc07.east);
+    % Inclusões
+    \draw[inc] (uc03.east) -- node[ilb] {\guillemotleft include\guillemotright} (uc04.west);
+    \draw[inc] (uc03.south) -- node[ilb, right, xshift=3pt] {\guillemotleft include\guillemotright} (uc01.north);
+    \draw[inc] (uc06.east) -- node[ilb] {\guillemotleft include\guillemotright} (uc07.west);
+  \end{tikzpicture}%
+  }
+  \end{center}
+  \legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Especificação dos casos de uso (UC) do sistema Karaokê Apache.}%
+  \label{tab:casos_uso}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.3cm}p{3.6cm}p{2.6cm}X}
+    \toprule
+    \textbf{Código} & \textbf{Nome do Caso de Uso} & \textbf{Atores} & \textbf{Resumo do Fluxo Principal e Comportamento Esperado} \\
+    \midrule
+    UC01 & Identificar-se / Autenticar & Cliente, Administrador & O cliente pode entrar como visitante, informando apenas o nome usado na chamada ao palco, ou, opcionalmente, fazer login ou criar uma conta com nome, e-mail e senha. O administrador sempre se autentica com e-mail e senha para acessar as funções do seu perfil. \\
+    \addlinespace
+    UC02 & Pesquisar e Escolher Vídeo no Sistema & Cliente & O cliente pesquisa vídeos de karaokê disponíveis por título ou artista diretamente na interface do próprio sistema. \\
+    \addlinespace
+    UC03 & Solicitar Música para a Fila & Cliente & O cliente, já identificado (UC01), escolhe o vídeo musical pelo sistema; a aplicação executa as validações do caso de uso UC04 e adiciona o item ao final da fila. \\
+    \addlinespace
+    UC04 & Validar Regras da Fila & Sistema (\textit{Include} de UC03) & Verifica se o vídeo é válido/disponível (RN00), se não está duplicado na fila ativa (RN01) e se o cliente respeita o limite de pedidos simultâneos (RN02). \\
+    \addlinespace
+    UC05 & Acompanhar Fila e Música Atual & Cliente, Administrador & Exibe em tempo real o card \textit{Tocando Agora} e a lista ordenada de próximas músicas com a quantidade total na fila. \\
+    \addlinespace
+    UC06 & Controlar Reprodução (Play / Próxima) & Administrador & O administrador inicia o primeiro pedido da fila (\textit{Play}, quando nenhuma música está em reprodução) ou aciona o botão \textit{Próxima música}, que conclui o pedido atual e promove o seguinte para o estado \textit{Reproduzindo}. \\
+    \addlinespace
+    UC07 & Sincronizar e Exibir Vídeo no Telão & Reprodutor TV & A alteração da faixa ativa (UC06) dispara a atualização imediata da janela do \textit{Karaokê TV Player} (Electron), que abre o vídeo pelo link em uma das duas visões. Quando não há música ativa, o telão exibe um estado de espera. \\
+    \addlinespace
+    UC08 & Moderar Fila e Gerenciar Catálogo & Administrador & Permite excluir pedidos individuais, limpar a fila ao encerrar a noite e cadastrar ou inativar músicas no banco de dados. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Modelo Conceitual}
+
+O modelo conceitual do domínio foi construído pela equipe na ferramenta \textbf{brModelo} e representado no \textbf{Diagrama de Classes Conceitual UML} da Figura \ref{fig:classes_conceitual}.
+
+O domínio é estruturado em torno de quatro conceitos essenciais, independentes de decisões de implementação:
+
+\begin{itemize}
+  \item \textbf{\texttt{Usuario} (com generalização/especialização em \texttt{Admin} e \texttt{Cliente}):} representa qualquer pessoa que interage com o sistema, contendo os atributos conceituais \texttt{nome}, \texttt{email} e \texttt{senha}; o cliente que entra como visitante informa apenas o \texttt{nome}, e \texttt{email} e \texttt{senha} existem somente para quem possui conta. A especialização distingue o \texttt{Cliente} (autor dos pedidos musicais) do \texttt{Admin} (responsável pela moderação);
+  \item \textbf{\texttt{Musica}:} representa a obra musical disponível para interpretação no karaokê, caracterizada por \texttt{titulo}, \texttt{artista}, identificador do vídeo no YouTube (\texttt{youtube\_id}), a partir do qual o link é obtido, e estado de disponibilidade (\texttt{disponivel});
+  \item \textbf{\texttt{Letra}:} representa o texto da canção (\texttt{conteudo\_letra}, \texttt{idioma}) vinculado à classe \texttt{Musica} pela associação \textit{Possui} com multiplicidade $1$ para $0..*$. Está prevista no modelo, mas \textbf{não faz parte do escopo do MVP};
+  \item \textbf{\texttt{Fila} (Classe Associativa \texttt{Adiciona}):} materializa o vínculo entre um \texttt{Cliente} ($0..*$) e uma \texttt{Musica} ($0..*$), registrando o \texttt{status} do pedido (RN04) e a data/hora da solicitação (\texttt{dt\_pedido}), que define a ordem de chegada (FIFO).
+\end{itemize}
+
+\begin{figure}[H]
+  \caption{Diagrama de Classes Conceitual UML}
+  \label{fig:classes_conceitual}
+\begin{center}
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}
+  \umlclass[x=0,y=0]{Usuario}{
+    - nome : Texto \\
+    - email : Texto (somente com conta) \\
+    - senha : Texto (somente com conta)
+  }{}
+  \umlclass[x=-3.5,y=-4]{Admin}{}{
+    + moderarFila() \\
+    + avancarMusica()
+  }
+  \umlclass[x=3.5,y=-4]{Cliente}{}{}
+  \umlclass[x=10,y=-4]{Fila / Pedido}{
+    - status : Texto (RN04) \\
+    - dt\_pedido : Data e hora
+  }{}
+  \umlclass[x=10,y=-9]{Musica}{
+    - titulo : Texto \\
+    - artista : Texto \\
+    - youtube\_id : Texto \\
+    - disponivel : Booleano
+  }{}
+  \umlclass[x=2.5,y=-9]{Letra}{
+    - conteudo\_letra : Texto \\
+    - idioma : Texto
+  }{}
+  \umlinherit[geometry=|-|]{Admin}{Usuario}
+  \umlinherit[geometry=|-|]{Cliente}{Usuario}
+  \umlassoc[mult1=1, mult2=0..*]{Cliente}{Fila / Pedido}
+  \umlassoc[mult1=0..*, mult2=1]{Fila / Pedido}{Musica}
+  \umlassoc[mult1=1, mult2=0..*]{Musica}{Letra}
+  \node[font=\scriptsize\itshape] at (6.75,-3.7) {realiza};
+  \node[font=\scriptsize\itshape] at (10.75,-6.4) {refere-se a};
+  \node[font=\scriptsize\itshape] at (6.3,-8.55) {possui};
+  \umlnote[x=-3.5,y=-9,width=3.6cm]{Letra}{Fora do escopo do MVP: prevista para etapa futura.}
+\end{tikzpicture}%
+}
+\end{center}
+\legend{Fonte: Elaborado pelos autores (2026).}
+\end{figure}
+
+\section{Requisitos Funcionais}
+
+A Tabela \ref{tab:requisitos_funcionais} especifica de forma objetiva os Requisitos Funcionais (RF01 a RF12) que o sistema deve oferecer para atender às necessidades do Apache Gru Rock Bar.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Requisitos funcionais (RF) do sistema Karaokê Apache.}%
+  \label{tab:requisitos_funcionais}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.4cm}p{3.4cm}X p{1.8cm}}
+    \toprule
+    \textbf{Código} & \textbf{Requisito Funcional} & \textbf{Descrição do Comportamento} & \textbf{Prioridade} \\
+    \midrule
+    RF01 & Identificação e Autenticação de Usuário & Permitir que o cliente use o sistema como visitante, informando apenas um nome, ou, opcionalmente, com cadastro e login; exigir login com e-mail e senha para o perfil \textit{Administrador}. & Alta \\
+    \addlinespace
+    RF02 & Pesquisa de Vídeos no Próprio Sistema & Permitir que o usuário pesquise vídeos de karaokê por título, música ou artista diretamente na interface do sistema. & Alta \\
+    \addlinespace
+    RF03 & Seleção de Vídeo pelo Sistema & Permitir que o usuário escolha o vídeo desejado a partir dos resultados exibidos pelo próprio sistema, sem necessidade de copiar links externos. & Alta \\
+    \addlinespace
+    RF04 & Adição de Pedido à Fila & Permitir inserir o vídeo escolhido na fila ativa, vinculando o pedido à música do catálogo (cadastrada automaticamente, se necessário) e ao cliente, com a data e a hora que definem a ordem de chegada. & Alta \\
+    \addlinespace
+    RF05 & Validação das Regras do Pedido & Antes de inserir o pedido, verificar a disponibilidade da música (RN00), bloquear músicas que já estejam na fila ativa ou em reprodução (RN01) e recusar o pedido quando o cliente atingir o limite de pedidos ativos (RN02). & Alta \\
+    \addlinespace
+    RF06 & Visualização da Fila e Faixa Atual & Exibir em tempo real o destaque \textit{Tocando Agora} e a lista numerada de próximas músicas na fila. & Alta \\
+    \addlinespace
+    RF07 & Acionamento Direto de Música (\textit{Play}) & Permitir ao administrador iniciar com um clique a reprodução do primeiro pedido da fila, respeitando a ordem de chegada (FIFO). & Alta \\
+    \addlinespace
+    RF08 & Avanço para a Próxima Música & Permitir ao administrador, pelo botão \textit{Próxima música}, concluir a faixa atual e promover o próximo item da fila (FIFO) para execução. & Alta \\
+    \addlinespace
+    RF09 & Remoção Individual e Limpeza da Fila & Permitir ao administrador excluir um pedido específico ou limpar toda a fila ao final do evento. & Alta \\
+    \addlinespace
+    RF10 & Reprodução Dedicada no Telão (Electron) & Exibir no telão, na janela do \textit{Karaokê TV Player}, o vídeo da música ativa aberto pelo link, ao lado da interface própria do sistema (duas visões), sempre que a faixa ativa mudar, e um estado de espera quando não houver apresentação. & Alta \\
+    \addlinespace
+    RF11 & Gestão Administrativa do Catálogo & Permitir cadastrar novas músicas no banco de dados e alterar seu status de disponibilidade. & Média \\
+    \addlinespace
+    RF12 & Feedback Visual de Estado e Conexão & Exibir indicadores claros de conexão (\textit{Conectado -- Tocando}) e alertas de validação na interface. & Alta \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\subsection{Critérios de Aceitação dos Requisitos Centrais}
+
+Os requisitos centrais devem ser verificáveis por meio de cenários de uso. A Tabela \ref{tab:criterios_aceitacao} apresenta os critérios de aceitação iniciais do MVP, que orientam os testes descritos no Capítulo \ref{cap:implementacao}.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Critérios de aceitação dos requisitos centrais.}%
+  \label{tab:criterios_aceitacao}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}X}
+    \toprule
+    \textbf{Requisito} & \textbf{Critério de aceitação} \\
+    \midrule
+    RF01 & Dado que o cliente informe apenas um nome, o sistema deverá permitir seu acesso como visitante; dado que alguém tente acessar as funções de administrador, o sistema deverá exigir e-mail e senha de uma conta com perfil \texttt{admin}. \\
+    \addlinespace
+    RF04, RF05 & Dado que a música esteja disponível, não esteja na fila nem em reprodução e o cliente esteja abaixo do limite de pedidos, ao confirmar a solicitação o sistema deverá criar o pedido no final da fila, com estado \textit{Na Fila}. \\
+    \addlinespace
+    RF05, RF12 & Dado que a música já esteja na fila ou em reprodução, ou que o cliente tenha atingido o limite de pedidos, o sistema deverá recusar o pedido e informar o motivo. \\
+    \addlinespace
+    RF06 & Dado que existam pedidos ativos, ao acessar a fila o usuário deverá visualizar a música atual e a ordem de chegada dos próximos pedidos. \\
+    \addlinespace
+    RF07, RF08 & Dado que nenhuma música esteja em reprodução, o \textit{Play} deverá levar o primeiro pedido da fila ao estado \textit{Reproduzindo}; ao acionar \textit{Próxima música}, o pedido atual deverá passar a \textit{Concluído} e o seguinte, a \textit{Reproduzindo}. \\
+    \addlinespace
+    RF10 & Dado que exista uma música ativa, o reprodutor deverá abrir o vídeo correspondente no telão, ao lado da interface do sistema; sem música ativa, deverá exibir o estado de espera. \\
+    \addlinespace
+    RF12 & Dado que uma operação seja concluída ou recusada, o sistema deverá apresentar uma mensagem que permita ao usuário compreender o resultado. \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\subsection{Rastreabilidade entre Necessidades, Regras e Requisitos}
+
+A Tabela \ref{tab:rastreabilidade} relaciona as necessidades identificadas no Capítulo \ref{cap:contexto} às regras de negócio, aos casos de uso e aos requisitos funcionais correspondentes.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Matriz de rastreabilidade da análise do sistema.}%
+  \label{tab:rastreabilidade}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.1cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.6cm}X}
+    \toprule
+    \textbf{Nec.} & \textbf{Necessidade} & \textbf{Regras} & \textbf{Casos de uso} & \textbf{Requisitos funcionais} \\
+    \midrule
+    N01 & Escolha de vídeos pelo próprio sistema & RN00 & UC01, UC02, UC03, UC04 & RF01 a RF05, RF11 \\
+    \addlinespace
+    N02 & Transparência e previsibilidade da fila & RN03, RN04 & UC05, UC07 & RF06, RF10, RF12 \\
+    \addlinespace
+    N03 & Prevenção de repetições e rotatividade justa & RN01, RN02, RN03 & UC03, UC04, UC08 & RF04, RF05, RF09 \\
+    \addlinespace
+    N04 & Reprodução dedicada no telão & RN03, RN04 & UC06, UC07 & RF07, RF08, RF10 \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Requisitos Não Funcionais}
+
+A Tabela \ref{tab:requisitos_nao_funcionais} apresenta os Requisitos Não Funcionais (RNF01 a RNF09) que estabelecem os padrões de usabilidade, desempenho, compatibilidade, segurança e privacidade do sistema.
+
+\begin{table}[H]
+\IBGEtab{%
+  \caption{Requisitos não funcionais (RNF) do sistema Karaokê Apache.}%
+  \label{tab:requisitos_nao_funcionais}%
+}{%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{p{1.4cm}p{2.8cm}p{3.2cm}X}
+    \toprule
+    \textbf{Código} & \textbf{Categoria} & \textbf{Requisito} & \textbf{Critério de Qualidade exigido} \\
+    \midrule
+    RNF01 & Usabilidade & Interface Responsiva e Tema Escuro & A interface web deve adaptar-se a telas móveis e utilizar paleta escura de alto contraste adequada à iluminação noturna do bar. \\
+    \addlinespace
+    RNF02 & Desempenho & Sincronização em Tempo Real & A troca de música acionada na interface de controle deve refletir na janela do reprodutor Electron em menos de 2 segundos, em condições normais de conexão com a internet. \\
+    \addlinespace
+    RNF03 & Compatibilidade & Acesso Web Sem Instalação (\textit{Zero-Install}) & Os clientes devem acessar o sistema diretamente por navegadores padrões (Chrome, Safari, Firefox) via leitura do QR Code exibido no telão. \\
+    \addlinespace
+    RNF04 & Segurança & Isolamento de Contexto no Electron & O reprodutor desktop deve executar com isolamento de contexto e \textit{sandbox} ativos, sem exposição direta de APIs críticas do sistema operacional a scripts remotos. \\
+    \addlinespace
+    RNF05 & Segurança & Proteção de Credenciais e Sessão & As sessões devem ser controladas por token JWT, as senhas das contas devem ser armazenadas sob hash criptográfico (Bcrypt) e as rotas administrativas devem ser protegidas por controle de perfil. \\
+    \addlinespace
+    RNF06 & Confiabilidade & Consistência de Estado da Fila & A API em Java 21 com Spring Boot e o banco de dados MySQL devem garantir integridade transacional na ordenação e transição de status dos pedidos. \\
+    \addlinespace
+    RNF07 & Manutenibilidade & Modularidade por Componentes & O código deve manter separação clara entre as responsabilidades de Usuários, Fila, Pedido de Música e Reprodutor. \\
+    \addlinespace
+    RNF08 & Legal / Privacidade & Conformidade com a LGPD & A coleta de dados dos clientes deve limitar-se ao mínimo necessário para identificação na fila (Art. 6{\textordmasculine} da Lei n{\textordmasculine} 13.709/2018) \cite{brasil2018lgpd}. \\
+    \addlinespace
+    RNF09 & Segurança & Comunicação Cifrada & Toda a comunicação entre as interfaces web, o Electron e a API hospedada em nuvem deve usar conexões cifradas (HTTPS e WSS). \\
+    \bottomrule
+  \end{tabularx}%
+}{%
+  \fonte{Elaborado pelos autores (2026).}%
+}
+\end{table}
+
+\section{Restrições do Sistema} \label{sec:restricoes}
+
+O desenvolvimento e a operação do sistema estão sujeitos às seguintes restrições técnicas, operacionais, legais e orçamentárias:
+
+\begin{itemize}
+  \item \textbf{Cota de Uso da API de Pesquisa do YouTube:} a pesquisa de vídeos depende da \textit{YouTube Data API v3}, cuja cota padrão é de 10.000 unidades por dia, com cada pesquisa consumindo 100 unidades \cite{youtubedataapi2026}; isso limita o sistema a cerca de 100 pesquisas diárias, o que exige o uso do catálogo local e de \textit{cache} para reduzir as consultas ao serviço;
+  \item \textbf{Dependência de Conectividade com a Internet:} a aplicação web, a API e o banco de dados são executados em nuvem, e os vídeos são carregados sob demanda a partir do YouTube. Por isso, tanto os celulares dos clientes quanto o computador do bar necessitam de conexão ativa à internet durante a Noite de Karaokê;
+  \item \textbf{Restrição Orçamentária (Baixo Custo):} por tratar-se de um projeto acadêmico de extensão voltado a uma microempresa, a solução deve utilizar exclusivamente ferramentas, bibliotecas e bancos de dados gratuitos ou de código aberto (\textit{open source}), sem custo de licenciamento, e reaproveitar o hardware (computador, TV e som) já existente no bar. O único custo previsto é o da plataforma de hospedagem em nuvem da aplicação web, da API e do banco de dados, que deve ser baixo e compatível com o porte do estabelecimento;
+  \item \textbf{Restrição Temporal e Acadêmica:} o cronograma de desenvolvimento é delimitado pelo semestre letivo da disciplina de Projeto Integrado de Extensão do IFSP, razão pela qual a entrega concentra-se na consolidação e validação do Produto Mínimo Viável (MVP);
+  \item \textbf{Restrições Legais (LGPD):} o sistema não pode coletar dados pessoais sensíveis nem compartilhar cadastros de frequentadores com terceiros sem consentimento expresso \cite{brasil2018lgpd}.
+\end{itemize}
+
+%% -------------------------------------------------------------------------- %%

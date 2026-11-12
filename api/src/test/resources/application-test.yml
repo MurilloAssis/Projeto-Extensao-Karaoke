@@ -1,0 +1,5 @@
+karaoke:
+  fila:
+    limite-pedidos: 2
+  reprodutor:
+    chave: chave-de-teste
