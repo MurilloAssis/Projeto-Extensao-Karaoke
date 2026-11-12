@@ -1,0 +1,45 @@
+# Ambiente completo: MySQL (criado pelos scripts) + API.
+# Uso: docker compose up -d --build
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: karaoke-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: karaoke_apache
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: UTC
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+      - --default-time-zone=+00:00
+    ports:
+      - "3307:3306"
+    volumes:
+      - karaoke-mysql-dados:/var/lib/mysql
+      - ./BancoDeDados/scripts:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  api:
+    build: ./api
+    container_name: karaoke-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      DB_URL: jdbc:mysql://mysql:3306/karaoke_apache?connectionTimeZone=UTC
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      KARAOKE_LIMITE_PEDIDOS: ${KARAOKE_LIMITE_PEDIDOS:-2}
+      PLAYER_API_KEY: ${PLAYER_API_KEY}
+    ports:
+      - "8080:8080"
+
+volumes:
+  karaoke-mysql-dados:
