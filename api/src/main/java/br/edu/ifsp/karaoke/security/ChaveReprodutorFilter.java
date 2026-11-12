@@ -4,7 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -31,7 +31,7 @@ public class ChaveReprodutorFilter extends OncePerRequestFilter {
         String recebida = request.getHeader(CABECALHO);
         if (chave.length > 0 && recebida != null
                 && MessageDigest.isEqual(chave, recebida.getBytes(StandardCharsets.UTF_8))) {
-            var autenticacao = UsernamePasswordAuthenticationToken.authenticated("reprodutor", null,
+            var autenticacao = new PreAuthenticatedAuthenticationToken("reprodutor", null,
                     List.of(new SimpleGrantedAuthority("ROLE_REPRODUTOR")));
             SecurityContextHolder.getContext().setAuthentication(autenticacao);
         }
