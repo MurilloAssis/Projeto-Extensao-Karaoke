@@ -21,7 +21,7 @@ import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@SpringBootTest
+@SpringBootTest(properties = "karaoke.jwt.segredo=segredo-de-testes-com-pelo-menos-32-caracteres")
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Import(TestcontainersConfiguration.class)
@@ -85,7 +85,7 @@ public abstract class IntegracaoTest {
                 .content("{\"videoId\":\"%s\",\"titulo\":\"%s\"}".formatted(videoId, titulo)));
     }
 
-    private int inserir(String tabela, String chave, Map<String, Object> valores) {
+    protected int inserir(String tabela, String chave, Map<String, Object> valores) {
         return new SimpleJdbcInsert(jdbc).withTableName(tabela).usingGeneratedKeyColumns(chave)
                 .executeAndReturnKey(valores).intValue();
     }

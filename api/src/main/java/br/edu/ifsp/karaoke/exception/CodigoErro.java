@@ -5,8 +5,13 @@ import org.springframework.http.HttpStatus;
 public enum CodigoErro {
     VALIDACAO(HttpStatus.BAD_REQUEST, "Dados inválidos"),
     NAO_IDENTIFICADO(HttpStatus.UNAUTHORIZED, "Identificação necessária"),
+    CREDENCIAIS_INVALIDAS(HttpStatus.UNAUTHORIZED, "Credenciais inválidas"),
     RN03_ACESSO_NEGADO(HttpStatus.FORBIDDEN, "Acesso negado"),
     PEDIDO_NAO_ENCONTRADO(HttpStatus.NOT_FOUND, "Pedido não encontrado"),
+    SESSAO_NAO_ENCONTRADA(HttpStatus.NOT_FOUND, "Sessão não encontrada"),
+    SESSAO_JA_ABERTA(HttpStatus.CONFLICT, "Já existe uma sessão aberta"),
+    SESSAO_JA_ENCERRADA(HttpStatus.CONFLICT, "A sessão já está encerrada"),
+    NOME_INADEQUADO(HttpStatus.BAD_REQUEST, "Nome inadequado"),
     RN00_MUSICA_INDISPONIVEL(HttpStatus.CONFLICT, "Música indisponível"),
     RN01_MUSICA_JA_NA_FILA(HttpStatus.CONFLICT, "Música já está na fila"),
     RN02_LIMITE_PEDIDOS(HttpStatus.CONFLICT, "Limite de pedidos atingido"),

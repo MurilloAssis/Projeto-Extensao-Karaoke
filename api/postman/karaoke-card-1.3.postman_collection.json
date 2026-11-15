@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Karaokê Apache — Card 1.3 (Motor da Fila)",
-    "description": "Roteiro de testes do card 1.3. Execute na ordem pelo Collection Runner: cada pasta depende da anterior.\n\nPré-requisitos:\n1. Banco com BancoDeDados/scripts/02_dados_desenvolvimento.sql (admin id 1; visitantes 2, 3 e 4; músicas DEVTESTE001–005).\n2. API no perfil dev: ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev\n3. Variável de ambiente PLAYER_API_KEY igual à variável playerKey da collection (padrão: teste).\n4. KARAOKE_LIMITE_PEDIDOS = 2 (padrão).\n\nA primeira requisição limpa a fila, então o roteiro pode ser repetido.",
+    "description": "Roteiro integrado dos cards 1.2 e 1.3. Execute na ordem pelo Collection Runner.\n\nPré-requisitos:\n1. Banco criado pelos scripts 01 e 02, nessa ordem.\n2. API no perfil dev com JWT_SECRET definido.\n3. PLAYER_API_KEY igual à variável playerKey (padrão: teste).\n4. KARAOKE_LIMITE_PEDIDOS = 2.\n\nA coleção autentica o admin, abre uma sessão, cria três guests e usa os tokens JWT nos testes da fila.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -10,27 +10,278 @@
       "value": "http://localhost:8080"
     },
     {
-      "key": "admin",
-      "value": "1"
-    },
-    {
-      "key": "ana",
-      "value": "2"
-    },
-    {
-      "key": "bruno",
-      "value": "3"
-    },
-    {
-      "key": "carla",
-      "value": "4"
-    },
-    {
       "key": "playerKey",
       "value": "teste"
+    },
+    {
+      "key": "adminEmail",
+      "value": "admin@karaoke.local"
+    },
+    {
+      "key": "adminPassword",
+      "value": "1234"
+    },
+    {
+      "key": "tokenAdmin",
+      "value": ""
+    },
+    {
+      "key": "tokenAna",
+      "value": ""
+    },
+    {
+      "key": "tokenBruno",
+      "value": ""
+    },
+    {
+      "key": "tokenCarla",
+      "value": ""
+    },
+    {
+      "key": "sessaoCodigo",
+      "value": ""
+    },
+    {
+      "key": "sessaoId",
+      "value": ""
     }
   ],
   "item": [
+    {
+      "name": "Card 1.2 — Autenticação e sessão",
+      "item": [
+        {
+          "name": "Login do admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"senha\": \"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"perfil admin e token JWT\", () => { pm.expect(r.perfil).to.eql(\"admin\"); pm.expect(r.token).to.be.a(\"string\"); });",
+                  "pm.collectionVariables.set(\"tokenAdmin\", r.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Abrir sessão de karaokê",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/sessoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "sessoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"sessão aberta com código\", () => { pm.expect(r.status).to.eql(\"aberta\"); pm.expect(r.codigo).to.match(/^\\\\d{6}$/); });",
+                  "pm.collectionVariables.set(\"sessaoCodigo\", r.codigo);",
+                  "pm.collectionVariables.set(\"sessaoId\", r.idSessao);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ingresso guest — Ana",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/visitante",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "visitante"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana\",\n  \"codigoSessao\": \"{{sessaoCodigo}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"guest Ana recebe JWT\", () => { pm.expect(r.perfil).to.eql(\"visitante\"); pm.expect(r.token).to.be.a(\"string\"); });",
+                  "pm.collectionVariables.set(\"tokenAna\", r.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ingresso guest — Bruno",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/visitante",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "visitante"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Bruno\",\n  \"codigoSessao\": \"{{sessaoCodigo}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"guest Bruno recebe JWT\", () => { pm.expect(r.perfil).to.eql(\"visitante\"); pm.expect(r.token).to.be.a(\"string\"); });",
+                  "pm.collectionVariables.set(\"tokenBruno\", r.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ingresso guest — Carla",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/visitante",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "visitante"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Carla\",\n  \"codigoSessao\": \"{{sessaoCodigo}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json();",
+                  "pm.test(\"guest Carla recebe JWT\", () => { pm.expect(r.perfil).to.eql(\"visitante\"); pm.expect(r.token).to.be.a(\"string\"); });",
+                  "pm.collectionVariables.set(\"tokenCarla\", r.token);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
     {
       "name": "0. Preparação",
       "item": [
@@ -40,8 +291,8 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -107,8 +358,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               },
               {
                 "key": "Content-Type",
@@ -158,8 +409,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{bruno}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenBruno}}"
               },
               {
                 "key": "Content-Type",
@@ -207,8 +458,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{carla}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenCarla}}"
               },
               {
                 "key": "Content-Type",
@@ -254,8 +505,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               },
               {
                 "key": "Content-Type",
@@ -303,8 +554,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               },
               {
                 "key": "Content-Type",
@@ -350,8 +601,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{carla}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenCarla}}"
               },
               {
                 "key": "Content-Type",
@@ -397,8 +648,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{carla}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenCarla}}"
               },
               {
                 "key": "Content-Type",
@@ -488,8 +739,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               },
               {
                 "key": "Content-Type",
@@ -573,8 +824,8 @@
             "method": "GET",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -608,8 +859,8 @@
             "method": "GET",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               }
             ],
             "url": {
@@ -643,8 +894,8 @@
             "method": "GET",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               }
             ],
             "url": {
@@ -683,8 +934,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               }
             ],
             "url": {
@@ -718,8 +969,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -753,8 +1004,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -790,8 +1041,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -856,8 +1107,8 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -891,8 +1142,8 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -925,8 +1176,8 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -960,8 +1211,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -997,8 +1248,8 @@
             "method": "POST",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{ana}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAna}}"
               },
               {
                 "key": "Content-Type",
@@ -1157,8 +1408,8 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{carla}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenCarla}}"
               }
             ],
             "url": {
@@ -1191,8 +1442,8 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "X-Usuario-Id",
-                "value": "{{admin}}"
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
               }
             ],
             "url": {
@@ -1247,6 +1498,51 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "Encerrar sessão (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenAdmin}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/sessoes/{{sessaoId}}/encerrar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "sessoes",
+            "{{sessaoId}}",
+            "encerrar"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"sessão encerrada\", () => pm.expect(pm.response.json().status).to.eql(\"encerrada\"));"
+            ]
+          }
         }
       ]
     }

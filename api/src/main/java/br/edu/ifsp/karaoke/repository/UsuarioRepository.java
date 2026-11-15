@@ -10,6 +10,8 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Integer> {
 
+    Optional<UsuarioModel> findByEmailIgnoreCase(String email);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select u from UsuarioModel u where u.idUsuario = :id")
     Optional<UsuarioModel> travarPorId(Integer id);

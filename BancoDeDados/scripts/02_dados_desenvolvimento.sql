@@ -3,7 +3,7 @@ SET NAMES utf8mb4;
 USE karaoke_apache;
 
 INSERT INTO usuario (id_usuario, nome, email, senha_hash, tipo_perfil) VALUES
-    (1, 'Organizador', 'admin@karaoke.local', '1234', 'admin'),
+    (1, 'Organizador', 'admin@karaoke.local', '$2a$10$rzLZPwN0datG5sJm6T/Tqu56mj3W/RQzHF/JqldB/bR7bLJqN7XSC', 'admin'),
     (2, 'Ana',         NULL,                  NULL, 'visitante'),
     (3, 'Bruno',       NULL,                  NULL, 'visitante'),
     (4, 'Carla',       NULL,                  NULL, 'visitante');

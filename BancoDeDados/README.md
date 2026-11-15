@@ -7,7 +7,7 @@ Scripts MySQL 8 do modelo relacional (documento.pdf, Seção 4.3 e Tabela 11).
 | Script | Conteúdo | Onde rodar |
 |---|---|---|
 | `scripts/01_criar_banco.sql` | Banco `karaoke_apache` + tabelas `usuario`, `musica`, `fila` (e `letra`, fora do MVP) | dev e produção |
-| `scripts/02_dados_desenvolvimento.sql` | Admin, 3 visitantes e 5 músicas fictícias | **somente dev** |
+| `scripts/02_dados_desenvolvimento.sql` | Admin com senha BCrypt, 3 visitantes e 5 músicas fictícias | **somente dev** |
 
 ## Opção 1 — Docker
 

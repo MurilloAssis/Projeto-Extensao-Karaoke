@@ -3,5 +3,8 @@ karaoke:
     limite-pedidos: 2
   reprodutor:
     chave: chave-de-teste
+  jwt:
+    segredo: segredo-de-testes-com-pelo-menos-32-caracteres
+    validade-minutos: 60
   cors:
     origens: http://localhost:5173

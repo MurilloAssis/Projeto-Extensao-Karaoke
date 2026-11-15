@@ -19,6 +19,9 @@ karaoke:
     limite-pedidos: ${KARAOKE_LIMITE_PEDIDOS:2}
   reprodutor:
     chave: ${PLAYER_API_KEY:teste}
+  jwt:
+    segredo: ${JWT_SECRET:}
+    validade-minutos: ${JWT_VALIDITY_MINUTES:480}
   cors:
     origens: ${CORS_ORIGINS:http://localhost:5173}
 

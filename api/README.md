@@ -41,7 +41,8 @@ docker compose up -d --build
 
 ## Rodar localmente
 
-1. Crie o banco com `BancoDeDados/scripts/01_criar_banco.sql` (e `02_dados_desenvolvimento.sql` em dev).
+1. Crie o banco com `BancoDeDados/scripts/01_criar_banco.sql`
+   (inclua `02_dados_desenvolvimento.sql` em dev).
 2. Defina as variáveis de ambiente (modelo em `.env.example`):
 
 | Variável | Padrão | Uso |
@@ -50,6 +51,8 @@ docker compose up -d --build
 | `DB_USER` / `DB_PASSWORD` | `karaoke_app` / vazio | credenciais |
 | `KARAOKE_LIMITE_PEDIDOS` | `2` | RN02 |
 | `PLAYER_API_KEY` | `teste` | chave do Karaokê TV Player (defina um valor forte em produção) |
+| `JWT_SECRET` | sem padrão | assinatura dos tokens; mínimo de 32 caracteres |
+| `JWT_VALIDITY_MINUTES` | `480` | duração do token JWT |
 | `CORS_ORIGINS` | `http://localhost:5173` | origens do React/Electron, separadas por vírgula (HTTP e WebSocket) |
 
 3. Suba no perfil `dev`:
@@ -61,22 +64,35 @@ docker compose up -d --build
 - Saúde: `GET http://localhost:8080/actuator/health`
 - Swagger: `http://localhost:8080/swagger-ui.html`
 
-## Identificação provisória (até o card de autenticação)
+## Autenticação e sessão de karaokê
 
-Nos perfis `dev` e `test`, o usuário é identificado pelo cabeçalho `X-Usuario-Id`.
-Com os dados de desenvolvimento: `1` = admin, `2`–`4` = visitantes. Fora desses perfis, o cabeçalho é ignorado.
+O administrador faz login, abre uma sessão e divulga o código de seis dígitos no QR Code/telão.
+Cada cliente informa esse código e o nome da chamada ao palco. As rotas identificadas recebem
+`Authorization: Bearer <token>`.
 
 ```bash
-curl -X POST localhost:8080/api/fila -H "X-Usuario-Id: 2" -H "Content-Type: application/json" \
-     -d '{"videoId":"DEVTESTE001","titulo":"Still Loving You (Karaokê)"}'
-curl -X POST localhost:8080/api/fila/play -H "X-Usuario-Id: 1"
-curl localhost:8080/api/fila
+curl -X POST localhost:8080/api/auth/login -H "Content-Type: application/json" \
+     -d '{"email":"admin@karaoke.local","senha":"1234"}'
+# Use o token retornado:
+curl -X POST localhost:8080/api/sessoes -H "Authorization: Bearer <token-admin>"
+# Use o código retornado:
+curl -X POST localhost:8080/api/auth/visitante -H "Content-Type: application/json" \
+     -d '{"nome":"Ana","codigoSessao":"123456"}'
 ```
 
-## Endpoints da fila
+O ingresso rejeita nomes inadequados antes de criar o visitante. Encerrar a sessão invalida os tokens
+dos visitantes ligados a ela e impede novos ingressos; a limpeza da fila continua sendo uma ação explícita do admin.
+A sessão é mantida em memória pela API. Ao reiniciar a aplicação, o admin precisa abrir uma nova sessão e o código
+anterior deixa de aceitar ingressos.
+
+## Endpoints
 
 | Método | Rota | Acesso |
 |---|---|---|
+| POST | `/api/auth/login` | público (credenciais de admin) |
+| POST | `/api/auth/visitante` | público (nome + código de sessão) |
+| POST | `/api/sessoes` | admin |
+| POST | `/api/sessoes/{idSessao}/encerrar` | admin |
 | POST | `/api/fila` | visitante, cliente |
 | GET | `/api/fila` | público |
 | GET | `/api/fila/atual` | público (204 = telão em espera) |
@@ -147,21 +163,21 @@ recebida, com versão, motivo e atraso. Útil junto com a collection do Postman.
 ## Collection Postman
 
 [`postman/karaoke-card-1.3.postman_collection.json`](postman/karaoke-card-1.3.postman_collection.json):
-31 requisições com 64 verificações automáticas, cobrindo pedidos (RN00–RN02), consultas, controle de palco
+roda o login, a abertura/encerramento da sessão, o ingresso dos visitantes e os testes existentes de pedidos,
+consultas, controle de palco
 (RN03/RN04) e o aviso de fim de vídeo do reprodutor.
 
-1. Banco com `02_dados_desenvolvimento.sql` aplicado.
-2. API no perfil `dev` com `PLAYER_API_KEY=teste`.
+1. Banco com `01_criar_banco.sql` e `02_dados_desenvolvimento.sql` aplicados, nessa ordem.
+2. API no perfil `dev` com `PLAYER_API_KEY=teste` e `JWT_SECRET` definido.
 3. No Postman: **Import** → arquivo da collection → **Run collection**, na ordem.
 
-A primeira requisição limpa a fila, então o roteiro pode ser repetido. As variáveis da collection
-(`baseUrl`, `admin`, `ana`, `bruno`, `carla`, `playerKey`) podem ser ajustadas.
+A coleção obtém e guarda os tokens automaticamente. A senha dev do admin é `1234`.
 Pela linha de comando: `npx newman run postman/karaoke-card-1.3.postman_collection.json`.
 
 ## Testes
 
 Precisam do Docker em execução: o Testcontainers sobe um MySQL 8.4 descartável criado com o mesmo
-`01_criar_banco.sql`, sem tocar no banco local.
+esquema do script `01`, sem tocar no banco local.
 
 ```bash
 ./mvnw test

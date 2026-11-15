@@ -32,6 +32,15 @@ public class UsuarioModel {
     protected UsuarioModel() {
     }
 
+    public static UsuarioModel visitante(String nome) {
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.nome = nome;
+        usuario.email = null;
+        usuario.senhaHash = null;
+        usuario.tipoPerfil = TipoPerfil.VISITANTE;
+        return usuario;
+    }
+
     public boolean isAdmin() {
         return tipoPerfil == TipoPerfil.ADMIN;
     }
@@ -46,6 +55,10 @@ public class UsuarioModel {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getSenhaHash() {
+        return senhaHash;
     }
 
     public TipoPerfil getTipoPerfil() {

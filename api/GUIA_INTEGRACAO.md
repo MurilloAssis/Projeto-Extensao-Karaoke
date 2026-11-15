@@ -66,11 +66,11 @@ Pedido recusado não é gravado: a API responde com um erro e nada muda na fila.
 | Fila: pedir, consultar, Play, Próxima, Remover, Limpar, fim do vídeo | ✅ pronto | 1.3 |
 | Aviso em tempo real `fila-atualizada` | ✅ pronto | 2.2 |
 | Banco MySQL e ambiente Docker | ✅ pronto | 1.1 |
-| Login, cadastro, visitante e token JWT | ⏳ pendente — hoje usa `X-Usuario-Id` (Seção 4) | 1.2 |
+| Login do admin, sessão, visitante e token JWT | ✅ pronto | 1.2 |
 | Pesquisa de músicas no YouTube (`GET /api/musicas/busca?q=`) | ⏳ pendente — hoje informe `videoId` e `titulo` direto | 2.1 |
 | Gestão do catálogo pelo admin (RF11) | ⏳ pendente | 2.1 |
 
-Isole a autenticação e a busca em um único módulo de cada tela, para que a troca futura não espalhe mudanças.
+Isole a autenticação e a busca em um único módulo de cada tela.
 
 ---
 
@@ -93,10 +93,8 @@ docker compose up -d --build
 
 Dados de desenvolvimento (`BancoDeDados/scripts/02_dados_desenvolvimento.sql`):
 
-| `X-Usuario-Id` | Usuário | Perfil |
-|---|---|---|
-| `1` | Organizador | admin |
-| `2`, `3`, `4` | Ana, Bruno, Carla | visitante |
+- Admin: `admin@karaoke.local`, senha `1234` (hash BCrypt armazenado pelo script `02`).
+- Os visitantes de cada execução são criados por `POST /api/auth/visitante`.
 
 Músicas: `DEVTESTE001` a `DEVTESTE004` disponíveis e `DEVTESTE005` indisponível. Os IDs são fictícios e não abrem vídeos reais no YouTube.
 
@@ -121,15 +119,32 @@ Em produção: `https://<dominio>` e `wss://<dominio>/ws` (RNF09).
 
 ---
 
-## 4. Identificação (provisória até o card 1.2)
+## 4. Identificação e sessão
 
-Hoje, nos perfis `dev` e `test`, a API identifica quem chama pelo cabeçalho:
+1. Admin: `POST /api/auth/login` com e-mail e senha.
+2. Admin: `POST /api/sessoes` com seu Bearer token; a resposta traz o código de seis dígitos.
+3. Cliente: lê o QR Code ou digita o código e envia `POST /api/auth/visitante` com nome e código.
+4. Todas as chamadas identificadas usam:
 
 ```
-X-Usuario-Id: 2
+Authorization: Bearer <token JWT>
 ```
 
-Com o card 1.2, o cabeçalho passa a ser `Authorization: Bearer <token JWT>`, obtido em `POST /api/auth/visitante` ou `POST /api/auth/login` (Figura 7). **Coloque esse cabeçalho em um único lugar** (Seção 6.1); quando o login chegar, só ele muda.
+Corpos de entrada:
+
+```json
+{ "email": "admin@karaoke.local", "senha": "1234" }
+```
+
+```json
+{ "nome": "Ana", "codigoSessao": "123456" }
+```
+
+O código pode vir tanto do QR Code quanto da digitação manual. A leitura do QR acontece na tela; a API recebe
+o mesmo código em ambos os casos. Nomes ofensivos retornam `400 NOME_INADEQUADO`. Quando o admin chama
+`POST /api/sessoes/{id}/encerrar`, os tokens guest daquela sessão deixam de autorizar novas operações.
+A sessão fica em memória na instância da API. Se a aplicação reiniciar, o admin deve abrir outra sessão e divulgar
+o novo código.
 
 O Electron usa outra credencial, `X-Player-Key` (Seção 8.3).
 
@@ -141,6 +156,10 @@ O Electron usa outra credencial, `X-Player-Key` (Seção 8.3).
 
 | Método | Rota | Quem chama | Resposta |
 |---|---|---|---|
+| POST | `/api/auth/login` | Admin | `200` + token JWT |
+| POST | `/api/auth/visitante` | Cliente | `200` + token JWT |
+| POST | `/api/sessoes` | Admin autenticado | `200` + sessão/código |
+| POST | `/api/sessoes/{id}/encerrar` | Admin autenticado | `200` + sessão encerrada |
 | POST | `/api/fila` | Cliente (visitante/cliente) | `201` + `ItemFila` |
 | GET | `/api/fila` | Todos (público) | `Fila` |
 | GET | `/api/fila/atual` | Todos (público) | `200` + `ItemFila`, ou `204` (telão em espera) |
@@ -282,11 +301,10 @@ export class ErroApi extends Error {
   }
 }
 
-// Provisório (card 1.3): id do usuário. Com o card 1.2, vira o token JWT.
-let usuarioId: string | null = localStorage.getItem('usuarioId');
-export function definirUsuario(id: string | null) {
-  usuarioId = id;
-  if (id) localStorage.setItem('usuarioId', id); else localStorage.removeItem('usuarioId');
+let token: string | null = localStorage.getItem('token');
+export function definirToken(valor: string | null) {
+  token = valor;
+  if (valor) localStorage.setItem('token', valor); else localStorage.removeItem('token');
 }
 
 export async function api<T>(caminho: string, opcoes: RequestInit = {}): Promise<T | null> {
@@ -294,7 +312,7 @@ export async function api<T>(caminho: string, opcoes: RequestInit = {}): Promise
     ...opcoes,
     headers: {
       ...(opcoes.body ? { 'Content-Type': 'application/json' } : {}),
-      ...(usuarioId ? { 'X-Usuario-Id': usuarioId } : {}), // card 1.2: Authorization: Bearer <token>
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...opcoes.headers,
     },
   });
@@ -396,7 +414,7 @@ sequenceDiagram
 ```
 
 Telas (Figura 6, a e b):
-- **Identificação** — (card 1.2) nome para visitante ou login. Hoje: escolher o `X-Usuario-Id`.
+- **Identificação** — nome e código para visitante; login com e-mail/senha para admin.
 - **Pesquisa e pedido** — (card 2.1) busca e botão **Adicionar** chamando `filaApi.pedir`. Trate `RN00`, `RN01` e `RN02` com as mensagens da Seção 5.3.
 - **Acompanhamento** — "Tocando agora" de `fila.atual`; "Seu pedido — Nº na fila" de `meusPedidos()`.
 - **Fila numerada** — `fila.proximos` com `posicao`. A visão pública não tem nomes (LGPD); destaque os pedidos do cliente comparando o `idFila` com os de `meusPedidos()`.
@@ -540,7 +558,7 @@ Como detectar o fim do vídeo na visão do YouTube ainda está **em aberto** no 
 ## 9. Checklist por tela
 
 - [ ] URL da API e do WebSocket por variável de ambiente (`VITE_API_URL`, `VITE_WS_URL`).
-- [ ] Identificação centralizada em um só módulo (troca do `X-Usuario-Id` pelo JWT no card 1.2).
+- [ ] Token JWT centralizado em um só módulo e enviado como Bearer.
 - [ ] Ao conectar e reconectar: buscar o estado por HTTP e zerar `ultimaVersao`.
 - [ ] Ignorar mensagens com `versao` menor ou igual à última.
 - [ ] Indicador de conexão (RF12): "Conectado" / "Reconectando".
