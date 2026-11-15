@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Lock, User, Link2, LogOut, Send } from 'lucide-react';
+import logoApache from '../assets/logo-apache.png';
+import fundoPalco from '../assets/fundo-palco.jfif';
 
 export function AdminPainel() {
   // Estados de Autenticação
@@ -55,25 +58,39 @@ export function AdminPainel() {
   if (!isLoggedIn) {
     return (
       <div style={styles.container}>
-        <div style={styles.card}>
+        <div style={styles.bgImage} />
+        <div style={styles.bgOverlay} />
+
+        <div style={styles.glassCard}>
+          <img src={logoApache} alt="Apache Gru Rock Bar" style={styles.logo} />
           <h2 style={styles.title}>Painel do DJ - Karaokê</h2>
+          <span style={styles.subtitle}>APACHE GRU ROCK BAR</span>
+
           <form onSubmit={handleLogin} style={styles.form}>
-            <input 
-              type="text" 
-              placeholder="Usuário" 
-              value={usuario} 
-              onChange={(e) => setUsuario(e.target.value)} 
-              style={styles.input}
-              required
-            />
-            <input 
-              type="password" 
-              placeholder="Senha" 
-              value={senha} 
-              onChange={(e) => setSenha(e.target.value)} 
-              style={styles.input}
-              required
-            />
+            <div style={styles.inputPill}>
+              <User size={17} color="#94A3B8" />
+              <input 
+                type="text" 
+                placeholder="Usuário" 
+                value={usuario} 
+                onChange={(e) => setUsuario(e.target.value)} 
+                style={styles.input}
+                required
+              />
+            </div>
+
+            <div style={styles.inputPill}>
+              <Lock size={17} color="#94A3B8" />
+              <input 
+                type="password" 
+                placeholder="Senha" 
+                value={senha} 
+                onChange={(e) => setSenha(e.target.value)} 
+                style={styles.input}
+                required
+              />
+            </div>
+
             <button type="submit" style={styles.buttonPrimary}>
               Entrar
             </button>
@@ -86,25 +103,44 @@ export function AdminPainel() {
   // --- TELA 2: GERENCIAMENTO DE FILA ---
   return (
     <div style={styles.container}>
-      <div style={styles.card}>
+      <div style={styles.bgImage} />
+      <div style={styles.bgOverlay} />
+
+      <div style={styles.glassCardDesktop}>
         <div style={styles.header}>
-          <h2 style={styles.title}>Gerenciar Fila</h2>
-          <button onClick={() => setIsLoggedIn(false)} style={styles.buttonLogout}>Sair</button>
+          <div style={styles.headerBrand}>
+            <img src={logoApache} alt="Apache" style={styles.logoSmall} />
+            <div>
+              <h2 style={styles.titleLeft}>Gerenciar Fila</h2>
+              <span style={styles.subtitleSmall}>APACHE GRU ROCK BAR • DJ</span>
+            </div>
+          </div>
+
+          <button onClick={() => setIsLoggedIn(false)} style={styles.buttonLogout}>
+            <LogOut size={14} />
+            <span>Sair</span>
+          </button>
         </div>
         
         <div style={styles.form}>
-          <p style={{ margin: '0 0 10px 0', color: '#ccc' }}>
+          <p style={styles.helperText}>
             Cole o link do YouTube abaixo para adicionar à fila da TV.
           </p>
-          <input
-            type="text"
-            placeholder="Ex: https://www.youtube.com/watch?v=..."
-            value={inputUrl}
-            onChange={(e) => setInputUrl(e.target.value)}
-            style={styles.input}
-          />
+
+          <div style={styles.inputPill}>
+            <Link2 size={17} color="#94A3B8" />
+            <input
+              type="text"
+              placeholder="Ex: https://www.youtube.com/watch?v=..."
+              value={inputUrl}
+              onChange={(e) => setInputUrl(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
           <button onClick={handleEnviarMusica} style={styles.buttonSuccess}>
-            Enviar Música
+            <Send size={15} />
+            <span>Enviar Música</span>
           </button>
         </div>
       </div>
@@ -112,80 +148,189 @@ export function AdminPainel() {
   );
 }
 
-// Objeto de estilos para manter o código limpo e centralizado
 const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
+    minHeight: '100vh',
     width: '100vw',
-    backgroundColor: '#1e1e1e',
-    fontFamily: 'sans-serif',
-    margin: 0
+    backgroundColor: '#0B0E14',
+    fontFamily: "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+    margin: 0,
+    padding: '24px',
+    boxSizing: 'border-box',
+    position: 'relative',
+    overflow: 'hidden'
   },
-  card: {
-    backgroundColor: '#333',
-    padding: '30px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+  bgImage: {
+    position: 'absolute',
+    inset: '-20px',
+    backgroundImage: `url(${fundoPalco})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    filter: 'blur(7px) brightness(0.65)',
+    transform: 'scale(1.04)',
+    zIndex: 0
+  },
+  bgOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'radial-gradient(circle at center, rgba(11, 14, 20, 0.35) 0%, rgba(11, 14, 20, 0.85) 100%)',
+    zIndex: 0
+  },
+  glassCard: {
+    position: 'relative',
+    zIndex: 1,
     width: '100%',
-    maxWidth: '400px',
+    maxWidth: '430px',
+    padding: '42px 36px',
+    borderRadius: '28px',
+    backgroundColor: 'rgba(15, 20, 30, 0.72)',
+    backdropFilter: 'blur(18px)',
+    WebkitBackdropFilter: 'blur(18px)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75)',
+    textAlign: 'center',
     boxSizing: 'border-box'
+  },
+  glassCardDesktop: {
+    position: 'relative',
+    zIndex: 1,
+    width: '100%',
+    maxWidth: '580px',
+    padding: '38px 40px',
+    borderRadius: '28px',
+    backgroundColor: 'rgba(15, 20, 30, 0.76)',
+    backdropFilter: 'blur(18px)',
+    WebkitBackdropFilter: 'blur(18px)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75)',
+    boxSizing: 'border-box'
+  },
+  logo: {
+    width: '74px',
+    height: '74px',
+    objectFit: 'contain',
+    marginBottom: '12px'
+  },
+  logoSmall: {
+    width: '40px',
+    height: '40px',
+    objectFit: 'contain'
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '20px'
+    paddingBottom: '20px',
+    marginBottom: '22px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+  },
+  headerBrand: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px'
   },
   title: {
-    color: '#fff',
+    color: '#FFFFFF',
     margin: 0,
-    fontSize: '1.5rem'
+    fontSize: '25px',
+    fontWeight: '800',
+    letterSpacing: '-0.3px'
+  },
+  titleLeft: {
+    color: '#FFFFFF',
+    margin: 0,
+    fontSize: '20px',
+    fontWeight: '800',
+    letterSpacing: '-0.3px'
+  },
+  subtitle: {
+    color: '#D91C24',
+    fontSize: '10px',
+    fontWeight: '700',
+    letterSpacing: '2px',
+    display: 'block',
+    marginTop: '6px',
+    marginBottom: '30px'
+  },
+  subtitleSmall: {
+    color: '#D91C24',
+    fontSize: '10px',
+    fontWeight: '700',
+    letterSpacing: '1.2px',
+    display: 'block',
+    marginTop: '2px'
+  },
+  helperText: {
+    margin: '0 0 4px 0',
+    color: '#CBD5E1',
+    fontSize: '14px',
+    textAlign: 'left',
+    paddingLeft: '4px'
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '15px'
+    gap: '14px'
+  },
+  inputPill: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    backgroundColor: 'rgba(11, 14, 20, 0.65)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '999px',
+    padding: '14px 20px'
   },
   input: {
-    padding: '12px',
-    fontSize: '16px',
-    borderRadius: '4px',
-    border: '1px solid #555',
-    backgroundColor: '#222',
-    color: '#fff',
-    outline: 'none'
+    flex: 1,
+    background: 'transparent',
+    border: 'none',
+    fontSize: '14px',
+    color: '#FFFFFF',
+    outline: 'none',
+    minWidth: 0
   },
   buttonPrimary: {
-    padding: '12px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    fontWeight: 'bold'
-  },
-  buttonSuccess: {
-    padding: '12px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    fontWeight: 'bold'
-  },
-  buttonLogout: {
-    padding: '6px 12px',
+    padding: '15px',
     fontSize: '14px',
     cursor: 'pointer',
-    backgroundColor: '#dc3545',
-    color: 'white',
+    backgroundColor: '#D91C24',
+    color: '#FFFFFF',
     border: 'none',
-    borderRadius: '4px'
+    borderRadius: '999px',
+    fontWeight: '700',
+    marginTop: '6px'
+  },
+  buttonSuccess: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    padding: '15px',
+    fontSize: '14px',
+    cursor: 'pointer',
+    backgroundColor: '#D91C24',
+    color: '#FFFFFF',
+    border: 'none',
+    borderRadius: '999px',
+    fontWeight: '700',
+    marginTop: '4px'
+  },
+  buttonLogout: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    padding: '8px 16px',
+    fontSize: '12px',
+    cursor: 'pointer',
+    backgroundColor: 'rgba(217, 28, 36, 0.18)',
+    border: '1px solid #D91C24',
+    color: '#FCA5A5',
+    borderRadius: '999px',
+    fontWeight: '700'
   }
 };
 

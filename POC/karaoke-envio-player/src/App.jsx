@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ClienteEntrada } from './pages/ClienteEntrada';
+import { ClientePainel } from './pages/ClientePainel';
 import { AdminPainel } from './pages/AdminPainel';
 
 export function App() {
@@ -9,17 +10,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/cliente" replace />} />
         <Route path="/cliente" element={<ClienteEntrada />} />
-        
-        {/* Tela cliente logado (posteriromente Card 2.3) */}
-        <Route 
-          path="/cliente/painel" 
-          element={
-            <div style={{ backgroundColor: '#0B0E14', color: '#FFF', minHeight: '100vh', padding: '24px', fontFamily: 'sans-serif' }}>
-              <h2>Bem-vindo ao Karaokê, {sessionStorage.getItem('apache_cantor')}!</h2>
-              <p style={{ color: '#94A3B8' }}>Sessão ativa: {sessionStorage.getItem('apache_sessao')}</p>
-            </div>
-          } 
-        />
+        <Route path="/cliente/painel" element={<ClientePainel />} />
 
         {/* Painel do DJ */}
         <Route path="/admin" element={<AdminPainel />} />
