@@ -1,0 +1,9 @@
+{
+  "API_URL": "http://localhost:8080",
+  "PLAYER_API_KEY": "teste",
+  "CLIENTE_URL": "http://localhost:5174",
+  "TELA_CHEIA": false,
+  "DEVTOOLS": false,
+  "LOGIN_YOUTUBE": true,
+  "ANUNCIO_MS": 4000
+}

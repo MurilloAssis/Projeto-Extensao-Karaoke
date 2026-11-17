@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'">
+  <title>Karaokê TV Player</title>
+  <style>
+    html, body { margin: 0; height: 100vh; background: #0B0E14; color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI', sans-serif; overflow: hidden; }
+    body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      background: radial-gradient(circle at center, rgba(217, 28, 36, 0.18) 0%, #0B0E14 60%); }
+    h1 { margin: 0; font-size: 56px; font-weight: 800; letter-spacing: -1px; }
+    span { color: #D91C24; font-size: 14px; font-weight: 700; letter-spacing: 4px; }
+    p { margin-top: 28px; color: #94A3B8; font-size: 22px; }
+    #aviso { margin-top: 18px; max-width: 70vw; text-align: center; color: #FCA5A5; font-size: 18px;
+      background: rgba(217, 28, 36, 0.14); border: 1px solid #D91C24; border-radius: 12px; padding: 12px 18px; }
+  </style>
+</head>
+<body>
+  <h1>APACHE</h1>
+  <span>GRU ROCK BAR • KARAOKÊ</span>
+  <p>Aguardando a próxima música…</p>
+  <div id="aviso" hidden></div>
+  <script src="espera.js"></script>
+</body>
+</html>

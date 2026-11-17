@@ -5,7 +5,14 @@
   "scripts": {
     "start": "electron ."
   },
+  "dependencies": {
+    "@stomp/stompjs": "^7.3.0",
+    "ws": "^8.18.0"
+  },
   "devDependencies": {
     "electron": "^29.0.0"
+  },
+  "allowScripts": {
+    "electron@29.4.6": true
   }
 }
