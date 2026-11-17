@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { User, AlertCircle, QrCode, ArrowRight } from 'lucide-react';
 import logoApache from '../assets/logo-apache.png';
+import { clienteApi } from '../api/clienteApi';
+import { encerrarSessaoCliente, iniciarSessaoCliente } from '../auth/sessaoCliente';
 
 const PALAVRAS_BLOQUEADAS = [
   'admin', 'administrador', 'dj', 'palco', 'sistema', 'moderador',
@@ -16,6 +18,7 @@ export function ClienteEntrada() {
   const [nome, setNome] = useState('');
   const [focado, setFocado] = useState(false);
   const [erro, setErro] = useState('');
+  const [entrando, setEntrando] = useState(false);
 
   useEffect(() => {
     const nomeSalvo = sessionStorage.getItem('apache_cantor');
@@ -34,11 +37,23 @@ export function ClienteEntrada() {
     return null;
   };
 
-  const handleEntrar = (e) => {
+  const handleEntrar = async (e) => {
     e.preventDefault();
     const mensagemErro = validarNome(nome);
     if (mensagemErro) {
       setErro(mensagemErro);
+      return;
+    }
+
+    // Até o card 1.2, entra como visitante de desenvolvimento e confere o acesso na API.
+    setEntrando(true);
+    iniciarSessaoCliente(nome.trim(), searchParams.get('visitante'));
+    try {
+      await clienteApi.meusPedidos();
+    } catch (falha) {
+      encerrarSessaoCliente();
+      setErro(falha.message);
+      setEntrando(false);
       return;
     }
 
@@ -95,8 +110,12 @@ export function ClienteEntrada() {
             </div>
           )}
 
-          <button type="submit" style={styles.btnSubmit}>
-            <span>Entrar no Karaokê</span>
+          <button
+            type="submit"
+            disabled={entrando}
+            style={{ ...styles.btnSubmit, ...(entrando ? { opacity: 0.7, cursor: 'wait' } : {}) }}
+          >
+            <span>{entrando ? 'Entrando…' : 'Entrar no Karaokê'}</span>
             <ArrowRight size={16} />
           </button>
         </form>

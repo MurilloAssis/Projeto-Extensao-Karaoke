@@ -1,0 +1,6 @@
+{
+  "API_URL": "http://localhost:8080",
+  "PLAYER_API_KEY": "teste",
+  "TELA_CHEIA": false,
+  "DEVTOOLS": false
+}

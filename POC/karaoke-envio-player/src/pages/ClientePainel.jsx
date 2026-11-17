@@ -1,28 +1,33 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Search, User, Plus, ChevronUp, ChevronDown,
-  AlertCircle, CheckCircle2, Radio, ListMusic, Disc3, Trash2, X, Mic2, ArrowRight
+  AlertCircle, CheckCircle2, Radio, ListMusic, Disc3, X, Mic2, ArrowRight
 } from 'lucide-react';
 import logoApache from '../assets/logo-apache.png';
+import { clienteApi, LIMITE_PEDIDOS } from '../api/clienteApi';
+import { useSessaoCliente } from '../auth/sessaoCliente';
+import { useFilaAoVivo } from '../hooks/useFilaAoVivo';
 
+// Até o card 2.1 (GET /api/musicas/busca), a busca usa este catálogo local de vídeos reais do YouTube.
 const CATALOGO_MOCK = [
-  { id: 'yt-1', titulo: 'Evidências', artista: 'Chitãozinho & Xororó', duracao: '04:39', thumb: 'https://img.youtube.com/vi/ePjtnSPFWK8/mqdefault.jpg' },
-  { id: 'yt-2', titulo: 'Bohemian Rhapsody', artista: 'Queen', duracao: '05:55', thumb: 'https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg' },
-  { id: 'yt-3', titulo: 'Tempo Perdido', artista: 'Legião Urbana', duracao: '05:02', thumb: 'https://img.youtube.com/vi/a658W4K8j10/mqdefault.jpg' },
-  { id: 'yt-4', titulo: "Sweet Child O' Mine", artista: "Guns N' Roses", duracao: '05:03', thumb: 'https://img.youtube.com/vi/1w7OgIMMRc4/mqdefault.jpg' },
-  { id: 'yt-5', titulo: 'Anna Júlia', artista: 'Los Hermanos', duracao: '03:32', thumb: 'https://img.youtube.com/vi/umj0gu5nEGs/mqdefault.jpg' },
-  { id: 'yt-6', titulo: 'Mulher de Fases', artista: 'Raimundos', duracao: '03:33', thumb: 'https://img.youtube.com/vi/8w6X-t9F47Q/mqdefault.jpg' },
-  { id: 'yt-7', titulo: 'Garota Nacional', artista: 'Skank', duracao: '05:17', thumb: 'https://img.youtube.com/vi/6M4_Ommfvv0/mqdefault.jpg' },
-  { id: 'yt-8', titulo: 'Cheia de Manias', artista: 'Raça Negra', duracao: '03:28', thumb: 'https://img.youtube.com/vi/903hL2X033w/mqdefault.jpg' }
+  { videoId: 'ePjtnSPFWK8', titulo: 'Evidências', artista: 'Chitãozinho & Xororó', duracao: '04:39' },
+  { videoId: 'fJ9rUzIMcZQ', titulo: 'Bohemian Rhapsody', artista: 'Queen', duracao: '05:55' },
+  { videoId: 'a658W4K8j10', titulo: 'Tempo Perdido', artista: 'Legião Urbana', duracao: '05:02' },
+  { videoId: '1w7OgIMMRc4', titulo: "Sweet Child O' Mine", artista: "Guns N' Roses", duracao: '05:03' },
+  { videoId: 'umj0gu5nEGs', titulo: 'Anna Júlia', artista: 'Los Hermanos', duracao: '03:32' },
+  { videoId: '8w6X-t9F47Q', titulo: 'Mulher de Fases', artista: 'Raimundos', duracao: '03:33' },
+  { videoId: '6M4_Ommfvv0', titulo: 'Garota Nacional', artista: 'Skank', duracao: '05:17' },
+  { videoId: '903hL2X033w', titulo: 'Cheia de Manias', artista: 'Raça Negra', duracao: '03:28' }
 ];
 
-const LIMITE_MUSICAS_SIMULTANEAS = 2;
+const miniatura = (videoId) => `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 
 export function ClientePainel() {
   const navigate = useNavigate();
-  const [nomeUsuario, setNomeUsuario] = useState('');
-  const [sessaoId, setSessaoId] = useState('');
+  const sessao = useSessaoCliente();
+  const nomeUsuario = sessao?.nome ?? '';
+  const [sessaoId] = useState(() => sessionStorage.getItem('apache_sessao') || 'NOITE-APACHE-01');
   const [inputBusca, setInputBusca] = useState('');
   const [termoBuscado, setTermoBuscado] = useState('');
   const [aguardandoDebounce, setAguardandoDebounce] = useState(false);
@@ -30,24 +35,21 @@ export function ClientePainel() {
   const [resultados, setResultados] = useState(CATALOGO_MOCK);
   const [expandirFila, setExpandirFila] = useState(false);
   const [musicaModal, setMusicaModal] = useState(null);
+  const [enviando, setEnviando] = useState(false);
   const [alerta, setAlerta] = useState(null);
   const timerRef = useRef(null);
+  const timerAlerta = useRef(null);
 
-  const [filaAtiva, setFilaAtiva] = useState([
-    { idPedido: 101, titulo: 'Evidências', artista: 'Chitãozinho & Xororó', solicitante: 'Mesa 02' },
-    { idPedido: 102, titulo: 'Bohemian Rhapsody', artista: 'Queen', solicitante: 'Mesa 05' }
-  ]);
+  const { fila: painel, conectado, recarregar } = useFilaAoVivo(clienteApi.painel);
 
-  useEffect(() => {
-    const salvo = sessionStorage.getItem('apache_cantor');
-    const sessao = sessionStorage.getItem('apache_sessao') || 'NOITE-APACHE-01';
-    if (!salvo) {
-      navigate('/cliente');
-    } else {
-      setNomeUsuario(salvo);
-      setSessaoId(sessao);
-    }
-  }, [navigate]);
+  const atual = painel?.fila.atual ?? null;
+  const proximos = painel?.fila.proximos ?? [];
+  const total = painel?.fila.total ?? 0;
+  const meusPedidosAtivos = painel?.meusPedidos ?? [];
+  const meusIds = new Set(meusPedidosAtivos.map((p) => p.idFila));
+  const filaAtiva = atual ? [atual, ...proximos] : proximos;
+  const videosNaFila = new Set(filaAtiva.map((item) => item.musica.youtubeId));
+  const limiteAtingido = meusPedidosAtivos.length >= LIMITE_PEDIDOS;
 
   const executarBusca = (termo) => {
     setAguardandoDebounce(false);
@@ -85,56 +87,54 @@ export function ClientePainel() {
     executarBusca(inputBusca);
   };
 
+  const exibirAlerta = (mensagem, tipo) => {
+    clearTimeout(timerAlerta.current);
+    setAlerta({ mensagem, tipo });
+    timerAlerta.current = setTimeout(() => setAlerta(null), 3500);
+  };
+
+  // Pré-checagem para orientar o cliente; quem decide RN01 e RN02 é a API.
   const handleAbrirConfirmacao = (musica) => {
-    const jaNaFila = filaAtiva.some(
-      (item) => item.titulo.toLowerCase() === musica.titulo.toLowerCase()
-    );
-    if (jaNaFila) {
+    if (videosNaFila.has(musica.videoId)) {
       exibirAlerta(`"${musica.titulo}" já está na fila ativa.`, 'erro');
       return;
     }
-
-    const meusPedidos = filaAtiva.filter((item) => item.solicitante === nomeUsuario);
-    if (meusPedidos.length >= LIMITE_MUSICAS_SIMULTANEAS) {
-      exibirAlerta(
-        `Limite simultâneo atingido (${LIMITE_MUSICAS_SIMULTANEAS}/${LIMITE_MUSICAS_SIMULTANEAS}). Aguarde sua vez.`,
-        'erro'
-      );
+    if (limiteAtingido) {
+      exibirAlerta(`Limite simultâneo atingido (${LIMITE_PEDIDOS}/${LIMITE_PEDIDOS}). Aguarde sua vez.`, 'erro');
       return;
     }
-
     setMusicaModal(musica);
   };
 
-  const handleConfirmarPedido = () => {
-    if (!musicaModal) return;
-
-    const novoPedido = {
-      idPedido: Date.now(),
-      titulo: musicaModal.titulo,
-      artista: musicaModal.artista,
-      solicitante: nomeUsuario
-    };
-
-    setFilaAtiva((prev) => [...prev, novoPedido]);
-    exibirAlerta(`"${musicaModal.titulo}" enviada para a fila!`, 'sucesso');
-    setMusicaModal(null);
+  const handleConfirmarPedido = async () => {
+    if (!musicaModal || enviando) return;
+    setEnviando(true);
+    try {
+      await clienteApi.pedir(musicaModal.videoId, musicaModal.titulo);
+      exibirAlerta(`"${musicaModal.titulo}" enviada para a fila!`, 'sucesso');
+      setMusicaModal(null);
+      recarregar();
+    } catch (erro) {
+      exibirAlerta(erro.message, 'erro');
+      if (erro.status === 401) {
+        navigate('/cliente');
+        return;
+      }
+      setMusicaModal(null);
+      recarregar();
+    } finally {
+      setEnviando(false);
+    }
   };
 
-  const handleRemoverPedido = (idPedido) => {
-    setFilaAtiva((prev) => prev.filter((item) => item.idPedido !== idPedido));
-    exibirAlerta('Pedido cancelado.', 'sucesso');
-  };
-
-  const exibirAlerta = (mensagem, tipo) => {
-    setAlerta({ mensagem, tipo });
-    setTimeout(() => setAlerta(null), 3500);
-  };
-
-  const tocandoAgora = filaAtiva[0] || { titulo: 'Palco Livre', artista: 'Peça a primeira música!' };
-  const meusPedidosAtivos = filaAtiva.filter((item) => item.solicitante === nomeUsuario);
-  const proximoMeuPedido = meusPedidosAtivos[0];
-  const minhaPosicao = proximoMeuPedido ? filaAtiva.indexOf(proximoMeuPedido) : -1;
+  const tocandoAgora = atual
+    ? { titulo: atual.musica.titulo, artista: atual.musica.artista ?? '' }
+    : { titulo: 'Palco Livre', artista: 'Peça a primeira música!' };
+  const cantandoAgora = meusPedidosAtivos.some((p) => p.status === 'reproduzindo');
+  const posicoes = meusPedidosAtivos.filter((p) => p.status === 'na_fila').map((p) => p.posicao);
+  const minhaPosicao = cantandoAgora ? 0 : posicoes.length ? Math.min(...posicoes) : -1;
+  const posicaoEstimada = total + 1;
+  const minutosEstimados = (total + (atual ? 1 : 0)) * 4;
 
   return (
     <div style={styles.container}>
@@ -164,11 +164,11 @@ export function ClientePainel() {
           <span
             style={{
               ...styles.quotaPill,
-              color: meusPedidosAtivos.length >= LIMITE_MUSICAS_SIMULTANEAS ? '#FCA5A5' : '#93C5FD',
-              borderColor: meusPedidosAtivos.length >= LIMITE_MUSICAS_SIMULTANEAS ? '#D91C24' : '#1A4B84'
+              color: limiteAtingido ? '#FCA5A5' : '#93C5FD',
+              borderColor: limiteAtingido ? '#D91C24' : '#1A4B84'
             }}
           >
-            {meusPedidosAtivos.length}/{LIMITE_MUSICAS_SIMULTANEAS} na fila
+            {meusPedidosAtivos.length}/{LIMITE_PEDIDOS} na fila
           </span>
 
           <button
@@ -242,14 +242,11 @@ export function ClientePainel() {
         ) : (
           <div style={styles.trackList}>
             {resultados.map((item) => {
-              const jaPedida = filaAtiva.some(
-                (q) => q.titulo.toLowerCase() === item.titulo.toLowerCase()
-              );
-              const limiteAtingido = meusPedidosAtivos.length >= LIMITE_MUSICAS_SIMULTANEAS;
+              const jaPedida = videosNaFila.has(item.videoId);
 
               return (
-                <div key={item.id} style={styles.trackRow}>
-                  <img src={item.thumb} alt={item.titulo} style={styles.trackThumb} />
+                <div key={item.videoId} style={styles.trackRow}>
+                  <img src={miniatura(item.videoId)} alt={item.titulo} style={styles.trackThumb} />
                   <div style={styles.trackMeta}>
                     <h3 style={styles.trackTitle}>{item.titulo}</h3>
                     <p style={styles.trackSub}>
@@ -291,20 +288,24 @@ export function ClientePainel() {
             </div>
 
             <div style={styles.queueScroll}>
-              {filaAtiva.map((item, idx) => {
-                const isMine = item.solicitante === nomeUsuario;
+              {filaAtiva.length === 0 && (
+                <div style={styles.emptyState}>A fila está vazia.</div>
+              )}
+              {filaAtiva.map((item) => {
+                const isMine = meusIds.has(item.idFila);
+                const tocando = item.status === 'reproduzindo';
                 return (
                   <div
-                    key={item.idPedido}
+                    key={item.idFila}
                     style={{
                       ...styles.queueItem,
                       ...(isMine ? styles.queueItemHighlight : {})
                     }}
                   >
                     <div style={styles.queueItemLeft}>
-                      <strong style={styles.queueSong}>{item.titulo}</strong>
+                      <strong style={styles.queueSong}>{item.musica.titulo}</strong>
                       <span style={styles.queueSinger}>
-                        {isMine ? `${item.solicitante} • Seu pedido` : item.solicitante}
+                        {[item.musica.artista, isMine ? 'Seu pedido' : null].filter(Boolean).join(' • ')}
                       </span>
                     </div>
 
@@ -312,19 +313,11 @@ export function ClientePainel() {
                       <span
                         style={{
                           ...styles.queueBadgePos,
-                          color: idx === 0 ? '#D91C24' : isMine ? '#93C5FD' : '#71717A'
+                          color: tocando ? '#D91C24' : isMine ? '#93C5FD' : '#71717A'
                         }}
                       >
-                        {idx === 0 ? 'NOW' : `${idx}º`}
+                        {tocando ? 'NOW' : `${item.posicao}º`}
                       </span>
-                      {isMine && idx > 0 && (
-                        <button
-                          onClick={() => handleRemoverPedido(item.idPedido)}
-                          style={styles.btnTrash}
-                        >
-                          <Trash2 size={14} color="#D91C24" />
-                        </button>
-                      )}
                     </div>
                   </div>
                 );
@@ -352,7 +345,7 @@ export function ClientePainel() {
             <div style={styles.miniTopLine}>
               <Disc3 size={14} color="#D91C24" style={{ flexShrink: 0 }} />
               <span style={styles.miniTitle}>{tocandoAgora.titulo}</span>
-              <span style={styles.miniArtist}>• {tocandoAgora.artista}</span>
+              {tocandoAgora.artista && <span style={styles.miniArtist}>• {tocandoAgora.artista}</span>}
             </div>
             <div style={styles.miniSubLine}>
               {minhaPosicao > 0 ? (
@@ -369,16 +362,16 @@ export function ClientePainel() {
             </div>
           </div>
 
-          <div style={styles.liveIndicator}>
-            <Radio size={11} color="#D91C24" />
-            <span>AO VIVO</span>
+          <div style={{ ...styles.liveIndicator, ...(conectado ? {} : { color: '#64748B' }) }}>
+            <Radio size={11} color={conectado ? '#D91C24' : '#64748B'} />
+            <span>{conectado ? 'AO VIVO' : 'RECONECTANDO'}</span>
           </div>
         </div>
       </div>
 
       {/* Modal de confirmação */}
       {musicaModal && (
-        <div style={styles.modalBackdrop} onClick={() => setMusicaModal(null)}>
+        <div style={styles.modalBackdrop} onClick={() => !enviando && setMusicaModal(null)}>
           <div style={styles.bottomSheet} onClick={(e) => e.stopPropagation()}>
             <div style={styles.sheetHandle} />
 
@@ -392,13 +385,13 @@ export function ClientePainel() {
                   <span style={styles.sheetSub}>APACHE GRU ROCK BAR</span>
                 </div>
               </div>
-              <button style={styles.btnCloseModal} onClick={() => setMusicaModal(null)}>
+              <button style={styles.btnCloseModal} onClick={() => setMusicaModal(null)} disabled={enviando}>
                 <X size={16} color="#94A3B8" />
               </button>
             </div>
 
             <div style={styles.selectedTrackBox}>
-              <img src={musicaModal.thumb} alt={musicaModal.titulo} style={styles.modalThumb} />
+              <img src={miniatura(musicaModal.videoId)} alt={musicaModal.titulo} style={styles.modalThumb} />
               <div style={{ flex: 1, overflow: 'hidden' }}>
                 <strong style={styles.modalSong}>{musicaModal.titulo}</strong>
                 <span style={styles.modalArtist}>{musicaModal.artista}</span>
@@ -412,17 +405,21 @@ export function ClientePainel() {
                 <span>Posição estimada na fila:</span>
               </div>
               <strong style={{ color: '#FFFFFF' }}>
-                #{filaAtiva.length} (~{filaAtiva.length * 4} min)
+                #{posicaoEstimada} (~{minutosEstimados} min)
               </strong>
             </div>
 
             <div style={styles.sheetActions}>
-              <button style={styles.btnCancel} onClick={() => setMusicaModal(null)}>
+              <button style={styles.btnCancel} onClick={() => setMusicaModal(null)} disabled={enviando}>
                 Cancelar
               </button>
-              <button style={styles.btnConfirm} onClick={handleConfirmarPedido}>
+              <button
+                style={{ ...styles.btnConfirm, ...(enviando ? { opacity: 0.7, cursor: 'wait' } : {}) }}
+                onClick={handleConfirmarPedido}
+                disabled={enviando}
+              >
                 <Plus size={15} />
-                <span>Confirmar Pedido</span>
+                <span>{enviando ? 'Enviando…' : 'Confirmar Pedido'}</span>
               </button>
             </div>
           </div>
