@@ -68,7 +68,7 @@ Pedido recusado não é gravado: a API responde com um erro e nada muda na fila.
 | Banco MySQL e ambiente Docker | ✅ pronto | 1.1 |
 | Login do admin, sessão, visitante e token JWT | ✅ pronto | 1.2 |
 | Músicas sugeridas do catálogo cadastrado, com busca e páginas (`GET /api/musicas`) | ✅ pronto (provisório até a busca no YouTube) | — |
-| Pesquisa de músicas no YouTube (`GET /api/musicas/busca?q=`) | ⏳ pendente — hoje informe `videoId` e `titulo` direto | 2.1 |
+| Pesquisa de músicas cache-first com fallback para o YouTube (`GET /api/musicas/busca?q=`) | ✅ pronto | 2.1 |
 | Gestão do catálogo pelo admin (RF11) | ⏳ pendente | 2.1 |
 
 Isole a autenticação e a busca em um único módulo de cada tela.
@@ -167,6 +167,7 @@ O Electron usa outra credencial, `X-Player-Key` (Seção 8.3).
 | POST | `/api/sessoes/{id}/encerrar` | Admin autenticado | `200` + sessão encerrada |
 | GET | `/api/sessoes/atual` | Admin ou Electron (`X-Player-Key`) | `200` + sessão aberta (com código), ou `204` |
 | GET | `/api/musicas?q=&pagina=0&tamanho=20` | Cliente ou Admin | `Pagina<Musica>`: sugestões do catálogo (só disponíveis), por título ou artista |
+| GET | `/api/musicas/busca?q=termo` | Cliente ou Admin | `Musica[]`: resultado local ou primeira página persistida do YouTube |
 | POST | `/api/fila` | Cliente (visitante/cliente) | `201` + `ItemFila` |
 | GET | `/api/fila` | Todos (público) | `Fila` |
 | GET | `/api/fila/atual` | Todos (público) | `200` + `ItemFila`, ou `204` (telão em espera) |
@@ -227,6 +228,10 @@ export interface Pagina<T> {
 `GET /api/musicas`: `q` filtra por trecho do título ou do artista, sem diferenciar maiúsculas nem acentos
 (`evidencias` encontra "Evidências"); sem `q`, lista todo o catálogo disponível. A ordem é alfabética pelo título.
 Para pedir uma sugestão, envie `musica.youtubeId` como `videoId` em `POST /api/fila`.
+
+`GET /api/musicas/busca`: procura primeiro por título na tabela `musica`. Se houver resultado, responde sem
+consultar o YouTube. Se não houver, pesquisa `<termo> karaoke` no `search.list`, salva todos os vídeos retornados
+na primeira página e devolve os registros disponíveis. A chave fica apenas na API, em `YOUTUBE_API_KEY`.
 
 Exemplo real de `GET /api/fila`:
 

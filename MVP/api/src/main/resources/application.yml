@@ -24,6 +24,8 @@ karaoke:
     validade-minutos: ${JWT_VALIDITY_MINUTES:480}
   cors:
     origens: ${CORS_ORIGINS:http://localhost:5173}
+  youtube:
+    api-key: ${YOUTUBE_API_KEY:}
 
 management:
   endpoints:

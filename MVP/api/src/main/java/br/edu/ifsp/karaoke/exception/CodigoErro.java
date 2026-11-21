@@ -21,6 +21,7 @@ public enum CodigoErro {
     RN04_PEDIDO_NAO_REMOVIVEL(HttpStatus.CONFLICT, "Pedido não pode ser removido"),
     RN04_PEDIDO_NAO_ATIVO(HttpStatus.CONFLICT, "Pedido não está em reprodução"),
     RN04_TRANSICAO_INVALIDA(HttpStatus.CONFLICT, "Transição de estado inválida"),
+    YOUTUBE_INDISPONIVEL(HttpStatus.BAD_GATEWAY, "Pesquisa do YouTube indisponível"),
     ERRO_INTERNO(HttpStatus.INTERNAL_SERVER_ERROR, "Erro interno");
 
     private final HttpStatus status;

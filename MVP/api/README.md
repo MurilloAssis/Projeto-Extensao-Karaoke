@@ -54,6 +54,7 @@ docker compose up -d --build
 | `JWT_SECRET` | sem padrão | assinatura dos tokens; mínimo de 32 caracteres |
 | `JWT_VALIDITY_MINUTES` | `480` | duração do token JWT |
 | `CORS_ORIGINS` | `http://localhost:5173` | origens do React/Electron, separadas por vírgula (HTTP e WebSocket) |
+| `YOUTUBE_API_KEY` | sem padrão | chave da YouTube Data API v3; usada somente quando o catálogo local não encontra o título |
 
 3. Suba no perfil `dev`:
 
@@ -95,6 +96,7 @@ anterior deixa de aceitar ingressos.
 | POST | `/api/sessoes/{idSessao}/encerrar` | admin |
 | GET | `/api/sessoes/atual` | admin, reprodutor (`X-Player-Key`); 204 = sem sessão |
 | GET | `/api/musicas?q=&pagina=0&tamanho=20` | visitante, cliente, admin; sugestões do catálogo, paginadas |
+| GET | `/api/musicas/busca?q=termo` | visitante, cliente, admin; cache MySQL com fallback para YouTube |
 | POST | `/api/fila` | visitante, cliente |
 | GET | `/api/fila` | público |
 | GET | `/api/fila/atual` | público (204 = telão em espera) |

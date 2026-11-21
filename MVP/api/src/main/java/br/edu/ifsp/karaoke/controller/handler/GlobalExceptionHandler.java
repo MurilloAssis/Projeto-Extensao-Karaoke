@@ -2,6 +2,7 @@ package br.edu.ifsp.karaoke.controller.handler;
 
 import br.edu.ifsp.karaoke.exception.CodigoErro;
 import br.edu.ifsp.karaoke.exception.RegraNegocioException;
+import br.edu.ifsp.karaoke.exception.IntegracaoYoutubeException;
 import br.edu.ifsp.karaoke.exception.TransicaoInvalidaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(TransicaoInvalidaException.class)
     public ResponseEntity<ProblemDetail> transicaoInvalida(TransicaoInvalidaException e) {
         return resposta(CodigoErro.RN04_TRANSICAO_INVALIDA, e.getMessage());
+    }
+
+    @ExceptionHandler(IntegracaoYoutubeException.class)
+    public ResponseEntity<ProblemDetail> integracaoYoutube(IntegracaoYoutubeException e) {
+        return resposta(CodigoErro.YOUTUBE_INDISPONIVEL, e.getMessage());
     }
 
     @ExceptionHandler(AuthenticationException.class)
