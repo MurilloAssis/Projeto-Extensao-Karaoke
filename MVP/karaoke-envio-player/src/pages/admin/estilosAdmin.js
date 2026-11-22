@@ -117,8 +117,8 @@ export const estilos = {
     boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75)',
     boxSizing: 'border-box',
   },
-  logo: { width: '74px', height: '74px', objectFit: 'contain', marginBottom: '12px' },
-  logoSmall: { width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0 },
+  logo: { width: '100px', height: '100px', objectFit: 'fill', marginBottom: '12px' },
+  logoSmall: { width: '100px', height: '100px', objectFit: 'fill', flexShrink: 0 },
   header: {
     display: 'flex',
     justifyContent: 'space-between',

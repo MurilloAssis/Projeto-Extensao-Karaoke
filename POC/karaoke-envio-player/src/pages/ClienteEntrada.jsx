@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { User, AlertCircle, QrCode, ArrowRight } from 'lucide-react';
-import logoApache from '../assets/logo-apache.png';
+import logoApache from '../assets/logo-apache-vetorizado.svg';
 import { clienteApi } from '../api/clienteApi';
 import { encerrarSessaoCliente, iniciarSessaoCliente } from '../auth/sessaoCliente';
 

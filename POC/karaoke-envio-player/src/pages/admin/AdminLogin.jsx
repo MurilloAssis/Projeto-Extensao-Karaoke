@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Lock, Mail, AlertCircle, Info } from 'lucide-react';
-import logoApache from '../../assets/logo-apache.png';
+import logoApache from '../../assets/logo-apache-vetorizado.svg';
 import { filaApi } from '../../api/filaApi';
 import { encerrarSessao, iniciarSessaoDesenvolvimento, useSessaoAdmin } from '../../auth/sessaoAdmin';
 import { cores, estilos } from './estilosAdmin';

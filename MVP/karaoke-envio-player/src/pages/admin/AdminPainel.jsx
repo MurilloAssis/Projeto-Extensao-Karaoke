@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogOut, Radio, AlertCircle, CheckCircle2, RotateCw, Power } from 'lucide-react';
-import logoApache from '../../assets/logo-apache.png';
+import logoApache from '../../assets/logo-apache-vetorizado.svg';
 import { filaApi } from '../../api/filaApi';
 import { sessaoKaraokeApi } from '../../api/sessaoKaraokeApi';
 import { encerrarSessao } from '../../auth/sessaoAdmin';
