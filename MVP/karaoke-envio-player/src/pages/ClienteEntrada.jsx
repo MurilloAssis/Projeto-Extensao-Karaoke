@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { User, AlertCircle, QrCode, ArrowRight, KeyRound, Info } from 'lucide-react';
-import logoApache from '../assets/logo-apache.png';
+import logoApache from '../assets/logo-apache-vetorizado.svg';
 import { entrarCliente, lerRecadoCliente } from '../auth/sessaoCliente';
 
 const CODIGO_VALIDO = /^\d{6}$/;
@@ -199,9 +199,9 @@ const styles = {
     zIndex: 1
   },
   logo: {
-    width: '72px',
-    height: '72px',
-    objectFit: 'contain',
+    width: '200px',
+    height: '200px',
+    objectFit: 'fill',
     marginBottom: '10px'
   },
   title: {

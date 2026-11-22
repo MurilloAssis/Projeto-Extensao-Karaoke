@@ -4,7 +4,7 @@ import {
   Search, User, Plus, ChevronUp, ChevronDown,
   AlertCircle, CheckCircle2, Radio, ListMusic, Disc3, X, Mic2, ArrowRight
 } from 'lucide-react';
-import logoApache from '../assets/logo-apache.png';
+import logoApache from '../assets/logo-apache-vetorizado.svg';
 import { clienteApi, LIMITE_PEDIDOS } from '../api/clienteApi';
 import { useSessaoCliente } from '../auth/sessaoCliente';
 import { useFilaAoVivo } from '../hooks/useFilaAoVivo';
