@@ -16,6 +16,7 @@ const MENSAGENS = {
   RN04_FILA_VAZIA: 'A fila está vazia.',
   RN04_NADA_REPRODUZINDO: 'Nenhuma música está tocando.',
   RN04_PEDIDO_NAO_REMOVIVEL: 'Esse pedido já está tocando. Use Próxima música.',
+  YOUTUBE_INDISPONIVEL: 'A pesquisa no YouTube está indisponível. Tente novamente mais tarde.',
 };
 
 export function mensagemDoErro(codigo, detalhe) {

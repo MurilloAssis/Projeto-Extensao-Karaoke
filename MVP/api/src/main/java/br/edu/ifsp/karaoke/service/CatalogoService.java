@@ -20,19 +20,21 @@ public class CatalogoService {
 
     /** RN00: a música escolhida que ainda não está no catálogo é cadastrada automaticamente. */
     public Integer obterOuCadastrar(String youtubeId, String titulo) {
+        return obterOuCadastrarMusica(youtubeId, titulo).getIdMusica();
+    }
+
+    /** Cache: devolve a entidade existente ou persiste o vídeo retornado pelo YouTube. */
+    public MusicaModel obterOuCadastrarMusica(String youtubeId, String titulo) {
         return musicaRepository.findByYoutubeId(youtubeId)
-                .map(MusicaModel::getIdMusica)
                 .orElseGet(() -> cadastrar(youtubeId, titulo));
     }
 
-    private Integer cadastrar(String youtubeId, String titulo) {
+    private MusicaModel cadastrar(String youtubeId, String titulo) {
         try {
-            return transacao.execute(s ->
-                    musicaRepository.saveAndFlush(new MusicaModel(youtubeId, titulo)).getIdMusica());
+            return transacao.execute(s -> musicaRepository.saveAndFlush(new MusicaModel(youtubeId, titulo)));
         } catch (DataIntegrityViolationException e) {
-            // Outro pedido cadastrou a mesma música ao mesmo tempo.
+            // Outra busca cadastrou a mesma música ao mesmo tempo.
             return musicaRepository.findByYoutubeId(youtubeId)
-                    .map(MusicaModel::getIdMusica)
                     .orElseThrow(() -> e);
         }
     }

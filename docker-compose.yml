@@ -41,6 +41,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       JWT_VALIDITY_MINUTES: ${JWT_VALIDITY_MINUTES:-480}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:5174,https://*.trycloudflare.com}
+      YOUTUBE_API_KEY: ${YOUTUBE_API_KEY:-}
     ports:
       - "8080:8080"
 

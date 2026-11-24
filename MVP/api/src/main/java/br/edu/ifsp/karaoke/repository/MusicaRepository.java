@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.List;
 
 public interface MusicaRepository extends JpaRepository<MusicaModel, Integer> {
 
@@ -23,6 +24,14 @@ public interface MusicaRepository extends JpaRepository<MusicaModel, Integer> {
               and (:padrao is null or m.titulo like :padrao escape '!' or m.artista like :padrao escape '!')
             """)
     Page<MusicaModel> buscarSugestoes(@Param("padrao") String padrao, Pageable pagina);
+
+    /** Cache-first: procura pelo título antes de consumir a cota do YouTube. */
+    @Query("""
+            select m from MusicaModel m
+            where m.titulo like :padrao escape '!'
+            order by m.titulo, m.idMusica
+            """)
+    List<MusicaModel> buscarNoCache(@Param("padrao") String padrao);
 
     Optional<MusicaModel> findByYoutubeId(String youtubeId);
 

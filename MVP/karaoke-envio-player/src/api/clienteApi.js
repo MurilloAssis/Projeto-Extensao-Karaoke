@@ -5,11 +5,15 @@ export const LIMITE_PEDIDOS = Number(import.meta.env.VITE_LIMITE_PEDIDOS ?? 2);
 
 export const clienteApi = {
   fila: () => requisitar('/api/fila'),
-  // Sugestões do catálogo cadastrado na API (até a busca no YouTube, card 2.1).
+  // Sugestões locais usadas enquanto o cliente digita.
   musicas: (termo, pagina, tamanho) => {
     const consulta = new URLSearchParams({ pagina: String(pagina), tamanho: String(tamanho) });
     if (termo) consulta.set('q', termo);
     return requisitar(`/api/musicas?${consulta}`, { identidade: identidadeCliente });
+  },
+  buscarMusicas: (termo) => {
+    const consulta = new URLSearchParams({ q: termo });
+    return requisitar(`/api/musicas/busca?${consulta}`, { identidade: identidadeCliente });
   },
   meusPedidos: () => requisitar('/api/fila/meus-pedidos', { identidade: identidadeCliente }),
   pedir: (videoId, titulo) =>

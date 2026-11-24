@@ -9,7 +9,7 @@ import { clienteApi, LIMITE_PEDIDOS } from '../api/clienteApi';
 import { useSessaoCliente } from '../auth/sessaoCliente';
 import { useFilaAoVivo } from '../hooks/useFilaAoVivo';
 
-// Sugestões vêm do catálogo cadastrado na API (GET /api/musicas), em páginas, filtradas ao digitar.
+// Ao digitar, filtra o catálogo local. Ao confirmar, usa a busca cache-first com fallback para o YouTube.
 const TAMANHO_PAGINA = 20;
 const ATRASO_BUSCA_MS = 350;
 
@@ -51,11 +51,15 @@ export function ClientePainel() {
   const limiteAtingido = meusPedidosAtivos.length >= LIMITE_PEDIDOS;
 
   // Só a resposta da busca mais recente é exibida (o cliente pode digitar mais rápido que a rede).
-  const buscarSugestoes = useCallback((termo, pagina) => {
+  const buscarSugestoes = useCallback((termo, pagina, incluirYoutube = false) => {
     const busca = ++ultimaBusca.current;
     const recente = () => busca === ultimaBusca.current;
-    return clienteApi
-      .musicas(termo, pagina, TAMANHO_PAGINA)
+    const requisicao = incluirYoutube && termo
+      ? clienteApi.buscarMusicas(termo).then((itens) => ({
+          itens, pagina: 0, total: itens.length, temMais: false,
+        }))
+      : clienteApi.musicas(termo, pagina, TAMANHO_PAGINA);
+    return requisicao
       .then((resposta) => {
         if (!recente()) return;
         const novas = resposta.itens.map(sugestaoDe);
@@ -80,12 +84,12 @@ export function ClientePainel() {
 
   useEffect(() => () => clearTimeout(timerRef.current), []);
 
-  const executarBusca = (termo) => {
+  const executarBusca = (termo, incluirYoutube = false) => {
     setAguardandoDebounce(false);
     const limpo = termo.trim();
     setTermoBuscado(limpo);
     setCarregandoBusca(true);
-    buscarSugestoes(limpo, 0);
+    buscarSugestoes(limpo, 0, incluirYoutube);
   };
 
   const carregarMais = () => {
@@ -108,7 +112,7 @@ export function ClientePainel() {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (timerRef.current) clearTimeout(timerRef.current);
-    executarBusca(inputBusca);
+    executarBusca(inputBusca, true);
   };
 
   const exibirAlerta = (mensagem, tipo) => {
@@ -267,7 +271,7 @@ export function ClientePainel() {
               <AlertCircle size={14} color="#D91C24" style={{ flexShrink: 0 }} />
               {erroBusca}
             </span>
-            <button type="button" style={styles.btnCarregarMais} onClick={() => executarBusca(inputBusca)}>
+            <button type="button" style={styles.btnCarregarMais} onClick={() => executarBusca(inputBusca, true)}>
               Tentar de novo
             </button>
           </div>
